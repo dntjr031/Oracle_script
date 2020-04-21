@@ -28,3 +28,11 @@ SID : 설시치 지정한 전역 DB이름, 따로 지정안했다면 orcl 이다
   or
   192.168.11.3
 ---우리집ip = 192.168.0.8
+
+
+계정 활성화
+conn / as sysdba;
+alter user hr identified by hr;
+alter user hr account unlock;
+
+exec dbms_xdb.setlistenerlocalaccess(false);
