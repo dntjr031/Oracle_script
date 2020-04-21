@@ -18,7 +18,7 @@ Oracle탭에서
 
 SID : 설시치 지정한 전역 DB이름, 따로 지정안했다면 orcl 이다.
 
---학원--
+--학원--DESKTOP-Q8AMKFB
   (ADDRESS = (PROTOCOL = TCP)(HOST = DESKTOP-Q8AMKFB)(PORT = 1521))
     (CONNECT_DATA =
       (SERVER = DEDICATED)
