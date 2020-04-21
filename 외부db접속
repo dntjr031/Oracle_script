@@ -23,4 +23,7 @@ SID : 설시치 지정한 전역 DB이름, 따로 지정안했다면 orcl 이다
     (CONNECT_DATA =
       (SERVER = DEDICATED)
       (SERVICE_NAME = XE)
-  ip 주소 : 210.89.164.90
+  ----ip 주소---
+  210.89.164.90
+  or
+  192.168.11.3
