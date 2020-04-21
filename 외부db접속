@@ -1,0 +1,26 @@
+3. 접속하기
+
+ 
+
+접속이름 : 임의로 자신이 접속이름 설정(한글,영어 가능)
+
+사용자 이름 : 연결할 DB계정 ID
+
+비밀번호 : 연결할 DB계정 PW
+
+ 
+
+Oracle탭에서
+
+호스트이름 : 연결할 DB IP주소(로컬이면 localhost로 냅두고, 외부DB연결이면 IP주소로 적는다)
+
+포트 : 디폴트 1521이다. 아니면 다른포트번호 적기
+
+SID : 설시치 지정한 전역 DB이름, 따로 지정안했다면 orcl 이다.
+
+--학원--
+  (ADDRESS = (PROTOCOL = TCP)(HOST = DESKTOP-Q8AMKFB)(PORT = 1521))
+    (CONNECT_DATA =
+      (SERVER = DEDICATED)
+      (SERVICE_NAME = XE)
+  ip 주소 : 210.89.164.90
