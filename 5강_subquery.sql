@@ -1,6 +1,6 @@
-/* Formatted on 2020/04/22 오후 6:45:58 (QP5 v5.360) */
+/* Formatted on 2020/04/23 오후 6:46:10 (QP5 v5.360) */
 --5강_subquery.sql
---2020-04-22 수요일
+--[2020-04-22 수요일]
 
 /*
 서브쿼리 - 쿼리안에 또 다른 쿼리가 담겨 있는 것
@@ -15,7 +15,7 @@ where 조건 연산자(select 컬럼 from 테이블 where 조건); --subquery
 
 SELECT sal
   FROM emp
- WHERE ename = 'SCOTT';                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    -- 3000
+ WHERE ename = 'SCOTT';                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         -- 3000
 
 --2) 3000보다 많이 받는 직원 조회
 
@@ -474,3 +474,624 @@ SELECT *
 SELECT *
   FROM emp
  WHERE sal > (SELECT AVG (NVL (sal, 0)) FROM emp);
+
+
+ --[2020-04-23 목요일]
+
+ /*
+ <exists 연산자>
+ - 특저 컬럼값이 존재하는지 여부를 체크
+ - 서브쿼리가 반환하는 결과에 메인 쿼리에서 추출될 데이터들이 존재하기만 하면 조건을 만족
+ - 성능면에서 in보다 월등히 우수함
+ 
+ ※ in, exists비교
+ 1) in - 어떤 값에 포함되는지 여부를 체크
+        in은 ()에 비교할 값이 올수도 있고, 서브쿼리가 올 수도 있다.
+ 2) exists - 특정 컬럼값이 존재하는지 여부를 체크
+            exists는 오직 서브쿼리만 올 수 있다.
+ */
+
+ --부서 테이블의 pdept 값이 null이 아닌 부서에 속하는 사원 추출
+
+SELECT *
+  FROM dept2
+ WHERE pdept IS NOT NULL;
+
+ --0001을 제외한 모든 부서
+
+ --in 이용
+
+SELECT *
+  FROM emp2
+ WHERE deptno IN (SELECT dcode
+                    FROM dept2
+                   WHERE pdept IS NOT NULL);
+
+ --exists 이용
+
+SELECT *
+  FROM emp2 e
+ WHERE EXISTS
+           (SELECT 1
+              FROM dept2 d
+             WHERE d.pdept IS NOT NULL AND e.DEPTNO = d.DCODE);
+
+-- cf. join
+
+SELECT e.*, d.*
+  FROM emp2 e JOIN dept2 d ON e.DEPTNO = d.DCODE AND d.pdept IS NOT NULL;
+
+-- 경기 지사에 속하는 사원들의 정보 조회
+--in
+
+SELECT *
+  FROM dept2
+ WHERE area = '경기지사';
+
+SELECT *
+  FROM emp2
+ WHERE DEPTNO IN (SELECT dcode
+                    FROM dept2
+                   WHERE area = '경기지사');
+
+--exists
+
+SELECT *
+  FROM emp2 e
+ WHERE EXISTS
+           (SELECT 1
+              FROM dept2 d
+             WHERE e.DEPTNO = d.DCODE AND area = '경기지사');
+
+--cf. join
+
+SELECT *
+  FROM emp2 e JOIN dept2 d ON e.DEPTNO = d.DCODE AND area = '경기지사';
+
+--월급이 3000달러 이상인 사원이 속한 부서를 조회 emp, dept 이용
+-- in
+
+SELECT *
+  FROM dept
+ WHERE DEPTNO IN (SELECT deptno
+                    FROM emp
+                   WHERE SAL >= 3000);
+
+-- exists
+
+SELECT *
+  FROM dept d
+ WHERE EXISTS
+           (SELECT 1
+              FROM emp e
+             WHERE d.DEPTNO = e.DEPTNO AND sal >= 3000);
+
+--join
+
+SELECT DISTINCT d.*
+  FROM dept d JOIN emp e ON d.DEPTNO = e.DEPTNO AND sal >= 3000;
+
+/*
+※ 서브쿼리 위치별 이름
+- 서브쿼리는 오는 위치에 따라서 그 이름이 다름
+[1] scalar sub query
+    - select 절에 오는 서브쿼리로 한번에 결과를 1행씩 반환함
+[2] inline view
+    - from 절에 오는 서브쿼리
+[3] sub query
+    - where 절에 오는 서브쿼리 
+*/
+
+-- 예제) emp2 테이블과 dept2 테이블을 조회하여 사원들의 이름과 부서이름 을 출력하시오
+--join
+
+SELECT e.NAME, d.DNAME
+  FROM emp2 e JOIN dept2 d ON e.DEPTNO = d.DCODE;
+
+--outer join
+
+SELECT e.NAME, d.DNAME
+  FROM emp2 e LEFT JOIN dept2 d ON e.DEPTNO = d.DCODE;
+
+--scalar sub query
+
+SELECT name,
+       (SELECT dname
+          FROM dept2 d
+         WHERE d.DCODE = e.deptno)    부서명
+  FROM emp2 e;
+
+--=> select문에서 사용하려면 단일 서브쿼리 중에서 단일행이면서 단일 컬럼인 경우만 가능함
+--(임의의 숫자나 문자로 인식할 수 있는 서브쿼리) 
+
+--employees, departments - 사원정보, 부서명 조회
+--scalar sumquery
+
+  SELECT e.*,
+         (SELECT d.DEPARTMENT_NAME
+            FROM departments d
+           WHERE e.department_id = d.DEPARTMENT_ID)    부서명
+    FROM employees e
+ORDER BY e.department_id DESC;
+
+--join
+
+  SELECT e.*, d.DEPARTMENT_NAME 부서명
+    FROM employees e JOIN departments d ON e.department_id = d.DEPARTMENT_ID
+ORDER BY e.department_id DESC;
+
+-- outer join
+
+  SELECT e.*, d.DEPARTMENT_NAME 부서명
+    FROM employees e
+         LEFT JOIN departments d ON e.department_id = d.DEPARTMENT_ID
+ORDER BY e.department_id DESC;
+
+--scalar subquery는 outer join 과 동일
+--사원정보를 모두 출력하고, 부서번호가 없는 경우 scalar subquery로 조회한 부서명은 null값이 됨
+
+--각 부서에 해당하는 사원수 구하기
+
+SELECT * FROM dept;
+
+SELECT * FROM emp;
+
+SELECT dname,
+       d.LOC,
+       (SELECT COUNT (*)
+          FROM emp e
+         WHERE e.DEPTNO = d.deptno)    사원수
+  FROM dept d;
+
+-- 학과별 교수의 인원수, 백분율 구하기
+
+SELECT COUNT (*) FROM professor;
+
+  SELECT deptno,
+         COUNT (*)                                                         인원수,
+         ROUND (COUNT (*) / (SELECT COUNT (*) FROM professor) * 100, 1)    "백분율"
+    FROM professor
+GROUP BY deptno
+ORDER BY deptno;
+
+SELECT d.*,
+       (SELECT COUNT (*)
+          FROM professor p
+         WHERE p.DEPTNO = d.deptno)    "교수의 인원수",
+          ROUND (  (SELECT COUNT (*)
+                      FROM professor p
+                     WHERE p.DEPTNO = d.deptno)
+                 / (SELECT COUNT (*) FROM professor)
+                 * 100,
+                 1)
+       || '%'                          "백분율"
+  FROM department d;
+
+--employees 에서 job_id별 급여의 합계가 전체 금액에서 차지하는 비율 구하기
+
+  SELECT job_id,
+         SUM (SALARY)    "급여의 합계",
+            ROUND (SUM (SALARY) / (SELECT SUM (salary) FROM employees) * 100,
+                   2)
+         || '%'          "비율"
+    FROM employees
+GROUP BY ROLLUP (job_id)
+ORDER BY job_id;
+
+--case 이용, scalar subquery 이용
+--employees에서 직속 상관이름, 급여 레벨 구하기
+--상관이 없는 경우 사장으로 표시, 
+--salary가 5000미만이면 하, 5000~10000 중, 10001~20000 상, 그 이상 특상
+
+  SELECT FIRST_NAME || '-' || LAST_NAME    이름,
+         NVL ((SELECT b.FIRST_NAME
+                 FROM employees b
+                WHERE b.EMPLOYEE_ID = e.MANAGER_ID),
+              '사장')                    "직속상관 이름",
+         e.SALARY,
+         CASE
+             WHEN salary < 5000 THEN '하'
+             WHEN salary BETWEEN 5000 AND 10000 THEN '중'
+             WHEN salary BETWEEN 10001 AND 20000 THEN '상'
+             ELSE '특상'
+         END                               "급여 레벨"
+    FROM employees e
+ORDER BY salary DESC;
+
+
+  SELECT FIRST_NAME || '-' || LAST_NAME    이름,
+         CASE
+             WHEN e.MANAGER_ID IS NULL
+             THEN
+                 '사장'
+             ELSE
+                 (SELECT b.FIRST_NAME
+                    FROM employees b
+                   WHERE b.EMPLOYEE_ID = e.MANAGER_ID)
+         END                               "직속상관 이름",
+         e.SALARY,
+         CASE
+             WHEN salary < 5000 THEN '하'
+             WHEN salary BETWEEN 5000 AND 10000 THEN '중'
+             WHEN salary BETWEEN 10001 AND 20000 THEN '상'
+             ELSE '특상'
+         END                               "급여 레벨"
+    FROM employees e
+ORDER BY salary DESC;
+
+/*
+<의사컬럼(pseudocolumn) - 모조, 유령 컬럼>
+- 테이블에 있는 일반적인 컬럼처럼 행동하기는 하지만, 실제로 테이블에 저장되어 있지 않은 컬럼
+
+[1] rownum : 쿼리의 결과로 나오는 각각의 row들에 대한 순서값을 가리키는 의사컬럼
+- 주로 특정 개수나 그 이하의 row를 선택할 때 사용됨
+
+[2] rowid : 테이블에 저장된 각각의 row들이 저장된 주소값을 가진 의사컬럼
+- 모든 테이블의 모든 row들은 오직 자신만의 유일한 rowid값을 가지고 있다
+*/
+
+SELECT ROWNUM, empno, ename, sal, ROWID AS "ROW_ID" FROM emp;
+
+-- emp테이블 전체에서 상위 5건의 데이터 조회
+
+SELECT ROWNUM,
+       empno,
+       ename,
+       sal,
+       ROWID     AS "ROW_ID"
+  FROM emp
+ WHERE ROWNUM <= 5;
+
+-- order by 이용, emp테이블에서 ename 순으로 정렬한 상태에서 상위 5건 조회
+
+  SELECT ROWNUM,
+         empno,
+         ename,
+         sal
+    FROM emp
+ORDER BY ename;
+
+-- rownum 순서가 뒤바뀜
+
+--inline view 이용
+
+SELECT ROWNUM,
+       empno,
+       ename,
+       sal
+  FROM (  SELECT empno, ename, sal
+            FROM emp
+        ORDER BY ename)
+ WHERE ROWNUM <= 5;
+
+--student에서 height 순서대로 상위 7명의 학생 조회
+
+  SELECT *
+    FROM student
+ORDER BY height DESC;
+
+SELECT ROWNUM, name, height
+  FROM (  SELECT *
+            FROM student
+        ORDER BY height DESC)
+ WHERE ROWNUM <= 7;
+
+--employees에서 salary를 내림차순 정렬해서 상위 6건만 조회
+
+SELECT ROWNUM, FIRST_NAME, SALARY
+  FROM (  SELECT FIRST_NAME, SALARY
+            FROM employees
+        ORDER BY salary DESC)
+ WHERE ROWNUM <= 6;
+
+ --상위에서 2~4 사이인 사원 조회
+
+SELECT ROWNUM, FIRST_NAME, SALARY
+  FROM (  SELECT FIRST_NAME, SALARY
+            FROM employees
+        ORDER BY salary DESC)
+ WHERE ROWNUM BETWEEN 2 AND 4;
+
+ --결과 안나옴, 1이 반드시 포함되어야 함(포함안되면 0건 출력)
+
+ -- 별칭을 사용하여 1없이 출력(inline view 두번 사용)
+
+SELECT rnum, FIRST_NAME, SALARY
+  FROM (SELECT ROWNUM rnum, FIRST_NAME, SALARY
+          FROM (  SELECT FIRST_NAME, SALARY
+                    FROM employees
+                ORDER BY salary DESC))
+ WHERE rnum BETWEEN 2 AND 4;
+
+ --inline view 
+-- employees에서 사원정보를 조회하고, job_id별 평균 급여도 조회
+
+SELECT EMPLOYEE_ID, FIRST_NAME, JOB_ID, SALARY FROM employees;
+
+  SELECT job_id, AVG (NVL (salary, 0))
+    FROM employees
+GROUP BY job_id;
+
+SELECT a.EMPLOYEE_ID,
+       a.FIRST_NAME,
+       a.JOB_ID,
+       a.SALARY,
+       b.평균
+  FROM employees  a
+       JOIN (  SELECT job_id, AVG (NVL (salary, 0)) 평균
+                 FROM employees
+             GROUP BY job_id) b
+           ON a.JOB_ID = b.JOB_ID;
+
+--로그인 처리
+
+SELECT * FROM MEMBER;
+
+SELECT CASE (SELECT COUNT (*)
+               FROM MEMBER
+              WHERE id = 'simson' AND passwd = 'a1234')
+           WHEN 1 THEN '로그인 성공'
+           ELSE '로그인 실패'
+       END    로그인
+  FROM DUAL;
+
+SELECT CASE (SELECT COUNT (*)
+               FROM MEMBER
+              WHERE id = 'simson' AND passwd = 'a1234')
+           WHEN 1
+           THEN
+               '로그인 성공'
+           ELSE
+               CASE (SELECT COUNT (*)
+                       FROM MEMBER
+                      WHERE id = 'simson')
+                   WHEN 1 THEN '비밀번호가 틀렸습니다.'
+                   ELSE '아이디가 없습니다.'
+               END
+       END    로그인
+  FROM DUAL;
+
+-- 사용자로부터 입력값 받아와서 처리하기
+
+SELECT CASE (SELECT COUNT (*)
+               FROM MEMBER
+              WHERE id = :id AND passwd = :pwd)
+           WHEN 1
+           THEN
+               '로그인 성공'
+           ELSE
+               CASE (SELECT COUNT (*)
+                       FROM MEMBER
+                      WHERE id = :id)
+                   WHEN 1 THEN '비밀번호가 틀렸습니다.'
+                   ELSE '아이디가 없습니다.'
+               END
+       END    로그인
+  FROM DUAL;
+
+--decode 이용
+
+SELECT DECODE ((SELECT COUNT (*)
+                  FROM MEMBER
+                 WHERE id = :id AND passwd = :pwd),
+               1, '로그인 성공',
+               DECODE ((SELECT COUNT (*)
+                          FROM MEMBER
+                         WHERE id = :id),
+                       1, '비밀번호가 틀렸습니다.',
+                       '아이디가 없습니다.'))    로그인
+  FROM DUAL;
+
+--gogak에서 10대, 30대 남자 조회 - inline view이용
+
+/*
+10,14,19 => 10
+20,22,27 => 20
+*/
+
+SELECT * FROM gogak;
+
+SELECT gname,
+       jumin,
+       CASE
+           WHEN SUBSTR (jumin, 7, 1) IN (1, 3) THEN '남자'
+           ELSE '여자'
+       END    성별,
+         EXTRACT (YEAR FROM SYSDATE)
+       - (  SUBSTR (jumin, 1, 2)
+          + CASE WHEN SUBSTR (jumin, 7, 1) IN (1, 2) THEN 1900 ELSE 2000 END)
+       + 1    나이
+  FROM gogak;
+
+SELECT gname,
+       jumin,
+       CASE
+           WHEN SUBSTR (jumin, 7, 1) IN (1, 3) THEN '남자'
+           ELSE '여자'
+       END        성별,
+         EXTRACT (YEAR FROM SYSDATE)
+       - (  SUBSTR (jumin, 1, 2)
+          + CASE WHEN SUBSTR (jumin, 7, 1) IN (1, 2) THEN 1900 ELSE 2000 END)
+       + 1        나이,
+       TRUNC (
+           (  EXTRACT (YEAR FROM SYSDATE)
+            - (  SUBSTR (jumin, 1, 2)
+               + CASE
+                     WHEN SUBSTR (jumin, 7, 1) IN (1, 2) THEN 1900
+                     ELSE 2000
+                 END)
+            + 1),
+           -1)    연령대
+  FROM gogak;
+
+SELECT a.*
+  FROM (SELECT gname,
+               jumin,
+               CASE
+                   WHEN SUBSTR (jumin, 7, 1) IN (1, 3) THEN '남자'
+                   ELSE '여자'
+               END        성별,
+                 EXTRACT (YEAR FROM SYSDATE)
+               - (  SUBSTR (jumin, 1, 2)
+                  + CASE
+                        WHEN SUBSTR (jumin, 7, 1) IN (1, 2) THEN 1900
+                        ELSE 2000
+                    END)
+               + 1        나이,
+               TRUNC (
+                   (  EXTRACT (YEAR FROM SYSDATE)
+                    - (  SUBSTR (jumin, 1, 2)
+                       + CASE
+                             WHEN SUBSTR (jumin, 7, 1) IN (1, 2) THEN 1900
+                             ELSE 2000
+                         END)
+                    + 1),
+                   -1)    연령대
+          FROM gogak) a
+ WHERE a.연령대 IN (10, 30) AND a.성별 = '남자';
+
+--학년별, 성별 인원수, 백분율
+--student
+
+SELECT name,
+       jumin,
+       grade,
+       CASE
+           WHEN SUBSTR (jumin, 7, 1) IN (1, 3) THEN '남자'
+           ELSE '여자'
+       END    성별
+  FROM student;
+
+  SELECT grade,
+         성별,
+         COUNT (*)                                                    인원수,
+         COUNT (*) / (SELECT COUNT (*) FROM student) * 100 || '%'     백분율
+    FROM (SELECT name,
+                 jumin,
+                 grade,
+                 CASE
+                     WHEN SUBSTR (jumin, 7, 1) IN (1, 3) THEN '남자'
+                     ELSE '여자'
+                 END    성별
+            FROM student) a
+GROUP BY ROLLUP (grade, 성별);
+
+--job_history의 정보를 조회하되, job_id에 해당하는 job_title,
+--department_id에 해당하는 부서명도 조회
+--scalar subquery 이용
+
+SELECT * FROM job_history;
+
+SELECT * FROM jobs;
+
+SELECT * FROM departments;
+
+SELECT a.*,
+       (SELECT job_title
+          FROM jobs b
+         WHERE a.JOB_ID = b.job_id)                  job_title,
+       (SELECT DEPARTMENT_NAME
+          FROM DEPARTMENTs c
+         WHERE a.department_id = c.DEPARTMENT_ID)    부서명
+  FROM job_history a;
+
+-- 각 부서에 속하는 사원정보를 조회하고 , 부서별 평균급여도 출력하시오 
+--[1] 각 부서에 속하는 사원정보를 조회하는 데이터 집합
+
+SELECT d.DEPARTMENT_ID                        부서번호,
+       d.DEPARTMENT_NAME                      부서명,
+       e.EMPLOYEE_ID                          사원번호,
+       e.FIRST_NAME || '-' || e.LAST_NAME     사원명,
+       e.HIRE_DATE                            입사일,
+       e.SALARY                               급여
+  FROM DEPARTMENTS  d
+       RIGHT JOIN EMPLOYEES e ON e.DEPARTMENT_ID = d.DEPARTMENT_ID;
+
+--[2] 부서별 평균급여
+
+  SELECT 부서명, ROUND (AVG (NVL (급여, 0))) "평균 급여"
+    FROM (SELECT d.DEPARTMENT_ID                        부서번호,
+                 d.DEPARTMENT_NAME                      부서명,
+                 e.EMPLOYEE_ID                          사원번호,
+                 e.FIRST_NAME || '-' || e.LAST_NAME     사원명,
+                 e.HIRE_DATE                            입사일,
+                 e.SALARY                               급여
+            FROM DEPARTMENTS d
+                 RIGHT JOIN EMPLOYEES e ON e.DEPARTMENT_ID = d.DEPARTMENT_ID) a
+GROUP BY 부서명;
+
+--[3] 두 개의 데이터를 조인
+
+SELECT A.*, B."평균 급여"
+  FROM (SELECT d.DEPARTMENT_ID                        부서번호,
+               d.DEPARTMENT_NAME                      부서명,
+               e.EMPLOYEE_ID                          사원번호,
+               e.FIRST_NAME || '-' || e.LAST_NAME     사원명,
+               e.HIRE_DATE                            입사일,
+               e.SALARY                               급여
+          FROM DEPARTMENTS  d
+               RIGHT JOIN EMPLOYEES e ON e.DEPARTMENT_ID = d.DEPARTMENT_ID) A
+       LEFT JOIN
+       (  SELECT 부서명, ROUND (AVG (NVL (급여, 0))) "평균 급여"
+            FROM (SELECT d.DEPARTMENT_ID                        부서번호,
+                         d.DEPARTMENT_NAME                      부서명,
+                         e.EMPLOYEE_ID                          사원번호,
+                         e.FIRST_NAME || '-' || e.LAST_NAME     사원명,
+                         e.HIRE_DATE                            입사일,
+                         e.SALARY                               급여
+                    FROM DEPARTMENTS d
+                         RIGHT JOIN EMPLOYEES e
+                             ON e.DEPARTMENT_ID = d.DEPARTMENT_ID) a
+        GROUP BY 부서명) B
+           ON A."부서명" = B."부서명";
+
+-- emp 테이블을 조회하여 직원들 중에서 자신의 job의 평균 연봉(sal)보다 적거 나 같게 받는 사람들을 조회하시오.
+
+SELECT AVG (NVL (sal, 0)) FROM emp;
+
+  SELECT a.*
+    FROM emp a
+   WHERE sal <= (SELECT AVG (NVL (sal, 0))
+                   FROM emp b
+                  WHERE b.JOB = a.job)
+ORDER BY a.job;
+
+-- 각 학과에 해당하는 교수의 수 구하기 ?
+-- 각 학과에 해당하는 학생수 구하기 ?
+-- department , student 테이블
+
+  SELECT DEPTNO, COUNT (*)
+    FROM professor
+GROUP BY DEPTNO;
+
+--학과별 교수의 수
+
+  SELECT DEPTNO1, COUNT (*)
+    FROM student
+GROUP BY DEPTNO1;
+
+--학과별 학생 수
+
+--Professor 테이블에서 월급을 많이 받는 교수 순으로 10명 조회하기 ? 
+
+SELECT r,
+       PROFNO,
+       NAME,
+       PAY
+  FROM (SELECT ROWNUM     r,
+               PROFNO,
+               NAME,
+               PAY
+          FROM (  SELECT PROFNO, NAME, PAY
+                    FROM professor
+                ORDER BY pay DESC))
+ WHERE r <= 10;
+
+--Student, exam_01 테이블에서 총점이 90이상인 학생들의 정보 조회
+
+SELECT s.*
+  FROM student s
+ WHERE TRUNC (  (SELECT TOTAL
+                   FROM exam_01 e
+                  WHERE e.STUDNO = s.STUDNO)
+              / 10) IN (10, 9);
