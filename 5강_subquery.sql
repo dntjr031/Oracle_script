@@ -1,4 +1,4 @@
-/* Formatted on 2020/04/23 오후 6:46:10 (QP5 v5.360) */
+/* Formatted on 2020/04/24 오전 10:43:08 (QP5 v5.360) */
 --5강_subquery.sql
 --[2020-04-22 수요일]
 
@@ -15,7 +15,7 @@ where 조건 연산자(select 컬럼 from 테이블 where 조건); --subquery
 
 SELECT sal
   FROM emp
- WHERE ename = 'SCOTT';                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         -- 3000
+ WHERE ename = 'SCOTT';                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 -- 3000
 
 --2) 3000보다 많이 받는 직원 조회
 
@@ -986,6 +986,8 @@ SELECT * FROM jobs;
 
 SELECT * FROM departments;
 
+SELECT * FROM employees;
+
 SELECT a.*,
        (SELECT job_title
           FROM jobs b
@@ -994,6 +996,24 @@ SELECT a.*,
           FROM DEPARTMENTs c
          WHERE a.department_id = c.DEPARTMENT_ID)    부서명
   FROM job_history a;
+
+-- 사원 정보도 조회
+
+SELECT a.EMPLOYEE_ID,
+       a.START_DATE,
+       a.END_DATE,
+       a.JOB_ID,
+       a.DEPARTMENT_ID,
+       e.FIRST_NAME,
+       e.HIRE_DATE,
+       e.SALARY,
+       (SELECT job_title
+          FROM jobs b
+         WHERE a.JOB_ID = b.job_id)                  job_title,
+       (SELECT DEPARTMENT_NAME
+          FROM DEPARTMENTs c
+         WHERE a.department_id = c.DEPARTMENT_ID)    부서명
+  FROM job_history a RIGHT JOIN employees e ON a.EMPLOYEE_ID = e.EMPLOYEE_ID;
 
 -- 각 부서에 속하는 사원정보를 조회하고 , 부서별 평균급여도 출력하시오 
 --[1] 각 부서에 속하는 사원정보를 조회하는 데이터 집합
@@ -1064,11 +1084,21 @@ ORDER BY a.job;
     FROM professor
 GROUP BY DEPTNO;
 
+SELECT deptno,
+       dname,
+       (SELECT COUNT (*)
+          FROM professor b
+         WHERE a.deptno = b.DEPTNO)    "교수의 수"
+  FROM department a;
+
 --학과별 교수의 수
 
-  SELECT DEPTNO1, COUNT (*)
-    FROM student
-GROUP BY DEPTNO1;
+SELECT deptno,
+       dname,
+       (SELECT COUNT (*)
+          FROM student b
+         WHERE a.deptno = b.DEPTNO1)    "학생의 수"
+  FROM department a;
 
 --학과별 학생 수
 
@@ -1095,3 +1125,50 @@ SELECT s.*
                    FROM exam_01 e
                   WHERE e.STUDNO = s.STUDNO)
               / 10) IN (10, 9);
+
+SELECT *
+  FROM student
+ WHERE studno IN (SELECT studno
+                    FROM exam_01
+                   WHERE total >= 90);
+
+SELECT *
+  FROM student s
+ WHERE EXISTS
+           (SELECT studno
+              FROM exam_01 e
+             WHERE s.STUDNO = e.STUDNO AND total >= 90);
+
+
+--[2020-04-24 금요일]
+--departments, employees 조인해서 부서에 해당하는 사원들 정보 조회
+
+  SELECT d.DEPARTMENT_ID,
+         d.DEPARTMENT_NAME,
+         e.EMPLOYEE_ID,
+         e.FIRST_NAME,
+         e.SALARY
+    FROM departments d
+         FULL JOIN employees e ON d.DEPARTMENT_ID = e.DEPARTMENT_ID
+ORDER BY d.DEPARTMENT_ID;
+
+--부서장 명도 알고싶다
+
+SELECT a.DEPARTMENT_ID       "부서 번호",
+       a.DEPARTMENT_NAME     "부서 이름",
+       a.MANAGER_ID          "부서장 번호",
+       b.FIRST_NAME          "부서장 명"
+  FROM departments a LEFT JOIN employees b ON a.MANAGER_ID = b.EMPLOYEE_ID;
+
+  SELECT A.*,
+         e.EMPLOYEE_ID     "사원 번호",
+         e.FIRST_NAME      "사원 이름",
+         e.SALARY          "월급"
+    FROM (SELECT a.DEPARTMENT_ID       "부서 번호",
+                 a.DEPARTMENT_NAME     "부서 이름",
+                 a.MANAGER_ID          "부서장 번호",
+                 b.FIRST_NAME          "부서장 명"
+            FROM departments a JOIN employees b ON a.MANAGER_ID = b.EMPLOYEE_ID)
+         A
+         FULL JOIN employees e ON A."부서 번호" = e.DEPARTMENT_ID
+ORDER BY "부서 번호";
