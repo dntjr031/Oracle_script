@@ -1,4 +1,4 @@
-/* Formatted on 2020/04/27 오후 6:34:19 (QP5 v5.360) */
+/* Formatted on 2020/04/28 오전 11:18:26 (QP5 v5.360) */
 --7강_table_제약조건.sql
 --[2020-04-27 월요일]
 
@@ -827,42 +827,258 @@ DELETE FROM employee
 --regdate 가입일, 기본값:현재일자 
 --mileage  마일리지, 기본값 :0, 0~1000000 사이의 값만 들어가도록
 
-create table member2
+CREATE TABLE member2
 (
-    no number primary key,
-    userid varchar2(20) unique not null,
-    name char(20) not null,
-    pwd varchar2(20) not null,
-    email varchar2(50),
-    hp varchar2(20),
-    zipcode varchar2(10),
-    address varchar2(50),
-    addressdetail clob,
-    regdate date default sysdate,
-    mileage number default 0 check(mileage between 0 and 1000000)
+    no               NUMBER PRIMARY KEY,
+    userid           VARCHAR2 (20) UNIQUE NOT NULL,
+    name             CHAR (20) NOT NULL,
+    pwd              VARCHAR2 (20) NOT NULL,
+    email            VARCHAR2 (50),
+    hp               VARCHAR2 (20),
+    zipcode          VARCHAR2 (10),
+    address          VARCHAR2 (50),
+    addressdetail    CLOB,
+    regdate          DATE DEFAULT SYSDATE,
+    mileage          NUMBER DEFAULT 0 CHECK (mileage BETWEEN 0 AND 1000000)
 );
 
-create table zipcode
+CREATE TABLE zipcode
 (
-    zipcode varchar2(10),
-    sido varchar2(10),
-    gugun varchar2(10),
-    dong varchar2(10),
-    bunji varchar2(10),
-    seq number(3) primary key
+    zipcode    VARCHAR2 (10),
+    sido       VARCHAR2 (10),
+    gugun      VARCHAR2 (10),
+    dong       VARCHAR2 (10),
+    bunji      VARCHAR2 (10),
+    seq        NUMBER (3) PRIMARY KEY
 );
 
-create table member1
+CREATE TABLE member1
 (
-    no number primary key,
-    userid varchar2(20) unique not null,
-    name char(20) not null,
-    pwd varchar2(20) not null,
-    email varchar2(50),
-    hp varchar2(20),
-    zipcodeno number(3) CONSTRAINT fk_member1_zipcode
-                       REFERENCES zipcode (seq),
-    addressdetail clob,
-    regdate date default sysdate,
-    mileage number default 0 check(mileage between 0 and 1000000)
+    no               NUMBER PRIMARY KEY,
+    userid           VARCHAR2 (20) UNIQUE NOT NULL,
+    name             CHAR (20) NOT NULL,
+    pwd              VARCHAR2 (20) NOT NULL,
+    email            VARCHAR2 (50),
+    hp               VARCHAR2 (20),
+    zipcodeno        NUMBER (3)
+                        CONSTRAINT fk_member1_zipcode REFERENCES zipcode (seq),
+    addressdetail    CLOB,
+    regdate          DATE DEFAULT SYSDATE,
+    mileage          NUMBER DEFAULT 0 CHECK (mileage BETWEEN 0 AND 1000000)
 );
+
+--[2020-04-28 화요일]
+
+/*
+1) 테이블 생성 후 제약조건 추가
+ alter table 테이블명
+ add constraint 제약조건이름 제약조건종류(컬럼);
+ ex) alter table emp
+     add constraint pk_empno primary key(empno);
+     
+2) 테이블을 만들면서 아웃라인 제약조건 지정
+ - 컬럼명을 모두 나열한 이후에
+ , constraint 제약조건이름 제약조건 종류(컬럼)
+ ex) , constraint pk_empno primary key(empno);
+ 
+3) 인라인 제약조건 지정
+ - 컬럼의 데이터타입 뒤에 제약조건 종류
+ ex) empno number primary key
+*/
+--테이블 생성 후 제약조건 추가하기
+
+CREATE TABLE employee2
+(
+    empno       NUMBER,
+    name        VARCHAR2 (30) NOT NULL,
+    dcode       CHAR (3) NOT NULL,
+    sal         NUMBER (10) DEFAULT 0,
+    email       VARCHAR2 (50),
+    hiredate    DATE DEFAULT SYSDATE
+);
+
+--제약조건 추가하기
+--primary key 제약조건 추가
+
+ALTER TABLE employee2
+    ADD CONSTRAINT pk_employee2_empno PRIMARY KEY (empno);
+
+SELECT *
+  FROM user_constraints
+ WHERE table_name = 'EMPLOYEE2';
+
+--default값 조회
+
+SELECT column_name, data_default
+  FROM user_tab_columns
+ WHERE table_name = 'EMPLOYEE2';
+
+--foreign key 제약조건 추가
+
+ALTER TABLE employee2
+    ADD CONSTRAINT fk_employee2_empno FOREIGN KEY (dcode)
+            REFERENCES depart (dept_cd);
+
+--check 제약조건 추가
+
+ALTER TABLE employee2
+    ADD CONSTRAINT check_employee2_sal CHECK (sal >= 0);
+
+--unique 제약조건 추가
+
+ALTER TABLE employee2
+    ADD CONSTRAINT check_employee2_email UNIQUE (email);
+
+--not null, default 제약조건 변경하기
+
+ALTER TABLE employee2
+    MODIFY name NULL;
+
+--name 컬럼이 not null 이었는데 null로 변경
+
+ALTER TABLE employee2
+    MODIFY name NOT NULL;
+
+--name 컬럼이 null 이었는데 not null로 변경
+
+ALTER TABLE employee2
+    MODIFY sal DEFAULT 1000;
+
+-- sal 컬럼의 default값이 0이었는데 1000으로 변경
+
+--제약조건 이름 변경하기
+
+ALTER TABLE employee2
+    RENAME CONSTRAINT fk_employee2_empno TO fk_employee2_dcode;
+
+--제약조건 제거하기
+
+ALTER TABLE employee2
+    DROP CONSTRAINT pk_employee2_empno;
+
+SELECT *
+  FROM user_constraints
+ WHERE table_name = 'EMPLOYEE2';
+
+--outline
+
+CREATE TABLE employee3
+(
+    empno       NUMBER,
+    name        VARCHAR2 (30) NOT NULL,
+    dcode       CHAR (3) NOT NULL,
+    sal         NUMBER (10) DEFAULT 0,
+    email       VARCHAR2 (50),
+    hiredate    DATE DEFAULT SYSDATE,
+    CONSTRAINT pk_employee3_empno PRIMARY KEY (empno),
+    CONSTRAINT fk_employee3_dcode FOREIGN KEY (dcode)
+        REFERENCES depart (dept_cd),
+    CONSTRAINT ck_employee3_sal CHECK (sal >= 0),
+    CONSTRAINT uk_employee3_email UNIQUE (email)
+);
+
+SELECT * FROM employee3;
+
+SELECT *
+  FROM user_constraints
+ WHERE table_name = 'EMPLOYEE3';
+
+--
+
+SELECT * FROM user_tables;
+
+SELECT * FROM user_objects;
+
+/*
+    create table depart_temp1
+    as
+    select 문
+    
+    을 이용해서 테이블을 만들면, null, not null을 제외한 제약조건은 복사되지 않음
+*/
+
+CREATE TABLE depart_temp1
+AS
+    SELECT * FROM depart;
+
+SELECT *
+  FROM user_constraints
+ WHERE table_name = 'DEPART';
+
+SELECT *
+  FROM user_constraints
+ WHERE table_name = 'DEPART_TEMP1';
+
+--복사한 테이블에 primary key 추가
+
+ALTER TABLE depart_temp1
+    ADD CONSTRAINT pk_depart_temp1_dept_cd PRIMARY KEY (dept_cd);
+
+-- not null에도 제약조건이름 넣기
+
+CREATE TABLE employee4
+(
+    empno       NUMBER,
+    name        VARCHAR2 (30) CONSTRAINT nn_employee4_name NOT NULL,
+    dcode       CHAR (3) NOT NULL,
+    sal         NUMBER (10) DEFAULT 0,
+    email       VARCHAR2 (50),
+    hiredate    DATE DEFAULT SYSDATE,
+    CONSTRAINT pk_employee4_empno PRIMARY KEY (empno),
+    CONSTRAINT ck_employee4_sal CHECK (sal >= 0),
+    CONSTRAINT uk_employee4_email UNIQUE (email)
+);
+
+SELECT *
+  FROM user_constraints
+ WHERE table_name = 'EMPLOYEE4';
+
+
+
+--테이블 변경하기(alter table 이용)
+
+--1) 새로운 컬럼 추가
+
+SELECT * FROM depart;
+
+ALTER TABLE depart
+    ADD pdept CHAR (3);
+
+--추가될 때 값은 null이 들어감
+
+ALTER TABLE depart
+    ADD country VARCHAR2 (50) DEFAULT '한국';
+
+--추가될 때 값은 default값이 들어감
+
+--2) 컬럼의 데이터 크기 변경하기
+--country 컬럼의 데이터 타입 변경, varchar2(50) => varchar2(100)
+
+ALTER TABLE depart
+    MODIFY country VARCHAR2 (100);
+    
+desc depart;
+
+--3) 컬럼 이름 변경
+--loc => area 로 변경
+alter table depart
+rename column loc to area;
+
+select * from depart;
+
+--cf. 테이블 이름 변경하기
+select * from depart_temp1;
+rename depart_temp1 to depart_temp10;
+
+select * from depart_temp10;
+
+--컬럼 삭제하기
+alter table depart_temp10
+drop column loc;
+
+create table depart_temp2
+as
+select * from depart
+where 1=0;
+
+select * from depart_temp2;
