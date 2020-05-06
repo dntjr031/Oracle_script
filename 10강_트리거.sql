@@ -1,4 +1,4 @@
-/* Formatted on 2020/05/06 오후 5:27:53 (QP5 v5.360) */
+/* Formatted on 2020/05/06 오후 6:47:26 (QP5 v5.360) */
 --10강_트리거.sql
 --[2020-05-06 수요일]
 
@@ -405,11 +405,12 @@ CREATE OR REPLACE TRIGGER tr_입고
     FOR EACH ROW
 BEGIN
     UPDATE 재고
-       SET 수량 = 수량+:new.수량, 금액 = 금액+:new.금액
+       SET 수량 = 수량 + :new.수량, 금액 = 금액 + :new.금액
      WHERE 품번 = :new.품번;
 END;
 
-insert into 입고 values(100, 2, 1800);
+INSERT INTO 입고
+     VALUES (100, 2, 1800);
 
 SELECT * FROM 입고;
 
@@ -423,12 +424,146 @@ CREATE OR REPLACE TRIGGER tr_판매
     FOR EACH ROW
 BEGIN
     UPDATE 재고
-       SET 수량 = 수량-:new.수량, 금액 = 금액-:new.금액
+       SET 수량 = 수량 - :new.수량, 금액 = 금액 - :new.금액
      WHERE 품번 = :new.품번;
 END;
 
-insert into 판매 values(100, 3, 2700);
+INSERT INTO 판매
+     VALUES (100, 3, 2700);
 
 SELECT * FROM 판매;
 
 SELECT * FROM 재고;
+
+--분석함수
+--순위함수 - rank(), dense_rank(), row_number()
+
+/*
+    rank | dense_rank | row_number(expr)
+        over ( <partition by 컬럼> <order by 컬럼> )
+*/
+-- 급여가 높은 순서대로 수위를 부여하여 출력
+
+SELECT * FROM employees;
+
+SELECT EMPLOYEE_ID,
+       FIRST_NAME,
+       HIRE_DATE,
+       SALARY,
+       DEPARTMENT_ID,
+       RANK () OVER (ORDER BY salary DESC)
+           AS "전체 순위(rank)",
+       RANK () OVER (PARTITION BY department_id ORDER BY salary DESC)
+           AS "부서내 순위(rank)",
+       DENSE_RANK () OVER (ORDER BY salary DESC)
+           AS "전체 순위(dense_rank)",
+       DENSE_RANK () OVER (PARTITION BY department_id ORDER BY salary DESC)
+           AS "부서내 순위(dense_rank)",
+       ROW_NUMBER () OVER (ORDER BY salary DESC)
+           AS "전체 순위(row_number)",
+       ROW_NUMBER () OVER (PARTITION BY department_id ORDER BY salary DESC)
+           AS "부서내 순위(row_number)"
+  FROM employees;
+
+--order by department_id;
+
+--급여가 가장 많은 사원 5명 (1~5위)만 조회
+--rank이용
+
+SELECT EMPLOYEE_ID,
+       FIRST_NAME,
+       HIRE_DATE,
+       SALARY,
+       DEPARTMENT_ID,
+       RANK () OVER (ORDER BY salary DESC)     "급여 순위"
+  FROM employees
+ WHERE "급여 순위" <= 5;
+
+-- error, rank등 분석함수는 where절에 올 수 없다.
+
+SELECT *
+  FROM (SELECT EMPLOYEE_ID,
+               FIRST_NAME,
+               HIRE_DATE,
+               SALARY,
+               DEPARTMENT_ID,
+               RANK () OVER (ORDER BY salary DESC)     "급여 순위"
+          FROM employees)
+ WHERE "급여 순위" <= 5;
+
+-- top-n 분석
+-- 입사일 기준으로 정렬한 후 조회
+
+SELECT ROW_NUMBER () OVER (ORDER BY hiredate DESC)     NO,
+       empno,
+       ename,
+       hiredate
+  FROM emp;
+
+SELECT ROWNUM AS NO, A.*
+  FROM (  SELECT empno, ename, hiredate
+            FROM emp
+        ORDER BY hiredate DESC) A;
+
+--최근에 입사한 7명을 순서대로 조회
+--1) rownum
+
+SELECT ROWNUM AS NO, A.*
+  FROM (  SELECT empno, ename, hiredate
+            FROM emp
+        ORDER BY hiredate DESC) A
+ WHERE ROWNUM <= 7;
+
+--2) row_number()
+
+SELECT *
+  FROM (SELECT ROW_NUMBER () OVER (ORDER BY hiredate DESC)     NO,
+               empno,
+               ename,
+               hiredate
+          FROM emp)
+ WHERE NO <= 7;
+
+--누적 합계 구하기
+--sum() over()
+
+SELECT p_code,
+       p_date,
+       p_qty                                                     판매량,
+       SUM (p_qty) OVER (PARTITION BY p_code ORDER BY p_date)    누적판매량
+  FROM panmae;
+
+--group by 이용
+
+  SELECT p_code, p_date, SUM (p_qty) AS qty_total
+    FROM panmae
+GROUP BY p_code, p_date
+ORDER BY p_code, p_date;
+
+SELECT A.*,
+       SUM (qty_total) OVER (PARTITION BY p_code ORDER BY p_date)    누적판매량
+  FROM (  SELECT p_code, p_date, SUM (p_qty) AS qty_total
+            FROM panmae
+        GROUP BY p_code, p_date) A;
+
+--view 만들기
+
+CREATE OR REPLACE VIEW v_panmae
+AS
+    SELECT A.*,
+           SUM (qty_total) OVER (PARTITION BY p_code ORDER BY p_date)    누적판매량
+      FROM (  SELECT p_code, p_date, SUM (p_qty) AS qty_total
+                FROM panmae
+            GROUP BY p_code, p_date) A;
+
+SELECT * FROM v_panmae;
+
+--panmae 이용
+--판매내역 출력하되 판매일자, 판매량, 판매금액, 누적 판매량, 누적 판매금액 조회
+--날짜별로 누적
+
+SELECT A.*,
+       SUM ("sum_qty") OVER (ORDER BY p_date)       "누적 판매랑",
+       SUM ("sum_total") OVER (ORDER BY p_date)     "누적 판매금액"
+  FROM (SELECT P_DATE, SUM (P_QTY) "sum_qty", SUM (P_TOTAL) "sum_total"
+          FROM panmae group by p_date) A;
