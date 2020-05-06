@@ -1,4 +1,4 @@
-/* Formatted on 2020/04/22 오전 10:36:48 (QP5 v5.360) */
+/* Formatted on 2020/05/06 오전 10:44:22 (QP5 v5.360) */
 --4강_join.sql
 --20-04-21 화
 
@@ -33,7 +33,7 @@ SELECT s.STUDNO,
        s.DEPTNO1,
        d.DNAME
   FROM student s, department d
- WHERE s.DEPTNO1 = d.DEPTNO;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        -- join 조건
+ WHERE s.DEPTNO1 = d.DEPTNO;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    -- join 조건
 
 --2) 표준 ANSI 조인
 
@@ -61,7 +61,7 @@ SELECT s.STUDNO,
        d.DNAME
   FROM student s, department d
  WHERE s.DEPTNO1 = d.DEPTNO                                           --join조건
-                            AND s.GRADE = 4;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           -- 검색조건
+                            AND s.GRADE = 4;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       -- 검색조건
 
 --2) ANSI
 
@@ -81,7 +81,7 @@ SELECT *
 
 SELECT s.NAME, p.PROFNO, p.NAME
   FROM student s, professor p
- WHERE s.PROFNO = p.PROFNO;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    -- 15건 student에 profno가 null인 데이터는 안 나옴
+ WHERE s.PROFNO = p.PROFNO;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               -- 15건 student에 profno가 null인 데이터는 안 나옴
 --=> 내부조인 : 양쪽 테이블에 데이터가 있는 것만 출력됨 
 
 SELECT s.NAME, p.PROFNO, p.NAME
@@ -275,7 +275,7 @@ SELECT s.name, p.name
   SELECT s.name, p.name, p.POSITION
     FROM student s, professor p
    WHERE s.PROFNO(+) = p.PROFNO
-ORDER BY p.name;                                                                                                                                                                                                                                                                                                                                                                  -- 24건
+ORDER BY p.name;                                                                                                                                                                                                                                                                                                                                                                                  -- 24건
 
   SELECT s.name, p.name, p.POSITION
     FROM student s RIGHT OUTER JOIN professor p ON s.PROFNO = p.PROFNO
@@ -463,7 +463,7 @@ ORDER BY l.city, d.department_name, e.job_id;
 --상위 부서명 조회하기
 --부서 테이블에서 상위부서코드(pdept)에 해당하는 상위부서 정보를 출력
 
-SELECT * FROM dept2;                                         -- 13건
+SELECT * FROM dept2;                                                             -- 13건
 
 --inner join
 
@@ -473,7 +473,7 @@ SELECT * FROM dept2;                                         -- 13건
          a.area,
          b.dname     "상위 부서명"
     FROM dept2 a JOIN dept2 b ON a.pdept = b.dcode
-ORDER BY a.dcode;                                   --12 건
+ORDER BY a.dcode;                                                    --12 건
 -- 사장실은 상위 부서가 null이므로 데이터를 가져오지 않았음
 
 --outer join
@@ -484,35 +484,39 @@ ORDER BY a.dcode;                                   --12 건
          a.area,
          b.dname     "상위 부서명"
     FROM dept2 a LEFT JOIN dept2 b ON a.pdept = b.dcode
-ORDER BY a.dcode;                                   -- 13건
+ORDER BY a.dcode;                                                    -- 13건
 --=> 사장실 레코드도 포함됨
 
 --사원정보와 해당 사원의 직속 상관의 이름 출력
-select * from employees;
 
-select a.*, b.first_name "직속상관의 이름"
-from employees a left join employees b
-on a.manager_id=b.employee_id;
+SELECT * FROM employees;
+
+SELECT a.*, b.first_name "직속상관의 이름"
+  FROM employees a LEFT JOIN employees b ON a.manager_id = b.employee_id;
 
 --2. EMP Table에 있는 EMPNO와 MGR을 이용하여 서로의 관계를 다음과 같이 출력하라. 
 --‘FORD의 매니저는 JONES’
-select a.*, b.ename "매니저"
-from emp a left join emp b
-on a.mgr=b.empno;
+
+SELECT a.*, b.ename "매니저"
+  FROM emp a LEFT JOIN emp b ON a.mgr = b.empno;
 
 -- 카티션곱(cartesion product)
+
 /*
 - join 조건이 없는 경우
  두 테이블의 데이터를 곱한 개수만큼의 데이터가 출력됨
 - ANSI join 에서는 cross join이라고 부름
 */
-select * from emp; --14건
-select * from dept; -- 4건
 
-select e.*,d.dname
-from emp e, dept d; -- 14 * 4 = 56건 출력
+SELECT * FROM emp;                   --14건
+
+SELECT * FROM dept;                    -- 4건
+
+SELECT e.*, d.dname
+  FROM emp e, dept d;                    -- 14 * 4 = 56건 출력
 
 --ANSI join
-select e.*,d.dname, d.deptno
-from emp e cross join dept d
-order by d.deptno, e.empno; -- 14 * 4 = 56건 출력
+
+  SELECT e.*, d.dname, d.deptno
+    FROM emp e CROSS JOIN dept d
+ORDER BY d.deptno, e.empno;                            -- 14 * 4 = 56건 출력

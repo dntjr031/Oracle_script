@@ -1,4 +1,4 @@
-/* Formatted on 2020/04/29 오후 6:32:07 (QP5 v5.360) */
+/* Formatted on 2020/05/06 오전 10:44:48 (QP5 v5.360) */
 --10강_사용자관리.sql
 --[2020-04-29 수요일]
 
@@ -142,6 +142,7 @@ SELECT *
  WHERE grantee = 'CONNECT';
 
 -- hr 권환 조회
+
 SELECT *
   FROM dba_sys_privs
  WHERE grantee = 'HR';
@@ -149,24 +150,92 @@ SELECT *
 SELECT *
   FROM dba_role_privs
  WHERE grantee = 'HR';
- 
+
 --사용자 삭제
 --drop user 사용자 이름;
-drop user testuser7;
+DROP USER testuser7;
 
-select * from dba_users where username like'TEST%';
+SELECT *
+  FROM dba_users
+ WHERE username LIKE 'TEST%';
 
 --잠긴 계정 열기
 --alter user 사용자ID account unlock;
-alter user testuser2 account unlock;
+
+ALTER USER testuser2
+    ACCOUNT UNLOCK;
 
 --계정 잠그기
 --alter user 사용자ID account lock;
-alter user testuser2 account lock;
+
+ALTER USER testuser2
+    ACCOUNT LOCK;
 
 -- 기존 계정의 암호 변경하기
 --alter user 사용자ID identified by 새로운비밀번호;
-alter user testuser2 identified by testuser123;
+
+ALTER USER testuser2
+    IDENTIFIED BY testuser123;
 
 --오라클이 제공하는 role조회
+
 SELECT * FROM dba_roles;
+
+
+----------------------------------------
+--[2020-05-06 수요일]
+
+SELECT *
+  FROM dba_users
+ WHERE username LIKE 'TEST%';
+
+SELECT *
+  FROM dba_sys_privs
+ WHERE grantee = 'TESTUSER5';
+
+--권한 조회
+
+SELECT *
+  FROM dba_role_privs
+ WHERE grantee = 'TESTUSER5';
+
+--롤 조회
+
+-- testrole 이라는 이름의 롤을 생성하고, create session, create table권한 부여하기
+--1) 롤 생성하기
+CREATE ROLE testrole;
+
+SELECT *
+  FROM dba_roles
+ WHERE role = 'TESTROLE';
+
+SELECT *
+  FROM dba_sys_privs
+ WHERE grantee = 'TESTROLE';
+
+--2) 롤에 권한 부여하기
+-- create session, create table, unlimited tablespace
+GRANT CREATE SESSION, CREATE TABLE TO testrole;
+GRANT UNLIMITED TABLESPACE TO testrole;
+
+SELECT *
+  FROM dba_sys_privs
+ WHERE grantee = 'TESTROLE';
+
+--3) testuser5 사용자에게 testrole 부여하기
+GRANT testrole TO testuser5;
+
+ALTER USER testuser5
+    QUOTA 100 M ON tb_test2;
+
+SELECT *
+  FROM dba_sys_privs
+ WHERE grantee = 'TESTUSER5';
+
+--권한 조회
+
+SELECT *
+  FROM dba_role_privs
+ WHERE grantee = 'TESTUSER5';
+
+--롤 조회

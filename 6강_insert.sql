@@ -1,4 +1,4 @@
-/* Formatted on 2020/04/24 오후 6:26:26 (QP5 v5.360) */
+/* Formatted on 2020/05/06 오전 10:44:31 (QP5 v5.360) */
 --6강_insert.sql
 --[2020-04-24 금요일]
 
@@ -503,70 +503,104 @@ SELECT * FROM p_02;
 --insert ? 
 --1) dept01, emp01 테이블에 데이터 입력하기 ? 
 --dept01 테이블에는 모든 칼럼 입력, emp01 테이블에는 일부 칼럼만 입력 
- 
-create table dept01
-as
-select * from dept;
 
-create table emp01
-(EMPNO, ENAME, SAL, job, MGR, HIREDATE, COMM, DEPTNO )
-as
-select EMPNO, ENAME, SAL, job, MGR, HIREDATE, COMM, DEPTNO from emp;
+CREATE TABLE dept01
+AS
+    SELECT * FROM dept;
 
-desc emp01;
+CREATE TABLE emp01
+(
+    EMPNO,
+    ENAME,
+    SAL,
+    job,
+    MGR,
+    HIREDATE,
+    COMM,
+    DEPTNO
+)
+AS
+    SELECT EMPNO, ENAME, SAL, job, MGR, HIREDATE, COMM, DEPTNO FROM emp;
+
+DESC emp01;
 
 --update ? 
 --1) DEPT01 테이블의 부서번호가 30인 부서의 위치(LOC)를 '부산'으로 수정 ? 
-update dept01
-set loc ='부산'
-where DEPTNO =30;
+
+UPDATE dept01
+   SET loc = '부산'
+ WHERE DEPTNO = 30;
+
 --2) DEPT01 테이블의 지역을 모두 '서울'로 수정 ? 
-update dept01
-set LOC = '서울';
+
+UPDATE dept01
+   SET LOC = '서울';
+
 --3) emp01 테이블에서 job이 'MANAGER' 인 사원의 급여(sal)를 10% 인상 
-update emp01
-set sal = sal*(1.1)
-where job= 'MANAGER';
+
+UPDATE emp01
+   SET sal = sal * (1.1)
+ WHERE job = 'MANAGER';
 
 
 --서브쿼리를 이용한 update ? 
 --1) 사원번호가 7934인 사원의 급여와, 직무를 사원번호가 7654인 사원의 직무와 급여 로 수정(emp01 테이블 이용) 
-update emp01
-set (SAL, JOB) = (select SAL, JOB from emp01 where EMPNO = 7654)
-where EMPNO = 7934;
+
+UPDATE emp01
+   SET (SAL, JOB) =
+           (SELECT SAL, JOB
+              FROM emp01
+             WHERE EMPNO = 7654)
+ WHERE EMPNO = 7934;
 
 --다른 테이블을 참조한 UPDATE ? 
 --1) DEPT01 테이블에서 부서이름이 SALES인 데이터를 찾아 그 부서에 해당되는 
 --EMP01 테이블의 사원업무(JOB)를 'SALSEMAN'으로 수정 ? 
-update emp01
-set job = 'SALSEMAN'
-where DEPTNO = (select deptno from dept01 where dname='SALES');
+
+UPDATE emp01
+   SET job = 'SALSEMAN'
+ WHERE DEPTNO = (SELECT deptno
+                   FROM dept01
+                  WHERE dname = 'SALES');
 
 --2) DEPT01 테이블의 위치(loc)가  'DALLAS'인 데이터를 찾아 그 부서에 해당하는 
 --EMP01 테이블의 사원들의 직무(JOB)을 'ANALYST'로 수정
-update emp01
-set job = 'ANALYST'
-where DEPTNO = (select deptno from dept01 where loc='DALLAS');
+
+UPDATE emp01
+   SET job = 'ANALYST'
+ WHERE DEPTNO = (SELECT deptno
+                   FROM dept01
+                  WHERE loc = 'DALLAS');
 
 
 -- DELETE ? 
 --1) EMP01테이블에서 7782의 사원번호인 사원정보를 모두 삭제 ? 
-delete from emp01
-where EMPNO = 7782;
+
+DELETE FROM emp01
+      WHERE EMPNO = 7782;
+
 --2) EMP01테이블에서 직무(JOB)이 'CLERK'인 사원들의 정보를 삭제 ? 
-delete from emp01
-where job='CLERK';
+
+DELETE FROM emp01
+      WHERE job = 'CLERK';
 
 --3) EMP01테이블의 모든 정보를 삭제 후 rollback 
-delete from emp01;
+
+DELETE FROM emp01;
 
 --서브쿼리를 이용한 데이터의 삭제 ? 
 --1) 'ACCOUNTING'부서명에 대한 부서코드를 DEPT01테이블에서 검색한 후   
 --해당 부서코드를 가진 사원의 정보를 EMP01테이블에서 삭제 ? 
-delete from emp01
-where DEPTNO = (select deptno from dept01 where dname='ACCOUNTING');
+
+DELETE FROM emp01
+      WHERE DEPTNO = (SELECT deptno
+                        FROM dept01
+                       WHERE dname = 'ACCOUNTING');
 
 --2) DEPT01테이블에서 부서의 위치가 'NEW YORK'인 부서를 찾아   
 --EMP01테이블에서 그 부서에 해당하는 사원을 삭제 
-delete from emp01
-where DEPTNO = (select deptno from dept01 where loc='NEW YORK');
+
+DELETE FROM emp01
+      WHERE DEPTNO = (SELECT deptno
+                        FROM dept01
+                       WHERE loc = 'NEW YORK');

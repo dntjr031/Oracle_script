@@ -1,4 +1,4 @@
-/* Formatted on 2020/04/28 오후 5:44:30 (QP5 v5.360) */
+/* Formatted on 2020/05/06 오전 10:44:36 (QP5 v5.360) */
 --8강_seq_index_view.sql
 --[2020-04-28 화요일]
 
@@ -483,6 +483,6 @@ INSERT INTO v_emp_3 (empno,
 
 -- error, with check option 위배, view WITH CHECK OPTION where-clause violation
 
-select * from v_emp_3;
+SELECT * FROM v_emp_3;
 
-select * from user_views;
+SELECT * FROM user_views;

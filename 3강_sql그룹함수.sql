@@ -1,4 +1,4 @@
-/* Formatted on 2020/04/21 오후 12:43:52 (QP5 v5.360) */
+/* Formatted on 2020/05/06 오전 10:44:18 (QP5 v5.360) */
 --3강_sql그룹함수.sql
 --20-04-20 월
 
@@ -11,7 +11,7 @@ SELECT * FROM professor;
 --count() : 입력되는 데이터의 건수를 리턴
 --그룹함수는 null을 제외하고 계산함
 
-SELECT COUNT (*), COUNT (bonus), COUNT (hpage), COUNT (name) FROM professor;                                                                                            --=> bonus, hpage의 건수는 null이 제외된 건수
+SELECT COUNT (*), COUNT (bonus), COUNT (hpage), COUNT (name) FROM professor;                                                                                                                                                                        --=> bonus, hpage의 건수는 null이 제외된 건수
 
 --sum() : 합계를 구하는 함수
 
@@ -73,11 +73,11 @@ min(distinct 컬럼명) - 중복값을 제외한 최소값
 --그룹별 집계
 --학과별로 교수들의 평균급여를 구하기
 
-SELECT AVG (pay) FROM professor;                                                                --전체 교수들의 평균급여
+SELECT AVG (pay) FROM professor;                                                                                                --전체 교수들의 평균급여
 
   SELECT deptno, pay
     FROM professor
-ORDER BY deptno;                                                                   -- 학과별로 정렬
+ORDER BY deptno;                                                                                   -- 학과별로 정렬
 
   SELECT deptno, AVG (pay)
     FROM professor
@@ -574,7 +574,7 @@ SELECT SUM (DECODE (TO_CHAR (REGDATE, 'mm'), '01', price))     "1월",
 -- student 테이블에서 deptno1(학과)별, grade(학년)별 키 (height)의 평균구하기 ? 
 --[1] group by 이용 ? 
 
-  SELECT deptno1, grade, AVG (nvl(height,0)) 평균키
+  SELECT deptno1, grade, AVG (NVL (height, 0)) 평균키
     FROM student
 GROUP BY deptno1, grade
 ORDER BY deptno1, grade;
@@ -582,10 +582,10 @@ ORDER BY deptno1, grade;
 --[2] group by, decode 이용-가로, 세로 바꿔서
 
   SELECT deptno1,
-         AVG (DECODE (grade, 1, nvl(height,0)))     "1학년",
-         AVG (DECODE (grade, 2, nvl(height,0)))     "2학년",
-         AVG (DECODE (grade, 3, nvl(height,0)))     "3학년",
-         AVG (DECODE (grade, 4, nvl(height,0)))     "4학년"
+         AVG (DECODE (grade, 1, NVL (height, 0)))     "1학년",
+         AVG (DECODE (grade, 2, NVL (height, 0)))     "2학년",
+         AVG (DECODE (grade, 3, NVL (height, 0)))     "3학년",
+         AVG (DECODE (grade, 4, NVL (height, 0)))     "4학년"
     FROM student
 GROUP BY deptno1
 ORDER BY deptno1;

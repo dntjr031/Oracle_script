@@ -1,4 +1,4 @@
-/* Formatted on 2020/04/20 오후 4:24:28 (QP5 v5.360) */
+/* Formatted on 2020/05/06 오전 10:44:40 (QP5 v5.360) */
 --2강_단일 행 함수.sql 
 --2020.04.17 금요일
 
@@ -239,7 +239,7 @@ SELECT dname, RTRIM (dname, '부') FROM dept2;
 --reverse()
 --어떤 문자열을 거꾸로 보여주는 것
 
-SELECT 'oracle', reverse ('oracle')                --reverse('대한민국') --한글은 에러
+SELECT 'oracle', reverse ('oracle')                 --reverse('대한민국') --한글은 에러
                                     FROM DUAL;
 
 --replace(문자열이나 컬럼명, 문자1, 문자2)
@@ -300,8 +300,8 @@ SELECT 12345.457,
 SELECT first_name,
        salary,
        ROUND (salary, -3),
-       TRUNC (salary, -3)-- 100의 자리에서 반올림, 버림
-  FROM employees;                 
+       TRUNC (salary, -3)                                 -- 100의 자리에서 반올림, 버림
+  FROM employees;
 
 --mod(숫자, 나누는 수) - 나머지를 구하는 함수
 --ceil(소수점이 있는 실수) - 올림(주어진 숫자와 가장 근접한 큰 정수 출력)
@@ -381,7 +381,7 @@ SELECT SYSDATE,
 --올해 1/1 부터 며칠 경과되었는지
 --2020-04-17 - 2020-01-01 => 숫자
 
-SELECT '2020-04-17' - '2020-01-01' FROM DUAL;                                                                                                                                        --error
+SELECT '2020-04-17' - '2020-01-01' FROM DUAL;                                                                                                                                                                                     --error
 
 SELECT TO_DATE ('2020-04-17') - TO_DATE ('2020-01-01') FROM DUAL;
 
@@ -396,14 +396,14 @@ SELECT TO_DATE ('2020-04-17') - TO_DATE ('2020-04-16')     "어제부터",
 SELECT SYSDATE,
        SYSDATE - TO_DATE ('2020-04-16')     "어제부터",
        TO_DATE ('2020-04-18') - SYSDATE     "내일까지"
-  FROM DUAL;                                   -- 현재일자는 시간이 포함되서 결과가 예상과 다름
+  FROM DUAL;                                               -- 현재일자는 시간이 포함되서 결과가 예상과 다름
 
 --시간을 제외한 두 날짜 사이의 일수를 구하는 경우
 
 SELECT SYSDATE,
        TRUNC (SYSDATE),
        TO_DATE ('2020-04-18') - TRUNC (SYSDATE)     "내일까지"
-  FROM DUAL;                                   -- 현재일자는 시간이 포함
+  FROM DUAL;                                               -- 현재일자는 시간이 포함
 -- trunc(날짜) : 해당 날짜를 리턴함(시간 빼고)
 -- round(날짜) : 해당 날짜를 반올림해서 리턴(정오 기준)
 
@@ -577,7 +577,7 @@ SELECT *
   FROM professor
  WHERE hiredate >= '1995-01-01';
 
-SELECT '2020-04-03' - '2020-01-01' FROM DUAL;                                                                                                                                        --error
+SELECT '2020-04-03' - '2020-01-01' FROM DUAL;                                                                                                                                                                                     --error
 
 SELECT TO_DATE ('2020-04-03') - TO_DATE ('2020-01-01') FROM DUAL;
 
@@ -888,11 +888,8 @@ SELECT gno,
            WHEN '1' THEN '남'
            WHEN '3' THEN '남'
            ELSE '여'
-       END                                     성별,
-       CASE 
-           WHEN SUBSTR (jumin, 7, 1) IN ('1', '3') THEN '남' 
-           ELSE '여' 
-       END    성별2
+       END                                                                       성별,
+       CASE WHEN SUBSTR (jumin, 7, 1) IN ('1', '3') THEN '남' ELSE '여' END    성별2
   FROM gogak;
 
 --나이구하기
@@ -976,9 +973,5 @@ ORDER BY pay DESC;
 
 SELECT ename,
        sal,
-       CASE 
-            WHEN sal > 2000 THEN 1000 
-            WHEN sal > 1000 THEN 500 
-            ELSE 0 
-       END    보너스
+       CASE WHEN sal > 2000 THEN 1000 WHEN sal > 1000 THEN 500 ELSE 0 END    보너스
   FROM emp;

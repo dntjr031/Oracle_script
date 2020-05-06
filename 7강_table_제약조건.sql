@@ -1,4 +1,4 @@
-/* Formatted on 2020/04/28 오전 11:18:26 (QP5 v5.360) */
+/* Formatted on 2020/05/06 오전 10:44:34 (QP5 v5.360) */
 --7강_table_제약조건.sql
 --[2020-04-27 월요일]
 
@@ -1056,29 +1056,34 @@ ALTER TABLE depart
 
 ALTER TABLE depart
     MODIFY country VARCHAR2 (100);
-    
-desc depart;
+
+DESC depart;
 
 --3) 컬럼 이름 변경
 --loc => area 로 변경
-alter table depart
-rename column loc to area;
 
-select * from depart;
+ALTER TABLE depart
+    RENAME COLUMN loc TO area;
+
+SELECT * FROM depart;
 
 --cf. 테이블 이름 변경하기
-select * from depart_temp1;
-rename depart_temp1 to depart_temp10;
 
-select * from depart_temp10;
+SELECT * FROM depart_temp1;
+
+RENAME depart_temp1 TO depart_temp10;
+
+SELECT * FROM depart_temp10;
 
 --컬럼 삭제하기
-alter table depart_temp10
-drop column loc;
 
-create table depart_temp2
-as
-select * from depart
-where 1=0;
+ALTER TABLE depart_temp10
+    DROP COLUMN loc;
 
-select * from depart_temp2;
+CREATE TABLE depart_temp2
+AS
+    SELECT *
+      FROM depart
+     WHERE 1 = 0;
+
+SELECT * FROM depart_temp2;
