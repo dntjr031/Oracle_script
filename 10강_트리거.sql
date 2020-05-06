@@ -65,10 +65,12 @@ CREATE TABLE t_order
 create or replace trigger tr_check_time
 before insert on t_order
 begin
-    if then
-        raise_application_error(-20009,'일 경우에만 입력가능!!');
+    if to_char(sysdate, 'HH24:mi') not between '15:50' and '16:10' then
+        raise_application_error(-20009,'15:50~16:10일 경우에만 입력가능!!');
         rollback;
     end if;
 end;
 
---
+select * from t_order;
+insert into t_order
+values(1,'A01',sysdate);
