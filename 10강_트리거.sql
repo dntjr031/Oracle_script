@@ -1,4 +1,4 @@
-/* Formatted on 2020/05/06 오후 5:10:40 (QP5 v5.360) */
+/* Formatted on 2020/05/06 오후 5:27:53 (QP5 v5.360) */
 --10강_트리거.sql
 --[2020-05-06 수요일]
 
@@ -331,3 +331,104 @@ INSERT INTO t_test3
 SELECT * FROM t_test3;
 
 SELECT * FROM t_test3_history;
+
+----------실습----------
+
+CREATE TABLE 상품
+(
+    품번       NUMBER,
+    항목명    VARCHAR2 (20),
+    단가       NUMBER
+);
+
+CREATE TABLE 입고
+(
+    품번    NUMBER,
+    수량    NUMBER,
+    금액    NUMBER
+);
+
+CREATE TABLE 판매
+(
+    품번    NUMBER,
+    수량    NUMBER,
+    금액    NUMBER
+);
+
+CREATE TABLE 재고
+(
+    품번    NUMBER,
+    수량    NUMBER,
+    금액    NUMBER
+);
+
+INSERT INTO 상품
+     VALUES (100, '새우깡', 900);
+
+INSERT INTO 상품
+     VALUES (200, '감자깡', 900);
+
+INSERT INTO 상품
+     VALUES (300, '맛동산', 1000);
+
+INSERT INTO 입고
+     VALUES (100, 10, 9000);
+
+INSERT INTO 입고
+     VALUES (200, 10, 9000);
+
+INSERT INTO 입고
+     VALUES (300, 10, 10000);
+
+INSERT INTO 재고
+     VALUES (100, 10, 9000);
+
+INSERT INTO 재고
+     VALUES (200, 10, 9000);
+
+INSERT INTO 재고
+     VALUES (300, 10, 10000);
+
+SELECT * FROM 입고;
+
+SELECT * FROM 재고;
+
+SELECT * FROM 상품;
+
+SELECT * FROM 판매;
+
+--상품이 입고되면 재고 테이블에서 자동으로 해당 상품의 재고 수량과 금액이 증가되는 트리거 작성 하기  
+
+CREATE OR REPLACE TRIGGER tr_입고
+    AFTER INSERT
+    ON 입고
+    FOR EACH ROW
+BEGIN
+    UPDATE 재고
+       SET 수량 = 수량+:new.수량, 금액 = 금액+:new.금액
+     WHERE 품번 = :new.품번;
+END;
+
+insert into 입고 values(100, 2, 1800);
+
+SELECT * FROM 입고;
+
+SELECT * FROM 재고;
+
+--상품이 판매되면 재고 테이블에서 자동으로 해당 상품의 재고 수량과 금액이 감소되는 트리거 작성 하기  
+
+CREATE OR REPLACE TRIGGER tr_판매
+    AFTER INSERT
+    ON 판매
+    FOR EACH ROW
+BEGIN
+    UPDATE 재고
+       SET 수량 = 수량-:new.수량, 금액 = 금액-:new.금액
+     WHERE 품번 = :new.품번;
+END;
+
+insert into 판매 values(100, 3, 2700);
+
+SELECT * FROM 판매;
+
+SELECT * FROM 재고;
