@@ -1,4 +1,4 @@
-/* Formatted on 2020/05/06 오전 10:44:48 (QP5 v5.360) */
+/* Formatted on 2020/05/06 오전 11:33:02 (QP5 v5.360) */
 --10강_사용자관리.sql
 --[2020-04-29 수요일]
 
@@ -239,3 +239,157 @@ SELECT *
  WHERE grantee = 'TESTUSER5';
 
 --롤 조회
+
+--전역 데이터베이스명 조회 - orcl, xe 등
+
+SELECT * FROM global_name;
+
+-- object 권한 주기
+-- 해당 object 의 소유자 계정에서 권한을 부여하거나 박탈할 수 있다.
+
+-- testuser5에게 hr계정의 employees 테이블을 조회하고, 수정할 수 잇는 권한 부여
+--(hr 계정에서 처리 가능)
+
+/*
+    --select 권한 부여
+    grant select on hr.employees to testuser5;
+     
+    --update권한 부여
+    grant update on hr.employees to testuser5;
+    
+    --select권한 박탈
+    revoke select on hr.employees from testuser5;
+    
+    --update 권한 박탈
+    revoke update on hr.employees from testuser5;
+*/
+
+/*
+    testuser5계정에서 처리
+    
+    update hr.employees
+    set salary=2000
+    where employee_id=100;
+*/
+
+GRANT RESOURCE, CONNECT TO testuser4;
+
+SELECT *
+  FROM dba_sys_privs
+ WHERE grantee = 'TESTUSER4';
+
+SELECT *
+  FROM dba_role_privs
+ WHERE grantee = 'TESTUSER4';
+
+/*
+    hr 계정에서
+    grant select on hr.employees to testuser5 with grant option;
+*/
+
+/*
+    with grant option
+    - 권한을 위임하는 기증
+    또 다른 사용자에게 권한을 할당해 줄 수 있게 됨
+    object privilege에서 사용
+*/
+
+/*
+    testuser5에서 처리
+    grant select on hr.employees to testuser4;
+    => testuser5 계정이 testuser4계정에게 hr의 employees에 select 할 수 있는 권한을 부여함
+    
+    => testuser4로 접속해서 hr의 employees를 select하면 조회됨
+*/
+
+REVOKE RESOURCE, CONNECT FROM testuser2;
+
+GRANT RESOURCE, CONNECT TO testuser6 WITH ADMIN OPTION;
+
+/*
+    with admin option
+    - 권한을 위임하는 기능, 또 다른 사용자에게 권한을 할당해 줄 수 있게 됨
+    - system 관련 권한에서 사용
+*/
+
+SELECT *
+  FROM dba_sys_privs
+ WHERE grantee = 'TESTUSER6';
+
+SELECT *
+  FROM dba_role_privs
+ WHERE grantee = 'TESTUSER6';
+ 
+/*
+    testuser6으로 접속해서 testuser2에게 resource, connect 권한(롤) 부여하기
+    grant resource, connect to testuser2;
+*/
+
+--hr에서
+select * from user_views;
+
+--hr계정의 v_emp 뷰에 select할 수 잇는 권한을 testuser6에게 부여하기
+--grant select on hr.v_emp to testuser6;
+
+--testuser6에서
+select * from hr.v_emp;
+
+/*
+    <data dictionary>
+    - database 내에 저장된 모든 객체의 정보를 제공해주는 테이블
+    - select * from dictionary;
+    
+    data dictionary의 종류
+    1) DBA_XXX 
+        - 데이터베이스 관리를 위한 정보를 제공
+    2) ALL_XXX 
+        - 자신이 생성한 object와 다른 사용자가 생성한 object중에 자신이 볼 수 있는 정보를 제공
+        - 사용자가 접근 가능한 모든 스키마의 정보를 제공
+        - 권한을 부여받음으로써 가능
+    3) USER_XXX 
+        - 자신이 생성한 object 정보를 제공,
+        - 현재 데이터베이스에 접속한 사용자가 소유한 객체의 정보를 제공
+*/
+
+--모든 자료 사전의 정보를 출력
+select * from dictionary where table_name like 'USER%';
+
+select * from dictionary where table_name like 'ALL_%';
+
+select * from dictionary where table_name like 'DBA_%';
+
+--자료 사전 테이블의 각 컬럼에 대한 설명을 출력
+select * from dict_columns
+where table_name = 'USER_CONS_COLUMNS';
+
+select * from USER_CONS_COLUMNS;
+
+--[1] user_xxx
+select * from user_objects;
+select * from user_tables;
+
+select * from user_constraints;
+select * from user_cons_columns;
+
+select * from user_indexes;
+select * from user_ind_columns;
+
+select * from user_sequences;
+
+select * from user_views;
+select * from user_source;
+
+--[2] all_XXX
+select owner, table_name
+from all_tables where table_name='EMPLOYEES';
+
+--[3] dba_XXX
+select * from dba_users;
+
+select * from dba_data_files;
+select * from dba_tablespaces;
+
+select * from dba_roles;
+
+select * from dba_sys_privs;
+select * from dba_role_privs;

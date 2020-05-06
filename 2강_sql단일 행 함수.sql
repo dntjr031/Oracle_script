@@ -1,27 +1,27 @@
-/* Formatted on 2020/05/06 ¿ÀÀü 10:44:40 (QP5 v5.360) */
---2°­_´ÜÀÏ Çà ÇÔ¼ö.sql 
---2020.04.17 ±Ý¿äÀÏ
+/* Formatted on 2020/05/06 ì˜¤ì „ 10:44:40 (QP5 v5.360) */
+--2ê°•_ë‹¨ì¼ í–‰ í•¨ìˆ˜.sql 
+--2020.04.17 ê¸ˆìš”ì¼
 
 /*
-´ÜÀÏÇà ÇÔ¼ö - ÀÔ·ÂµÇ´Â µ¥ÀÌÅÍÀÇ Á¾·ù¿¡ µû¶ó
-[1] ¹®ÀÚÇÔ¼ö - ÀÔ·ÂµÇ´Â °ª(¸Å°³º¯¼ö)ÀÌ ¹®ÀÚÀÎ ÇÔ¼ö
-[2] ¼ýÀÚÇÔ¼ö
-[3] ³¯Â¥ÇÔ¼ö
-[4] Çüº¯È¯ ÇÔ¼ö
-[5] ÀÏ¹ÝÇÔ¼ö
+ë‹¨ì¼í–‰ í•¨ìˆ˜ - ìž…ë ¥ë˜ëŠ” ë°ì´í„°ì˜ ì¢…ë¥˜ì— ë”°ë¼
+[1] ë¬¸ìží•¨ìˆ˜ - ìž…ë ¥ë˜ëŠ” ê°’(ë§¤ê°œë³€ìˆ˜)ì´ ë¬¸ìžì¸ í•¨ìˆ˜
+[2] ìˆ«ìží•¨ìˆ˜
+[3] ë‚ ì§œí•¨ìˆ˜
+[4] í˜•ë³€í™˜ í•¨ìˆ˜
+[5] ì¼ë°˜í•¨ìˆ˜
 */
 
--- [1] ¹®ÀÚÇÔ¼ö
--- initcap() - ¿µ¹® Ã¹±ÛÀÚ¸¸ ´ë¹®ÀÚ·Î ¹Ù²Û´Ù.
+-- [1] ë¬¸ìží•¨ìˆ˜
+-- initcap() - ì˜ë¬¸ ì²«ê¸€ìžë§Œ ëŒ€ë¬¸ìžë¡œ ë°”ê¾¼ë‹¤.
 
 SELECT id, INITCAP (id) FROM student;
 
 SELECT 'pretty girl', INITCAP ('pretty girl') FROM DUAL;
 
--- °ø¹é µÚÀÇ ¹®ÀÚµµ ´ë¹®ÀÚ·Î ¹Ù²ãÁÜ
+-- ê³µë°± ë’¤ì˜ ë¬¸ìžë„ ëŒ€ë¬¸ìžë¡œ ë°”ê¿”ì¤Œ
 
---upper() - ´ë¹®ÀÚ·Î º¯È¯
---lower() - ¼Ò¹®ÀÚ·Î º¯È¯
+--upper() - ëŒ€ë¬¸ìžë¡œ ë³€í™˜
+--lower() - ì†Œë¬¸ìžë¡œ ë³€í™˜
 
 SELECT id, INITCAP (id), UPPER (id), LOWER (id) FROM student;
 
@@ -35,33 +35,33 @@ SELECT *
   FROM emp
  WHERE LOWER (ename) = 'scott';
 
---length(), lengthb() - ¹®ÀÚ¿­ÀÇ ±æÀÌ¸¦ ¸®ÅÏÇØÁÖ´Â ÇÔ¼ö
---lengthb() - ¹®ÀÚ¿­ÀÇ ¹ÙÀÌÆ®¼ö¸¦ ±¸ÇÔ(ÇÑ±Û 1±ÛÀÚ´Â 2¹ÙÀÌÆ®³ª 3¹ÙÀÌÆ®·Î Ã³¸®)
---express ¹öÁ¯Àº 3¹ÙÀÌÆ®·Î Ã³¸®
+--length(), lengthb() - ë¬¸ìžì—´ì˜ ê¸¸ì´ë¥¼ ë¦¬í„´í•´ì£¼ëŠ” í•¨ìˆ˜
+--lengthb() - ë¬¸ìžì—´ì˜ ë°”ì´íŠ¸ìˆ˜ë¥¼ êµ¬í•¨(í•œê¸€ 1ê¸€ìžëŠ” 2ë°”ì´íŠ¸ë‚˜ 3ë°”ì´íŠ¸ë¡œ ì²˜ë¦¬)
+--express ë²„ì ¼ì€ 3ë°”ì´íŠ¸ë¡œ ì²˜ë¦¬
 
 SELECT name,
        id,
-       LENGTH (name)      "ÀÌ¸§ÀÇ ±æÀÌ",
-       LENGTHB (name)     "ÀÌ¸§ ¹ÙÀÌÆ®¼ö",
-       LENGTH (id)        "id ±æÀÌ",
-       LENGTHB (id)       "idÀÇ ¹ÙÀÌÆ®¼ö"
+       LENGTH (name)      "ì´ë¦„ì˜ ê¸¸ì´",
+       LENGTHB (name)     "ì´ë¦„ ë°”ì´íŠ¸ìˆ˜",
+       LENGTH (id)        "id ê¸¸ì´",
+       LENGTHB (id)       "idì˜ ë°”ì´íŠ¸ìˆ˜"
   FROM student;
 
---concat(¹®ÀÚ¿­, ¹®ÀÚ¿­) - µÎ ¹®ÀÚ¿­À» ¿¬°áÇØ ÁÖ´Â ÇÔ¼ö
--- 3°³ ÀÌ»óÀÇ ¹®ÀÚ¿­À» ¿¬°áÇÏ·Á¸é || ¿¬»êÀÚ ÀÌ¿ë
+--concat(ë¬¸ìžì—´, ë¬¸ìžì—´) - ë‘ ë¬¸ìžì—´ì„ ì—°ê²°í•´ ì£¼ëŠ” í•¨ìˆ˜
+-- 3ê°œ ì´ìƒì˜ ë¬¸ìžì—´ì„ ì—°ê²°í•˜ë ¤ë©´ || ì—°ì‚°ìž ì´ìš©
 
-SELECT name || position            AS "±³¼ö ÀÌ¸§",
-       CONCAT (name, position)     AS "concatÀÌ¿ë",
-       name || ' ' || position     AS "|| ¿¬»êÀÚ ÀÌ¿ë"
+SELECT name || position            AS "êµìˆ˜ ì´ë¦„",
+       CONCAT (name, position)     AS "concatì´ìš©",
+       name || ' ' || position     AS "|| ì—°ì‚°ìž ì´ìš©"
   FROM professor;
 
 --select concat(naem,' ', position) from professor; -- error
 
---substr() - ¹®ÀÚ¿­¿¡¼­ Æ¯Á¤ ±æÀÌÀÇ ¹®ÀÚ¿­À» ÃßÃâÇÒ ¶§ »ç¿ë
+--substr() - ë¬¸ìžì—´ì—ì„œ íŠ¹ì • ê¸¸ì´ì˜ ë¬¸ìžì—´ì„ ì¶”ì¶œí•  ë•Œ ì‚¬ìš©
 
 /*
-substr(¹®ÀÚ¿­, ½ÃÀÛÀ§Ä¡, ÃßÃâÇÒ ±ÛÀÚ¼ö)
--½ÃÀÛÀ§Ä¡¸¦ -(À½¼ö)·Î ÇÏ¸é µÚ¿¡¼­ºÎÅÍ ÀÚ¸®¼ö¸¦ °è»êÇÔ
+substr(ë¬¸ìžì—´, ì‹œìž‘ìœ„ì¹˜, ì¶”ì¶œí•  ê¸€ìžìˆ˜)
+-ì‹œìž‘ìœ„ì¹˜ë¥¼ -(ìŒìˆ˜)ë¡œ í•˜ë©´ ë’¤ì—ì„œë¶€í„° ìžë¦¬ìˆ˜ë¥¼ ê³„ì‚°í•¨
 */
 
 SELECT SUBSTR ('abcdefghi', 2, 3),
@@ -70,33 +70,33 @@ SELECT SUBSTR ('abcdefghi', 2, 3),
   FROM DUAL;
 
 --bcd, fghi, ef
---2¹øÂ° À§Ä¡¿¡¼­ 3°³ ÃßÃâ
--- 6¹øÂ° À§Ä¡¿¡¼­ ³¡±îÁö ÃßÃâ
--- µÚ¿¡¼­ 5¹øÂ° À§Ä¡¿¡¼­ 2°³ ÃßÃâ
+--2ë²ˆì§¸ ìœ„ì¹˜ì—ì„œ 3ê°œ ì¶”ì¶œ
+-- 6ë²ˆì§¸ ìœ„ì¹˜ì—ì„œ ëê¹Œì§€ ì¶”ì¶œ
+-- ë’¤ì—ì„œ 5ë²ˆì§¸ ìœ„ì¹˜ì—ì„œ 2ê°œ ì¶”ì¶œ
 
-SELECT SUBSTR ('java¿À¶óÅ¬', 5, 2),
-       SUBSTR ('java¿À¶óÅ¬', 3, 3),
-       SUBSTR ('java¿À¶óÅ¬', 6),
-       SUBSTR ('java¿À¶óÅ¬', -3, 1)
+SELECT SUBSTR ('javaì˜¤ë¼í´', 5, 2),
+       SUBSTR ('javaì˜¤ë¼í´', 3, 3),
+       SUBSTR ('javaì˜¤ë¼í´', 6),
+       SUBSTR ('javaì˜¤ë¼í´', -3, 1)
   FROM DUAL;
 
---¿À¶ó, va¿À, ¶óÅ¬, ¿À
+--ì˜¤ë¼, vaì˜¤, ë¼í´, ì˜¤
 
---Ä³¸¯ÅÍ¼Â È®ÀÎ
+--ìºë¦­í„°ì…‹ í™•ì¸
 
 SELECT parameter, VALUE
   FROM nls_database_parameters
  WHERE parameter LIKE '%CHAR%';
 
---student Å×ÀÌºí¿¡¼­ JUMIN Ä®·³À» »ç¿ëÇÏ¿© 1Àü°øÀÌ 101 ¹øÀÎ ÇÐ»ýµéÀÇ ÀÌ¸§°ú »ý³â¿ùÀÏÀ» Ãâ·Â 
+--student í…Œì´ë¸”ì—ì„œ JUMIN ì¹¼ëŸ¼ì„ ì‚¬ìš©í•˜ì—¬ 1ì „ê³µì´ 101 ë²ˆì¸ í•™ìƒë“¤ì˜ ì´ë¦„ê³¼ ìƒë…„ì›”ì¼ì„ ì¶œë ¥ 
 
-SELECT name, SUBSTR (jumin, 1, 6) »ý³â¿ùÀÏ
+SELECT name, SUBSTR (jumin, 1, 6) ìƒë…„ì›”ì¼
   FROM student
  WHERE deptno1 = 101;
 
--- student Å×ÀÌºí¿¡¼­ JUMIN Ä®·³À» »ç¿ëÇÏ¿© ÅÂ¾î³­ ´ÞÀÌ 8¿ùÀÎ »ç¶÷ÀÇ ÀÌ¸§°ú »ý³â¿ùÀÏÀ» Ãâ·Â 
+-- student í…Œì´ë¸”ì—ì„œ JUMIN ì¹¼ëŸ¼ì„ ì‚¬ìš©í•˜ì—¬ íƒœì–´ë‚œ ë‹¬ì´ 8ì›”ì¸ ì‚¬ëžŒì˜ ì´ë¦„ê³¼ ìƒë…„ì›”ì¼ì„ ì¶œë ¥ 
 
-SELECT name, SUBSTR (jumin, 1, 6) »ý³â¿ùÀÏ
+SELECT name, SUBSTR (jumin, 1, 6) ìƒë…„ì›”ì¼
   FROM student
  WHERE SUBSTR (jumin, 3, 2) = 8;
 
@@ -104,10 +104,10 @@ SELECT name, SUBSTR (jumin, 1, 6) »ý³â¿ùÀÏ
 
 SELECT name, SUBSTR (name, 1, 2), SUBSTRB (name, 1, 3) FROM student;
 
---instr()- ÁÖ¾îÁø ¹®ÀÚ¿­ÀÌ³ª ÄÃ·³¿¡¼­ Æ¯Á¤ ±ÛÀÚÀÇ À§Ä¡¸¦ Ã£¾ÆÁÖ´Â ÇÔ¼ö
---instr(¹®ÀÚ¿­, Ã£´Â ±ÛÀÚ)
---instr(¹®ÀÚ¿­, Ã£´Â ±ÛÀÚ, ½ÃÀÛÀ§Ä¡, ¸î¹øÂ°ÀÎÁö)
---¸î¹øÂ°ÀÇ ±âº»°ªÀº 1
+--instr()- ì£¼ì–´ì§„ ë¬¸ìžì—´ì´ë‚˜ ì»¬ëŸ¼ì—ì„œ íŠ¹ì • ê¸€ìžì˜ ìœ„ì¹˜ë¥¼ ì°¾ì•„ì£¼ëŠ” í•¨ìˆ˜
+--instr(ë¬¸ìžì—´, ì°¾ëŠ” ê¸€ìž)
+--instr(ë¬¸ìžì—´, ì°¾ëŠ” ê¸€ìž, ì‹œìž‘ìœ„ì¹˜, ëª‡ë²ˆì§¸ì¸ì§€)
+--ëª‡ë²ˆì§¸ì˜ ê¸°ë³¸ê°’ì€ 1
 
 SELECT 'A*B*C*',
        INSTR ('A*B*C*', '*'),
@@ -119,9 +119,9 @@ SELECT 'A*B*C*',
   FROM DUAL;
 
 --2,4,6
---¾Õ¿¡¼­ºÎÅÍ Á¦ÀÏ Ã³À½ ¸¸³ª´Â *ÀÇ À§Ä¡(¿À¶óÅ¬¿¡¼­´Â À§Ä¡°ªÀÌ 1ºÎÅÍ ½ÃÀÛ)
---3¹øÂ° À§Ä¡ ÀÌÈÄ¿¡ Ã³À½ ¸¸³ª´Â *ÀÇ À§Ä¡
---3¹øÂ° À§Ä¡ ÀÌÈÄ¿¡ 2¹øÂ°·Î ¸¸³ª´Â *ÀÇ À§Ä¡
+--ì•žì—ì„œë¶€í„° ì œì¼ ì²˜ìŒ ë§Œë‚˜ëŠ” *ì˜ ìœ„ì¹˜(ì˜¤ë¼í´ì—ì„œëŠ” ìœ„ì¹˜ê°’ì´ 1ë¶€í„° ì‹œìž‘)
+--3ë²ˆì§¸ ìœ„ì¹˜ ì´í›„ì— ì²˜ìŒ ë§Œë‚˜ëŠ” *ì˜ ìœ„ì¹˜
+--3ë²ˆì§¸ ìœ„ì¹˜ ì´í›„ì— 2ë²ˆì§¸ë¡œ ë§Œë‚˜ëŠ” *ì˜ ìœ„ì¹˜
 
 SELECT 'A*B*C*',
        INSTR ('A*B*C*', '*', -1),
@@ -141,24 +141,24 @@ SELECT 'A*B*C*',
   FROM DUAL;
 
 --6,4,2,2,0
---µÚ¿¡¼­ Ã¹¹øÂ° À§Ä¡ ÀÌÈÄ Ã³À½ ¸¸³ª´Â *ÀÇ À§Ä¡
---µÚ¿¡¼­ 2¹øÂ° À§Ä¡ ÀÌÈÄ Ã³À½ ¸¸³ª´Â *ÀÇ À§Ä¡
---µÚ¿¡¼­ 2¹øÂ° À§Ä¡ ÀÌÈÄ µÎ ¹øÂ°·Î ¸¸³ª´Â *ÀÇ À§Ä¡
---µÚ¿¡¼­ 3¹øÂ° À§Ä¡ ÀÌÈÄ µÎ ¹øÂ°·Î ¸¸³ª´Â *ÀÇ À§Ä¡
---µÚ¿¡¼­ 3¹øÂ° À§Ä¡ ÀÌÈÄ ³× ¹øÂ°·Î ¸¸³ª´Â *ÀÇ À§Ä¡ => ¾øÀ¸¸é 0¸®ÅÏ
+--ë’¤ì—ì„œ ì²«ë²ˆì§¸ ìœ„ì¹˜ ì´í›„ ì²˜ìŒ ë§Œë‚˜ëŠ” *ì˜ ìœ„ì¹˜
+--ë’¤ì—ì„œ 2ë²ˆì§¸ ìœ„ì¹˜ ì´í›„ ì²˜ìŒ ë§Œë‚˜ëŠ” *ì˜ ìœ„ì¹˜
+--ë’¤ì—ì„œ 2ë²ˆì§¸ ìœ„ì¹˜ ì´í›„ ë‘ ë²ˆì§¸ë¡œ ë§Œë‚˜ëŠ” *ì˜ ìœ„ì¹˜
+--ë’¤ì—ì„œ 3ë²ˆì§¸ ìœ„ì¹˜ ì´í›„ ë‘ ë²ˆì§¸ë¡œ ë§Œë‚˜ëŠ” *ì˜ ìœ„ì¹˜
+--ë’¤ì—ì„œ 3ë²ˆì§¸ ìœ„ì¹˜ ì´í›„ ë„¤ ë²ˆì§¸ë¡œ ë§Œë‚˜ëŠ” *ì˜ ìœ„ì¹˜ => ì—†ìœ¼ë©´ 0ë¦¬í„´
 
---student Å×ÀÌºíÀÇ TEL Ä®·³À» »ç¿ëÇÏ¿© ÇÐ»ýÀÇ ÀÌ¸§°ú ÀüÈ­¹øÈ£, ')'°¡ ³ª¿À´Â À§Ä¡¸¦ Ãâ·Â 
+--student í…Œì´ë¸”ì˜ TEL ì¹¼ëŸ¼ì„ ì‚¬ìš©í•˜ì—¬ í•™ìƒì˜ ì´ë¦„ê³¼ ì „í™”ë²ˆí˜¸, ')'ê°€ ë‚˜ì˜¤ëŠ” ìœ„ì¹˜ë¥¼ ì¶œë ¥ 
 
 SELECT name, tel, INSTR (tel, ')') FROM student;
 
--- student Å×ÀÌºíÀ» ÂüÁ¶ÇØ¼­ 1Àü°øÀÌ 101¹øÀÎ ÇÐ»ýÀÇ ÀÌ¸§°ú Àü È­¹øÈ£¿Í Áö¿ª¹øÈ£¸¦ Ãâ·Â. 
---´Ü, Áö¿ª¹øÈ£´Â ¼ýÀÚ¸¸ ³ª¿Í¾ß ÇÔ 
+-- student í…Œì´ë¸”ì„ ì°¸ì¡°í•´ì„œ 1ì „ê³µì´ 101ë²ˆì¸ í•™ìƒì˜ ì´ë¦„ê³¼ ì „ í™”ë²ˆí˜¸ì™€ ì§€ì—­ë²ˆí˜¸ë¥¼ ì¶œë ¥. 
+--ë‹¨, ì§€ì—­ë²ˆí˜¸ëŠ” ìˆ«ìžë§Œ ë‚˜ì™€ì•¼ í•¨ 
 
-SELECT name, tel, SUBSTR (tel, 1, INSTR (tel, ')') - 1) Áö¿ª¹øÈ£
+SELECT name, tel, SUBSTR (tel, 1, INSTR (tel, ')') - 1) ì§€ì—­ë²ˆí˜¸
   FROM STUDENT
  WHERE deptno1 = 101;
 
---ÆÄÀÏ¸í¸¸ ÃßÃâÇÏ±â
+--íŒŒì¼ëª…ë§Œ ì¶”ì¶œí•˜ê¸°
 
 CREATE TABLE test_file
 (
@@ -174,50 +174,50 @@ INSERT INTO test_file
 
 SELECT * FROM test_file;
 
--- ÆÄÀÏ¸í¸¸ ÃßÃâ
+-- íŒŒì¼ëª…ë§Œ ì¶”ì¶œ
 
-SELECT no, SUBSTR (filepath, INSTR (filepath, '\', -1) + 1) ÆÄÀÏ¸í
+SELECT no, SUBSTR (filepath, INSTR (filepath, '\', -1) + 1) íŒŒì¼ëª…
   FROM test_file;
 
--- È®ÀåÀÚ¸¸ ÃßÃâ
+-- í™•ìž¥ìžë§Œ ì¶”ì¶œ
 
-SELECT no, SUBSTR (filepath, INSTR (filepath, '.', -1) + 1) È®ÀåÀÚ
+SELECT no, SUBSTR (filepath, INSTR (filepath, '.', -1) + 1) í™•ìž¥ìž
   FROM test_file;
 
---¼ø¼ö ÆÄÀÏ¸í¸¸ ÃßÃâ
+--ìˆœìˆ˜ íŒŒì¼ëª…ë§Œ ì¶”ì¶œ
 
 SELECT no,
        SUBSTR (filepath,
                INSTR (filepath, '\', -1) + 1,
-               INSTR (filepath, '.', -1) - INSTR (filepath, '\', -1) - 1)    "¼ø¼ö ÆÄÀÏ¸í"
+               INSTR (filepath, '.', -1) - INSTR (filepath, '\', -1) - 1)    "ìˆœìˆ˜ íŒŒì¼ëª…"
   FROM test_file;
 
---lpad(¹®ÀÚ¿­ ¶Ç´Â ÄÃ·³¸í, ÀÚ¸®¼ö, Ã¤¿ï¹®ÀÚ)
---¹®ÀÚ¿­ÀÇ ³²Àº ÀÚ¸®¼ö¸¦ Ã¤¿ï ¹®ÀÚ·Î Ã¤¿î´Ù. ¿ÞÂÊºÎÅÍ Ã¤¿öÁÜ
---RPAD() - ¿À¸¥ÂÊºÎÅÍ Ã¤¿öÁÜ
+--lpad(ë¬¸ìžì—´ ë˜ëŠ” ì»¬ëŸ¼ëª…, ìžë¦¬ìˆ˜, ì±„ìš¸ë¬¸ìž)
+--ë¬¸ìžì—´ì˜ ë‚¨ì€ ìžë¦¬ìˆ˜ë¥¼ ì±„ìš¸ ë¬¸ìžë¡œ ì±„ìš´ë‹¤. ì™¼ìª½ë¶€í„° ì±„ì›Œì¤Œ
+--RPAD() - ì˜¤ë¥¸ìª½ë¶€í„° ì±„ì›Œì¤Œ
 
---student Å×ÀÌºí¿¡¼­ 1Àü°øÀÌ 101¹øÀÎ ÇÐ°ú ÇÐ»ýµéÀÇ ID¸¦ ÃÑ 10ÀÚ¸® ·Î Ãâ·ÂÇÏµÇ 
---¿ÞÂÊ ºó ÀÚ¸®´Â '$'±âÈ£·Î Ã¤¿ì¼¼¿ä 
+--student í…Œì´ë¸”ì—ì„œ 1ì „ê³µì´ 101ë²ˆì¸ í•™ê³¼ í•™ìƒë“¤ì˜ IDë¥¼ ì´ 10ìžë¦¬ ë¡œ ì¶œë ¥í•˜ë˜ 
+--ì™¼ìª½ ë¹ˆ ìžë¦¬ëŠ” '$'ê¸°í˜¸ë¡œ ì±„ìš°ì„¸ìš” 
 
 SELECT name, id, LPAD (id, 10, '$')
   FROM student
  WHERE deptno1 = 101;
 
--- ½Ç½À) DEPT2 Å×ÀÌºíÀ» »ç¿ëÇÏ¿© DNAMEÀ» ´ÙÀ½ °á°ú°¡ ³ª¿Àµµ·Ï Äõ ¸® ÀÛ¼ºÇÏ±â ? 
---dnameÀ» ÃÑ 10¹ÙÀÌÆ®·Î Ãâ·ÂÇÏµÇ ¿ø·¡ dnameÀÌ ³ª¿À°í ³ª¸ÓÁö ºó ÀÚ¸®´Â ÇØ´ç ÀÚ ¸®ÀÇ ¼ýÀÚ°¡ ³ª¿À¸é µÊ. 
---Áï, »çÀå½ÇÀº ÀÌ¸§ÀÌ ÃÑ 6¹ÙÀÌÆ®ÀÌ¹Ç·Î ¼ýÀÚ°¡ 1234±îÁö ³ª ¿È
+-- ì‹¤ìŠµ) DEPT2 í…Œì´ë¸”ì„ ì‚¬ìš©í•˜ì—¬ DNAMEì„ ë‹¤ìŒ ê²°ê³¼ê°€ ë‚˜ì˜¤ë„ë¡ ì¿¼ ë¦¬ ìž‘ì„±í•˜ê¸° ? 
+--dnameì„ ì´ 10ë°”ì´íŠ¸ë¡œ ì¶œë ¥í•˜ë˜ ì›ëž˜ dnameì´ ë‚˜ì˜¤ê³  ë‚˜ë¨¸ì§€ ë¹ˆ ìžë¦¬ëŠ” í•´ë‹¹ ìž ë¦¬ì˜ ìˆ«ìžê°€ ë‚˜ì˜¤ë©´ ë¨. 
+--ì¦‰, ì‚¬ìž¥ì‹¤ì€ ì´ë¦„ì´ ì´ 6ë°”ì´íŠ¸ì´ë¯€ë¡œ ìˆ«ìžê°€ 1234ê¹Œì§€ ë‚˜ ì˜´
 
 SELECT dname, LPAD (dname, 10, '1234567890') FROM dept2;
 
---student Å×ÀÌºí¿¡¼­ ID¸¦ 12ÀÚ¸®·Î Ãâ·ÂÇÏµÇ ¿À¸¥ÂÊ ºó ÀÚ¸®¿¡´Â '*'±â È£·Î Ã¤¿ì¼¼¿ä 
+--student í…Œì´ë¸”ì—ì„œ IDë¥¼ 12ìžë¦¬ë¡œ ì¶œë ¥í•˜ë˜ ì˜¤ë¥¸ìª½ ë¹ˆ ìžë¦¬ì—ëŠ” '*'ê¸° í˜¸ë¡œ ì±„ìš°ì„¸ìš” 
 
 SELECT name, id, RPAD (id, 12, '*') FROM student;
 
---ltrim(¹®ÀÚ¿­ÀÌ³ª ÄÃ·³¸í, Á¦°ÅÇÒ ¹®ÀÚ)
---¿ÞÂÊ¿¡¼­ ÇØ´ç ¹®ÀÚ¸¦ Á¦°ÅÇÑ´Ù
---Á¦°ÅÇÒ ¹®ÀÚ¸¦ »ý·«ÇÏ¸é °ø¹éÀ» Á¦°ÅÇÔ
+--ltrim(ë¬¸ìžì—´ì´ë‚˜ ì»¬ëŸ¼ëª…, ì œê±°í•  ë¬¸ìž)
+--ì™¼ìª½ì—ì„œ í•´ë‹¹ ë¬¸ìžë¥¼ ì œê±°í•œë‹¤
+--ì œê±°í•  ë¬¸ìžë¥¼ ìƒëžµí•˜ë©´ ê³µë°±ì„ ì œê±°í•¨
 
---rtrim() - ¿À¸¥ÂÊ¿¡¼­ ÇØ´ç ¹®ÀÚ¸¦ Á¦°ÅÇÔ
+--rtrim() - ì˜¤ë¥¸ìª½ì—ì„œ í•´ë‹¹ ë¬¸ìžë¥¼ ì œê±°í•¨
 
 SELECT LTRIM ('javaoracle', 'j'),
        LTRIM ('javaoracle', 'abcdefghijvw'),
@@ -228,41 +228,41 @@ SELECT LTRIM ('javaoracle', 'j'),
        RTRIM ('java oracle   ') || '|'
   FROM DUAL;
 
- --DEPT2 Å×ÀÌºí¿¡¼­ DNAMEÀ» Ãâ·ÂÇÏµÇ ¿ÞÂÊ¿¡ '¿µ'ÀÌ¶õ ±ÛÀÚ¸¦ ¸ðµÎ Á¦°ÅÇÏ°í Ãâ·Â 
+ --DEPT2 í…Œì´ë¸”ì—ì„œ DNAMEì„ ì¶œë ¥í•˜ë˜ ì™¼ìª½ì— 'ì˜'ì´ëž€ ê¸€ìžë¥¼ ëª¨ë‘ ì œê±°í•˜ê³  ì¶œë ¥ 
 
-SELECT dname, LTRIM (dname, '¿µ') FROM dept2;
+SELECT dname, LTRIM (dname, 'ì˜') FROM dept2;
 
- --DEPT2 Å×ÀÌºí¿¡¼­ DNAMEÀ» Ãâ·ÂÇÏµÇ ¿À¸¥ÂÊ ³¡¿¡ 'ºÎ'¶ó´Â ±ÛÀÚ´Â Á¦°ÅÇÏ°í Ãâ·Â 
+ --DEPT2 í…Œì´ë¸”ì—ì„œ DNAMEì„ ì¶œë ¥í•˜ë˜ ì˜¤ë¥¸ìª½ ëì— 'ë¶€'ë¼ëŠ” ê¸€ìžëŠ” ì œê±°í•˜ê³  ì¶œë ¥ 
 
-SELECT dname, RTRIM (dname, 'ºÎ') FROM dept2;
+SELECT dname, RTRIM (dname, 'ë¶€') FROM dept2;
 
 --reverse()
---¾î¶² ¹®ÀÚ¿­À» °Å²Ù·Î º¸¿©ÁÖ´Â °Í
+--ì–´ë–¤ ë¬¸ìžì—´ì„ ê±°ê¾¸ë¡œ ë³´ì—¬ì£¼ëŠ” ê²ƒ
 
-SELECT 'oracle', reverse ('oracle')                 --reverse('´ëÇÑ¹Î±¹') --ÇÑ±ÛÀº ¿¡·¯
+SELECT 'oracle', reverse ('oracle')                 --reverse('ëŒ€í•œë¯¼êµ­') --í•œê¸€ì€ ì—ëŸ¬
                                     FROM DUAL;
 
---replace(¹®ÀÚ¿­ÀÌ³ª ÄÃ·³¸í, ¹®ÀÚ1, ¹®ÀÚ2)
---¹®ÀÚ¿­¿¡¼­ ¹®ÀÚ1ÀÌ ÀÖÀ¸¸é ¹®ÀÚ 2·Î ¹Ù²Ù¾î Ãâ·ÂÇÏ´Â ÇÔ¼ö
+--replace(ë¬¸ìžì—´ì´ë‚˜ ì»¬ëŸ¼ëª…, ë¬¸ìž1, ë¬¸ìž2)
+--ë¬¸ìžì—´ì—ì„œ ë¬¸ìž1ì´ ìžˆìœ¼ë©´ ë¬¸ìž 2ë¡œ ë°”ê¾¸ì–´ ì¶œë ¥í•˜ëŠ” í•¨ìˆ˜
 
 SELECT REPLACE ('javajsp', 'j', 'J'), REPLACE ('javajsp', 'jsp', 'oracle')
   FROM DUAL;
 
---student Å×ÀÌºí¿¡¼­ ÇÐ»ýµéÀÇ ÀÌ¸§À» Ãâ·ÂÇÏµÇ ¼º ºÎºÐÀº '#'À¸·Î Ç¥ ½ÃµÇ°Ô Ãâ·Â 
+--student í…Œì´ë¸”ì—ì„œ í•™ìƒë“¤ì˜ ì´ë¦„ì„ ì¶œë ¥í•˜ë˜ ì„± ë¶€ë¶„ì€ '#'ìœ¼ë¡œ í‘œ ì‹œë˜ê²Œ ì¶œë ¥ 
 
 SELECT name, REPLACE (name, SUBSTR (name, 1, 1), '#') FROM student;
 
---½Ç½À) student Å×ÀÌºí¿¡¼­ 1Àü°øÀÌ 101¹øÀÎ ÇÐ»ýµéÀÇ ÀÌ¸§À» Ãâ·ÂÇÏ µÇ 
---°¡¿îµ¥ ±ÛÀÚ¸¸ '#'À¸·Î Ç¥½ÃµÇ°Ô Ãâ·Â 
+--ì‹¤ìŠµ) student í…Œì´ë¸”ì—ì„œ 1ì „ê³µì´ 101ë²ˆì¸ í•™ìƒë“¤ì˜ ì´ë¦„ì„ ì¶œë ¥í•˜ ë˜ 
+--ê°€ìš´ë° ê¸€ìžë§Œ '#'ìœ¼ë¡œ í‘œì‹œë˜ê²Œ ì¶œë ¥ 
 
-SELECT name, REPLACE (name, SUBSTR (name, 2, 1), '#') ÀÌ¸§
+SELECT name, REPLACE (name, SUBSTR (name, 2, 1), '#') ì´ë¦„
   FROM student
  WHERE deptno1 = 101;
 
 
 
---[2] ¼ýÀÚ ÇÔ¼ö
---round(¼ýÀÚ, ¿øÇÏ´Â ÀÚ¸®¼ö) - ¹Ý¿Ã¸²
+--[2] ìˆ«ìž í•¨ìˆ˜
+--round(ìˆ«ìž, ì›í•˜ëŠ” ìžë¦¬ìˆ˜) - ë°˜ì˜¬ë¦¼
 
 SELECT 12345.457,
        ROUND (12345.457),
@@ -276,15 +276,15 @@ SELECT 12345.457,
 --12345, 12345.5, 12345.46, 12350, 12300, 12000
 
 /*
-Á¤¼ö·Î ¹Ý¿Ã¸²(¼Ò¼ö ÀÌÇÏ Ã¹Â° ÀÚ¸®¿¡¼­ ¹Ý¿Ã¸²)
-1: ¼Ò¼öÀÌÇÏ 1ÀÚ¸®¸¸ ³²±ä´Ù(¼Ò¼öÀÌÇÏ µÑÂ° ÀÚ¸®¿¡¼­ ¹Ý¿Ã¸²)
-2: ¼Ò¼öÀÌÇÏ 2ÀÚ¸®¸¸ ³²±ä´Ù
--1: 1ÀÇÀÚ¸®¿¡¼­ ¹Ý¿Ã¸²(ÀÚ¸®¼ö°¡ À½¼öÀÎ °æ¿ì¿¡´Â ¼Ò¼ö ÀÌ»ó¿¡¼­ Ã³¸®)
--2: 10ÀÇÀÚ¸®¿¡¼­ ¹Ý¿Ã¸²
--3: 100ÀÇÀÚ¸®¿¡¼­ ¹Ý¿Ã¸²
+ì •ìˆ˜ë¡œ ë°˜ì˜¬ë¦¼(ì†Œìˆ˜ ì´í•˜ ì²«ì§¸ ìžë¦¬ì—ì„œ ë°˜ì˜¬ë¦¼)
+1: ì†Œìˆ˜ì´í•˜ 1ìžë¦¬ë§Œ ë‚¨ê¸´ë‹¤(ì†Œìˆ˜ì´í•˜ ë‘˜ì§¸ ìžë¦¬ì—ì„œ ë°˜ì˜¬ë¦¼)
+2: ì†Œìˆ˜ì´í•˜ 2ìžë¦¬ë§Œ ë‚¨ê¸´ë‹¤
+-1: 1ì˜ìžë¦¬ì—ì„œ ë°˜ì˜¬ë¦¼(ìžë¦¬ìˆ˜ê°€ ìŒìˆ˜ì¸ ê²½ìš°ì—ëŠ” ì†Œìˆ˜ ì´ìƒì—ì„œ ì²˜ë¦¬)
+-2: 10ì˜ìžë¦¬ì—ì„œ ë°˜ì˜¬ë¦¼
+-3: 100ì˜ìžë¦¬ì—ì„œ ë°˜ì˜¬ë¦¼
 */
 
---trunc(¼ýÀÚ, ¿øÇÏ´Â ÀÚ¸®¼ö) - ¹ö¸²
+--trunc(ìˆ«ìž, ì›í•˜ëŠ” ìžë¦¬ìˆ˜) - ë²„ë¦¼
 
 SELECT 12345.457,
        TRUNC (12345.457),
@@ -300,64 +300,64 @@ SELECT 12345.457,
 SELECT first_name,
        salary,
        ROUND (salary, -3),
-       TRUNC (salary, -3)                                 -- 100ÀÇ ÀÚ¸®¿¡¼­ ¹Ý¿Ã¸², ¹ö¸²
+       TRUNC (salary, -3)                                 -- 100ì˜ ìžë¦¬ì—ì„œ ë°˜ì˜¬ë¦¼, ë²„ë¦¼
   FROM employees;
 
---mod(¼ýÀÚ, ³ª´©´Â ¼ö) - ³ª¸ÓÁö¸¦ ±¸ÇÏ´Â ÇÔ¼ö
---ceil(¼Ò¼öÁ¡ÀÌ ÀÖ´Â ½Ç¼ö) - ¿Ã¸²(ÁÖ¾îÁø ¼ýÀÚ¿Í °¡Àå ±ÙÁ¢ÇÑ Å« Á¤¼ö Ãâ·Â)
---floor(¼Ò¼öÁ¡ÀÌ ÀÖ´Â ½Ç¼ö) - ³»¸²(°¡Àå ±ÙÁ¢ÇÑ ÀÛÀº Á¤¼ö)
---power(¼ýÀÚ1, ¼ýÀÚ2) - ¼ýÀÚ1ÀÇ ¼ýÀÚ2½Â
+--mod(ìˆ«ìž, ë‚˜ëˆ„ëŠ” ìˆ˜) - ë‚˜ë¨¸ì§€ë¥¼ êµ¬í•˜ëŠ” í•¨ìˆ˜
+--ceil(ì†Œìˆ˜ì ì´ ìžˆëŠ” ì‹¤ìˆ˜) - ì˜¬ë¦¼(ì£¼ì–´ì§„ ìˆ«ìžì™€ ê°€ìž¥ ê·¼ì ‘í•œ í° ì •ìˆ˜ ì¶œë ¥)
+--floor(ì†Œìˆ˜ì ì´ ìžˆëŠ” ì‹¤ìˆ˜) - ë‚´ë¦¼(ê°€ìž¥ ê·¼ì ‘í•œ ìž‘ì€ ì •ìˆ˜)
+--power(ìˆ«ìž1, ìˆ«ìž2) - ìˆ«ìž1ì˜ ìˆ«ìž2ìŠ¹
 
 SELECT MOD (13, 3), CEIL (12.3), FLOOR (17.87), POWER (3, 4) FROM DUAL;
 
---[3] ³¯Â¥ ÇÔ¼ö
---1) ¸çÄ¥ Àü, ¸çÄ¥ ÈÄ
+--[3] ë‚ ì§œ í•¨ìˆ˜
+--1) ë©°ì¹  ì „, ë©°ì¹  í›„
 
 /*
-¿À´ÃºÎÅÍ 100ÀÏ ÈÄ, 100ÀÏ Àü
-2020-04-17 + 100 => ³¯Â¥
-2020-04-17 - 100 => ³¯Â¥
-=> ´õÇÏ°í »©´Â ±âÁØÀº ÀÏ¼ö
+ì˜¤ëŠ˜ë¶€í„° 100ì¼ í›„, 100ì¼ ì „
+2020-04-17 + 100 => ë‚ ì§œ
+2020-04-17 - 100 => ë‚ ì§œ
+=> ë”í•˜ê³  ë¹¼ëŠ” ê¸°ì¤€ì€ ì¼ìˆ˜
 */
 
---sysdate : ÇöÀçÀÏÀÚ¸¦ ¸®ÅÏÇÏ´Â ÇÔ¼ö
+--sysdate : í˜„ìž¬ì¼ìžë¥¼ ë¦¬í„´í•˜ëŠ” í•¨ìˆ˜
 
 SELECT SYSDATE FROM DUAL;
 
-SELECT SYSDATE           AS ÇöÀçÀÏÀÚ,
-       SYSDATE + 100     AS "100ÀÏ ÈÄ",
-       SYSDATE - 100     AS "100ÀÏ Àü",
-       SYSDATE + 1       ÇÏ·çÈÄ,
-       SYSDATE - 1       ÇÏ·çÀü
+SELECT SYSDATE           AS í˜„ìž¬ì¼ìž,
+       SYSDATE + 100     AS "100ì¼ í›„",
+       SYSDATE - 100     AS "100ì¼ ì „",
+       SYSDATE + 1       í•˜ë£¨í›„,
+       SYSDATE - 1       í•˜ë£¨ì „
   FROM DUAL;
 
---2ÀÏ 1½Ã°£ 5ºÐ 10ÃÊ ÈÄ ³¯Â¥ ±¸ÇÏ±â
+--2ì¼ 1ì‹œê°„ 5ë¶„ 10ì´ˆ í›„ ë‚ ì§œ êµ¬í•˜ê¸°
 
-SELECT SYSDATE                                                       ÇöÀçÀÏÀÚ,
-       SYSDATE + 2 + 1 / 24 + 5 / (24 * 60) + 10 / (24 * 60 * 60)    "2ÀÏ 1½Ã°£ 5ºÐ 10ÃÊ ÈÄ"
+SELECT SYSDATE                                                       í˜„ìž¬ì¼ìž,
+       SYSDATE + 2 + 1 / 24 + 5 / (24 * 60) + 10 / (24 * 60 * 60)    "2ì¼ 1ì‹œê°„ 5ë¶„ 10ì´ˆ í›„"
   FROM DUAL;
 
---3°³¿ù ÈÄ ³¯Â¥, 3°³¿ùÀü ³¯Â¥
---add_months(³¯Â¥, °³¿ù¼ö) : ÇØ´ç³¯Â¥·ÎºÎÅÍ °³¿ù¼ö ¸¸Å­ ´õÇÏ°Å³ª »« ³¯Â¥¸¦ ±¸ÇÑ´Ù
---=> ¸î °³¿ù ÈÄ, ¸î °³¿ù Àü¿¡ ÇØ´çÇÏ´Â ³¯Â¥¸¦ ±¸ÇÒ ¼ö ÀÖ´Ù
+--3ê°œì›” í›„ ë‚ ì§œ, 3ê°œì›”ì „ ë‚ ì§œ
+--add_months(ë‚ ì§œ, ê°œì›”ìˆ˜) : í•´ë‹¹ë‚ ì§œë¡œë¶€í„° ê°œì›”ìˆ˜ ë§Œí¼ ë”í•˜ê±°ë‚˜ ëº€ ë‚ ì§œë¥¼ êµ¬í•œë‹¤
+--=> ëª‡ ê°œì›” í›„, ëª‡ ê°œì›” ì „ì— í•´ë‹¹í•˜ëŠ” ë‚ ì§œë¥¼ êµ¬í•  ìˆ˜ ìžˆë‹¤
 
 SELECT SYSDATE,
-       ADD_MONTHS (SYSDATE, 3)      AS "3°³¿ù ÈÄ",
-       ADD_MONTHS (SYSDATE, -3)     "3°³¿ù Àü"
+       ADD_MONTHS (SYSDATE, 3)      AS "3ê°œì›” í›„",
+       ADD_MONTHS (SYSDATE, -3)     "3ê°œì›” ì „"
   FROM DUAL;
 
---1³â ÈÄ, 1³â Àü ³¯Â¥
+--1ë…„ í›„, 1ë…„ ì „ ë‚ ì§œ
 
 SELECT SYSDATE,
-       ADD_MONTHS (SYSDATE, 12)      AS "1³â ÈÄ",
-       ADD_MONTHS (SYSDATE, -12)     AS "1³â Àü"
+       ADD_MONTHS (SYSDATE, 12)      AS "1ë…„ í›„",
+       ADD_MONTHS (SYSDATE, -12)     AS "1ë…„ ì „"
   FROM DUAL;
 
--- 2³â 4°³¿ù 1ÀÏ 3½Ã°£ 10ºÐ 20ÃÊ ÈÄÀÇ ³¯Â¥ ±¸ÇÏ±â
+-- 2ë…„ 4ê°œì›” 1ì¼ 3ì‹œê°„ 10ë¶„ 20ì´ˆ í›„ì˜ ë‚ ì§œ êµ¬í•˜ê¸°
 
 SELECT SYSDATE,
        ADD_MONTHS (SYSDATE, 2 * 12 + 4)
-           "2³â 4°³¿ù ÈÄ",
+           "2ë…„ 4ê°œì›” í›„",
          ADD_MONTHS (SYSDATE, 2 * 12 + 4)
        + 1
        + 3 / 24
@@ -370,45 +370,45 @@ SELECT SYSDATE,
 
 SELECT SYSDATE,
        SYSDATE + TO_YMINTERVAL ('02-04')
-           "2³â 4°³¿ù ÈÄ",
+           "2ë…„ 4ê°œì›” í›„",
        SYSDATE + TO_DSINTERVAL ('1 03:10:20')
-           "1ÀÏ 3½Ã°£ 10ºÐ 20ÃÊ ÈÄ",
+           "1ì¼ 3ì‹œê°„ 10ë¶„ 20ì´ˆ í›„",
        SYSDATE + TO_YMINTERVAL ('02-04') + TO_DSINTERVAL ('1 03:10:20')
-           AS "2-4-1 3:10:20ÈÄ"
+           AS "2-4-1 3:10:20í›„"
   FROM DUAL;
 
---2)µÎ ³¯Â¥ »çÀÌÀÇ °æ°úµÈ ½Ã°£(ÀÏ¼ö)
---¿ÃÇØ 1/1 ºÎÅÍ ¸çÄ¥ °æ°úµÇ¾ú´ÂÁö
---2020-04-17 - 2020-01-01 => ¼ýÀÚ
+--2)ë‘ ë‚ ì§œ ì‚¬ì´ì˜ ê²½ê³¼ëœ ì‹œê°„(ì¼ìˆ˜)
+--ì˜¬í•´ 1/1 ë¶€í„° ë©°ì¹  ê²½ê³¼ë˜ì—ˆëŠ”ì§€
+--2020-04-17 - 2020-01-01 => ìˆ«ìž
 
 SELECT '2020-04-17' - '2020-01-01' FROM DUAL;                                                                                                                                                                                     --error
 
 SELECT TO_DATE ('2020-04-17') - TO_DATE ('2020-01-01') FROM DUAL;
 
---to_date(¹®ÀÚ) => ¹®ÀÚ¸¦ ³¯Â¥ÇüÅÂ·Î º¯È¯ÇØÁÖ´Â ÇÔ¼ö
+--to_date(ë¬¸ìž) => ë¬¸ìžë¥¼ ë‚ ì§œí˜•íƒœë¡œ ë³€í™˜í•´ì£¼ëŠ” í•¨ìˆ˜
 
---¾îÁ¦ºÎÅÍ ¿À´Ã±îÁö °æ°úµÈ ÀÏ¼ö, ¿À´ÃºÎÅÍ ³»ÀÏ±îÁö ³²Àº ÀÏ¼ö
+--ì–´ì œë¶€í„° ì˜¤ëŠ˜ê¹Œì§€ ê²½ê³¼ëœ ì¼ìˆ˜, ì˜¤ëŠ˜ë¶€í„° ë‚´ì¼ê¹Œì§€ ë‚¨ì€ ì¼ìˆ˜
 
-SELECT TO_DATE ('2020-04-17') - TO_DATE ('2020-04-16')     "¾îÁ¦ºÎÅÍ",
-       TO_DATE ('2020-04-18') - TO_DATE ('2020-04-17')     "³»ÀÏ±îÁö"
+SELECT TO_DATE ('2020-04-17') - TO_DATE ('2020-04-16')     "ì–´ì œë¶€í„°",
+       TO_DATE ('2020-04-18') - TO_DATE ('2020-04-17')     "ë‚´ì¼ê¹Œì§€"
   FROM DUAL;
 
 SELECT SYSDATE,
-       SYSDATE - TO_DATE ('2020-04-16')     "¾îÁ¦ºÎÅÍ",
-       TO_DATE ('2020-04-18') - SYSDATE     "³»ÀÏ±îÁö"
-  FROM DUAL;                                               -- ÇöÀçÀÏÀÚ´Â ½Ã°£ÀÌ Æ÷ÇÔµÇ¼­ °á°ú°¡ ¿¹»ó°ú ´Ù¸§
+       SYSDATE - TO_DATE ('2020-04-16')     "ì–´ì œë¶€í„°",
+       TO_DATE ('2020-04-18') - SYSDATE     "ë‚´ì¼ê¹Œì§€"
+  FROM DUAL;                                               -- í˜„ìž¬ì¼ìžëŠ” ì‹œê°„ì´ í¬í•¨ë˜ì„œ ê²°ê³¼ê°€ ì˜ˆìƒê³¼ ë‹¤ë¦„
 
---½Ã°£À» Á¦¿ÜÇÑ µÎ ³¯Â¥ »çÀÌÀÇ ÀÏ¼ö¸¦ ±¸ÇÏ´Â °æ¿ì
+--ì‹œê°„ì„ ì œì™¸í•œ ë‘ ë‚ ì§œ ì‚¬ì´ì˜ ì¼ìˆ˜ë¥¼ êµ¬í•˜ëŠ” ê²½ìš°
 
 SELECT SYSDATE,
        TRUNC (SYSDATE),
-       TO_DATE ('2020-04-18') - TRUNC (SYSDATE)     "³»ÀÏ±îÁö"
-  FROM DUAL;                                               -- ÇöÀçÀÏÀÚ´Â ½Ã°£ÀÌ Æ÷ÇÔ
--- trunc(³¯Â¥) : ÇØ´ç ³¯Â¥¸¦ ¸®ÅÏÇÔ(½Ã°£ »©°í)
--- round(³¯Â¥) : ÇØ´ç ³¯Â¥¸¦ ¹Ý¿Ã¸²ÇØ¼­ ¸®ÅÏ(Á¤¿À ±âÁØ)
+       TO_DATE ('2020-04-18') - TRUNC (SYSDATE)     "ë‚´ì¼ê¹Œì§€"
+  FROM DUAL;                                               -- í˜„ìž¬ì¼ìžëŠ” ì‹œê°„ì´ í¬í•¨
+-- trunc(ë‚ ì§œ) : í•´ë‹¹ ë‚ ì§œë¥¼ ë¦¬í„´í•¨(ì‹œê°„ ë¹¼ê³ )
+-- round(ë‚ ì§œ) : í•´ë‹¹ ë‚ ì§œë¥¼ ë°˜ì˜¬ë¦¼í•´ì„œ ë¦¬í„´(ì •ì˜¤ ê¸°ì¤€)
 
---µÎ ³¯Â¥ »çÀÌÀÇ °³¿ù ¼ö
---months_between() - µÎ ³¯Â¥ »çÀÌÀÇ °³¿ù¼ö¸¦ ±¸ÇØÁÜ
+--ë‘ ë‚ ì§œ ì‚¬ì´ì˜ ê°œì›” ìˆ˜
+--months_between() - ë‘ ë‚ ì§œ ì‚¬ì´ì˜ ê°œì›”ìˆ˜ë¥¼ êµ¬í•´ì¤Œ
 
 SELECT MONTHS_BETWEEN ('2020-04-17', '2020-02-17'),
        MONTHS_BETWEEN ('2020-04-17', '2020-02-01'),
@@ -418,20 +418,20 @@ SELECT MONTHS_BETWEEN ('2020-04-17', '2020-02-17'),
 --next_day()
 
 /*
-ÁÖ¾îÁø ³¯Â¥¸¦ ±âÁØÀ¸·Î µ¹¾Æ¿À´Â °¡Àå ÃÖ±Ù ¿äÀÏÀÇ ³¯Â¥¸¦ ¹ÝÈ¯ÇØ ÁÖ´Â ÇÔ¼ö
-¿äÀÏ¸í ´ë½Å ¼ýÀÚ¸¦ ÀÔ·ÂÇÒ ¼öµµ ÀÖ´Ù.
-1:ÀÏ 2:¿ù ... 7:Åä
+ì£¼ì–´ì§„ ë‚ ì§œë¥¼ ê¸°ì¤€ìœ¼ë¡œ ëŒì•„ì˜¤ëŠ” ê°€ìž¥ ìµœê·¼ ìš”ì¼ì˜ ë‚ ì§œë¥¼ ë°˜í™˜í•´ ì£¼ëŠ” í•¨ìˆ˜
+ìš”ì¼ëª… ëŒ€ì‹  ìˆ«ìžë¥¼ ìž…ë ¥í•  ìˆ˜ë„ ìžˆë‹¤.
+1:ì¼ 2:ì›” ... 7:í† 
 */
 
 SELECT SYSDATE,
-       NEXT_DAY (SYSDATE, '¿ù'),
-       NEXT_DAY (SYSDATE, 'È­¿äÀÏ'),
+       NEXT_DAY (SYSDATE, 'ì›”'),
+       NEXT_DAY (SYSDATE, 'í™”ìš”ì¼'),
        NEXT_DAY (SYSDATE, 1),
        NEXT_DAY ('2020-05-01', 4)
   FROM DUAL;
 
 --last_day()
---ÁÖ¾îÁø ³¯Â¥°¡ ¼ÓÇÑ ´ÞÀÇ °¡Àå ¸¶Áö¸· ³¯À» Ãâ·ÂÇØÁÖ´Â ÇÔ¼ö
+--ì£¼ì–´ì§„ ë‚ ì§œê°€ ì†í•œ ë‹¬ì˜ ê°€ìž¥ ë§ˆì§€ë§‰ ë‚ ì„ ì¶œë ¥í•´ì£¼ëŠ” í•¨ìˆ˜
 
 SELECT SYSDATE,
        LAST_DAY (SYSDATE),
@@ -440,80 +440,80 @@ SELECT SYSDATE,
        LAST_DAY ('2019-02-03')
   FROM DUAL;
 
--- trunc(³¯Â¥) : ÇØ´ç ³¯Â¥¸¦ ¸®ÅÏÇÔ(½Ã°£ »©°í)
--- round(³¯Â¥) : ÇØ´ç ³¯Â¥¸¦ ¹Ý¿Ã¸²ÇØ¼­ ¸®ÅÏ(Á¤¿À ±âÁØ)
--- => µÑ´Ù ½Ã°£Àº Á¦¿ÜµÊ
+-- trunc(ë‚ ì§œ) : í•´ë‹¹ ë‚ ì§œë¥¼ ë¦¬í„´í•¨(ì‹œê°„ ë¹¼ê³ )
+-- round(ë‚ ì§œ) : í•´ë‹¹ ë‚ ì§œë¥¼ ë°˜ì˜¬ë¦¼í•´ì„œ ë¦¬í„´(ì •ì˜¤ ê¸°ì¤€)
+-- => ë‘˜ë‹¤ ì‹œê°„ì€ ì œì™¸ë¨
 
 SELECT SYSDATE, ROUND (SYSDATE), TRUNC (SYSDATE) FROM DUAL;
 
---»ç¿øÀÇ ÀÔ»çÀÏ 50ÀÏ ÈÄÀÇ ³¯Â¥ ±¸ÇÏ±â
+--ì‚¬ì›ì˜ ìž…ì‚¬ì¼ 50ì¼ í›„ì˜ ë‚ ì§œ êµ¬í•˜ê¸°
 
 SELECT FIRST_NAME,
        LAST_NAME,
        HIRE_DATE,
-       HIRE_DATE + 50     "50ÀÏ ÈÄ"
+       HIRE_DATE + 50     "50ì¼ í›„"
   FROM employees;
 
---ÀÔ»çÀÏ 3°³¿ù ÈÄÀÇ ³¯Â¥ ±¸ÇÏ±â
+--ìž…ì‚¬ì¼ 3ê°œì›” í›„ì˜ ë‚ ì§œ êµ¬í•˜ê¸°
 
 SELECT FIRST_NAME,
        LAST_NAME,
        HIRE_DATE,
-       ADD_MONTHS (HIRE_DATE, 3)     "3°³¿ù ÈÄ"
+       ADD_MONTHS (HIRE_DATE, 3)     "3ê°œì›” í›„"
   FROM employees;
 
---¼ö·áÀÏ±îÁö ³²Àº ÀÏ¼ö
+--ìˆ˜ë£Œì¼ê¹Œì§€ ë‚¨ì€ ì¼ìˆ˜
 
-SELECT TO_DATE ('2020-08-19') - TRUNC (SYSDATE) || 'ÀÏ'    "¼ö·áÀÏ±îÁö"
+SELECT TO_DATE ('2020-08-19') - TRUNC (SYSDATE) || 'ì¼'    "ìˆ˜ë£Œì¼ê¹Œì§€"
   FROM DUAL;
 
---¼ö·áÀÏ±îÁö ³²Àº °³¿ù¼ö
+--ìˆ˜ë£Œì¼ê¹Œì§€ ë‚¨ì€ ê°œì›”ìˆ˜
 
 SELECT    MONTHS_BETWEEN (LAST_DAY ('2020-08-19'), LAST_DAY (SYSDATE))
-       || '°³¿ù'    "¼ö·áÀÏ±îÁö"
+       || 'ê°œì›”'    "ìˆ˜ë£Œì¼ê¹Œì§€"
   FROM DUAL;
 
---[4] Çüº¯È¯ ÇÔ¼ö
+--[4] í˜•ë³€í™˜ í•¨ìˆ˜
 
 /*
-<¿À¶óÅ¬ÀÇ ÀÚ·áÇü>
-¹®ÀÚ - char(°íÁ¤±æÀÌÇü), varchar2(±âº¯ ±æÀÌÇü)
-¼ýÀÚ - number
-³¯Â¥ - date
+<ì˜¤ë¼í´ì˜ ìžë£Œí˜•>
+ë¬¸ìž - char(ê³ ì •ê¸¸ì´í˜•), varchar2(ê¸°ë³€ ê¸¸ì´í˜•)
+ìˆ«ìž - number
+ë‚ ì§œ - date
 
-<Çüº¯È¯>
-1) ÀÚµ¿ Çüº¯È¯
-2) ¸í½ÃÀû Çüº¯È¯
-to_char() - ¼ýÀÚ, ³¯Â¥¸¦ ¹®ÀÚ·Î
-to_number() - ¹®ÀÚ¸¦ ¼ýÀÚ·Î
-to_date() - ¹®ÀÚ¸¦ ³¯Â¥·Î
+<í˜•ë³€í™˜>
+1) ìžë™ í˜•ë³€í™˜
+2) ëª…ì‹œì  í˜•ë³€í™˜
+to_char() - ìˆ«ìž, ë‚ ì§œë¥¼ ë¬¸ìžë¡œ
+to_number() - ë¬¸ìžë¥¼ ìˆ«ìžë¡œ
+to_date() - ë¬¸ìžë¥¼ ë‚ ì§œë¡œ
 */
 
---ÀÚµ¿ Çüº¯È¯
+--ìžë™ í˜•ë³€í™˜
 
 SELECT 1 + '2', 2 + '003' FROM DUAL;
 
--- =>¼ýÀÚ ÇüÅÂÀÇ ¹®ÀÚ¸¦ ¿¬»êÇÏ¸é ÇØ´ç ¹®ÀÚ¸¦ ¼ýÀÚ·Î ÀÚµ¿Çüº¯È¯ÇÑ ÈÄ ¿¬»êÇÔ
+-- =>ìˆ«ìž í˜•íƒœì˜ ë¬¸ìžë¥¼ ì—°ì‚°í•˜ë©´ í•´ë‹¹ ë¬¸ìžë¥¼ ìˆ«ìžë¡œ ìžë™í˜•ë³€í™˜í•œ í›„ ì—°ì‚°í•¨
 
 SELECT '004', 1 + TO_NUMBER ('2'), 2 + TO_NUMBER ('003') FROM DUAL;
 
---(1-1) to_char(³¯Â¥, ÆÐÅÏ) - ³¯Â¥¸¦ ¹®ÀÚ·Î º¯È¯ÇÑ´Ù
+--(1-1) to_char(ë‚ ì§œ, íŒ¨í„´) - ë‚ ì§œë¥¼ ë¬¸ìžë¡œ ë³€í™˜í•œë‹¤
 
 SELECT SYSDATE,
        TO_CHAR (SYSDATE, 'yyyy'),
        TO_CHAR (SYSDATE, 'mm'),
        TO_CHAR (SYSDATE, 'dd'),
-       TO_CHAR (SYSDATE, 'd')     ¿äÀÏ
+       TO_CHAR (SYSDATE, 'd')     ìš”ì¼
   FROM DUAL;
 
 SELECT SYSDATE,
        TO_CHAR (SYSDATE, 'year'),
        TO_CHAR (SYSDATE, 'mon'),
        TO_CHAR (SYSDATE, 'month'),
-       TO_CHAR (SYSDATE, 'day'),                            -- ¿äÀÏ(¿ù¿äÀÏ,È­¿äÀÏ,...)
-       TO_CHAR (SYSDATE, 'dy'),                                -- ¿äÀÏ(¿ù, È­,...)
-       TO_CHAR (SYSDATE, 'q'),                                           -- ºÐ±â
-       TO_CHAR (SYSDATE, 'ddd')                                  -- 1³â Áß ¸çÄ¥Â°ÀÎÁö
+       TO_CHAR (SYSDATE, 'day'),                            -- ìš”ì¼(ì›”ìš”ì¼,í™”ìš”ì¼,...)
+       TO_CHAR (SYSDATE, 'dy'),                                -- ìš”ì¼(ì›”, í™”,...)
+       TO_CHAR (SYSDATE, 'q'),                                           -- ë¶„ê¸°
+       TO_CHAR (SYSDATE, 'ddd')                                  -- 1ë…„ ì¤‘ ë©°ì¹ ì§¸ì¸ì§€
   FROM DUAL;
 
 SELECT SYSDATE,
@@ -523,14 +523,14 @@ SELECT SYSDATE,
        TO_CHAR (SYSDATE, 'yyyy-mm-dd hh:mi:ss pm day')
   FROM DUAL;
 
---Æ¯Á¤ ³¯Â¥¿¡¼­ ³âµµ¸¸ ÃßÃâ, ¿ù¸¸ ÃßÃâ, ÀÏ¸¸ ÃßÃâ
+--íŠ¹ì • ë‚ ì§œì—ì„œ ë…„ë„ë§Œ ì¶”ì¶œ, ì›”ë§Œ ì¶”ì¶œ, ì¼ë§Œ ì¶”ì¶œ
 
-SELECT EXTRACT (YEAR FROM SYSDATE)      ³âµµ,
-       EXTRACT (MONTH FROM SYSDATE)     ¿ù,
-       EXTRACT (DAY FROM SYSDATE)       ÀÏ
+SELECT EXTRACT (YEAR FROM SYSDATE)      ë…„ë„,
+       EXTRACT (MONTH FROM SYSDATE)     ì›”,
+       EXTRACT (DAY FROM SYSDATE)       ì¼
   FROM DUAL;
 
---½Ç½À) STUDENT Å×ÀÌºíÀÇ birthday Ä®·³À» ÂüÁ¶ÇÏ¿© »ýÀÏ ÀÌ 3¿ùÀÎ ÇÐ»ýÀÇ ÀÌ¸§°ú birthday¸¦ Ãâ·Â 
+--ì‹¤ìŠµ) STUDENT í…Œì´ë¸”ì˜ birthday ì¹¼ëŸ¼ì„ ì°¸ì¡°í•˜ì—¬ ìƒì¼ ì´ 3ì›”ì¸ í•™ìƒì˜ ì´ë¦„ê³¼ birthdayë¥¼ ì¶œë ¥ 
 
 SELECT name, birthday
   FROM student
@@ -540,11 +540,11 @@ SELECT name, birthday
   FROM student
  WHERE TO_CHAR (birthday, 'mm') = 3;
 
---(1-2) to_char(¼ýÀÚ, ÆÐÅÏ) - ¼ýÀÚ¸¦ ÆÐÅÏÀÌ Àû¿ëµÈ ¹®ÀÚ·Î º¯È¯
+--(1-2) to_char(ìˆ«ìž, íŒ¨í„´) - ìˆ«ìžë¥¼ íŒ¨í„´ì´ ì ìš©ëœ ë¬¸ìžë¡œ ë³€í™˜
 
 /*
-9 : ³²ÀºÀÚ¸®¸¦ °ø¹éÀ¸·Î Ã¤¿ò
-0 : ³²ÀºÀÚ¸®¸¦ 0À¸·Î Ã¤¿ò
+9 : ë‚¨ì€ìžë¦¬ë¥¼ ê³µë°±ìœ¼ë¡œ ì±„ì›€
+0 : ë‚¨ì€ìžë¦¬ë¥¼ 0ìœ¼ë¡œ ì±„ì›€
 */
 
 SELECT 1234,
@@ -558,14 +558,14 @@ SELECT 1234,
        TO_CHAR (1234.56, '9999')
   FROM DUAL;
 
---Professor Å×ÀÌºíÀ» ÂüÁ¶ÇÏ¿© 101¹ø ÇÐ°ú ±³¼öµé ÀÇ ÀÌ¸§°ú ¿¬ºÀÀ» Ãâ·ÂÇÏ½Ã¿À. 
---´Ü ¿¬ºÀÀº (pay*12)+bonus ·Î °è»êÇÏ°í Ãµ ´ÜÀ§ ±¸ºÐ±âÈ£·Î Ç¥½ÃÇÏ½Ã¿À
+--Professor í…Œì´ë¸”ì„ ì°¸ì¡°í•˜ì—¬ 101ë²ˆ í•™ê³¼ êµìˆ˜ë“¤ ì˜ ì´ë¦„ê³¼ ì—°ë´‰ì„ ì¶œë ¥í•˜ì‹œì˜¤. 
+--ë‹¨ ì—°ë´‰ì€ (pay*12)+bonus ë¡œ ê³„ì‚°í•˜ê³  ì²œ ë‹¨ìœ„ êµ¬ë¶„ê¸°í˜¸ë¡œ í‘œì‹œí•˜ì‹œì˜¤
 
-SELECT NAME ÀÌ¸§, TO_CHAR ((pay * 12) + bonus, '99,999') ¿¬ºÀ
+SELECT NAME ì´ë¦„, TO_CHAR ((pay * 12) + bonus, '99,999') ì—°ë´‰
   FROM professor
  WHERE DEPTNO = 101;
 
---(2) to_date(¹®ÀÚ, ÆÐÅÏ) - ¹®ÀÚ¸¦ ³¯Â¥·Î º¯È¯
+--(2) to_date(ë¬¸ìž, íŒ¨í„´) - ë¬¸ìžë¥¼ ë‚ ì§œë¡œ ë³€í™˜
 
 SELECT TO_DATE ('2020-05-09'),
        TO_DATE ('2020-05-09', 'yyyy-mm-dd'),
@@ -581,7 +581,7 @@ SELECT '2020-04-03' - '2020-01-01' FROM DUAL;                                   
 
 SELECT TO_DATE ('2020-04-03') - TO_DATE ('2020-01-01') FROM DUAL;
 
---2020-03-07 ~ 2020-04-16±îÁöÀÇ µ¥ÀÌÅÍ Á¶È¸
+--2020-03-07 ~ 2020-04-16ê¹Œì§€ì˜ ë°ì´í„° ì¡°íšŒ
 
 SELECT *
   FROM pd
@@ -589,266 +589,266 @@ SELECT *
                    AND TO_DATE ('2020-04-16 23:59:59',
                                 'yyyy-mm-dd hh24:mi:ss');
 
---µî·ÏÇÑÁö ¸î ½Ã°£ÀÌ Áö³µ´ÂÁö Á¶È¸
+--ë“±ë¡í•œì§€ ëª‡ ì‹œê°„ì´ ì§€ë‚¬ëŠ”ì§€ ì¡°íšŒ
 
-SELECT PDNAME, PRICE, REGDATE, (SYSDATE - regdate) * 24 °æ°ú½Ã°£ FROM pd;
+SELECT PDNAME, PRICE, REGDATE, (SYSDATE - regdate) * 24 ê²½ê³¼ì‹œê°„ FROM pd;
 
 
---2020-04-20¿ù¿äÀÏ
+--2020-04-20ì›”ìš”ì¼
 
---(3) to_number(¹®ÀÚ) - ¹®ÀÚ¸¦ ¼ýÀÚ·Î º¯È¯
+--(3) to_number(ë¬¸ìž) - ë¬¸ìžë¥¼ ìˆ«ìžë¡œ ë³€í™˜
 
-SELECT '10'                       AS ¹®ÀÚ,
-       10                         AS ¼ýÀÚ1,
-       TO_NUMBER ('10')           AS ¼ýÀÚ2,
-       TO_NUMBER ('003') + 20     AS ¼ýÀÚ3,
-       '005' + 30                 AS ¼ýÀÚ4
+SELECT '10'                       AS ë¬¸ìž,
+       10                         AS ìˆ«ìž1,
+       TO_NUMBER ('10')           AS ìˆ«ìž2,
+       TO_NUMBER ('003') + 20     AS ìˆ«ìž3,
+       '005' + 30                 AS ìˆ«ìž4
   FROM DUAL;
 
---[½Ç½À]Professor Å×ÀÌºíÀ» »ç¿ëÇÏ¿© 1990³â ÀÌÀü¿¡ ÀÔ»çÇÑ ±³¼ö¸í°ú ÀÔ»çÀÏ, 
---ÇöÀç ¿¬ºÀ°ú 10% ÀÎ»ó ÈÄ ¿¬ºÀÀ» Ãâ·ÂÇÏ½Ã¿À.      
---¿¬ºÀÀº »ó¿©±Ý(bonus)¸¦ Á¦¿ÜÇÑ (pay*12)·Î °è»êÇÏ°í ¿¬ºÀ°ú ÀÎ»ó ÈÄ ¿¬ºÀÀº 
---Ãµ ´ÜÀ§ ±¸ºÐ ±âÈ£¸¦ Ãß°¡ÇÏ¿© Ãâ·ÂÇÏ½Ã¿À. 
+--[ì‹¤ìŠµ]Professor í…Œì´ë¸”ì„ ì‚¬ìš©í•˜ì—¬ 1990ë…„ ì´ì „ì— ìž…ì‚¬í•œ êµìˆ˜ëª…ê³¼ ìž…ì‚¬ì¼, 
+--í˜„ìž¬ ì—°ë´‰ê³¼ 10% ì¸ìƒ í›„ ì—°ë´‰ì„ ì¶œë ¥í•˜ì‹œì˜¤.      
+--ì—°ë´‰ì€ ìƒì—¬ê¸ˆ(bonus)ë¥¼ ì œì™¸í•œ (pay*12)ë¡œ ê³„ì‚°í•˜ê³  ì—°ë´‰ê³¼ ì¸ìƒ í›„ ì—°ë´‰ì€ 
+--ì²œ ë‹¨ìœ„ êµ¬ë¶„ ê¸°í˜¸ë¥¼ ì¶”ê°€í•˜ì—¬ ì¶œë ¥í•˜ì‹œì˜¤. 
 
 SELECT NAME,
        HIREDATE,
-       TO_CHAR (PAY * 12, '9,999')           ¿¬ºÀ,
-       TO_CHAR (pay * 1.1 * 12, '9,999')     "ÀÎ»ó ÈÄ ¿¬ºÀ"
+       TO_CHAR (PAY * 12, '9,999')           ì—°ë´‰,
+       TO_CHAR (pay * 1.1 * 12, '9,999')     "ì¸ìƒ í›„ ì—°ë´‰"
   FROM professor;
 
---[5]ÀÏ¹Ý ÇÔ¼ö
---nvl(ÄÃ·³, Ä¡È¯ÇÒ °ª) - ÇØ´ç ÄÃ·³ÀÌ nullÀÌ¸é Ä¡È¯ÇÒ °ªÀ¸·Î ¹Ù²Ù´Â ÇÔ¼ö
+--[5]ì¼ë°˜ í•¨ìˆ˜
+--nvl(ì»¬ëŸ¼, ì¹˜í™˜í•  ê°’) - í•´ë‹¹ ì»¬ëŸ¼ì´ nullì´ë©´ ì¹˜í™˜í•  ê°’ìœ¼ë¡œ ë°”ê¾¸ëŠ” í•¨ìˆ˜
 
 SELECT name,
        bonus,
        NVL (bonus, 0),
        hpage,
-       NVL (hpage, 'È¨ÆäÀÌÁö ¾øÀ½')
+       NVL (hpage, 'í™ˆíŽ˜ì´ì§€ ì—†ìŒ')
   FROM professor;
 
---Professor Å×ÀÌºí¿¡¼­ 101¹ø ÇÐ°ú ±³¼öµéÀÇ ÀÌ¸§°ú ±Þ¿©, bonus, ¿¬ºÀÀ» Ãâ·ÂÇÏ½Ã¿À. 
---´Ü, ¿¬ºÀÀº (pay*12+bonus)·Î °è»ê ÇÏ°í bonus°¡ ¾ø´Â ±³¼ö´Â 0À¸·Î °è»êÇÏ½Ã¿À. 
+--Professor í…Œì´ë¸”ì—ì„œ 101ë²ˆ í•™ê³¼ êµìˆ˜ë“¤ì˜ ì´ë¦„ê³¼ ê¸‰ì—¬, bonus, ì—°ë´‰ì„ ì¶œë ¥í•˜ì‹œì˜¤. 
+--ë‹¨, ì—°ë´‰ì€ (pay*12+bonus)ë¡œ ê³„ì‚° í•˜ê³  bonusê°€ ì—†ëŠ” êµìˆ˜ëŠ” 0ìœ¼ë¡œ ê³„ì‚°í•˜ì‹œì˜¤. 
 
-SELECT NAME                                 ÀÌ¸§,
-       pay                                  ±Þ¿©,
+SELECT NAME                                 ì´ë¦„,
+       pay                                  ê¸‰ì—¬,
        NVL (BONUS, 0)                       bonus,
-       NVL (PAY * 12 + bonus, PAY * 12)     ¿¬ºÀ
+       NVL (PAY * 12 + bonus, PAY * 12)     ì—°ë´‰
   FROM professor;
 
---nvl2(col1, col2, col3) : col1ÀÇ °ªÀÌ nullÀÌ ¾Æ´Ï¸é col2¸¦, nullÀÌ¸é col3¸¦ Ãâ·Â
+--nvl2(col1, col2, col3) : col1ì˜ ê°’ì´ nullì´ ì•„ë‹ˆë©´ col2ë¥¼, nullì´ë©´ col3ë¥¼ ì¶œë ¥
 
---nvl2 ÀÌ¿ë
---Professor Å×ÀÌºí¿¡¼­ 101¹ø ÇÐ°ú ±³¼öµéÀÇ ÀÌ¸§°ú ±Þ¿©, bonus, ¿¬ºÀÀ» Ãâ·ÂÇÏ½Ã¿À. 
---´Ü, ¿¬ºÀÀº (pay*12+bonus)·Î °è»ê ÇÏ°í bonus°¡ ¾ø´Â ±³¼ö´Â 0À¸·Î °è»êÇÏ½Ã¿À. 
+--nvl2 ì´ìš©
+--Professor í…Œì´ë¸”ì—ì„œ 101ë²ˆ í•™ê³¼ êµìˆ˜ë“¤ì˜ ì´ë¦„ê³¼ ê¸‰ì—¬, bonus, ì—°ë´‰ì„ ì¶œë ¥í•˜ì‹œì˜¤. 
+--ë‹¨, ì—°ë´‰ì€ (pay*12+bonus)ë¡œ ê³„ì‚° í•˜ê³  bonusê°€ ì—†ëŠ” êµìˆ˜ëŠ” 0ìœ¼ë¡œ ê³„ì‚°í•˜ì‹œì˜¤. 
 
-SELECT NAME                                         ÀÌ¸§,
-       pay                                          ±Þ¿©,
+SELECT NAME                                         ì´ë¦„,
+       pay                                          ê¸‰ì—¬,
        NVL (BONUS, 0)                               bonus,
-       NVL2 (bonus, PAY * 12 + bonus, PAY * 12)     ¿¬ºÀ
+       NVL2 (bonus, PAY * 12 + bonus, PAY * 12)     ì—°ë´‰
   FROM professor;
 
 --employees
---ÀÌ¸§(first_name - last_name), ÀÔ»çÀÏ, salary(±âº»±Þ), ¼ö´çÆÛ¼¾Æ®(commission_pct),
--- ¿¬ºÀ(±âº»±Þ+±âº»±Þ*¼ö´çÆÛ¼¾Æ®)*12(¼ö´çÆÛ¼¾Æ®°¡ nullÀÌ¸é ¿¬ºÀÀº ±âº»±Þ*12)
+--ì´ë¦„(first_name - last_name), ìž…ì‚¬ì¼, salary(ê¸°ë³¸ê¸‰), ìˆ˜ë‹¹í¼ì„¼íŠ¸(commission_pct),
+-- ì—°ë´‰(ê¸°ë³¸ê¸‰+ê¸°ë³¸ê¸‰*ìˆ˜ë‹¹í¼ì„¼íŠ¸)*12(ìˆ˜ë‹¹í¼ì„¼íŠ¸ê°€ nullì´ë©´ ì—°ë´‰ì€ ê¸°ë³¸ê¸‰*12)
 
-SELECT FIRST_NAME || '-' || LAST_NAME                            ÀÌ¸§,
-       HIRE_DATE                                                 ÀÔ»çÀÏ,
-       SALARY                                                    ±âº»±Þ,
-       NVL (COMMISSION_PCT, 0)                                   ¼ö´çÆÛ¼¾Æ®,
-       NVL (salary * (1 + commission_pct) * 12, salary * 12)     ¿¬ºÀ
+SELECT FIRST_NAME || '-' || LAST_NAME                            ì´ë¦„,
+       HIRE_DATE                                                 ìž…ì‚¬ì¼,
+       SALARY                                                    ê¸°ë³¸ê¸‰,
+       NVL (COMMISSION_PCT, 0)                                   ìˆ˜ë‹¹í¼ì„¼íŠ¸,
+       NVL (salary * (1 + commission_pct) * 12, salary * 12)     ì—°ë´‰
   FROM employees;
 
-SELECT FIRST_NAME || '-' || LAST_NAME    ÀÌ¸§,
-       HIRE_DATE                         ÀÔ»çÀÏ,
-       SALARY                            ±âº»±Þ,
-       NVL (COMMISSION_PCT, 0)           ¼ö´çÆÛ¼¾Æ®,
+SELECT FIRST_NAME || '-' || LAST_NAME    ì´ë¦„,
+       HIRE_DATE                         ìž…ì‚¬ì¼,
+       SALARY                            ê¸°ë³¸ê¸‰,
+       NVL (COMMISSION_PCT, 0)           ìˆ˜ë‹¹í¼ì„¼íŠ¸,
        TO_CHAR (
            NVL2 (commission_pct,
                  salary * (1 + commission_pct) * 12,
                  salary * 12),
-           '$999,999')                   ¿¬ºÀ
+           '$999,999')                   ì—°ë´‰
   FROM employees;
 
---decode() ÇÔ¼ö : if¹®À» ´ë½ÅÇÏ´Â ÇÔ¼ö
+--decode() í•¨ìˆ˜ : ifë¬¸ì„ ëŒ€ì‹ í•˜ëŠ” í•¨ìˆ˜
 
 /*
-    decode(A, B, Âü, °ÅÁþ)
-    => A°¡ B¿Í °°À¸¸é ÂüÀ» ÇÏ°í, ±×·¸Áö ¾ÊÀ¸¸é °ÅÁþÀ» Ã³¸®ÇÑ´Ù.
+    decode(A, B, ì°¸, ê±°ì§“)
+    => Aê°€ Bì™€ ê°™ìœ¼ë©´ ì°¸ì„ í•˜ê³ , ê·¸ë ‡ì§€ ì•Šìœ¼ë©´ ê±°ì§“ì„ ì²˜ë¦¬í•œë‹¤.
 */
---student¿¡¼­ grade°¡ 1ÀÌ¸é 1ÇÐ³â, 2ÀÌ¸é 2ÇÐ³â, 3ÀÌ¸é 3ÇÐ³â, 4ÀÌ¸é 4ÇÐ³âÀ» Ãâ·Â
+--studentì—ì„œ gradeê°€ 1ì´ë©´ 1í•™ë…„, 2ì´ë©´ 2í•™ë…„, 3ì´ë©´ 3í•™ë…„, 4ì´ë©´ 4í•™ë…„ì„ ì¶œë ¥
 
 SELECT grade,
        DECODE (grade,
-               1, '1ÇÐ³â',
-               2, '2ÇÐ³â',
-               3, '3ÇÐ³â',
-               4, '4ÇÐ³â')    "ÇÐ³â"
+               1, '1í•™ë…„',
+               2, '2í•™ë…„',
+               3, '3í•™ë…„',
+               4, '4í•™ë…„')    "í•™ë…„"
   FROM student;
 
---Professor Å×ÀÌºí¿¡¼­ ±³¼ö¸í, ÇÐ°ú¹øÈ£, ÇÐ°ú¸íÀ» Ãâ·ÂÇÏµÇ deptno°¡ 101¹ø ÀÎ ±³¼ö¸¸ 
---ÄÄÇ»ÅÍ °øÇÐ°ú·Î Ãâ·ÂÇÏ°í 101¹øÀÌ ¾Æ´Ñ ±³¼öµéÀº ÇÐ°ú¸í¿¡ ¾Æ¹«°Í µµ Ãâ·ÂÇÏÁö ¸¶¼¼¿ä. 
+--Professor í…Œì´ë¸”ì—ì„œ êµìˆ˜ëª…, í•™ê³¼ë²ˆí˜¸, í•™ê³¼ëª…ì„ ì¶œë ¥í•˜ë˜ deptnoê°€ 101ë²ˆ ì¸ êµìˆ˜ë§Œ 
+--ì»´í“¨í„° ê³µí•™ê³¼ë¡œ ì¶œë ¥í•˜ê³  101ë²ˆì´ ì•„ë‹Œ êµìˆ˜ë“¤ì€ í•™ê³¼ëª…ì— ì•„ë¬´ê²ƒ ë„ ì¶œë ¥í•˜ì§€ ë§ˆì„¸ìš”. 
 
-SELECT NAME, DEPTNO, DECODE (deptno, 101, 'ÄÄÇ»ÅÍ °øÇÐ°ú') "ÇÐ°ú¸í"
+SELECT NAME, DEPTNO, DECODE (deptno, 101, 'ì»´í“¨í„° ê³µí•™ê³¼') "í•™ê³¼ëª…"
   FROM professor;
 
--- Professor Å×ÀÌºí¿¡¼­ ±³¼ö¸í, ÇÐ°ú¹øÈ£ , ÇÐ°ú¸íÀ» Ãâ·ÂÇÏµÇ 
---deptno°¡ 101¹øÀÎ ±³¼ö¸¸ ÄÄÇ»ÅÍ °øÇÐ°ú·Î Ãâ·ÂÇÏ°í 101 ¹øÀÌ ¾Æ´Ñ ±³¼öµéÀº ÇÐ°ú¸í¿¡ ¡®±âÅ¸ÇÐ°ú ¡¯·Î Ãâ·ÂÇÏ¼¼¿ä. 
+-- Professor í…Œì´ë¸”ì—ì„œ êµìˆ˜ëª…, í•™ê³¼ë²ˆí˜¸ , í•™ê³¼ëª…ì„ ì¶œë ¥í•˜ë˜ 
+--deptnoê°€ 101ë²ˆì¸ êµìˆ˜ë§Œ ì»´í“¨í„° ê³µí•™ê³¼ë¡œ ì¶œë ¥í•˜ê³  101 ë²ˆì´ ì•„ë‹Œ êµìˆ˜ë“¤ì€ í•™ê³¼ëª…ì— â€˜ê¸°íƒ€í•™ê³¼ â€™ë¡œ ì¶œë ¥í•˜ì„¸ìš”. 
 
 SELECT name,
        deptno,
-       DECODE (deptno, 101, 'ÄÄÇ»ÅÍ °øÇÐ°ú', '±âÅ¸ÇÐ°ú')    "ÇÐ°ú¸í"
+       DECODE (deptno, 101, 'ì»´í“¨í„° ê³µí•™ê³¼', 'ê¸°íƒ€í•™ê³¼')    "í•™ê³¼ëª…"
   FROM professor;
 
--- Professor Å×ÀÌºí¿¡¼­ ±³¼ö¸í, ÇÐ°ú¸íÀ» Ãâ·ÂÇÏµÇ deptno°¡ 101¹øÀÌ¸é ¡®ÄÄÇ»ÅÍ °øÇÐ°ú¡¯, 
---102¹øÀÌ¸é ¡®¸ÖÆ¼¹Ìµð¾î °øÇÐ°ú ¡¯, 103¹øÀÌ¸é ¡®¼ÒÇÁÆ®¿þ¾î °øÇÐ°ú¡¯, ³ª¸Ó Áö´Â ¡®±âÅ¸ÇÐ°ú¡¯·Î Ãâ·ÂÇÏ¼¼¿ä. 
+-- Professor í…Œì´ë¸”ì—ì„œ êµìˆ˜ëª…, í•™ê³¼ëª…ì„ ì¶œë ¥í•˜ë˜ deptnoê°€ 101ë²ˆì´ë©´ â€˜ì»´í“¨í„° ê³µí•™ê³¼â€™, 
+--102ë²ˆì´ë©´ â€˜ë©€í‹°ë¯¸ë””ì–´ ê³µí•™ê³¼ â€™, 103ë²ˆì´ë©´ â€˜ì†Œí”„íŠ¸ì›¨ì–´ ê³µí•™ê³¼â€™, ë‚˜ë¨¸ ì§€ëŠ” â€˜ê¸°íƒ€í•™ê³¼â€™ë¡œ ì¶œë ¥í•˜ì„¸ìš”. 
 
 SELECT name,
        deptno,
        DECODE (deptno,
-               101, 'ÄÄÇ»ÅÍ °øÇÐ°ú',
-               102, '¸ÖÆ¼¹Ìµð¾î °øÇÐ°ú',
-               103, '¼ÒÇÁÆ®¿þ¾î °øÇÐ°ú',
-               '±âÅ¸ÇÐ°ú')    "ÇÐ°ú¸í"
+               101, 'ì»´í“¨í„° ê³µí•™ê³¼',
+               102, 'ë©€í‹°ë¯¸ë””ì–´ ê³µí•™ê³¼',
+               103, 'ì†Œí”„íŠ¸ì›¨ì–´ ê³µí•™ê³¼',
+               'ê¸°íƒ€í•™ê³¼')    "í•™ê³¼ëª…"
   FROM professor;
 
--- Professor Å×ÀÌºí¿¡¼­ ±³¼ö¸í, ºÎ¼­¹øÈ£ ¸¦ Ãâ·ÂÇÏ°í, deptno°¡ 101¹øÀÎ ºÎ¼­ Áß¿¡¼­ 
---ÀÌ¸§ÀÌ Á¶ÀÎÇüÀÎ ±³¼ö¿¡°Ô ¡®¼®ÁÂ ±³¼ö ÈÄº¸¡¯¶ó°í Ãâ·ÂÇÏ¼¼¿ä. ³ª¸ÓÁö´Â null °ª Ãâ·Â. 
+-- Professor í…Œì´ë¸”ì—ì„œ êµìˆ˜ëª…, ë¶€ì„œë²ˆí˜¸ ë¥¼ ì¶œë ¥í•˜ê³ , deptnoê°€ 101ë²ˆì¸ ë¶€ì„œ ì¤‘ì—ì„œ 
+--ì´ë¦„ì´ ì¡°ì¸í˜•ì¸ êµìˆ˜ì—ê²Œ â€˜ì„ì¢Œ êµìˆ˜ í›„ë³´â€™ë¼ê³  ì¶œë ¥í•˜ì„¸ìš”. ë‚˜ë¨¸ì§€ëŠ” null ê°’ ì¶œë ¥. 
 
 SELECT NAME,
        DEPTNO,
        DECODE (deptno,
-               101, DECODE (name, 'Á¶ÀÎÇü', '¼®ÁÂ ±³¼ö ÈÄº¸'))    "ºñ°í"
+               101, DECODE (name, 'ì¡°ì¸í˜•', 'ì„ì¢Œ êµìˆ˜ í›„ë³´'))    "ë¹„ê³ "
   FROM professor;
 
---Professor Å×ÀÌºí¿¡¼­ ±³¼ö¸í, ºÎ¼­¹øÈ£ ¸¦ Ãâ·ÂÇÏ°í, deptno°¡ 101¹øÀÎ ºÎ¼­ Áß¿¡¼­ 
---ÀÌ¸§ÀÌ Á¶ÀÎÇüÀÎ ±³¼ö¿¡°Ô ºñ°í ¶õ¿¡ ¡®¼®ÁÂ±³¼ö ÈÄº¸¡¯¶ó°í Ãâ·ÂÇÏ¼¼¿ä. 101¹ø ÇÐ°úÀÇ Á¶ÀÎÇü ±³¼ö ¿Ü¿¡´Â 
---ºñ°í ¶õ¿¡ ¡®ÈÄº¸¾Æ´Ô¡¯À» Ãâ·ÂÇÏ°í 101¹ø ±³¼ö °¡ ¾Æ´Ò °æ¿ì´Â ºñ°í¶õÀÌ °ø¶õÀÌ µÇµµ·Ï 
+--Professor í…Œì´ë¸”ì—ì„œ êµìˆ˜ëª…, ë¶€ì„œë²ˆí˜¸ ë¥¼ ì¶œë ¥í•˜ê³ , deptnoê°€ 101ë²ˆì¸ ë¶€ì„œ ì¤‘ì—ì„œ 
+--ì´ë¦„ì´ ì¡°ì¸í˜•ì¸ êµìˆ˜ì—ê²Œ ë¹„ê³  ëž€ì— â€˜ì„ì¢Œêµìˆ˜ í›„ë³´â€™ë¼ê³  ì¶œë ¥í•˜ì„¸ìš”. 101ë²ˆ í•™ê³¼ì˜ ì¡°ì¸í˜• êµìˆ˜ ì™¸ì—ëŠ” 
+--ë¹„ê³  ëž€ì— â€˜í›„ë³´ì•„ë‹˜â€™ì„ ì¶œë ¥í•˜ê³  101ë²ˆ êµìˆ˜ ê°€ ì•„ë‹ ê²½ìš°ëŠ” ë¹„ê³ ëž€ì´ ê³µëž€ì´ ë˜ë„ë¡ 
 
 SELECT NAME,
        DEPTNO,
        DECODE (
            deptno,
            101, DECODE (name,
-                        'Á¶ÀÎÇü', '¼®ÁÂ ±³¼ö ÈÄº¸',
-                        'ÈÄº¸¾Æ´Ô'))    "ºñ°í"
+                        'ì¡°ì¸í˜•', 'ì„ì¢Œ êµìˆ˜ í›„ë³´',
+                        'í›„ë³´ì•„ë‹˜'))    "ë¹„ê³ "
   FROM professor;
 
---¿äÀÏ Ãâ·Â
+--ìš”ì¼ ì¶œë ¥
 
 SELECT SYSDATE,
        TO_CHAR (SYSDATE, 'd'),
        DECODE (TO_CHAR (SYSDATE, 'd'),
-               '1', 'ÀÏ',
-               '2', '¿ù',
-               '3', 'È­',
-               '4', '¼ö',
-               '5', '¸ñ',
-               '6', '±Ý',
-               '7', 'Åä')    "¿äÀÏ"
+               '1', 'ì¼',
+               '2', 'ì›”',
+               '3', 'í™”',
+               '4', 'ìˆ˜',
+               '5', 'ëª©',
+               '6', 'ê¸ˆ',
+               '7', 'í† ')    "ìš”ì¼"
   FROM DUAL;
 
---Student Å×ÀÌºíÀ» »ç¿ëÇÏ¿© Á¦ 1Àü°ø(deptno1)ÀÌ 101¹øÀÎ ÇÐ°ú ÇÐ»ýµéÀÇ ÀÌ ¸§(name)°ú ÁÖ¹Î¹øÈ£(jumin), 
---¼ºº°À» Ãâ·ÂÇÏµÇ ¼ºº°Àº ÁÖ¹Î¹øÈ£ Ä®·³À» ÀÌ¿ë ÇÏ¿© 7¹øÂ° ¼ýÀÚ°¡ 1ÀÏ °æ¿ì ¡®³²ÀÚ¡¯, 2ÀÏ °æ¿ì ¡®¿©ÀÚ¡¯·Î Ãâ·ÂÇÏ¼¼¿ä 
+--Student í…Œì´ë¸”ì„ ì‚¬ìš©í•˜ì—¬ ì œ 1ì „ê³µ(deptno1)ì´ 101ë²ˆì¸ í•™ê³¼ í•™ìƒë“¤ì˜ ì´ ë¦„(name)ê³¼ ì£¼ë¯¼ë²ˆí˜¸(jumin), 
+--ì„±ë³„ì„ ì¶œë ¥í•˜ë˜ ì„±ë³„ì€ ì£¼ë¯¼ë²ˆí˜¸ ì¹¼ëŸ¼ì„ ì´ìš© í•˜ì—¬ 7ë²ˆì§¸ ìˆ«ìžê°€ 1ì¼ ê²½ìš° â€˜ë‚¨ìžâ€™, 2ì¼ ê²½ìš° â€˜ì—¬ìžâ€™ë¡œ ì¶œë ¥í•˜ì„¸ìš” 
 
 SELECT name,
        jumin,
-       DECODE (SUBSTR (jumin, 7, 1),  '1', '³²ÀÚ',  '2', '¿©ÀÚ')    ¼ºº°
+       DECODE (SUBSTR (jumin, 7, 1),  '1', 'ë‚¨ìž',  '2', 'ì—¬ìž')    ì„±ë³„
   FROM student
  WHERE deptno1 = 101;
 
---Student Å×ÀÌºí¿¡¼­ Á¦ 1Àü°ø(deptno1)ÀÌ 101¹øÀÎ ÇÐ»ýµéÀÇ ÀÌ¸§(name)°ú ÀüÈ­¹øÈ£(tel), Áö¿ª¸íÀ» 
---Ãâ·ÂÇÏ¼¼¿ä. Áö¿ª¸íÀº Áö¿ª¹øÈ£°¡ 02´Â ¼­¿ï, 031Àº °æ±â, 051Àº ºÎ»ê,052´Â ¿ï»ê, 055´Â °æ³²À¸·Î Ãâ·ÂÇÏ¼¼¿ä 
+--Student í…Œì´ë¸”ì—ì„œ ì œ 1ì „ê³µ(deptno1)ì´ 101ë²ˆì¸ í•™ìƒë“¤ì˜ ì´ë¦„(name)ê³¼ ì „í™”ë²ˆí˜¸(tel), ì§€ì—­ëª…ì„ 
+--ì¶œë ¥í•˜ì„¸ìš”. ì§€ì—­ëª…ì€ ì§€ì—­ë²ˆí˜¸ê°€ 02ëŠ” ì„œìš¸, 031ì€ ê²½ê¸°, 051ì€ ë¶€ì‚°,052ëŠ” ìš¸ì‚°, 055ëŠ” ê²½ë‚¨ìœ¼ë¡œ ì¶œë ¥í•˜ì„¸ìš” 
 
 SELECT name,
        tel,
        DECODE (SUBSTR (tel, 1, INSTR (tel, ')') - 1),
-               '02', '¼­¿ï',
-               '031', '°æ±â',
-               '051', 'ºÎ»ê',
-               '052', '¿ï»ê',
-               '055', '°æ³²')    "Áö¿ª¸í"
+               '02', 'ì„œìš¸',
+               '031', 'ê²½ê¸°',
+               '051', 'ë¶€ì‚°',
+               '052', 'ìš¸ì‚°',
+               '055', 'ê²½ë‚¨')    "ì§€ì—­ëª…"
   FROM student
  WHERE deptno1 = 101;
 
---case Ç¥Çö½Ä : if¹®À» ´ë½ÅÇÏ´Â ÇÔ¼ö, Á¶°ÇÀÌ ¹üÀ§°ªÀ» °¡Áú ¶§µµ »ç¿ë °¡´É
+--case í‘œí˜„ì‹ : ifë¬¸ì„ ëŒ€ì‹ í•˜ëŠ” í•¨ìˆ˜, ì¡°ê±´ì´ ë²”ìœ„ê°’ì„ ê°€ì§ˆ ë•Œë„ ì‚¬ìš© ê°€ëŠ¥
 
 /*
-[1]µ¿ÀÏ°ª ºñ±³½Ã (=·Î ºñ±³µÇ´Â °æ¿ì)
-    case Á¶°Ç when °á°ú1 then Ãâ·Â1
-            when °á°ú2 then Ãâ·Â2
-            else Ãâ·Â3
-    end "º°Äª"
-[2]¹üÀ§°ª ºñ±³½Ã
-    case when Á¶°Ç1 then Ãâ·Â1
-        when Á¶°Ç2 then Ãâ·Â2
-        else Ãâ·Â3
-    end "º°Äª"
+[1]ë™ì¼ê°’ ë¹„êµì‹œ (=ë¡œ ë¹„êµë˜ëŠ” ê²½ìš°)
+    case ì¡°ê±´ when ê²°ê³¼1 then ì¶œë ¥1
+            when ê²°ê³¼2 then ì¶œë ¥2
+            else ì¶œë ¥3
+    end "ë³„ì¹­"
+[2]ë²”ìœ„ê°’ ë¹„êµì‹œ
+    case when ì¡°ê±´1 then ì¶œë ¥1
+        when ì¡°ê±´2 then ì¶œë ¥2
+        else ì¶œë ¥3
+    end "ë³„ì¹­"
 */
---ÇÐ³â Ãâ·ÂÇÏ±â
+--í•™ë…„ ì¶œë ¥í•˜ê¸°
 
 SELECT name,
        grade,
        CASE grade
-           WHEN 1 THEN '1ÇÐ³â'
-           WHEN 2 THEN '2ÇÐ³â'
-           WHEN 3 THEN '3ÇÐ³â'
-           WHEN 4 THEN '4ÇÐ³â'
-       END                   "ÇÐ³â1",
+           WHEN 1 THEN '1í•™ë…„'
+           WHEN 2 THEN '2í•™ë…„'
+           WHEN 3 THEN '3í•™ë…„'
+           WHEN 4 THEN '4í•™ë…„'
+       END                   "í•™ë…„1",
        CASE grade
-           WHEN 1 THEN '1ÇÐ³â'
-           WHEN 2 THEN '2ÇÐ³â'
-           WHEN 3 THEN '3ÇÐ³â'
-           ELSE '4ÇÐ³â'
-       END                   "ÇÐ³â2",
+           WHEN 1 THEN '1í•™ë…„'
+           WHEN 2 THEN '2í•™ë…„'
+           WHEN 3 THEN '3í•™ë…„'
+           ELSE '4í•™ë…„'
+       END                   "í•™ë…„2",
        DECODE (grade,
-               1, '1ÇÐ³â',
-               2, '2ÇÐ³â',
-               3, '3ÇÐ³â',
-               '4ÇÐ³â')    "ÇÐ³â3"
+               1, '1í•™ë…„',
+               2, '2í•™ë…„',
+               3, '3í•™ë…„',
+               '4í•™ë…„')    "í•™ë…„3"
   FROM student;
 
---professor¿¡¼­ pay°¡ 400ÃÊ°ú, 300~400»çÀÌ, 300¹Ì¸¸À¸·Î ±¸ºÐ
+--professorì—ì„œ payê°€ 400ì´ˆê³¼, 300~400ì‚¬ì´, 300ë¯¸ë§Œìœ¼ë¡œ êµ¬ë¶„
 
 SELECT name,
        pay,
        CASE
-           WHEN pay > 400 THEN '400ÃÊ°ú'
-           WHEN pay BETWEEN 300 AND 400 THEN '300~400»çÀÌ'
-           WHEN pay < 300 THEN '300¹Ì¸¸'
-       END    "±Þ¿© ¹üÀ§"
+           WHEN pay > 400 THEN '400ì´ˆê³¼'
+           WHEN pay BETWEEN 300 AND 400 THEN '300~400ì‚¬ì´'
+           WHEN pay < 300 THEN '300ë¯¸ë§Œ'
+       END    "ê¸‰ì—¬ ë²”ìœ„"
   FROM professor;
 
---Áö¿ª¹øÈ£, Áö¿ª¸í
+--ì§€ì—­ë²ˆí˜¸, ì§€ì—­ëª…
 
 SELECT name,
        tel,
-       SUBSTR (tel, 1, INSTR (tel, ')') - 1)    "Áö¿ª¹øÈ£",
+       SUBSTR (tel, 1, INSTR (tel, ')') - 1)    "ì§€ì—­ë²ˆí˜¸",
        CASE SUBSTR (tel, 1, INSTR (tel, ')') - 1)
-           WHEN '02' THEN '¼­¿ï'
-           WHEN '031' THEN '°æ±âµµ'
-           WHEN '051' THEN 'ºÎ»ê'
-           WHEN '052' THEN '¿ï»ê'
-           WHEN '053' THEN '´ë±¸'
-           WHEN '055' THEN '°æ³²'
-       END                                      "Áö¿ª"
+           WHEN '02' THEN 'ì„œìš¸'
+           WHEN '031' THEN 'ê²½ê¸°ë„'
+           WHEN '051' THEN 'ë¶€ì‚°'
+           WHEN '052' THEN 'ìš¸ì‚°'
+           WHEN '053' THEN 'ëŒ€êµ¬'
+           WHEN '055' THEN 'ê²½ë‚¨'
+       END                                      "ì§€ì—­"
   FROM student;
 
--- Student Å×ÀÌºíÀÇ JUMIN Ä®·³À» ÂüÁ¶ÇÏ¿© ÇÐ»ýµéÀÇ ÀÌ¸§°ú ÅÂ¾î³­ ´Þ, ºÐ±â¸¦ Ãâ ·ÂÇÏ¼¼¿ä. ÅÂ¾î³­ ´ÞÀÌ 
---01~03¿ùÀº 1/4ºÐ±â, 04~06¿ùÀº 2/4ºÐ±â, 07~09¿ùÀº 3/4 ºÐ±â, 10~12¿ùÀº 4/4ºÐ±â·Î Ãâ·ÂÇÏ¼¼¿ä
+-- Student í…Œì´ë¸”ì˜ JUMIN ì¹¼ëŸ¼ì„ ì°¸ì¡°í•˜ì—¬ í•™ìƒë“¤ì˜ ì´ë¦„ê³¼ íƒœì–´ë‚œ ë‹¬, ë¶„ê¸°ë¥¼ ì¶œ ë ¥í•˜ì„¸ìš”. íƒœì–´ë‚œ ë‹¬ì´ 
+--01~03ì›”ì€ 1/4ë¶„ê¸°, 04~06ì›”ì€ 2/4ë¶„ê¸°, 07~09ì›”ì€ 3/4 ë¶„ê¸°, 10~12ì›”ì€ 4/4ë¶„ê¸°ë¡œ ì¶œë ¥í•˜ì„¸ìš”
 
 SELECT name,
        jumin,
-       SUBSTR (jumin, 3, 2)    "ÅÂ¾î³­ ´Þ",
+       SUBSTR (jumin, 3, 2)    "íƒœì–´ë‚œ ë‹¬",
        CASE
-           WHEN SUBSTR (jumin, 3, 2) BETWEEN '01' AND '03' THEN '1/4ºÐ±â'
-           WHEN SUBSTR (jumin, 3, 2) BETWEEN '04' AND '06' THEN '2/4ºÐ±â'
-           WHEN SUBSTR (jumin, 3, 2) BETWEEN '06' AND '09' THEN '3/4ºÐ±â'
-           WHEN SUBSTR (jumin, 3, 2) BETWEEN '10' AND '12' THEN '4/4ºÐ±â'
-       END                     ºÐ±â
+           WHEN SUBSTR (jumin, 3, 2) BETWEEN '01' AND '03' THEN '1/4ë¶„ê¸°'
+           WHEN SUBSTR (jumin, 3, 2) BETWEEN '04' AND '06' THEN '2/4ë¶„ê¸°'
+           WHEN SUBSTR (jumin, 3, 2) BETWEEN '06' AND '09' THEN '3/4ë¶„ê¸°'
+           WHEN SUBSTR (jumin, 3, 2) BETWEEN '10' AND '12' THEN '4/4ë¶„ê¸°'
+       END                     ë¶„ê¸°
   FROM student;
 
---totalÀ» ÀÌ¿ëÇØ¼­ ÇÐÁ¡ ±¸ÇÏ±â
---90ÀÌ»ó A, 80ÀÌ»ó B, 70ÀÌ»ó C, 60ÀÌ»ó D, ³ª¸ÓÁö F
+--totalì„ ì´ìš©í•´ì„œ í•™ì  êµ¬í•˜ê¸°
+--90ì´ìƒ A, 80ì´ìƒ B, 70ì´ìƒ C, 60ì´ìƒ D, ë‚˜ë¨¸ì§€ F
 
 SELECT studno,
        total,
@@ -860,14 +860,14 @@ SELECT studno,
            WHEN total >= 70 THEN 'C'
            WHEN total >= 60 THEN 'D'
            ELSE 'F'
-       END             ÇÐÁ¡1,
+       END             í•™ì 1,
        DECODE (TRUNC (total / 10),
                10, 'A',
                9, 'A',
                8, 'B',
                7, 'C',
                6, 'D',
-               'F')    ÇÐÁ¡2,
+               'F')    í•™ì 2,
        CASE TRUNC (total, -1)
            WHEN 100 THEN 'A'
            WHEN 90 THEN 'A'
@@ -875,65 +875,65 @@ SELECT studno,
            WHEN 70 THEN 'C'
            WHEN 60 THEN 'D'
            ELSE 'F'
-       END             ÇÐÁ¡3
+       END             í•™ì 3
   FROM EXAM_01;
 
---¼ºº°, gogak
+--ì„±ë³„, gogak
 
 SELECT gno,
        gname,
        jumin,
        point,
        CASE SUBSTR (jumin, 7, 1)
-           WHEN '1' THEN '³²'
-           WHEN '3' THEN '³²'
-           ELSE '¿©'
-       END                                                                       ¼ºº°,
-       CASE WHEN SUBSTR (jumin, 7, 1) IN ('1', '3') THEN '³²' ELSE '¿©' END    ¼ºº°2
+           WHEN '1' THEN 'ë‚¨'
+           WHEN '3' THEN 'ë‚¨'
+           ELSE 'ì—¬'
+       END                                                                       ì„±ë³„,
+       CASE WHEN SUBSTR (jumin, 7, 1) IN ('1', '3') THEN 'ë‚¨' ELSE 'ì—¬' END    ì„±ë³„2
   FROM gogak;
 
---³ªÀÌ±¸ÇÏ±â
+--ë‚˜ì´êµ¬í•˜ê¸°
 
   SELECT gno,
          gname,
          jumin,
          point,
-         TO_CHAR (SYSDATE, 'yyyy')    ÇöÀç¿¬µµ,
+         TO_CHAR (SYSDATE, 'yyyy')    í˜„ìž¬ì—°ë„,
            TO_CHAR (SYSDATE, 'yyyy')
          - (  SUBSTR (jumin, 1, 2)
             + CASE
                   WHEN SUBSTR (jumin, 7, 1) IN ('1', '2') THEN 1900
                   ELSE 2000
               END)
-         + 1                          ³ªÀÌ
+         + 1                          ë‚˜ì´
     FROM gogak
-ORDER BY ³ªÀÌ;
+ORDER BY ë‚˜ì´;
 
--- ¸Å³â ¸»ÀÏÀÌ ¿ù±Þ³¯, Åä,ÀÏÀÏ°æ¿ì Àü ±Ý¿äÀÏ¿¡ ³ª¿È
--- ¿ù±Þ³¯Â¥ ±¸ÇÏ±â ÇöÀç³¯Â¥, 5¿ù, 10¿ù
---[1] ¸»ÀÏÀÇ ¿äÀÏ
+-- ë§¤ë…„ ë§ì¼ì´ ì›”ê¸‰ë‚ , í† ,ì¼ì¼ê²½ìš° ì „ ê¸ˆìš”ì¼ì— ë‚˜ì˜´
+-- ì›”ê¸‰ë‚ ì§œ êµ¬í•˜ê¸° í˜„ìž¬ë‚ ì§œ, 5ì›”, 10ì›”
+--[1] ë§ì¼ì˜ ìš”ì¼
 
 SELECT SYSDATE,
        LAST_DAY (SYSDATE),
        TO_CHAR (LAST_DAY (SYSDATE), 'd'),
        DECODE (TO_CHAR (LAST_DAY (SYSDATE), 'd'),
-               '1', 'ÀÏ',
-               '2', 'Åä',
-               '3', 'Åä',
-               '4', 'Åä',
-               '5', 'Åä',
-               '6', 'Åä',
-               '7', 'Åä')    ¿äÀÏ
+               '1', 'ì¼',
+               '2', 'í† ',
+               '3', 'í† ',
+               '4', 'í† ',
+               '5', 'í† ',
+               '6', 'í† ',
+               '7', 'í† ')    ìš”ì¼
   FROM DUAL;
 
---[2] ¸»ÀÏÀÌ Åä~, ÀÏ~ ÀÌ¸é
+--[2] ë§ì¼ì´ í† ~, ì¼~ ì´ë©´
 
 SELECT SYSDATE,
        TO_CHAR (LAST_DAY (SYSDATE), 'd'),
        DECODE (TO_CHAR (LAST_DAY (SYSDATE), 'd'),
                '7', LAST_DAY (SYSDATE) - 1,
                '1', LAST_DAY (SYSDATE) - 2,
-               LAST_DAY (SYSDATE))    ¿ù±Þ³¯
+               LAST_DAY (SYSDATE))    ì›”ê¸‰ë‚ 
   FROM DUAL;
 
 SELECT '2020-05-05',
@@ -941,37 +941,37 @@ SELECT '2020-05-05',
        DECODE (TO_CHAR (LAST_DAY ('2020-05-05'), 'd'),
                '7', LAST_DAY ('2020-05-05') - 1,
                '1', LAST_DAY ('2020-05-05') - 2,
-               LAST_DAY ('2020-05-05'))    ¿ù±Þ³¯
+               LAST_DAY ('2020-05-05'))    ì›”ê¸‰ë‚ 
   FROM DUAL;
 
 SELECT '2020-10-24',
-       TO_CHAR (LAST_DAY ('2020-10-24'), 'dy')    ¿äÀÏ,
+       TO_CHAR (LAST_DAY ('2020-10-24'), 'dy')    ìš”ì¼,
        DECODE (TO_CHAR (LAST_DAY ('2020-10-24'), 'd'),
                '7', LAST_DAY ('2020-10-24') - 1,
                '1', LAST_DAY ('2020-10-24') - 2,
-               LAST_DAY ('2020-10-24'))           ¿ù±Þ³¯
+               LAST_DAY ('2020-10-24'))           ì›”ê¸‰ë‚ 
   FROM DUAL;
 
---½Ç½À ? Professor Å×ÀÌºíÀ» Á¶È¸ÇÏ¿© ±³¼öÀÇ ±Þ¿©¾×¼ö(pay)¸¦ ±âÁØÀ¸ ·Î 200 ¹Ì¸¸Àº 4±Þ, 
---201~300Àº 3±Þ, 301~400Àº 2±Þ, 401 ÀÌ»óÀº 1 ±ÞÀ¸·Î Ç¥½ÃÇÏ¿© ±³¼öÀÇ ¹øÈ£(profno), 
---±³¼öÀÌ¸§(name), ±Þ¿©(pay), µî±ÞÀ» Ãâ·ÂÇÏ¼¼¿ä. ´Ü, pay Ä®·³À» ³»¸²Â÷¼øÀ¸·Î Á¤·ÄÇÏ¼¼¿ä. 
+--ì‹¤ìŠµ ? Professor í…Œì´ë¸”ì„ ì¡°íšŒí•˜ì—¬ êµìˆ˜ì˜ ê¸‰ì—¬ì•¡ìˆ˜(pay)ë¥¼ ê¸°ì¤€ìœ¼ ë¡œ 200 ë¯¸ë§Œì€ 4ê¸‰, 
+--201~300ì€ 3ê¸‰, 301~400ì€ 2ê¸‰, 401 ì´ìƒì€ 1 ê¸‰ìœ¼ë¡œ í‘œì‹œí•˜ì—¬ êµìˆ˜ì˜ ë²ˆí˜¸(profno), 
+--êµìˆ˜ì´ë¦„(name), ê¸‰ì—¬(pay), ë“±ê¸‰ì„ ì¶œë ¥í•˜ì„¸ìš”. ë‹¨, pay ì¹¼ëŸ¼ì„ ë‚´ë¦¼ì°¨ìˆœìœ¼ë¡œ ì •ë ¬í•˜ì„¸ìš”. 
 
   SELECT profno,
          name,
          pay,
          CASE
-             WHEN pay <= 200 THEN '4±Þ'
-             WHEN pay BETWEEN 201 AND 300 THEN '3±Þ'
-             WHEN pay BETWEEN 301 AND 400 THEN '2±Þ'
-             ELSE '1±Þ'
-         END    µî
+             WHEN pay <= 200 THEN '4ê¸‰'
+             WHEN pay BETWEEN 201 AND 300 THEN '3ê¸‰'
+             WHEN pay BETWEEN 301 AND 400 THEN '2ê¸‰'
+             ELSE '1ê¸‰'
+         END    ë“±
     FROM professor
 ORDER BY pay DESC;
 
---emp Å×ÀÌºí¿¡¼­ sal ÀÌ 2000 º¸´Ù Å©¸é º¸³Ê½º´Â 1000, 1000º¸´Ù Å©¸é 500, 
---³ª¸ÓÁö´Â 0 À¸·Î Ç¥½ÃÇÏ¼¼¿ä 
+--emp í…Œì´ë¸”ì—ì„œ sal ì´ 2000 ë³´ë‹¤ í¬ë©´ ë³´ë„ˆìŠ¤ëŠ” 1000, 1000ë³´ë‹¤ í¬ë©´ 500, 
+--ë‚˜ë¨¸ì§€ëŠ” 0 ìœ¼ë¡œ í‘œì‹œí•˜ì„¸ìš” 
 
 SELECT ename,
        sal,
-       CASE WHEN sal > 2000 THEN 1000 WHEN sal > 1000 THEN 500 ELSE 0 END    º¸³Ê½º
+       CASE WHEN sal > 2000 THEN 1000 WHEN sal > 1000 THEN 500 ELSE 0 END    ë³´ë„ˆìŠ¤
   FROM emp;

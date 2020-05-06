@@ -1,41 +1,41 @@
-/* Formatted on 2020/05/06 ¿ÀÀü 10:44:22 (QP5 v5.360) */
---4°­_join.sql
---20-04-21 È­
+/* Formatted on 2020/05/06 ì˜¤ì „ 10:44:22 (QP5 v5.360) */
+--4ê°•_join.sql
+--20-04-21 í™”
 
 /*
-Á¶ÀÎ(join)
-- °¢°¢ÀÇ Å×ÀÌºí¿¡ ºÐ¸®µÇ¾î ÀÖ´Â ¿¬°ü¼º ÀÖ´Â µ¥ÀÌÅÍµéÀ» ¿¬°áÇÏ°Å³ª Á¶ÇÕÇÏ´Â ÀÏ·ÃÀÇ ÀÛ¾÷µé
-- ¿©·¯ Å×ÀÌºí¿¡ Èð¾îÁ® ÀÖ´Â Á¤º¸ Áß¿¡¼­ »ç¿ëÀÚ°¡ ÇÊ¿äÇÑ Á¤º¸¸¸ °¡Á®¿Í¼­ °¡»óÀÇ Å×ÀÌºí°£
- °øÅëµÈ ¿­À» ±âÁØÀ¸·Î °Ë»ö
+ì¡°ì¸(join)
+- ê°ê°ì˜ í…Œì´ë¸”ì— ë¶„ë¦¬ë˜ì–´ ìžˆëŠ” ì—°ê´€ì„± ìžˆëŠ” ë°ì´í„°ë“¤ì„ ì—°ê²°í•˜ê±°ë‚˜ ì¡°í•©í•˜ëŠ” ì¼ë ¨ì˜ ìž‘ì—…ë“¤
+- ì—¬ëŸ¬ í…Œì´ë¸”ì— í©ì–´ì ¸ ìžˆëŠ” ì •ë³´ ì¤‘ì—ì„œ ì‚¬ìš©ìžê°€ í•„ìš”í•œ ì •ë³´ë§Œ ê°€ì ¸ì™€ì„œ ê°€ìƒì˜ í…Œì´ë¸”ê°„
+ ê³µí†µëœ ì—´ì„ ê¸°ì¤€ìœ¼ë¡œ ê²€ìƒ‰
  
-¡Ø Á¶ÀÎÀÇ Á¾·ù
-1) ³»ºÎ Á¶ÀÎ(inner join)
-    - ¾çÂÊ Å×ÀÌºí¿¡ ¸ðµÎ µ¥ÀÌÅÍ°¡ Á¸ÀçÇØ¾ß °á°ú°¡ ³ª¿È
-2) ¿ÜºÎ Á¶ÀÎ(outer join)
-3) self Á¶ÀÎ
-4) cross join(Ä«Æ¼¼Ç °ö)
+â€» ì¡°ì¸ì˜ ì¢…ë¥˜
+1) ë‚´ë¶€ ì¡°ì¸(inner join)
+    - ì–‘ìª½ í…Œì´ë¸”ì— ëª¨ë‘ ë°ì´í„°ê°€ ì¡´ìž¬í•´ì•¼ ê²°ê³¼ê°€ ë‚˜ì˜´
+2) ì™¸ë¶€ ì¡°ì¸(outer join)
+3) self ì¡°ì¸
+4) cross join(ì¹´í‹°ì…˜ ê³±)
 
-¿À¶óÅ¬¿ë Á¶ÀÎ
-Ç¥ÁØ ANSI Á¶ÀÎ
+ì˜¤ë¼í´ìš© ì¡°ì¸
+í‘œì¤€ ANSI ì¡°ì¸
 */
---[1] inner join(³»ºÎ Á¶ÀÎ)
---¿¹Á¦) ÇÐ»ý Å×ÀÌºí (student)°ú ÇÐ°ú Å×ÀÌºí (department)À» »ç¿ëÇÏ¿© ÇÐ»ýÀÌ¸§, 
---1Àü°ø ÇÐ°ú¹øÈ£ (deptno1), 1Àü°ø ÇÐ°úÀÌ ¸§À» Ãâ·ÂÇÏ½Ã¿À.
+--[1] inner join(ë‚´ë¶€ ì¡°ì¸)
+--ì˜ˆì œ) í•™ìƒ í…Œì´ë¸” (student)ê³¼ í•™ê³¼ í…Œì´ë¸” (department)ì„ ì‚¬ìš©í•˜ì—¬ í•™ìƒì´ë¦„, 
+--1ì „ê³µ í•™ê³¼ë²ˆí˜¸ (deptno1), 1ì „ê³µ í•™ê³¼ì´ ë¦„ì„ ì¶œë ¥í•˜ì‹œì˜¤.
 
 SELECT * FROM student;
 
 SELECT * FROM department;
 
---1) ¿À¶óÅ¬¿ë Á¶ÀÎ
+--1) ì˜¤ë¼í´ìš© ì¡°ì¸
 
 SELECT s.STUDNO,
        s.NAME,
        s.DEPTNO1,
        d.DNAME
   FROM student s, department d
- WHERE s.DEPTNO1 = d.DEPTNO;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    -- join Á¶°Ç
+ WHERE s.DEPTNO1 = d.DEPTNO;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    -- join ì¡°ê±´
 
---2) Ç¥ÁØ ANSI Á¶ÀÎ
+--2) í‘œì¤€ ANSI ì¡°ì¸
 
 SELECT s.STUDNO,
        s.NAME,
@@ -43,7 +43,7 @@ SELECT s.STUDNO,
        d.DNAME
   FROM student s INNER JOIN department d ON s.DEPTNO1 = d.DEPTNO;
 
--- inner »ý·« °¡´É
+-- inner ìƒëžµ ê°€ëŠ¥
 
 SELECT s.STUDNO,
        s.NAME,
@@ -51,8 +51,8 @@ SELECT s.STUDNO,
        d.DNAME
   FROM student s JOIN department d ON s.DEPTNO1 = d.DEPTNO;
 
---4ÇÐ³â ÇÐ»ýµéÀÇ Á¤º¸¸¦ Á¶È¸, ÇÐ°ú¸íµµ Ãâ·Â
---1) ¿À¶óÅ¬¿ë Á¶ÀÎ
+--4í•™ë…„ í•™ìƒë“¤ì˜ ì •ë³´ë¥¼ ì¡°íšŒ, í•™ê³¼ëª…ë„ ì¶œë ¥
+--1) ì˜¤ë¼í´ìš© ì¡°ì¸
 
 SELECT s.STUDNO,
        s.NAME,
@@ -60,8 +60,8 @@ SELECT s.STUDNO,
        s.GRADE,
        d.DNAME
   FROM student s, department d
- WHERE s.DEPTNO1 = d.DEPTNO                                           --joinÁ¶°Ç
-                            AND s.GRADE = 4;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       -- °Ë»öÁ¶°Ç
+ WHERE s.DEPTNO1 = d.DEPTNO                                           --joinì¡°ê±´
+                            AND s.GRADE = 4;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       -- ê²€ìƒ‰ì¡°ê±´
 
 --2) ANSI
 
@@ -72,8 +72,8 @@ SELECT s.STUDNO,
        d.DNAME
   FROM student s JOIN department d ON s.DEPTNO1 = d.DEPTNO AND s.GRADE = 4;
 
---¿¹Á¦) ÇÐ»ý Å×ÀÌºí(student)°ú ±³¼ö Å×ÀÌºí(professor)À» joinÇÏ¿© ÇÐ »ýÀÌ¸§, 
---Áöµµ±³¼ö ¹øÈ£, Áöµµ±³¼ö ÀÌ¸§À» Ãâ·ÂÇÏ½Ã¿À
+--ì˜ˆì œ) í•™ìƒ í…Œì´ë¸”(student)ê³¼ êµìˆ˜ í…Œì´ë¸”(professor)ì„ joiní•˜ì—¬ í•™ ìƒì´ë¦„, 
+--ì§€ë„êµìˆ˜ ë²ˆí˜¸, ì§€ë„êµìˆ˜ ì´ë¦„ì„ ì¶œë ¥í•˜ì‹œì˜¤
 
 SELECT *
   FROM student
@@ -81,23 +81,23 @@ SELECT *
 
 SELECT s.NAME, p.PROFNO, p.NAME
   FROM student s, professor p
- WHERE s.PROFNO = p.PROFNO;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               -- 15°Ç student¿¡ profno°¡ nullÀÎ µ¥ÀÌÅÍ´Â ¾È ³ª¿È
---=> ³»ºÎÁ¶ÀÎ : ¾çÂÊ Å×ÀÌºí¿¡ µ¥ÀÌÅÍ°¡ ÀÖ´Â °Í¸¸ Ãâ·ÂµÊ 
+ WHERE s.PROFNO = p.PROFNO;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               -- 15ê±´ studentì— profnoê°€ nullì¸ ë°ì´í„°ëŠ” ì•ˆ ë‚˜ì˜´
+--=> ë‚´ë¶€ì¡°ì¸ : ì–‘ìª½ í…Œì´ë¸”ì— ë°ì´í„°ê°€ ìžˆëŠ” ê²ƒë§Œ ì¶œë ¥ë¨ 
 
 SELECT s.NAME, p.PROFNO, p.NAME
   FROM student s JOIN professor p ON s.profno = p.profno;
 
--- employees, jobs ¸¦ Á¶ÀÎÇØ¼­ »ç¿øÁ¤º¸(ÀÌ¸§, job_id)¿Í job_titleµµ Ãâ·Â
+-- employees, jobs ë¥¼ ì¡°ì¸í•´ì„œ ì‚¬ì›ì •ë³´(ì´ë¦„, job_id)ì™€ job_titleë„ ì¶œë ¥
 
-SELECT e.FIRST_NAME || '-' || e.LAST_NAME ÀÌ¸§, e.JOB_ID, j.JOB_TITLE
+SELECT e.FIRST_NAME || '-' || e.LAST_NAME ì´ë¦„, e.JOB_ID, j.JOB_TITLE
   FROM employees e, jobs j
  WHERE e.JOB_ID = j.JOB_ID;
 
-SELECT e.FIRST_NAME || '-' || e.LAST_NAME ÀÌ¸§, e.JOB_ID, j.JOB_TITLE
+SELECT e.FIRST_NAME || '-' || e.LAST_NAME ì´ë¦„, e.JOB_ID, j.JOB_TITLE
   FROM employees e JOIN jobs j ON e.JOB_ID = j.JOB_ID;
 
---¿¹Á¦) ÇÐ»ý Å×ÀÌºí(student)°ú ÇÐ°ú Å×ÀÌºí(department), ±³¼ö Å×ÀÌºí (professor)À» joinÇÏ¿© 
---ÇÐ»ýÀÌ¸§, ÇÐ°ú ÀÌ¸§, Áöµµ±³¼ö ÀÌ¸§À» Ãâ·ÂÇÏ½Ã¿À
+--ì˜ˆì œ) í•™ìƒ í…Œì´ë¸”(student)ê³¼ í•™ê³¼ í…Œì´ë¸”(department), êµìˆ˜ í…Œì´ë¸” (professor)ì„ joiní•˜ì—¬ 
+--í•™ìƒì´ë¦„, í•™ê³¼ ì´ë¦„, ì§€ë„êµìˆ˜ ì´ë¦„ì„ ì¶œë ¥í•˜ì‹œì˜¤
 
 SELECT s.NAME, d.DNAME, p.NAME
   FROM student s, department d, professor p
@@ -108,46 +108,46 @@ SELECT s.NAME, d.DNAME, p.NAME
        JOIN department d ON s.DEPTNO1 = d.DEPTNO
        JOIN professor p ON s.PROFNO = p.PROFNO;
 
--- ¿¹Á¦) emp2 Å×ÀÌºí°ú ÇÐ°ú p_grade Å×ÀÌºíÀ» joinÇÏ¿© »ç¿øÀÌ¸§, Á÷ ±Þ, ÇöÀç¿¬ºÀ, 
---ÇØ´ç Á÷±ÞÀÇ ¿¬ºÀÀÇ ÇÏÇÑ ±Ý¾×°ú »óÇÑ ±Ý¾×À» Ãâ·ÂÇÏ½Ã¿À
+-- ì˜ˆì œ) emp2 í…Œì´ë¸”ê³¼ í•™ê³¼ p_grade í…Œì´ë¸”ì„ joiní•˜ì—¬ ì‚¬ì›ì´ë¦„, ì§ ê¸‰, í˜„ìž¬ì—°ë´‰, 
+--í•´ë‹¹ ì§ê¸‰ì˜ ì—°ë´‰ì˜ í•˜í•œ ê¸ˆì•¡ê³¼ ìƒí•œ ê¸ˆì•¡ì„ ì¶œë ¥í•˜ì‹œì˜¤
 
 SELECT e.NAME,
        e.POSITION,
-       e.PAY       ÇöÀç,
-       p.S_PAY     ÇÏÇÑ,
-       p.E_PAY     »óÇÑ
+       e.PAY       í˜„ìž¬,
+       p.S_PAY     í•˜í•œ,
+       p.E_PAY     ìƒí•œ
   FROM emp2 e, p_grade p
  WHERE e.POSITION = p.POSITION;
 
 SELECT e.NAME,
        e.POSITION,
-       e.PAY       ÇöÀç,
-       p.S_PAY     ÇÏÇÑ,
-       p.E_PAY     »óÇÑ
+       e.PAY       í˜„ìž¬,
+       p.S_PAY     í•˜í•œ,
+       p.E_PAY     ìƒí•œ
   FROM emp2 e JOIN p_grade p ON e.POSITION = p.POSITION;
 
---ºÎ¼­¸íµµ Ãâ·Â
+--ë¶€ì„œëª…ë„ ì¶œë ¥
 
 SELECT e.NAME,
        e.POSITION,
-       e.PAY       ÇöÀç,
-       p.S_PAY     ÇÏÇÑ,
-       p.E_PAY     »óÇÑ,
+       e.PAY       í˜„ìž¬,
+       p.S_PAY     í•˜í•œ,
+       p.E_PAY     ìƒí•œ,
        d.DNAME
   FROM emp2 e, p_grade p, dept2 d
  WHERE e.POSITION = p.POSITION AND e.DEPTNO = d.DCODE;
 
 SELECT e.NAME,
        e.POSITION,
-       e.PAY       ÇöÀç,
-       p.S_PAY     ÇÏÇÑ,
-       p.E_PAY     »óÇÑ,
+       e.PAY       í˜„ìž¬,
+       p.S_PAY     í•˜í•œ,
+       p.E_PAY     ìƒí•œ,
        d.DNAME
   FROM emp2  e
        JOIN p_grade p ON e.POSITION = p.POSITION
        JOIN dept2 d ON e.DEPTNO = d.DCODE;
 
--- »ç¿øÁ¤º¸, »ç¿øÀÇ ºÎ¼­Á¤º¸, ºÎ¼­ÀÇ Áö¿ªÁ¤º¸, Áö¿ªÀÇ ³ª¶óÁ¤º¸ Á¶È¸
+-- ì‚¬ì›ì •ë³´, ì‚¬ì›ì˜ ë¶€ì„œì •ë³´, ë¶€ì„œì˜ ì§€ì—­ì •ë³´, ì§€ì—­ì˜ ë‚˜ë¼ì •ë³´ ì¡°íšŒ
 
 SELECT e.*,
        d.DEPARTMENT_NAME,
@@ -170,7 +170,7 @@ SELECT e.*,
        JOIN locations l ON d.LOCATION_ID = l.LOCATION_ID
        JOIN countries c ON l.COUNTRY_ID = c.COUNTRY_ID;
 
--- ¿¹Á¦) 1Àü°ø(depton1)ÀÌ 101¹øÀÎ ÇÐ»ýµéÀÇ ÇÐ»ýÀÌ¸§°ú Áöµµ±³¼ö ÀÌ¸§À» Ãâ·ÂÇÏ½Ã¿À.
+-- ì˜ˆì œ) 1ì „ê³µ(depton1)ì´ 101ë²ˆì¸ í•™ìƒë“¤ì˜ í•™ìƒì´ë¦„ê³¼ ì§€ë„êµìˆ˜ ì´ë¦„ì„ ì¶œë ¥í•˜ì‹œì˜¤.
 
 SELECT s.*, p.NAME
   FROM student s, professor p
@@ -179,8 +179,8 @@ SELECT s.*, p.NAME
 SELECT s.*, p.NAME
   FROM student s JOIN professor p ON s.PROFNO = p.PROFNO AND s.DEPTNO1 = 101;
 
---1) emp2, dept2 Å×ÀÌºíÀ» ÀÌ¿ëÇØ¼­ »ç¿øÀÌ¸§(name), ±Þ¿©(pay), Á÷±Þ(position), 
---ºÎ¼­¸í(dname)¸¦ Á¶È¸ÇÏ½Ã¿À
+--1) emp2, dept2 í…Œì´ë¸”ì„ ì´ìš©í•´ì„œ ì‚¬ì›ì´ë¦„(name), ê¸‰ì—¬(pay), ì§ê¸‰(position), 
+--ë¶€ì„œëª…(dname)ë¥¼ ì¡°íšŒí•˜ì‹œì˜¤
 
 SELECT e.name,
        e.pay,
@@ -195,116 +195,116 @@ SELECT e.name,
        d.dname
   FROM emp2 e JOIN dept2 d ON E.DEPTNO = D.DCODE;
 
---2) emp2 - ºÎ¼­¹øÈ£º° payÀÇ Æò±Õ
+--2) emp2 - ë¶€ì„œë²ˆí˜¸ë³„ payì˜ í‰ê· 
 
-  SELECT deptno, AVG (NVL (pay, 0)) "pay Æò±Õ"
+  SELECT deptno, AVG (NVL (pay, 0)) "pay í‰ê· "
     FROM emp2 e
 GROUP BY DEPTNO;
 
---emp2, dept2 Å×ÀÌºí¿¡¼­ ºÎ¼­ÀÌ¸§º° payÀÇ Æò±Õ ±¸ÇÏ±â
+--emp2, dept2 í…Œì´ë¸”ì—ì„œ ë¶€ì„œì´ë¦„ë³„ payì˜ í‰ê·  êµ¬í•˜ê¸°
 
-  SELECT d.dname, AVG (NVL (pay, 0)) "pay Æò±Õ"
+  SELECT d.dname, AVG (NVL (pay, 0)) "pay í‰ê· "
     FROM emp2 e, dept2 d
    WHERE E.DEPTNO = D.DCODE
 GROUP BY d.dname;
 
-  SELECT d.dname, AVG (NVL (pay, 0)) "pay Æò±Õ"
+  SELECT d.dname, AVG (NVL (pay, 0)) "pay í‰ê· "
     FROM emp2 e JOIN dept2 d ON E.DEPTNO = D.DCODE
 GROUP BY d.dname;
 
---[½Ç½À] À§ÀÇ ¿¹Á¦ÀÇ °á°ú¿¡¼­ ºÎ¼­ ÀÌ¸§ÀÌ ¿µ¾÷À¸·Î ½ÃÀÛÇÏ´Â ºÎ¼­ÀÇ Æò±Õ¸¸ Á¶È¸ÇÏ½Ã¿À.
+--[ì‹¤ìŠµ] ìœ„ì˜ ì˜ˆì œì˜ ê²°ê³¼ì—ì„œ ë¶€ì„œ ì´ë¦„ì´ ì˜ì—…ìœ¼ë¡œ ì‹œìž‘í•˜ëŠ” ë¶€ì„œì˜ í‰ê· ë§Œ ì¡°íšŒí•˜ì‹œì˜¤.
 
-  SELECT d.dname, AVG (NVL (pay, 0)) "pay Æò±Õ"
+  SELECT d.dname, AVG (NVL (pay, 0)) "pay í‰ê· "
     FROM emp2 e, dept2 d
-   WHERE E.DEPTNO = D.DCODE AND d.dname LIKE '¿µ¾÷%'
+   WHERE E.DEPTNO = D.DCODE AND d.dname LIKE 'ì˜ì—…%'
 GROUP BY d.dname;
 
-  SELECT d.dname, AVG (NVL (pay, 0)) "pay Æò±Õ"
-    FROM emp2 e JOIN dept2 d ON E.DEPTNO = D.DCODE AND d.dname LIKE '¿µ¾÷%'
+  SELECT d.dname, AVG (NVL (pay, 0)) "pay í‰ê· "
+    FROM emp2 e JOIN dept2 d ON E.DEPTNO = D.DCODE AND d.dname LIKE 'ì˜ì—…%'
 GROUP BY d.dname;
 
-  SELECT d.dname, AVG (NVL (pay, 0)) "pay Æò±Õ"
+  SELECT d.dname, AVG (NVL (pay, 0)) "pay í‰ê· "
     FROM emp2 e JOIN dept2 d ON E.DEPTNO = D.DCODE
 GROUP BY d.dname
-  HAVING d.dname LIKE '¿µ¾÷%';
+  HAVING d.dname LIKE 'ì˜ì—…%';
 
---À§ÀÇ °á°ú¿¡¼­ ºÎ¼­Æò±ÕÀÌ 5000¸¸¿ø ÀÌ»óÀÎ µ¥ÀÌÅÍ¸¸ Á¶È¸
+--ìœ„ì˜ ê²°ê³¼ì—ì„œ ë¶€ì„œí‰ê· ì´ 5000ë§Œì› ì´ìƒì¸ ë°ì´í„°ë§Œ ì¡°íšŒ
 
-  SELECT d.dname, AVG (NVL (pay, 0)) "pay Æò±Õ"
+  SELECT d.dname, AVG (NVL (pay, 0)) "pay í‰ê· "
     FROM emp2 e JOIN dept2 d ON E.DEPTNO = D.DCODE
 GROUP BY d.dname
   HAVING AVG (NVL (pay, 0)) >= 50000000;
 
---[2]outer join(¿ÜºÎ Á¶ÀÎ)
+--[2]outer join(ì™¸ë¶€ ì¡°ì¸)
 
 /*
-inner join°ú´Â ¹Ý´ë·Î ÇÑÂÊ Å×ÀÌºí¿¡´Â µ¥ÀÌÅÍ°¡ ÀÖ°í, ÇÑÂÊ Å×ÀÌºí¿¡ ¾ø´Â °æ¿ì
-µ¥ÀÌÅÍ°¡ ÀÖ´Â ÂÊ Å×ÀÌºíÀÇ ³»¿ëÀ» ÀüºÎ Ãâ·ÂÇÏ°Ô ÇÏ´Â ¹æ¹ý
+inner joinê³¼ëŠ” ë°˜ëŒ€ë¡œ í•œìª½ í…Œì´ë¸”ì—ëŠ” ë°ì´í„°ê°€ ìžˆê³ , í•œìª½ í…Œì´ë¸”ì— ì—†ëŠ” ê²½ìš°
+ë°ì´í„°ê°€ ìžˆëŠ” ìª½ í…Œì´ë¸”ì˜ ë‚´ìš©ì„ ì „ë¶€ ì¶œë ¥í•˜ê²Œ í•˜ëŠ” ë°©ë²•
 */
---¿¹Á¦)student Å×ÀÌºí°ú professor Å×ÀÌºíÀ» Á¶ÀÎÇÏ¿© ÇÐ»ýÀÌ¸§°ú Áöµµ±³¼ö ÀÌ¸§À» Ãâ·ÂÇÏ½Ã¿À. 
---´Ü, Áöµµ±³¼ö°¡ °áÁ¤µÇÁö ¾ÊÀº ÇÐ »ýÀÇ ¸í´Üµµ ÇÔ²² Ãâ·ÂÇÏ½Ã¿À. (ÇÐ»ý µ¥ÀÌÅÍ´Â ÀüºÎ Ãâ·ÂµÇµµ·Ï)
+--ì˜ˆì œ)student í…Œì´ë¸”ê³¼ professor í…Œì´ë¸”ì„ ì¡°ì¸í•˜ì—¬ í•™ìƒì´ë¦„ê³¼ ì§€ë„êµìˆ˜ ì´ë¦„ì„ ì¶œë ¥í•˜ì‹œì˜¤. 
+--ë‹¨, ì§€ë„êµìˆ˜ê°€ ê²°ì •ë˜ì§€ ì•Šì€ í•™ ìƒì˜ ëª…ë‹¨ë„ í•¨ê»˜ ì¶œë ¥í•˜ì‹œì˜¤. (í•™ìƒ ë°ì´í„°ëŠ” ì „ë¶€ ì¶œë ¥ë˜ë„ë¡)
 
---1) inner join - ¾çÂÊ¿¡ µ¥ÀÌÅÍ°¡ Á¸ÀçÇÏ´Â °Í¸¸ Ãâ·Â
+--1) inner join - ì–‘ìª½ì— ë°ì´í„°ê°€ ì¡´ìž¬í•˜ëŠ” ê²ƒë§Œ ì¶œë ¥
 
 SELECT s.name, p.name
   FROM student s, professor p
  WHERE s.PROFNO = p.PROFNO;
 
--- => 15°Ç, Áöµµ±³¼ö°¡ ¾ø´Â ÇÐ»ýÀº Á¦¿Ü
+-- => 15ê±´, ì§€ë„êµìˆ˜ê°€ ì—†ëŠ” í•™ìƒì€ ì œì™¸
 
---2) outer join - ÇÐ»ýÀº ¸ðµÎ Ãâ·Â
+--2) outer join - í•™ìƒì€ ëª¨ë‘ ì¶œë ¥
 
 SELECT s.name, p.name
   FROM student s, professor p
  WHERE s.PROFNO = p.PROFNO(+);
 
--- µ¥ÀÌÅÍ°¡ ¾ø´Â ÂÊ¿¡ (+) Ç¥½Ã¸¦ ÇÑ´Ù
+-- ë°ì´í„°ê°€ ì—†ëŠ” ìª½ì— (+) í‘œì‹œë¥¼ í•œë‹¤
 
 SELECT s.name, p.name
   FROM student s LEFT OUTER JOIN professor p ON s.PROFNO = p.PROFNO;
 
--- µ¥ÀÌÅÍ°¡ ÀÖ´Â ÂÊ¿¡ Ç¥½Ã¸¦ ÇÔ
--- ÇÐ»ý µ¥ÀÌÅÍ´Â ÀüºÎ Ãâ·ÂÇØ¾ß ÇÏ¹Ç·Î ÇÐ»ý Å×ÀÌºíÀ» ÇâÇØ Ç¥½Ã
--- ÇÐ»ý Å×ÀÌºíÀÌ ¿ÞÂÊ¿¡ ÀÖÀ¸¹Ç·Î left
+-- ë°ì´í„°ê°€ ìžˆëŠ” ìª½ì— í‘œì‹œë¥¼ í•¨
+-- í•™ìƒ ë°ì´í„°ëŠ” ì „ë¶€ ì¶œë ¥í•´ì•¼ í•˜ë¯€ë¡œ í•™ìƒ í…Œì´ë¸”ì„ í–¥í•´ í‘œì‹œ
+-- í•™ìƒ í…Œì´ë¸”ì´ ì™¼ìª½ì— ìžˆìœ¼ë¯€ë¡œ left
 
 
---¿¹Á¦) student Å×ÀÌºí°ú professor Å×ÀÌºíÀ» Á¶ÀÎÇÏ¿© ÇÐ »ýÀÌ¸§°ú Áöµµ±³¼ö ÀÌ¸§À» Ãâ·Â ÇÏ½Ã¿À. 
---´Ü, ÁöµµÇÐ»ýÀÌ °áÁ¤µÇÁö ¾ÊÀº ±³ ¼öÀÇ ¸í´Üµµ ÇÔ²² Ãâ·ÂÇÏ½Ã¿À. (±³¼ö µ¥ÀÌÅÍ´Â ÀüºÎ Ãâ·ÂµÇµµ·Ï)
--- ±³¼ö µ¥ÀÌÅÍ 18°Ç
+--ì˜ˆì œ) student í…Œì´ë¸”ê³¼ professor í…Œì´ë¸”ì„ ì¡°ì¸í•˜ì—¬ í•™ ìƒì´ë¦„ê³¼ ì§€ë„êµìˆ˜ ì´ë¦„ì„ ì¶œë ¥ í•˜ì‹œì˜¤. 
+--ë‹¨, ì§€ë„í•™ìƒì´ ê²°ì •ë˜ì§€ ì•Šì€ êµ ìˆ˜ì˜ ëª…ë‹¨ë„ í•¨ê»˜ ì¶œë ¥í•˜ì‹œì˜¤. (êµìˆ˜ ë°ì´í„°ëŠ” ì „ë¶€ ì¶œë ¥ë˜ë„ë¡)
+-- êµìˆ˜ ë°ì´í„° 18ê±´
 
   SELECT s.name, p.name, p.POSITION
     FROM student s, professor p
    WHERE s.PROFNO(+) = p.PROFNO
-ORDER BY p.name;                                                                                                                                                                                                                                                                                                                                                                                  -- 24°Ç
+ORDER BY p.name;                                                                                                                                                                                                                                                                                                                                                                                  -- 24ê±´
 
   SELECT s.name, p.name, p.POSITION
     FROM student s RIGHT OUTER JOIN professor p ON s.PROFNO = p.PROFNO
 ORDER BY p.name;
 
 /*
-¿¹Á¦)student Å×ÀÌºí°ú professor Å×ÀÌºíÀ» Á¶ÀÎÇÏ¿© ÇÐ»ýÀÌ¸§°ú Áöµµ±³¼ö ÀÌ¸§À» Ãâ·ÂÇÏ½Ã¿À. 
-´Ü, ÁöµµÇÐ»ýÀÌ °áÁ¤µÇÁö ¾ÊÀº ±³ ¼öÀÇ ¸í´Ü°ú Áöµµ±³¼ö°¡ °áÁ¤ ¾È µÈ ÇÐ»ý ¸í´ÜÀ» ÇÑ²¨¹ø¿¡ Ãâ·ÂÇÏ ½Ã¿À. ? 
-µÎ °¡Áö outer joinÀÇ °á°ú¸¦ ÇÕÃÄ¼­ ¸¸µé¾î¾ß ÇÔ (Oracle outer join¿¡¼­´Â Áö¿øÇÏÁö ¾ÊÀ½)
-=> µÎ outer joinÀ» °¢°¢ ¼öÇàÇÑ ÈÄ UnionÀ» »ç¿ëÇÏ¿© °á°ú¸¦ ÀÎÀ§ÀûÀ¸·Î ÇÕÃÄ¼­ Ãâ·ÂÇÔ ? 
+ì˜ˆì œ)student í…Œì´ë¸”ê³¼ professor í…Œì´ë¸”ì„ ì¡°ì¸í•˜ì—¬ í•™ìƒì´ë¦„ê³¼ ì§€ë„êµìˆ˜ ì´ë¦„ì„ ì¶œë ¥í•˜ì‹œì˜¤. 
+ë‹¨, ì§€ë„í•™ìƒì´ ê²°ì •ë˜ì§€ ì•Šì€ êµ ìˆ˜ì˜ ëª…ë‹¨ê³¼ ì§€ë„êµìˆ˜ê°€ ê²°ì • ì•ˆ ëœ í•™ìƒ ëª…ë‹¨ì„ í•œêº¼ë²ˆì— ì¶œë ¥í•˜ ì‹œì˜¤. ? 
+ë‘ ê°€ì§€ outer joinì˜ ê²°ê³¼ë¥¼ í•©ì³ì„œ ë§Œë“¤ì–´ì•¼ í•¨ (Oracle outer joinì—ì„œëŠ” ì§€ì›í•˜ì§€ ì•ŠìŒ)
+=> ë‘ outer joinì„ ê°ê° ìˆ˜í–‰í•œ í›„ Unionì„ ì‚¬ìš©í•˜ì—¬ ê²°ê³¼ë¥¼ ì¸ìœ„ì ìœ¼ë¡œ í•©ì³ì„œ ì¶œë ¥í•¨ ? 
 */
 
-SELECT s.name, p.name Áöµµ±³¼ö, p.POSITION
+SELECT s.name, p.name ì§€ë„êµìˆ˜, p.POSITION
   FROM student s, professor p
  WHERE s.PROFNO(+) = p.PROFNO
 UNION
-SELECT s.name, p.name Áöµµ±³¼ö, p.POSITION
+SELECT s.name, p.name ì§€ë„êµìˆ˜, p.POSITION
   FROM student s, professor p
  WHERE s.PROFNO = p.PROFNO(+)
-ORDER BY Áöµµ±³¼ö;
+ORDER BY ì§€ë„êµìˆ˜;
 
---Ansi outer join ¿¡¼­´Â ÈÎ¾À °£´ÜÇÑ ¹æ¹ýÀ» Á¦°øÇÔ
+--Ansi outer join ì—ì„œëŠ” í›¨ì”¬ ê°„ë‹¨í•œ ë°©ë²•ì„ ì œê³µí•¨
 
   SELECT s.name, p.name, p.POSITION
     FROM student s FULL OUTER JOIN professor p ON s.PROFNO = p.PROFNO
 ORDER BY p.name;
 
---ÇÐ»ý Á¤º¸ Ãâ·Â, ÇÐ°ú¸í, Áöµµ±³¼ö¸íµµ Ãâ·Â
---ÇÐ»ý µ¥ÀÌÅÍ´Â ÀüºÎ Ãâ·ÂµÇµµ·Ï
+--í•™ìƒ ì •ë³´ ì¶œë ¥, í•™ê³¼ëª…, ì§€ë„êµìˆ˜ëª…ë„ ì¶œë ¥
+--í•™ìƒ ë°ì´í„°ëŠ” ì „ë¶€ ì¶œë ¥ë˜ë„ë¡
 
   SELECT s.*, d.DNAME, p.NAME
     FROM student s, professor p, department d
@@ -317,13 +317,13 @@ ORDER BY s.PROFNO;
          LEFT JOIN department d ON p.DEPTNO = d.DEPTNO
 ORDER BY s.PROFNO;
 
---»ç¿øÁ¤º¸, ºÎ¼­Á¤º¸, Áö¿ªÁ¤º¸, ³ª¶óÁ¤º¸ Á¶È¸
---»ç¿ø ÀüÃ¼ Ãâ·Â(»ç¿ø-ºÎ¼­°£), ºÎ¼­ ÀüÃ¼ Ãâ·Â(ºÎ¼­-Áö¿ª°£), Áö¿ªÀüÃ¼ Ãâ·Â(Áö¿ª-³ª¶ó °£)
+--ì‚¬ì›ì •ë³´, ë¶€ì„œì •ë³´, ì§€ì—­ì •ë³´, ë‚˜ë¼ì •ë³´ ì¡°íšŒ
+--ì‚¬ì› ì „ì²´ ì¶œë ¥(ì‚¬ì›-ë¶€ì„œê°„), ë¶€ì„œ ì „ì²´ ì¶œë ¥(ë¶€ì„œ-ì§€ì—­ê°„), ì§€ì—­ì „ì²´ ì¶œë ¥(ì§€ì—­-ë‚˜ë¼ ê°„)
 
   SELECT e.*,
-         d.DEPARTMENT_NAME     ºÎ¼­¸í,
-         l.CITY                Áö¿ª¸í,
-         c.COUNTRY_NAME        ³ª¶óÁ¤º¸
+         d.DEPARTMENT_NAME     ë¶€ì„œëª…,
+         l.CITY                ì§€ì—­ëª…,
+         c.COUNTRY_NAME        ë‚˜ë¼ì •ë³´
     FROM employees  e,
          departments d,
          locations  l,
@@ -336,63 +336,63 @@ ORDER BY e.DEPARTMENT_ID;
 --ANSI
 
   SELECT e.*,
-         d.DEPARTMENT_NAME     ºÎ¼­¸í,
-         l.CITY                Áö¿ª¸í,
-         c.COUNTRY_NAME        ³ª¶óÁ¤º¸
+         d.DEPARTMENT_NAME     ë¶€ì„œëª…,
+         l.CITY                ì§€ì—­ëª…,
+         c.COUNTRY_NAME        ë‚˜ë¼ì •ë³´
     FROM employees e
          LEFT JOIN departments d ON e.DEPARTMENT_ID = d.DEPARTMENT_ID
          LEFT JOIN locations l ON d.LOCATION_ID = l.LOCATION_ID
          LEFT JOIN countries c ON l.COUNTRY_ID = c.COUNTRY_ID
 ORDER BY e.DEPARTMENT_ID;
 
---½Ç½À
--- 1. emp2, p_grade Å×ÀÌºí¿¡¼­ name(»ç¿øÀÌ¸§),  position(Á÷±Þ), ½ÃÀÛ¿¬µµ (s_year), 
---³¡¿¬µµ(e_year)À» Á¶È¸ ? ´Ü, emp2 Å×ÀÌºíÀÇ µ¥ÀÌÅÍ´Â ÀüºÎ Ãâ·ÂµÇµµ·Ï ÇÒ °Í
+--ì‹¤ìŠµ
+-- 1. emp2, p_grade í…Œì´ë¸”ì—ì„œ name(ì‚¬ì›ì´ë¦„),  position(ì§ê¸‰), ì‹œìž‘ì—°ë„ (s_year), 
+--ëì—°ë„(e_year)ì„ ì¡°íšŒ ? ë‹¨, emp2 í…Œì´ë¸”ì˜ ë°ì´í„°ëŠ” ì „ë¶€ ì¶œë ¥ë˜ë„ë¡ í•  ê²ƒ
 
-SELECT e.NAME »ç¿øÀÌ¸§, e.POSITION Á÷±Þ, p.S_YEAR ½ÃÀÛ¿¬µµ
+SELECT e.NAME ì‚¬ì›ì´ë¦„, e.POSITION ì§ê¸‰, p.S_YEAR ì‹œìž‘ì—°ë„
   FROM emp2 e, p_grade p
  WHERE e.POSITION = p.POSITION(+);
 
-SELECT e.NAME »ç¿øÀÌ¸§, e.POSITION Á÷±Þ, p.S_YEAR ½ÃÀÛ¿¬µµ
+SELECT e.NAME ì‚¬ì›ì´ë¦„, e.POSITION ì§ê¸‰, p.S_YEAR ì‹œìž‘ì—°ë„
   FROM emp2 e LEFT JOIN p_grade p ON e.POSITION = p.POSITION;
 
---emp, dept Å×ÀÌºí¿¡¼­ ºÎ¼­¹øÈ£,»ç¿ø¸í,Á÷¾÷,ºÎ¼­¸í,Áö¿ª Á¶È¸ ´Ü, Á÷¾÷(job)ÀÌ CLERKÀÎ »ç¿ø µ¥ÀÌÅÍ¸¸ Á¶È¸
+--emp, dept í…Œì´ë¸”ì—ì„œ ë¶€ì„œë²ˆí˜¸,ì‚¬ì›ëª…,ì§ì—…,ë¶€ì„œëª…,ì§€ì—­ ì¡°íšŒ ë‹¨, ì§ì—…(job)ì´ CLERKì¸ ì‚¬ì› ë°ì´í„°ë§Œ ì¡°íšŒ
 
-SELECT e.DEPTNO     ºÎ¼­¹øÈ£,
-       e.ENAME      »ç¿ø¸í,
-       e.JOB        Á÷¾÷,
-       d.DNAME      ºÎ¼­¸í,
-       d.LOC        Áö¿ª
+SELECT e.DEPTNO     ë¶€ì„œë²ˆí˜¸,
+       e.ENAME      ì‚¬ì›ëª…,
+       e.JOB        ì§ì—…,
+       d.DNAME      ë¶€ì„œëª…,
+       d.LOC        ì§€ì—­
   FROM emp e, dept d
  WHERE e.DEPTNO = d.DEPTNO AND e.JOB = 'CLERK';
 
-SELECT e.DEPTNO     ºÎ¼­¹øÈ£,
-       e.ENAME      »ç¿ø¸í,
-       e.JOB        Á÷¾÷,
-       d.DNAME      ºÎ¼­¸í,
-       d.LOC        Áö¿ª
+SELECT e.DEPTNO     ë¶€ì„œë²ˆí˜¸,
+       e.ENAME      ì‚¬ì›ëª…,
+       e.JOB        ì§ì—…,
+       d.DNAME      ë¶€ì„œëª…,
+       d.LOC        ì§€ì—­
   FROM emp e JOIN dept d ON e.DEPTNO = d.DEPTNO AND e.JOB = 'CLERK';
 
---emp, dept Å×ÀÌºí¿¡¼­ ºÎ¼­¹øÈ£,»ç¿ø¸í,Á÷¾÷,ºÎ¼­¸í,Áö¿ª Á¶È¸ ´Ü, Á÷¾÷(job)ÀÌ CLERKÀÎ »ç¿øÀÌ°Å³ª 
---ManagerÀÎ »ç¿ø¸¸ Á¶È¸
+--emp, dept í…Œì´ë¸”ì—ì„œ ë¶€ì„œë²ˆí˜¸,ì‚¬ì›ëª…,ì§ì—…,ë¶€ì„œëª…,ì§€ì—­ ì¡°íšŒ ë‹¨, ì§ì—…(job)ì´ CLERKì¸ ì‚¬ì›ì´ê±°ë‚˜ 
+--Managerì¸ ì‚¬ì›ë§Œ ì¡°íšŒ
 
-SELECT e.DEPTNO     ºÎ¼­¹øÈ£,
-       e.ENAME      »ç¿ø¸í,
-       e.JOB        Á÷¾÷,
-       d.DNAME      ºÎ¼­¸í,
-       d.LOC        Áö¿ª
+SELECT e.DEPTNO     ë¶€ì„œë²ˆí˜¸,
+       e.ENAME      ì‚¬ì›ëª…,
+       e.JOB        ì§ì—…,
+       d.DNAME      ë¶€ì„œëª…,
+       d.LOC        ì§€ì—­
   FROM emp e, dept d
  WHERE e.DEPTNO = d.DEPTNO AND e.JOB IN ('CLERK', 'MANAGER');
 
-SELECT e.DEPTNO     ºÎ¼­¹øÈ£,
-       e.ENAME      »ç¿ø¸í,
-       e.JOB        Á÷¾÷,
-       d.DNAME      ºÎ¼­¸í,
-       d.LOC        Áö¿ª
+SELECT e.DEPTNO     ë¶€ì„œë²ˆí˜¸,
+       e.ENAME      ì‚¬ì›ëª…,
+       e.JOB        ì§ì—…,
+       d.DNAME      ë¶€ì„œëª…,
+       d.LOC        ì§€ì—­
   FROM emp  e
        JOIN dept d ON e.DEPTNO = d.DEPTNO AND e.JOB IN ('CLERK', 'MANAGER');
 
---emp, dept Å×ÀÌºí¿¡¼­ Áö¿ª(loc)º° ±Þ¿©(sal)ÀÇ Æò±Õ Á¶È¸ ? Join, group by ¸ðµÎ ÀÌ¿ë
+--emp, dept í…Œì´ë¸”ì—ì„œ ì§€ì—­(loc)ë³„ ê¸‰ì—¬(sal)ì˜ í‰ê·  ì¡°íšŒ ? Join, group by ëª¨ë‘ ì´ìš©
 
   SELECT d.LOC, AVG (NVL (e.SAL, 0))
     FROM emp e, dept d
@@ -403,13 +403,13 @@ GROUP BY d.LOC;
     FROM emp e JOIN dept d ON e.DEPTNO = d.DEPTNO
 GROUP BY d.LOC;
 
--- student Å×ÀÌºí°ú exam_01 Å×ÀÌºíÀ» Á¶È¸ÇÏ¿© ÇÐ»ýµéÀÇ ÇÐ¹ø, ÀÌ¸§, Á¡¼ö, ÇÐÁ¡À» Ãâ·ÂÇÏ½Ã¿À 
---(ÇÐÁ¡Àº dcode³ª caseÀÌ¿ë- 90 ÀÌ»óÀÌ¸é 'A', 80ÀÌ»óÀÌ¸é 'B', 70ÀÌ»óÀÌ¸é 'C', 60ÀÌ»óÀÌ¸é'D' 
---60¹Ì¸¸ÀÌ¸é 'F' )
+-- student í…Œì´ë¸”ê³¼ exam_01 í…Œì´ë¸”ì„ ì¡°íšŒí•˜ì—¬ í•™ìƒë“¤ì˜ í•™ë²ˆ, ì´ë¦„, ì ìˆ˜, í•™ì ì„ ì¶œë ¥í•˜ì‹œì˜¤ 
+--(í•™ì ì€ dcodeë‚˜ caseì´ìš©- 90 ì´ìƒì´ë©´ 'A', 80ì´ìƒì´ë©´ 'B', 70ì´ìƒì´ë©´ 'C', 60ì´ìƒì´ë©´'D' 
+--60ë¯¸ë§Œì´ë©´ 'F' )
 
-SELECT s.STUDNO    ÇÐ¹ø,
-       s.NAME      ÀÌ¸§,
-       e.TOTAL     Á¡¼ö,
+SELECT s.STUDNO    í•™ë²ˆ,
+       s.NAME      ì´ë¦„,
+       e.TOTAL     ì ìˆ˜,
        CASE TRUNC (e.TOTAL / 10)
            WHEN 10 THEN 'A'
            WHEN 9 THEN 'A'
@@ -417,13 +417,13 @@ SELECT s.STUDNO    ÇÐ¹ø,
            WHEN 7 THEN 'C'
            WHEN 6 THEN 'D'
            ELSE 'F'
-       END         ÇÐÁ¡
+       END         í•™ì 
   FROM student s, exam_01 e
  WHERE s.STUDNO = e.STUDNO;
 
-SELECT s.STUDNO    ÇÐ¹ø,
-       s.NAME      ÀÌ¸§,
-       e.TOTAL     Á¡¼ö,
+SELECT s.STUDNO    í•™ë²ˆ,
+       s.NAME      ì´ë¦„,
+       e.TOTAL     ì ìˆ˜,
        CASE TRUNC (e.TOTAL / 10)
            WHEN 10 THEN 'A'
            WHEN 9 THEN 'A'
@@ -431,10 +431,10 @@ SELECT s.STUDNO    ÇÐ¹ø,
            WHEN 7 THEN 'C'
            WHEN 6 THEN 'D'
            ELSE 'F'
-       END         ÇÐÁ¡
+       END         í•™ì 
   FROM student s JOIN exam_01 e ON s.STUDNO = e.STUDNO;
 
-   --2020-04-22 ¼ö¿äÀÏ
+   --2020-04-22 ìˆ˜ìš”ì¼
 
   SELECT l.city,
          d.department_name,
@@ -449,8 +449,8 @@ ORDER BY d.department_id DESC;
   SELECT l.city,
          d.department_name,
          e.job_id,
-         SUM (e.salaty)     ±Þ¿©ÇÕ°è,
-         COUNT (*)          ÀÎ¿ø¼ö
+         SUM (e.salaty)     ê¸‰ì—¬í•©ê³„,
+         COUNT (*)          ì¸ì›ìˆ˜
     FROM employees e
          JOIN departments d ON e.department_id = d.department_id
          JOIN locations l ON d.location_id = l.location_id
@@ -460,63 +460,63 @@ ORDER BY l.city, d.department_name, e.job_id;
 --select * from emp_details_view;
 
 --[3] self join
---»óÀ§ ºÎ¼­¸í Á¶È¸ÇÏ±â
---ºÎ¼­ Å×ÀÌºí¿¡¼­ »óÀ§ºÎ¼­ÄÚµå(pdept)¿¡ ÇØ´çÇÏ´Â »óÀ§ºÎ¼­ Á¤º¸¸¦ Ãâ·Â
+--ìƒìœ„ ë¶€ì„œëª… ì¡°íšŒí•˜ê¸°
+--ë¶€ì„œ í…Œì´ë¸”ì—ì„œ ìƒìœ„ë¶€ì„œì½”ë“œ(pdept)ì— í•´ë‹¹í•˜ëŠ” ìƒìœ„ë¶€ì„œ ì •ë³´ë¥¼ ì¶œë ¥
 
-SELECT * FROM dept2;                                                             -- 13°Ç
+SELECT * FROM dept2;                                                             -- 13ê±´
 
 --inner join
 
   SELECT a.*,
          a.dname,
-         a.pdept     "»óÀ§ ºÎ¼­ ÄÚµå",
+         a.pdept     "ìƒìœ„ ë¶€ì„œ ì½”ë“œ",
          a.area,
-         b.dname     "»óÀ§ ºÎ¼­¸í"
+         b.dname     "ìƒìœ„ ë¶€ì„œëª…"
     FROM dept2 a JOIN dept2 b ON a.pdept = b.dcode
-ORDER BY a.dcode;                                                    --12 °Ç
--- »çÀå½ÇÀº »óÀ§ ºÎ¼­°¡ nullÀÌ¹Ç·Î µ¥ÀÌÅÍ¸¦ °¡Á®¿ÀÁö ¾Ê¾ÒÀ½
+ORDER BY a.dcode;                                                    --12 ê±´
+-- ì‚¬ìž¥ì‹¤ì€ ìƒìœ„ ë¶€ì„œê°€ nullì´ë¯€ë¡œ ë°ì´í„°ë¥¼ ê°€ì ¸ì˜¤ì§€ ì•Šì•˜ìŒ
 
 --outer join
 
   SELECT a.*,
          a.dname,
-         a.pdept     "»óÀ§ ºÎ¼­ ÄÚµå",
+         a.pdept     "ìƒìœ„ ë¶€ì„œ ì½”ë“œ",
          a.area,
-         b.dname     "»óÀ§ ºÎ¼­¸í"
+         b.dname     "ìƒìœ„ ë¶€ì„œëª…"
     FROM dept2 a LEFT JOIN dept2 b ON a.pdept = b.dcode
-ORDER BY a.dcode;                                                    -- 13°Ç
---=> »çÀå½Ç ·¹ÄÚµåµµ Æ÷ÇÔµÊ
+ORDER BY a.dcode;                                                    -- 13ê±´
+--=> ì‚¬ìž¥ì‹¤ ë ˆì½”ë“œë„ í¬í•¨ë¨
 
---»ç¿øÁ¤º¸¿Í ÇØ´ç »ç¿øÀÇ Á÷¼Ó »ó°üÀÇ ÀÌ¸§ Ãâ·Â
+--ì‚¬ì›ì •ë³´ì™€ í•´ë‹¹ ì‚¬ì›ì˜ ì§ì† ìƒê´€ì˜ ì´ë¦„ ì¶œë ¥
 
 SELECT * FROM employees;
 
-SELECT a.*, b.first_name "Á÷¼Ó»ó°üÀÇ ÀÌ¸§"
+SELECT a.*, b.first_name "ì§ì†ìƒê´€ì˜ ì´ë¦„"
   FROM employees a LEFT JOIN employees b ON a.manager_id = b.employee_id;
 
---2. EMP Table¿¡ ÀÖ´Â EMPNO¿Í MGRÀ» ÀÌ¿ëÇÏ¿© ¼­·ÎÀÇ °ü°è¸¦ ´ÙÀ½°ú °°ÀÌ Ãâ·ÂÇÏ¶ó. 
---¡®FORDÀÇ ¸Å´ÏÀú´Â JONES¡¯
+--2. EMP Tableì— ìžˆëŠ” EMPNOì™€ MGRì„ ì´ìš©í•˜ì—¬ ì„œë¡œì˜ ê´€ê³„ë¥¼ ë‹¤ìŒê³¼ ê°™ì´ ì¶œë ¥í•˜ë¼. 
+--â€˜FORDì˜ ë§¤ë‹ˆì €ëŠ” JONESâ€™
 
-SELECT a.*, b.ename "¸Å´ÏÀú"
+SELECT a.*, b.ename "ë§¤ë‹ˆì €"
   FROM emp a LEFT JOIN emp b ON a.mgr = b.empno;
 
--- Ä«Æ¼¼Ç°ö(cartesion product)
+-- ì¹´í‹°ì…˜ê³±(cartesion product)
 
 /*
-- join Á¶°ÇÀÌ ¾ø´Â °æ¿ì
- µÎ Å×ÀÌºíÀÇ µ¥ÀÌÅÍ¸¦ °öÇÑ °³¼ö¸¸Å­ÀÇ µ¥ÀÌÅÍ°¡ Ãâ·ÂµÊ
-- ANSI join ¿¡¼­´Â cross joinÀÌ¶ó°í ºÎ¸§
+- join ì¡°ê±´ì´ ì—†ëŠ” ê²½ìš°
+ ë‘ í…Œì´ë¸”ì˜ ë°ì´í„°ë¥¼ ê³±í•œ ê°œìˆ˜ë§Œí¼ì˜ ë°ì´í„°ê°€ ì¶œë ¥ë¨
+- ANSI join ì—ì„œëŠ” cross joinì´ë¼ê³  ë¶€ë¦„
 */
 
-SELECT * FROM emp;                   --14°Ç
+SELECT * FROM emp;                   --14ê±´
 
-SELECT * FROM dept;                    -- 4°Ç
+SELECT * FROM dept;                    -- 4ê±´
 
 SELECT e.*, d.dname
-  FROM emp e, dept d;                    -- 14 * 4 = 56°Ç Ãâ·Â
+  FROM emp e, dept d;                    -- 14 * 4 = 56ê±´ ì¶œë ¥
 
 --ANSI join
 
   SELECT e.*, d.dname, d.deptno
     FROM emp e CROSS JOIN dept d
-ORDER BY d.deptno, e.empno;                            -- 14 * 4 = 56°Ç Ãâ·Â
+ORDER BY d.deptno, e.empno;                            -- 14 * 4 = 56ê±´ ì¶œë ¥

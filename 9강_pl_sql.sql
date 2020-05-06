@@ -1,41 +1,41 @@
-/* Formatted on 2020/05/06 ¿ÀÀü 10:44:38 (QP5 v5.360) */
---9°­_pl_sql.sql
---[2020-04-28 È­¿äÀÏ]
+/* Formatted on 2020/05/06 ì˜¤ì „ 10:44:38 (QP5 v5.360) */
+--9ê°•_pl_sql.sql
+--[2020-04-28 í™”ìš”ì¼]
 --PL/SQL
 
 /*
     - Procedural language extension to Structured Query Language
-    - SQL°ú ÀÏ¹Ý ÇÁ·Î±×·¡¹Ö ¾ð¾îÀÇ Æ¯¼ºÀ» °áÇéÇÑ ¾ð¾î
-    - º¯¼ö, »ó¼ö ¼±¾ð °¡´É
-    - Á¶°Ç¹®, ¹Ýº¹¹® »ç¿ë °¡´É
+    - SQLê³¼ ì¼ë°˜ í”„ë¡œê·¸ëž˜ë° ì–¸ì–´ì˜ íŠ¹ì„±ì„ ê²°í—™í•œ ì–¸ì–´
+    - ë³€ìˆ˜, ìƒìˆ˜ ì„ ì–¸ ê°€ëŠ¥
+    - ì¡°ê±´ë¬¸, ë°˜ë³µë¬¸ ì‚¬ìš© ê°€ëŠ¥
 */
 
 /*
-    ¼±¾ðºÎ
-        - declare Å°¿öµå »ç¿ë
-        - º¯¼ö³ª »ó¼ö¸¦ ¼±¾ðÇÏ´Â ºÎºÐ
+    ì„ ì–¸ë¶€
+        - declare í‚¤ì›Œë“œ ì‚¬ìš©
+        - ë³€ìˆ˜ë‚˜ ìƒìˆ˜ë¥¼ ì„ ì–¸í•˜ëŠ” ë¶€ë¶„
         
-    ½ÇÇàºÎ
-        - begin ~ end Å°¿öµå »ç¿ë
-        - º¯¼ö¿¡ °ª ÇÒ´ç, Á¶°Ç¹®, ¹Ýº¹¹®, sql¹®ÀåµîÀ» Ã³¸®
-        - ½ÇÇàÇØ¾ß ÇÒ ·ÎÁ÷À» ³Ö´Â ºÎºÐ
+    ì‹¤í–‰ë¶€
+        - begin ~ end í‚¤ì›Œë“œ ì‚¬ìš©
+        - ë³€ìˆ˜ì— ê°’ í• ë‹¹, ì¡°ê±´ë¬¸, ë°˜ë³µë¬¸, sqlë¬¸ìž¥ë“±ì„ ì²˜ë¦¬
+        - ì‹¤í–‰í•´ì•¼ í•  ë¡œì§ì„ ë„£ëŠ” ë¶€ë¶„
         
-    ¿¹¿ÜÃ³¸®ºÎ
-        - exception Å°¿öµå »ç¿ë
-        - ½ÇÇàºÎ¿¡¼­ ¿¹¿Ü°¡ ¹ß»ýÇßÀ» ¶§ Ã³¸®ÇÏ´Â ºÎºÐ
+    ì˜ˆì™¸ì²˜ë¦¬ë¶€
+        - exception í‚¤ì›Œë“œ ì‚¬ìš©
+        - ì‹¤í–‰ë¶€ì—ì„œ ì˜ˆì™¸ê°€ ë°œìƒí–ˆì„ ë•Œ ì²˜ë¦¬í•˜ëŠ” ë¶€ë¶„
 */
 
---¼±¾ðºÎ, ½ÇÇàºÎ, ¿¹¿ÜÃ³¸®ºÎ°¡ ÇÏ³ªÀÇ PL/SQL ºí·ÏÀ» ±¸¼ºÇÏ°í, ¿À¶óÅ¬Àº ÀÌ ºÒ·Ï ´ÜÀ§·Î Ã³¸®ÇÔ
+--ì„ ì–¸ë¶€, ì‹¤í–‰ë¶€, ì˜ˆì™¸ì²˜ë¦¬ë¶€ê°€ í•˜ë‚˜ì˜ PL/SQL ë¸”ë¡ì„ êµ¬ì„±í•˜ê³ , ì˜¤ë¼í´ì€ ì´ ë¶ˆë¡ ë‹¨ìœ„ë¡œ ì²˜ë¦¬í•¨
 
 DECLARE
-    --¼±¾ðºÎ : º¯¼ö¸¦ ¼±¾ðÇÏ´Â ºÎºÐ
+    --ì„ ì–¸ë¶€ : ë³€ìˆ˜ë¥¼ ì„ ì–¸í•˜ëŠ” ë¶€ë¶„
     counter   NUMBER;
 BEGIN
-    --½ÇÇàºÎ : Ã³¸®ÇÒ ·ÎÁ÷À» ³Ö´Â ºÎºÐ
-    --º¯¼ö¿¡ °ª ÇÒ´ç
+    --ì‹¤í–‰ë¶€ : ì²˜ë¦¬í•  ë¡œì§ì„ ë„£ëŠ” ë¶€ë¶„
+    --ë³€ìˆ˜ì— ê°’ í• ë‹¹
     counter := 1;
 
-    --·ÎÁ÷Ã³¸®
+    --ë¡œì§ì²˜ë¦¬
     counter := counter / 0;
 
     IF counter IS NOT NULL
@@ -45,11 +45,11 @@ BEGIN
 EXCEPTION
     WHEN OTHERS
     THEN
-        --¿¹¿Ü Ã³¸®ºÎ
-        DBMS_OUTPUT.put_line ('0À¸·Î ³ª´©¸é ¾ÈµË´Ï´Ù.');
+        --ì˜ˆì™¸ ì²˜ë¦¬ë¶€
+        DBMS_OUTPUT.put_line ('0ìœ¼ë¡œ ë‚˜ëˆ„ë©´ ì•ˆë©ë‹ˆë‹¤.');
 END;
 
---1~10±îÁö for¹® ÀÌ¿ëÇÏ¿© ¹Ýº¹Ã³¸®
+--1~10ê¹Œì§€ forë¬¸ ì´ìš©í•˜ì—¬ ë°˜ë³µì²˜ë¦¬
 
 DECLARE
     i        NUMBER;
@@ -66,7 +66,7 @@ EXCEPTION
         DBMS_OUTPUT.put_line ('error!');
 END;
 
---1~10±îÁö while¹® ÀÌ¿ëÇÏ¿© ¹Ýº¹Ã³¸®
+--1~10ê¹Œì§€ whileë¬¸ ì´ìš©í•˜ì—¬ ë°˜ë³µì²˜ë¦¬
 
 DECLARE
     i        NUMBER;
@@ -85,38 +85,38 @@ EXCEPTION
         DBMS_OUTPUT.put_line ('error!');
 END;
 
---[2020-04-29 ¼ö¿äÀÏ]
---º¯¼ö, »ó¼ö ¼±¾ð
+--[2020-04-29 ìˆ˜ìš”ì¼]
+--ë³€ìˆ˜, ìƒìˆ˜ ì„ ì–¸
 /*
-    º¯¼ö¸í µ¥ÀÌÅÍÅ¸ÀÔ;          --º¯¼ö ¼±¾ð
-    º¯¼ö¸í constant µ¥ÀÌÅÍÅ¸ÀÔ; --»ó¼ö ¼±¾ð
-    º¯¼ö¸í Å×ÀÌºí¸í.ÄÃ·³¸í%type;  --º¯¼ö ¼±¾ð
-         => ÇØ´ç Å×ÀÌºíÀÇ ÇØ´ç ÄÃ·³°ú µ¿ÀÏÇÑ Å¸ÀÔÀÇ º¯¼ö ¼±¾ð
+    ë³€ìˆ˜ëª… ë°ì´í„°íƒ€ìž…;          --ë³€ìˆ˜ ì„ ì–¸
+    ë³€ìˆ˜ëª… constant ë°ì´í„°íƒ€ìž…; --ìƒìˆ˜ ì„ ì–¸
+    ë³€ìˆ˜ëª… í…Œì´ë¸”ëª….ì»¬ëŸ¼ëª…%type;  --ë³€ìˆ˜ ì„ ì–¸
+         => í•´ë‹¹ í…Œì´ë¸”ì˜ í•´ë‹¹ ì»¬ëŸ¼ê³¼ ë™ì¼í•œ íƒ€ìž…ì˜ ë³€ìˆ˜ ì„ ì–¸
          
-    ¿¹)  name    varchar2(30);
+    ì˜ˆ)  name    varchar2(30);
         curYear constant number := 2020;
         empno   employees.employee_id%type;
 */
 
 SELECT * FROM employees;
 
---Á¶°Ç¹®
+--ì¡°ê±´ë¬¸
 
 /*
-    1) if¹®
-        if Á¶°Ç1 then
-             ¹®Àå1;
-        elsif Á¶°Ç2 then
-               ¹®Àå2;
+    1) ifë¬¸
+        if ì¡°ê±´1 then
+             ë¬¸ìž¥1;
+        elsif ì¡°ê±´2 then
+               ë¬¸ìž¥2;
         else 
-            ¹®Àå2;
+            ë¬¸ìž¥2;
         end if;
         
-        2)case¹®
+        2)caseë¬¸
             case ...
-                when Á¶°Ç1 then ¹®Àå1
-                when Á¶°Ç2 then ¹®Àå2
-                else ¹®Àå3
+                when ì¡°ê±´1 then ë¬¸ìž¥1
+                when ì¡°ê±´2 then ë¬¸ìž¥2
+                else ë¬¸ìž¥3
             end case;
 */
 
@@ -149,7 +149,7 @@ EXCEPTION
         DBMS_OUTPUT.put_line ('error');
 END;
 
---case ¹®
+--case ë¬¸
 
 DECLARE
     grade    CHAR;
@@ -181,26 +181,26 @@ EXCEPTION
         DBMS_OUTPUT.put_line ('error!');
 END;
 
---¹Ýº¹¹®
+--ë°˜ë³µë¬¸
 /*
-    1) (Å»ÃâÁ¶°Ç »ç¿ë- exit when Á¶°Ç)
+    1) (íƒˆì¶œì¡°ê±´ ì‚¬ìš©- exit when ì¡°ê±´)
         loop
-            exit when Á¶°Ç;
+            exit when ì¡°ê±´;
         end loop;
         
-    2) (reverse¸¦ ³ÖÀ¸¸é Á¾·á°ª¿¡¼­ ÃÊ±â°ªÀ¸·Î ¹æÇâÀÌ ¹Ù²ñ)
-        for º¯¼ö in [reverse] ÃÊ±â°ª..Á¾·á°ª loop
-            Ã³¸®ÇÒ ¹®Àå;
+    2) (reverseë¥¼ ë„£ìœ¼ë©´ ì¢…ë£Œê°’ì—ì„œ ì´ˆê¸°ê°’ìœ¼ë¡œ ë°©í–¥ì´ ë°”ë€œ)
+        for ë³€ìˆ˜ in [reverse] ì´ˆê¸°ê°’..ì¢…ë£Œê°’ loop
+            ì²˜ë¦¬í•  ë¬¸ìž¥;
         end loop;
     
-    3) (º¯¼ö¸¦ ÃÊ±âÈ­ ÈÄ »ç¿ë)
-        while Á¶°Ç loop
-            Ã³¸®ÇÒ ¹®Àå
+    3) (ë³€ìˆ˜ë¥¼ ì´ˆê¸°í™” í›„ ì‚¬ìš©)
+        while ì¡°ê±´ loop
+            ì²˜ë¦¬í•  ë¬¸ìž¥
         ent loop;
     
 */
 
---loop ¹® ÀÌ¿ë
+--loop ë¬¸ ì´ìš©
 
 DECLARE
     i        NUMBER;
@@ -221,7 +221,7 @@ EXCEPTION
         DBMS_OUTPUT.put_line ('error!');
 END;
 
---for¹®
+--forë¬¸
 
 DECLARE
     i        NUMBER;
@@ -233,7 +233,7 @@ BEGIN
         DBMS_OUTPUT.put_line ('i:' || i || ', result:' || result);
     END LOOP;
 
-    DBMS_OUTPUT.put_line ('---for¹® reverseÀÌ¿ë---');
+    DBMS_OUTPUT.put_line ('---forë¬¸ reverseì´ìš©---');
 
     FOR i IN REVERSE 1 .. 10
     LOOP
@@ -246,7 +246,7 @@ EXCEPTION
         DBMS_OUTPUT.put_line ('error!');
 END;
 
---while ÀÌ¿ë
+--while ì´ìš©
 
 DECLARE
     i        NUMBER;
@@ -267,49 +267,49 @@ EXCEPTION
         DBMS_OUTPUT.put_line ('error!');
 END;
 
---PL/SQL ¼­ºê ÇÁ·Î±×·¥
+--PL/SQL ì„œë¸Œ í”„ë¡œê·¸ëž¨
 /*
-    - µ¥ÀÌÅÍº£ÀÌ½º °´Ã¼·Î ÀúÀåÇØ¼­ ÇÊ¿äÇÒ ¶§¸¶´Ù È£ÃâÇÏ¿© »ç¿ëÇÒ ¼ö ÀÖ´Â PL/SQLºí·Ï
+    - ë°ì´í„°ë² ì´ìŠ¤ ê°ì²´ë¡œ ì €ìž¥í•´ì„œ í•„ìš”í•  ë•Œë§ˆë‹¤ í˜¸ì¶œí•˜ì—¬ ì‚¬ìš©í•  ìˆ˜ ìžˆëŠ” PL/SQLë¸”ë¡
     
-    1) ÇÔ¼ö(function)
-        - °á°ú°ªÀ» ¹ÝÈ¯ÇÔ
-        - »ç¿ëÀÚ Á¤ÀÇ ÇÔ¼ö¸¦ ¸»ÇÔ
-        - Æ¯Á¤ ±â´ÉÀ» ¼öÇàÇÑ µÚ, °á°ú°ªÀ» ¹ÝÈ¯ÇÏ´Â ¼­ºê ÇÁ·Î±×·¥
+    1) í•¨ìˆ˜(function)
+        - ê²°ê³¼ê°’ì„ ë°˜í™˜í•¨
+        - ì‚¬ìš©ìž ì •ì˜ í•¨ìˆ˜ë¥¼ ë§í•¨
+        - íŠ¹ì • ê¸°ëŠ¥ì„ ìˆ˜í–‰í•œ ë’¤, ê²°ê³¼ê°’ì„ ë°˜í™˜í•˜ëŠ” ì„œë¸Œ í”„ë¡œê·¸ëž¨
         
-    2) ³»Àå ÇÁ·Î½ÃÀú(ÀúÀå ÇÁ·Î½ÃÀú, stored procedure)
-        - °á°ú°ªÀ» ¹ÝÈ¯ÇÏÁö ¾ÊÀ½(void)
+    2) ë‚´ìž¥ í”„ë¡œì‹œì €(ì €ìž¥ í”„ë¡œì‹œì €, stored procedure)
+        - ê²°ê³¼ê°’ì„ ë°˜í™˜í•˜ì§€ ì•ŠìŒ(void)
         
 */
 
---ÇÔ¼ö
+--í•¨ìˆ˜
 /*
-    create or replace function ÇÔ¼ö¸í
-        (ÆÄ¶ó¹ÌÅÍ1 µ¥ÀÌÅÍÅ¸ÀÔ,
-         ÆÄ¶ó¹ÌÅÍ2 µ¥ÀÌÅÍÅ¸ÀÔ, ...)
-            return µ¥ÀÌÅÍÅ¸ÀÔ
-    is ¶Ç´Â as
-        º¯¼ö ¼±¾ð
+    create or replace function í•¨ìˆ˜ëª…
+        (íŒŒë¼ë¯¸í„°1 ë°ì´í„°íƒ€ìž…,
+         íŒŒë¼ë¯¸í„°2 ë°ì´í„°íƒ€ìž…, ...)
+            return ë°ì´í„°íƒ€ìž…
+    is ë˜ëŠ” as
+        ë³€ìˆ˜ ì„ ì–¸
     begin
-        Ã³¸®ÇÒ ·ÎÁ÷
+        ì²˜ë¦¬í•  ë¡œì§
         
         exception when others then
-            ¿¹¿ÜÃ³¸®ÇÒ ¹®Àå
+            ì˜ˆì™¸ì²˜ë¦¬í•  ë¬¸ìž¥
     end;
 */
---ÁÖ¹Î¹øÈ£¸¦ ³ÖÀ¸¸é ¼ºº°À» ¸®ÅÏÇÏ´Â ÇÔ¼ö ¸¸µé±â
+--ì£¼ë¯¼ë²ˆí˜¸ë¥¼ ë„£ìœ¼ë©´ ì„±ë³„ì„ ë¦¬í„´í•˜ëŠ” í•¨ìˆ˜ ë§Œë“¤ê¸°
 
-CREATE OR REPLACE FUNCTION get_gender (                                 --ÆÄ¶ó¹ÌÅÍ
+CREATE OR REPLACE FUNCTION get_gender (                                 --íŒŒë¼ë¯¸í„°
                                        p_ssn VARCHAR2)
     RETURN VARCHAR2
---¹ÝÈ¯Å¸ÀÔ
+--ë°˜í™˜íƒ€ìž…
 IS
-    --º¯¼ö¼±¾ð
+    --ë³€ìˆ˜ì„ ì–¸
     v_gender   VARCHAR2 (10);
 BEGIN
-    --Ã³¸®ÇÒ ·ÎÁ÷
+    --ì²˜ë¦¬í•  ë¡œì§
     SELECT CASE
-               WHEN SUBSTR (p_ssn, 7, 1) IN (1, 3) THEN '³²ÀÚ'
-               ELSE '¿©ÀÚ'
+               WHEN SUBSTR (p_ssn, 7, 1) IN (1, 3) THEN 'ë‚¨ìž'
+               ELSE 'ì—¬ìž'
            END
       INTO v_gender
       FROM DUAL;
@@ -325,9 +325,9 @@ SELECT get_gender ('0110093122222') FROM DUAL;
 
 SELECT LENGTH ('java') FROM DUAL;
 
-SELECT gno, gname, jumin, get_gender (jumin) ¼ºº° FROM gogak;
+SELECT gno, gname, jumin, get_gender (jumin) ì„±ë³„ FROM gogak;
 
-SELECT gno, gname, jumin, LENGTH (gname) ÀÌ¸§±æÀÌ FROM gogak;
+SELECT gno, gname, jumin, LENGTH (gname) ì´ë¦„ê¸¸ì´ FROM gogak;
 
 --get_age
 
@@ -353,25 +353,25 @@ EXCEPTION
         DBMS_OUTPUT.put_line ('error');
 END;
 
-SELECT gno, gname, jumin, get_age (jumin) ³ªÀÌ FROM gogak;
+SELECT gno, gname, jumin, get_age (jumin) ë‚˜ì´ FROM gogak;
 
--- stored procedure(ÀúÀå ÇÁ·Î½ÃÀú, ³»Àå ÇÁ·Î½ÃÀú)
--- Æ¯Á¤ ±â´ÉÀ» ¼öÇàÇÏÁö¸¸ °ªÀ» ¹ÝÈ¯ÇÏÁö´Â ¾Ê´Â ¼­ºê ÇÁ·Î±×·¥
+-- stored procedure(ì €ìž¥ í”„ë¡œì‹œì €, ë‚´ìž¥ í”„ë¡œì‹œì €)
+-- íŠ¹ì • ê¸°ëŠ¥ì„ ìˆ˜í–‰í•˜ì§€ë§Œ ê°’ì„ ë°˜í™˜í•˜ì§€ëŠ” ì•ŠëŠ” ì„œë¸Œ í”„ë¡œê·¸ëž¨
 
 /*
-    create or replace procedure ÇÁ·Î½ÃÀú¸í
+    create or replace procedure í”„ë¡œì‹œì €ëª…
     (
-        ÆÄ¶ó¹ÌÅÍ1   µ¥ÀÌÅÍÅ¸ÀÔ,
-        ÆÄ¶ó¹ÌÅÍ2   µ¥ÀÌÅÍÅ¸ÀÔ,
+        íŒŒë¼ë¯¸í„°1   ë°ì´í„°íƒ€ìž…,
+        íŒŒë¼ë¯¸í„°2   ë°ì´í„°íƒ€ìž…,
         ...
     )
     is[as]
-        º¯¼ö¼±¾ðºÎ
+        ë³€ìˆ˜ì„ ì–¸ë¶€
     begin
-        Ã³¸®ÇÒ ·ÎÁ÷
+        ì²˜ë¦¬í•  ë¡œì§
         
     exception when others then
-        ¿¹¿ÜÃ³¸® ¹®Àå
+        ì˜ˆì™¸ì²˜ë¦¬ ë¬¸ìž¥
     end;
 */
 
@@ -379,16 +379,16 @@ SELECT * FROM pd2;
 
 SELECT * FROM user_sequences;
 
---pd2 Å×ÀÌºí¿¡ ÀÔ·ÂÇÏ´Â ÇÁ·Î½ÃÀú
+--pd2 í…Œì´ë¸”ì— ìž…ë ¥í•˜ëŠ” í”„ë¡œì‹œì €
 
-CREATE OR REPLACE PROCEDURE pd2_insert (                                --ÆÄ¶ó¹ÌÅÍ
-                                        --pd2 Å×ÀÌºí¿¡ insertÇÒ¶§ ÇÊ¿äÇÑ ÆÄ¶ó¹ÌÅÍµé
+CREATE OR REPLACE PROCEDURE pd2_insert (                                --íŒŒë¼ë¯¸í„°
+                                        --pd2 í…Œì´ë¸”ì— insertí• ë•Œ í•„ìš”í•œ íŒŒë¼ë¯¸í„°ë“¤
                                         p_pdcode    CHAR,
                                         p_pdname    VARCHAR2,
                                         p_price     NUMBER,
                                         p_company   VARCHAR2)
 IS
---º¯¼ö ¼±¾ðºÎ
+--ë³€ìˆ˜ ì„ ì–¸ë¶€
 BEGIN
     INSERT INTO pd2 (no,
                      pdcode,
@@ -401,36 +401,36 @@ BEGIN
                  p_price,
                  p_company);
 
-    COMMIT;                                                          --¼º°øÇÏ¸é Ä¿¹Ô
+    COMMIT;                                                          --ì„±ê³µí•˜ë©´ ì»¤ë°‹
 EXCEPTION
     WHEN OTHERS
     THEN
         DBMS_OUTPUT.put_line ('pd2 insert error!');
-        ROLLBACK;                                                    --½ÇÆÐÇÏ¸é ·Ñ¹é
+        ROLLBACK;                                                    --ì‹¤íŒ¨í•˜ë©´ ë¡¤ë°±
 END;
 
---ÀúÀå ÇÁ·Î½ÃÀú ½ÇÇà½ÃÅ°±â
+--ì €ìž¥ í”„ë¡œì‹œì € ì‹¤í–‰ì‹œí‚¤ê¸°
 /*
-    execute ÇÁ·Î½ÃÀúÀÌ¸§(ÆÄ¶ó¹ÌÅÍ);
-    ¶Ç´Â
-    exec ÇÁ·Î½ÃÀúÀÌ¸§(ÆÄ¶ó¹ÌÅÍ);
+    execute í”„ë¡œì‹œì €ì´ë¦„(íŒŒë¼ë¯¸í„°);
+    ë˜ëŠ”
+    exec í”„ë¡œì‹œì €ì´ë¦„(íŒŒë¼ë¯¸í„°);
 */
 
-EXECUTE pd2_insert('C01','¸¶¿ì½º',34000,'»ï¼º');
+EXECUTE pd2_insert('C01','ë§ˆìš°ìŠ¤',34000,'ì‚¼ì„±');
 
 SELECT * FROM pd2;
 
-EXEC pd2_insert('C02','¸ð´ÏÅÍ',470000,'LG');
+EXEC pd2_insert('C02','ëª¨ë‹ˆí„°',470000,'LG');
 
---pd2 Å×ÀÌºí ÄÃ·³À» ¼öÁ¤ÇÏ´Â ÇÁ·Î½ÃÀú ¸¸µé±â
+--pd2 í…Œì´ë¸” ì»¬ëŸ¼ì„ ìˆ˜ì •í•˜ëŠ” í”„ë¡œì‹œì € ë§Œë“¤ê¸°
 
 CREATE OR REPLACE PROCEDURE pd2_update (p_no        pd2.no%TYPE,
                                         p_pdcode    pd2.pdcode%TYPE,
                                         p_pdname    pd2.pdname%TYPE,
                                         p_price     pd2.price%TYPE,
                                         p_company   pd2.company%TYPE)
---                                                  Å×ÀÌºí¸í,ÄÃ·³¸í%type
---                                              => ÇØ´çÅ×ÀÌºíÀÇ ÇØ´ç ÄÃ·³°ú µ¿ÀÏÇÑ µ¥ÀÌÅÍ Å¸ÀÔ
+--                                                  í…Œì´ë¸”ëª…,ì»¬ëŸ¼ëª…%type
+--                                              => í•´ë‹¹í…Œì´ë¸”ì˜ í•´ë‹¹ ì»¬ëŸ¼ê³¼ ë™ì¼í•œ ë°ì´í„° íƒ€ìž…
 IS
     v_cnt   NUMBER (3);
 BEGIN
@@ -439,7 +439,7 @@ BEGIN
       FROM pd2
      WHERE no = p_no;
 
-    --ÇØ´ç µ¥ÀÌÅÍ°¡ Á¸ÀçÇÏ¸é update
+    --í•´ë‹¹ ë°ì´í„°ê°€ ì¡´ìž¬í•˜ë©´ update
     IF v_cnt > 0
     THEN
         UPDATE pd2
@@ -458,19 +458,19 @@ EXCEPTION
         ROLLBACK;
 END;
 
-EXEC pd2_update(4,'B03','ÄÄÇ»ÅÍ',1800000,'HP');
+EXEC pd2_update(4,'B03','ì»´í“¨í„°',1800000,'HP');
 
   SELECT *
     FROM pd2
 ORDER BY no DESC;
 
---ÀúÀå ÇÁ·Î½ÃÀú, ÇÔ¼ö È®ÀÎ
+--ì €ìž¥ í”„ë¡œì‹œì €, í•¨ìˆ˜ í™•ì¸
 
 SELECT *
   FROM user_source
  WHERE name = 'PD2_UPDATE';
 
--- exists ÀÌ¿ëÇÑ update
+-- exists ì´ìš©í•œ update
 
 CREATE OR REPLACE PROCEDURE pd2_update2 (p_no        pd2.no%TYPE,
                                          p_pdcode    pd2.pdcode%TYPE,
@@ -494,16 +494,16 @@ EXCEPTION
     WHEN OTHERS
     THEN
         raise_application_error (-20001, 'pd2 update error!');
-        --                              »ç¿ëÀÚ Á¤ÀÇ ¿¹¿Ü¹øÈ£´Â -20001 ~ -20999 ±îÁö
+        --                              ì‚¬ìš©ìž ì •ì˜ ì˜ˆì™¸ë²ˆí˜¸ëŠ” -20001 ~ -20999 ê¹Œì§€
         ROLLBACK;
 END;
 
-EXEC pd2_update2(4,'B04','Å°º¸µå',-50,'qnix');
+EXEC pd2_update2(4,'B04','í‚¤ë³´ë“œ',-50,'qnix');
 --error, ORA-20001: pd2 update error!
 --       ORA-06512: at "HR.PD2_UPDATE2", line 22
 --       ORA-06512: at line 1
 
-EXEC pd2_update2(4,'B05','Å°º¸µå',19000,'qnix');
+EXEC pd2_update2(4,'B05','í‚¤ë³´ë“œ',19000,'qnix');
 
   SELECT *
     FROM pd2
@@ -514,14 +514,14 @@ ORDER BY no DESC;
 --%rowtype
 
 /*
-    - %type°ú À¯»çÇÏ³ª, ÇÑ °³ ÀÌ»óÀÇ °ª¿¡ ´ëÇØ Àû¿ë
-    - ·Î¿ìÅ¸ÀÔ º¯¼ö¸¦ ¼±¾ðÇØ Å×ÀÌºí¿¡ ÀÖ´Â row(·¹ÄÚµå) ´ëÀÔ °¡´É
+    - %typeê³¼ ìœ ì‚¬í•˜ë‚˜, í•œ ê°œ ì´ìƒì˜ ê°’ì— ëŒ€í•´ ì ìš©
+    - ë¡œìš°íƒ€ìž… ë³€ìˆ˜ë¥¼ ì„ ì–¸í•´ í…Œì´ë¸”ì— ìžˆëŠ” row(ë ˆì½”ë“œ) ëŒ€ìž… ê°€ëŠ¥
 */
 
 CREATE OR REPLACE PROCEDURE prof_info (p_profno PROFESSOR.PROFNO%TYPE)
 IS
     v_prof_row   professor%ROWTYPE;
-    --                  professorÅ×ÀÌºíÀÇ ÇÑ °³ÀÇ ·¹ÄÚµå Á¤º¸¸¦ ´ãÀ» ¼ö ÀÖ´Â Å¸ÀÔ
+    --                  professorí…Œì´ë¸”ì˜ í•œ ê°œì˜ ë ˆì½”ë“œ ì •ë³´ë¥¼ ë‹´ì„ ìˆ˜ ìžˆëŠ” íƒ€ìž…
     v_result     VARCHAR2 (2000);
 BEGIN
     SELECT *
@@ -542,7 +542,7 @@ BEGIN
 EXCEPTION
     WHEN OTHERS
     THEN
-        raise_application_error (-20002, 'professor Á¶È¸ ¿¡·¯!');
+        raise_application_error (-20002, 'professor ì¡°íšŒ ì—ëŸ¬!');
 END;
 
 EXEC prof_info(1001);
@@ -551,7 +551,7 @@ SELECT * FROM professor;
 
 
 
---»ç¿ëÀÚ Á¤ÀÇ ¿¹¿Ü
+--ì‚¬ìš©ìž ì •ì˜ ì˜ˆì™¸
 
 SELECT * FROM MEMBER;
 
@@ -565,16 +565,16 @@ CREATE OR REPLACE PROCEDURE member_insert (p_name     MEMBER.name%TYPE,
                                            p_id       MEMBER.id%TYPE)
 IS
     system_check_insert_fail   EXCEPTION;
---»ç¿ëÀÚ Á¤ÀÇ ¿¹¿Ü
+--ì‚¬ìš©ìž ì •ì˜ ì˜ˆì™¸
 BEGIN
-    --ÀÏ¿äÀÏ 23:00:00 ~ 23:59:59 »çÀÌ¿¡´Â ½Ã½ºÅÛ ÀÛ¾÷À¸·Î ÀÎÇØ ÀÔ·Â ºÒ°¡
+    --ì¼ìš”ì¼ 23:00:00 ~ 23:59:59 ì‚¬ì´ì—ëŠ” ì‹œìŠ¤í…œ ìž‘ì—…ìœ¼ë¡œ ì¸í•´ ìž…ë ¥ ë¶ˆê°€
     IF TO_CHAR (SYSDATE, 'd') = '1' AND TO_CHAR (SYSDATE, 'hh24') = '23'
     THEN
         RAISE system_check_insert_fail;
-    --»ç¿ëÀÚ Á¤ÀÇ ¿¹¿Ü ¹ß»ý½ÃÅ°±â
+    --ì‚¬ìš©ìž ì •ì˜ ì˜ˆì™¸ ë°œìƒì‹œí‚¤ê¸°
     END IF;
 
-    --ÀÏ¿äÀÏ 23½Ã¶§°¡ ¾Æ´Ï¸é ÀÔ·Â°¡´É
+    --ì¼ìš”ì¼ 23ì‹œë•Œê°€ ì•„ë‹ˆë©´ ìž…ë ¥ê°€ëŠ¥
     INSERT INTO MEMBER (no,
                         name,
                         jumin,
@@ -592,21 +592,21 @@ EXCEPTION
     THEN
         raise_application_error (
             -20003,
-            'ÀÏ¿äÀÏ 23:00:00 ~ 23:59:59 »çÀÌ¿¡´Â ½Ã½ºÅÛ ÀÛ¾÷À¸·Î ÀÎÇØ ÀÔ·Â ºÒ°¡');
+            'ì¼ìš”ì¼ 23:00:00 ~ 23:59:59 ì‚¬ì´ì—ëŠ” ì‹œìŠ¤í…œ ìž‘ì—…ìœ¼ë¡œ ì¸í•´ ìž…ë ¥ ë¶ˆê°€');
         ROLLBACK;
 END;
 
-EXEC member_insert('±è±æµ¿2','9905091112282','1234','kim2');
+EXEC member_insert('ê¹€ê¸¸ë™2','9905091112282','1234','kim2');
 
 SELECT * FROM MEMBER;
 
 /*
-    out ¸Å°³º¯¼ö(ÆÄ¶ó¹ÌÅÍ)
-    - °á°ú¸¦ Ãâ·ÂÇÏ´Â ¿ëµµÀÇ ¸Å°³º¯¼ö
+    out ë§¤ê°œë³€ìˆ˜(íŒŒë¼ë¯¸í„°)
+    - ê²°ê³¼ë¥¼ ì¶œë ¥í•˜ëŠ” ìš©ë„ì˜ ë§¤ê°œë³€ìˆ˜
     
-    in ¸Å°³º¯¼ö 
-    - ÀÏ¹ÝÀûÀÎ ¸Å°³º¯¼ö, ÀÔ·Â¿ë ¸Å°³º¯¼ö
-    - »ý·«ÇÏ¸é in ¸Å°³º¯¼ö
+    in ë§¤ê°œë³€ìˆ˜ 
+    - ì¼ë°˜ì ì¸ ë§¤ê°œë³€ìˆ˜, ìž…ë ¥ìš© ë§¤ê°œë³€ìˆ˜
+    - ìƒëžµí•˜ë©´ in ë§¤ê°œë³€ìˆ˜
 */
 
 SELECT * FROM professor;
@@ -624,10 +624,10 @@ BEGIN
 EXCEPTION
     WHEN OTHERS
     THEN
-        raise_application_error (-20003, 'professorÁ¶È¸ ¿¡·¯!');
+        raise_application_error (-20003, 'professorì¡°íšŒ ì—ëŸ¬!');
 END;
 
---out ¸Å°³º¯¼ö°¡ ÀÖ´Â ÇÁ·Î½ÃÀú ½ÇÇàÇÏ±â
+--out ë§¤ê°œë³€ìˆ˜ê°€ ìžˆëŠ” í”„ë¡œì‹œì € ì‹¤í–‰í•˜ê¸°
 
 DECLARE
     v_name   professor.name%TYPE;
@@ -635,12 +635,12 @@ DECLARE
 BEGIN
     proc_prof (1003, v_name, v_pay);
 
-    DBMS_OUTPUT.put_line ('ÀÌ¸§:' || v_name || ', ±Þ¿©:' || v_pay);
+    DBMS_OUTPUT.put_line ('ì´ë¦„:' || v_name || ', ê¸‰ì—¬:' || v_pay);
 END;
 
 
 
---PL/SQL Ä¿¼­
+--PL/SQL ì»¤ì„œ
 
 CREATE OR REPLACE PROCEDURE pd2_select
 IS
@@ -654,40 +654,40 @@ EXCEPTION
 END;
 
 /*
-    Ä¿¼­
-    - Äõ¸®¿¡ ÀÇÇØ ¹ÝÈ¯µÇ´Â °á°ú´Â ¸Þ¸ð¸® »ó¿¡ À§Ä¡ÇÏ°Ô µÇ´Âµ¥
-      PL/SQL ¿¡¼­´Â Ä¿¼­¸¦ »ç¿ëÇÏ¿© ÀÌ °á°úÁýÇÕ¿¡ Á¢±ÙÇÒ ¼ö ÀÖ´Ù.
-    - Ä¿¼­¸¦ »ç¿ëÇÏ¸é °á°úÁýÇÕÀÇ °¢ °³º° µ¥ÀÌÅÍ¿¡ Á¢±ÙÀÌ °¡´ÉÇÏ´Ù.
+    ì»¤ì„œ
+    - ì¿¼ë¦¬ì— ì˜í•´ ë°˜í™˜ë˜ëŠ” ê²°ê³¼ëŠ” ë©”ëª¨ë¦¬ ìƒì— ìœ„ì¹˜í•˜ê²Œ ë˜ëŠ”ë°
+      PL/SQL ì—ì„œëŠ” ì»¤ì„œë¥¼ ì‚¬ìš©í•˜ì—¬ ì´ ê²°ê³¼ì§‘í•©ì— ì ‘ê·¼í•  ìˆ˜ ìžˆë‹¤.
+    - ì»¤ì„œë¥¼ ì‚¬ìš©í•˜ë©´ ê²°ê³¼ì§‘í•©ì˜ ê° ê°œë³„ ë°ì´í„°ì— ì ‘ê·¼ì´ ê°€ëŠ¥í•˜ë‹¤.
     
-    ¡Ø ¸í½ÃÀû Ä¿¼­
-    - »ç¿ëÀÚ°¡ Á÷Á¢ Äõ¸®ÀÇ °á°ú¿¡ Á¢±ÙÇØ¼­ ÀÌ¸¦ »ç¿ëÇÏ±â À§ÇØ ¸í½ÃÀûÀ¸·Î ¼±¾ðÇÑ Ä¿¼­
+    â€» ëª…ì‹œì  ì»¤ì„œ
+    - ì‚¬ìš©ìžê°€ ì§ì ‘ ì¿¼ë¦¬ì˜ ê²°ê³¼ì— ì ‘ê·¼í•´ì„œ ì´ë¥¼ ì‚¬ìš©í•˜ê¸° ìœ„í•´ ëª…ì‹œì ìœ¼ë¡œ ì„ ì–¸í•œ ì»¤ì„œ
     
-    - ¸í½ÃÀû Ä¿¼­¸¦ »ç¿ëÇÏ±â À§ÇÑ ÀýÂ÷
-        [1] Ä¿¼­ ¼±¾ð - Äõ¸®Á¤ÀÇ
-        cursor Ä¿¼­¸í is select ¹®Àå;
+    - ëª…ì‹œì  ì»¤ì„œë¥¼ ì‚¬ìš©í•˜ê¸° ìœ„í•œ ì ˆì°¨
+        [1] ì»¤ì„œ ì„ ì–¸ - ì¿¼ë¦¬ì •ì˜
+        cursor ì»¤ì„œëª… is select ë¬¸ìž¥;
         
-        [2] Ä¿¼­ ¿­±â(open) - Äõ¸® ½ÇÇà
-        open Ä¿¼­¸í;
+        [2] ì»¤ì„œ ì—´ê¸°(open) - ì¿¼ë¦¬ ì‹¤í–‰
+        open ì»¤ì„œëª…;
         
-        [3] ÆÐÄ¡(fetch) - Äõ¸®ÀÇ °á°ú¿¡ Á¢±Ù, ·çÇÁ¸¦ µ¹¸ç °³º° °ªµé¿¡ Á¢±Ù
-        fetch Ä¿¼­¸í is º¯¼ö...;
+        [3] íŒ¨ì¹˜(fetch) - ì¿¼ë¦¬ì˜ ê²°ê³¼ì— ì ‘ê·¼, ë£¨í”„ë¥¼ ëŒë©° ê°œë³„ ê°’ë“¤ì— ì ‘ê·¼
+        fetch ì»¤ì„œëª… is ë³€ìˆ˜...;
         
-        [4] Ä¿¼­ ´Ý±â(close) - ¸Þ¸ð¸®»ó¿¡ Á¸ÀçÇÏ´Â Äõ¸®ÀÇ °á°ú¸¦ ¼Ò¸ê½ÃÅ´
-        close Ä¿¼­¸í;
+        [4] ì»¤ì„œ ë‹«ê¸°(close) - ë©”ëª¨ë¦¬ìƒì— ì¡´ìž¬í•˜ëŠ” ì¿¼ë¦¬ì˜ ê²°ê³¼ë¥¼ ì†Œë©¸ì‹œí‚´
+        close ì»¤ì„œëª…;
 */
 
 CREATE OR REPLACE PROCEDURE pd2_select2
 IS
-    --[1] Ä¿¼­¼±¾ð
+    --[1] ì»¤ì„œì„ ì–¸
     CURSOR pd2_csr IS SELECT no, pdcode, pdname, price FROM pd2;
 
-    --º¯¼ö¼±¾ð
+    --ë³€ìˆ˜ì„ ì–¸
     pd2_rcd   pd2%ROWTYPE;
 BEGIN
-    --[2] Ä¿¼­ ¿­±â
+    --[2] ì»¤ì„œ ì—´ê¸°
     OPEN pd2_csr;
 
-    --[3] ÆÐÄ¡(fetch)
+    --[3] íŒ¨ì¹˜(fetch)
     LOOP
         FETCH pd2_csr
             INTO pd2_rcd.no,
@@ -708,29 +708,29 @@ BEGIN
             || pd2_rcd.price);
     END LOOP;
 
-    --[4] Ä¿¼­´Ý±â
+    --[4] ì»¤ì„œë‹«ê¸°
     CLOSE pd2_csr;
 EXCEPTION
     WHEN OTHERS
     THEN
-        raise_application_error (-2003, 'pd2 Á¶È¸ ¿¡·¯!');
+        raise_application_error (-2003, 'pd2 ì¡°íšŒ ì—ëŸ¬!');
 END;
 
 /*
     %notfound
-    - Ä¿¼­¿¡¼­¸¸ »ç¿ë °¡´ÉÇÑ ¼Ó¼º
-    - ´õÀÌ»ó ÆÐÄ¡(ÇÒ´ç)ÇÒ ·Î¿ì°¡ ¾øÀ½À» ÀÇ¹Ì
-    - Äõ¸®ÀÇ ¸¶Áö¸· °á°ú±îÁö ÆÐÄ¡ÇÑ ÈÄ¿¡ ÀÚµ¿À¸·Î ·çÇÁ¸¦ ºüÁ®³ª°¡°Ô µÊ
+    - ì»¤ì„œì—ì„œë§Œ ì‚¬ìš© ê°€ëŠ¥í•œ ì†ì„±
+    - ë”ì´ìƒ íŒ¨ì¹˜(í• ë‹¹)í•  ë¡œìš°ê°€ ì—†ìŒì„ ì˜ë¯¸
+    - ì¿¼ë¦¬ì˜ ë§ˆì§€ë§‰ ê²°ê³¼ê¹Œì§€ íŒ¨ì¹˜í•œ í›„ì— ìžë™ìœ¼ë¡œ ë£¨í”„ë¥¼ ë¹ ì ¸ë‚˜ê°€ê²Œ ë¨
 */
 
 /*
-    for loop cursor¹®
-    - Ä¿¼­ÀÇ for loop¹®À» »ç¿ëÇÏ¸é Ä¿¼­ÀÇ open, fetch, close°¡ ÀÚµ¿ÀûÀ¸·Î
-      ¹ß»ýµÇ¾îÁö±â ¶§¹®¿¡ open, fetch, close¹®À» ±â¼úÇÒ ÇÊ¿ä°¡ ¾ø´Ù
+    for loop cursorë¬¸
+    - ì»¤ì„œì˜ for loopë¬¸ì„ ì‚¬ìš©í•˜ë©´ ì»¤ì„œì˜ open, fetch, closeê°€ ìžë™ì ìœ¼ë¡œ
+      ë°œìƒë˜ì–´ì§€ê¸° ë•Œë¬¸ì— open, fetch, closeë¬¸ì„ ê¸°ìˆ í•  í•„ìš”ê°€ ì—†ë‹¤
       
-    ¡Ø Çü½Ä
-    for º¯¼ö¸í in Ä¿¼­¸í loop
-        ½ÇÇà¹®Àå
+    â€» í˜•ì‹
+    for ë³€ìˆ˜ëª… in ì»¤ì„œëª… loop
+        ì‹¤í–‰ë¬¸ìž¥
     end loop;
 */
 
@@ -759,8 +759,8 @@ EXEC pd2_select3;
 
 /*
     sys_refcursor
-    - ÀúÀå ÇÁ·Î½ÃÀúÀÇ select °á°ú¹°À» java¿¡¼­ ÀÐ±â À§ÇØ¼­´Â
-      ÀÌ¸¦ »ç¿ëÇØ¾ßÇÔ
+    - ì €ìž¥ í”„ë¡œì‹œì €ì˜ select ê²°ê³¼ë¬¼ì„ javaì—ì„œ ì½ê¸° ìœ„í•´ì„œëŠ”
+      ì´ë¥¼ ì‚¬ìš©í•´ì•¼í•¨
 */
 
 CREATE OR REPLACE PROCEDURE pd2_select4 (pd2_cursor OUT SYS_REFCURSOR)
@@ -771,5 +771,5 @@ BEGIN
 EXCEPTION
     WHEN OTHERS
     THEN
-        raise_application_error (-20004, 'pd2Å×ÀÌºí Á¶È¸ Áß ¿¡·¯!');
+        raise_application_error (-20004, 'pd2í…Œì´ë¸” ì¡°íšŒ ì¤‘ ì—ëŸ¬!');
 END;

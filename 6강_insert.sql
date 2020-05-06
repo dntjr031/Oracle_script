@@ -1,15 +1,15 @@
-/* Formatted on 2020/05/06 ¿ÀÀü 10:44:31 (QP5 v5.360) */
---6°­_insert.sql
---[2020-04-24 ±Ý¿äÀÏ]
+/* Formatted on 2020/05/06 ì˜¤ì „ 10:44:31 (QP5 v5.360) */
+--6ê°•_insert.sql
+--[2020-04-24 ê¸ˆìš”ì¼]
 
 /*
-<1. insert¹®> - µ¥ÀÌÅÍ¸¦ ÀÔ·ÂÇÏ´Â DML
-[1] ´ÜÀÏÇà ÀÔ·ÂÇÏ±â
-insert into Å×ÀÌºí¸í(Ä®·³1,Ä®·³2,...) velues(°ª1,°ª2,...)
+<1. insertë¬¸> - ë°ì´í„°ë¥¼ ìž…ë ¥í•˜ëŠ” DML
+[1] ë‹¨ì¼í–‰ ìž…ë ¥í•˜ê¸°
+insert into í…Œì´ë¸”ëª…(ì¹¼ëŸ¼1,ì¹¼ëŸ¼2,...) velues(ê°’1,ê°’2,...)
 */
---¿¹1) dept2 Å×ÀÌºí¿¡ ¾Æ·¡ÀÇ »õ·Î¿î ºÎ¼­ Á¤º¸¸¦ ÀÔ·ÂÇÏ½Ã¿À ? 
---ºÎ¼­¹øÈ£ : 9000, ºÎ¼­¸í: Æ¯ÆÇ1ÆÀ ? 
---»óÀ§ºÎ¼­ : 1006 (¿µ¾÷ºÎ), Áö¿ª : ÀÓ½ÃÁö¿ª 
+--ì˜ˆ1) dept2 í…Œì´ë¸”ì— ì•„ëž˜ì˜ ìƒˆë¡œìš´ ë¶€ì„œ ì •ë³´ë¥¼ ìž…ë ¥í•˜ì‹œì˜¤ ? 
+--ë¶€ì„œë²ˆí˜¸ : 9000, ë¶€ì„œëª…: íŠ¹íŒ1íŒ€ ? 
+--ìƒìœ„ë¶€ì„œ : 1006 (ì˜ì—…ë¶€), ì§€ì—­ : ìž„ì‹œì§€ì—­ 
 
 SELECT * FROM dept2;
 
@@ -18,67 +18,67 @@ INSERT INTO dept2 (DCODE,
                    PDEPT,
                    AREA)
      VALUES (9000,
-             'Æ¯ÆÇ1ÆÀ',
+             'íŠ¹íŒ1íŒ€',
              1006,
-             'ÀÓ½ÃÁö¿ª');
+             'ìž„ì‹œì§€ì—­');
 
 INSERT INTO dept2 (DCODE,
                    DNAME,
                    AREA,
                    PDEPT)
      VALUES (9001,
-             'Æ¯ÆÇ2ÆÀ',
-             'ÀÓ½ÃÁö¿ª',
+             'íŠ¹íŒ2íŒ€',
+             'ìž„ì‹œì§€ì—­',
              1006);
 
---¸ðµç ÄÃ·³ÀÇ µ¥ÀÌÅÍ¸¦ ÀÔ·ÂÇÏ´Â °æ¿ì => ÄÃ·³¸í »ý·« °¡´É
+--ëª¨ë“  ì»¬ëŸ¼ì˜ ë°ì´í„°ë¥¼ ìž…ë ¥í•˜ëŠ” ê²½ìš° => ì»¬ëŸ¼ëª… ìƒëžµ ê°€ëŠ¥
 
 INSERT INTO dept2
      VALUES (9002,
-             'Æ¯ÆÇ3ÆÀ',
+             'íŠ¹íŒ3íŒ€',
              1006,
-             'ÀÓ½ÃÁö¿ª');
+             'ìž„ì‹œì§€ì—­');
 
- -- ÀÏºÎ ÄÃ·³¸¸ ÀÔ·ÂÇÏ´Â °æ¿ì - not nullÀÎ ÄÃ·³Àº ¹Ýµå½Ã °ªÀ» ÀÔ·ÂÇØ¾ß ÇÔ
+ -- ì¼ë¶€ ì»¬ëŸ¼ë§Œ ìž…ë ¥í•˜ëŠ” ê²½ìš° - not nullì¸ ì»¬ëŸ¼ì€ ë°˜ë“œì‹œ ê°’ì„ ìž…ë ¥í•´ì•¼ í•¨
 
 DESC dept2;
 
 INSERT INTO dept2 (DCODE, DNAME)
-     VALUES (9004, 'Æ¯ÆÇ4ÆÀ');
+     VALUES (9004, 'íŠ¹íŒ4íŒ€');
 
 INSERT INTO dept2 (DCODE, PDEPT)
      VALUES (9004, 1006);
 
      -- ORA-01400: cannot insert NULL into ("HR"."DEPT2"."DNAME")
 
---null ÀÔ·ÂÇÏ±â
+--null ìž…ë ¥í•˜ê¸°
 
 /*
-1) µ¥ÀÌÅÍ¸¦ ÀÔ·ÂÇÏÁö ¾ÊÀ¸¸é nullÀÌ ÀÔ·ÂµÊ
-2) Á÷Á¢ nullÀ» ÀÔ·ÂÇØµµ nullÀÌ ÀÔ·ÂµÊ
+1) ë°ì´í„°ë¥¼ ìž…ë ¥í•˜ì§€ ì•Šìœ¼ë©´ nullì´ ìž…ë ¥ë¨
+2) ì§ì ‘ nullì„ ìž…ë ¥í•´ë„ nullì´ ìž…ë ¥ë¨
 */
 
 SELECT * FROM dept2;
 
 INSERT INTO dept2 (dcode, dname, pdept)
-     VALUES (9005, 'Æ¯ÆÇ5ÆÀ', NULL);
+     VALUES (9005, 'íŠ¹íŒ5íŒ€', NULL);
 
--- ³¯Â¥ µ¥ÀÌÅÍ ÀÔ·ÂÇÏ±â
+-- ë‚ ì§œ ë°ì´í„° ìž…ë ¥í•˜ê¸°
 
 /*
-? ¾Æ·¡ Á¤º¸¸¦ professor Å×ÀÌºí¿¡ ÀÔ·ÂÇÏ½Ã¿À ? 
-±³¼ö¹øÈ£ : 5001, ±³¼öÀÌ¸§: ±è¼³Èñ ? 
-ID : kimsh, Position : Á¤±³¼ö ? 
-Pay : 510, ÀÔ»çÀÏ : 2013³â 2¿ù 19ÀÏ 
+? ì•„ëž˜ ì •ë³´ë¥¼ professor í…Œì´ë¸”ì— ìž…ë ¥í•˜ì‹œì˜¤ ? 
+êµìˆ˜ë²ˆí˜¸ : 5001, êµìˆ˜ì´ë¦„: ê¹€ì„¤í¬ ? 
+ID : kimsh, Position : ì •êµìˆ˜ ? 
+Pay : 510, ìž…ì‚¬ì¼ : 2013ë…„ 2ì›” 19ì¼ 
 */
 
 SELECT * FROM professor;
 
 INSERT INTO professor
      VALUES (5001,
-             '±è¼³Èñ',
+             'ê¹€ì„¤í¬',
              'kimsh',
-             'Á¤±³¼ö',
+             'ì •êµìˆ˜',
              510,
              '2013-02-19',
              NULL,
@@ -86,13 +86,13 @@ INSERT INTO professor
              NULL,
              NULL);
 
---[2] ¿©·¯ Çà ÀÔ·ÂÇÏ±â
+--[2] ì—¬ëŸ¬ í–‰ ìž…ë ¥í•˜ê¸°
 
 /*
-insert into Å×ÀÌºí¸í()
-select¹®
+insert into í…Œì´ë¸”ëª…()
+selectë¬¸
 
-=> select¹®ÀÇ ÄÃ·³ÀÇ °³¼ö¿Í µ¥ÀÌÅÍ Å¸ÀÔÀÌ ÀÏÄ¡ÇØ¾ß ÀÔ·Â °¡´ÉÇÔ
+=> selectë¬¸ì˜ ì»¬ëŸ¼ì˜ ê°œìˆ˜ì™€ ë°ì´í„° íƒ€ìž…ì´ ì¼ì¹˜í•´ì•¼ ìž…ë ¥ ê°€ëŠ¥í•¨
 */
 
   SELECT *
@@ -112,17 +112,17 @@ INSERT INTO pd (no,
       FROM product
      WHERE p_code IN (102, 103, 104);
 
---[3] Å×ÀÌºíÀ» »ý¼ºÇÏ¸é¼­ µ¥ÀÌÅÍ ÀÔ·ÂÇÏ±â
+--[3] í…Œì´ë¸”ì„ ìƒì„±í•˜ë©´ì„œ ë°ì´í„° ìž…ë ¥í•˜ê¸°
 
 /*
-creat table ½Å±ÔÅ×ÀÌºí¸í
+creat table ì‹ ê·œí…Œì´ë¸”ëª…
 as
-select ¼±ÅÃÄÃ·³, ¼±ÅÃÄÃ·³2, ... from ±âÁ¸ Å×ÀÌºí¸í;
+select ì„ íƒì»¬ëŸ¼, ì„ íƒì»¬ëŸ¼2, ... from ê¸°ì¡´ í…Œì´ë¸”ëª…;
 
-- ½Å±Ô Å×ÀÌºíÀ» ¸¸µé°í µ¿½Ã¿¡ ´Ù¸¥ Å×ÀÌºí¿¡¼­ selectµÈ ÄÃ·³°ú °á°ú µ¥ÀÌÅÍ¸¦ insert½ÃÅ´
-- select¹®ÀÇ Å×ÀÌºí°ú ÄÃ·³ÀÇ Á¦¾àÁ¶°ÇÀ» º¹Á¦µÇÁö ¾Ê±â ¶§¹®¿¡ ½Å±Ô Å×ÀÌºí¿¡ ´ëÇØ 
-  Å×ÀÌºí°ú ÄÃ·³ Á¦¾à Á¶°ÇÀ» Á¤ÀÇÇØ¾ß ÇÔ
-  * pk(primary key)°ªµµ »ý¼ºÇÏÁö ¾ÊÀ½
+- ì‹ ê·œ í…Œì´ë¸”ì„ ë§Œë“¤ê³  ë™ì‹œì— ë‹¤ë¥¸ í…Œì´ë¸”ì—ì„œ selectëœ ì»¬ëŸ¼ê³¼ ê²°ê³¼ ë°ì´í„°ë¥¼ insertì‹œí‚´
+- selectë¬¸ì˜ í…Œì´ë¸”ê³¼ ì»¬ëŸ¼ì˜ ì œì•½ì¡°ê±´ì„ ë³µì œë˜ì§€ ì•Šê¸° ë•Œë¬¸ì— ì‹ ê·œ í…Œì´ë¸”ì— ëŒ€í•´ 
+  í…Œì´ë¸”ê³¼ ì»¬ëŸ¼ ì œì•½ ì¡°ê±´ì„ ì •ì˜í•´ì•¼ í•¨
+  * pk(primary key)ê°’ë„ ìƒì„±í•˜ì§€ ì•ŠìŒ
 */
 
 CREATE TABLE professor2
@@ -131,7 +131,7 @@ AS
 
 SELECT * FROM professor2;
 
---employees, departments Å×ÀÌºíÀ» Á¶ÀÎÇÑ °á°ú¸¦ imsi_tblÀ» ¸¸µé¸é¼­ ÀÔ·Â
+--employees, departments í…Œì´ë¸”ì„ ì¡°ì¸í•œ ê²°ê³¼ë¥¼ imsi_tblì„ ë§Œë“¤ë©´ì„œ ìž…ë ¥
 
 CREATE TABLE imsi_tbl
 AS
@@ -151,9 +151,9 @@ AS
 SELECT * FROM imsi_tbl;
 
 /*
-=> insert ¹®¿¡ ÄÃ·³ ¸®½ºÆ®°¡ ¾ø´Â »óÅÂ¿¡¼­ select¹® ÄÃ·³ ¸®½ºÆ®¿¡ ÇÔ¼ö°¡ Àû¿ëµÆ´Ù¸é
-  º°ÄªÀ» ½á¼­ insertµÇ´Â µ¥ÀÌÅÍÀÇ ÄÃ·³¸íÀ» ÁöÁ¤ÇØ¾ß ÇÔ
-  ±×·¸Áö ¾ÊÀ¸¸é ¿¡·¯
+=> insert ë¬¸ì— ì»¬ëŸ¼ ë¦¬ìŠ¤íŠ¸ê°€ ì—†ëŠ” ìƒíƒœì—ì„œ selectë¬¸ ì»¬ëŸ¼ ë¦¬ìŠ¤íŠ¸ì— í•¨ìˆ˜ê°€ ì ìš©ëë‹¤ë©´
+  ë³„ì¹­ì„ ì¨ì„œ insertë˜ëŠ” ë°ì´í„°ì˜ ì»¬ëŸ¼ëª…ì„ ì§€ì •í•´ì•¼ í•¨
+  ê·¸ë ‡ì§€ ì•Šìœ¼ë©´ ì—ëŸ¬
 */
 
 CREATE TABLE imsi_tbl2
@@ -176,55 +176,55 @@ AS
            LEFT JOIN departments d ON e.department_id = d.department_id;
 
 /*
-=> create table¿¡¼­ ÄÃ·³¸íÀ» ÁöÁ¤ÇÏ¸í ½Å±Ô Å×ÀÌºí¿¡ ÄÃ·³ ¸®½ºÆ®°¡ Á¤ÀÇµÇ¸é¼­
-  select ¹®À» ÅëÇØ ÇÊ¿äÇÑ µ¥ÀÌÅÍ°¡ insertµÊ
+=> create tableì—ì„œ ì»¬ëŸ¼ëª…ì„ ì§€ì •í•˜ëª… ì‹ ê·œ í…Œì´ë¸”ì— ì»¬ëŸ¼ ë¦¬ìŠ¤íŠ¸ê°€ ì •ì˜ë˜ë©´ì„œ
+  select ë¬¸ì„ í†µí•´ í•„ìš”í•œ ë°ì´í„°ê°€ insertë¨
 */
 
 SELECT * FROM imsi_tbl2;
 
 /*
 <update> 
-- ±âÁ¸ µ¥ÀÌÅÍ¸¦ ´Ù¸¥ µ¥ÀÌÅÍ·Î º¯°æÇÒ ¶§ »ç¿ë
+- ê¸°ì¡´ ë°ì´í„°ë¥¼ ë‹¤ë¥¸ ë°ì´í„°ë¡œ ë³€ê²½í•  ë•Œ ì‚¬ìš©
 
-update Å×ÀÌºí¸í
-set ÄÃ·³1 = value1, ÄÃ·³2=value2, ...
-where Á¶°Ç;
+update í…Œì´ë¸”ëª…
+set ì»¬ëŸ¼1 = value1, ì»¬ëŸ¼2=value2, ...
+where ì¡°ê±´;
 */
 
---¿¹1) Professor Å×ÀÌºí¿¡¼­ Á÷±ÞÀÌ Á¶±³¼öÀÎ ±³¼öµéÀÇ bonus¸¦ 100¸¸¿ø À¸·Î ÀÎ»óÇÏ½Ã¿À.
+--ì˜ˆ1) Professor í…Œì´ë¸”ì—ì„œ ì§ê¸‰ì´ ì¡°êµìˆ˜ì¸ êµìˆ˜ë“¤ì˜ bonusë¥¼ 100ë§Œì› ìœ¼ë¡œ ì¸ìƒí•˜ì‹œì˜¤.
 
 SELECT *
   FROM professor
- WHERE position = 'Á¶±³¼ö';
+ WHERE position = 'ì¡°êµìˆ˜';
 
 UPDATE professor
    SET bonus = 100
- WHERE position = 'Á¶±³¼ö';
+ WHERE position = 'ì¡°êµìˆ˜';
 
---¿¹2) student Å×ÀÌºí¿¡¼­  4ÇÐ³â '±èÀç¼ö' ÇÐ»ýÀÇ 2Àü°ø(deptno2) À» 101·Î ¼öÁ¤ÇÏ½Ã¿À. 
+--ì˜ˆ2) student í…Œì´ë¸”ì—ì„œ  4í•™ë…„ 'ê¹€ìž¬ìˆ˜' í•™ìƒì˜ 2ì „ê³µ(deptno2) ì„ 101ë¡œ ìˆ˜ì •í•˜ì‹œì˜¤. 
 
 UPDATE student
    SET deptno2 = 101
- WHERE grade = 4 AND name = '±èÀç¼ö';
+ WHERE grade = 4 AND name = 'ê¹€ìž¬ìˆ˜';
 
 SELECT *
   FROM student
- WHERE grade = 4 AND name = '±èÀç¼ö';
+ WHERE grade = 4 AND name = 'ê¹€ìž¬ìˆ˜';
 
---¿¹3) Professor Å×ÀÌºí¿¡¼­  Â÷¹üÃ¶±³¼öÀÇ Á÷±Þ°ú µ¿ÀÏÇÑ Á÷±ÞÀ» °¡Áø ±³¼öµé Áß ÇöÀç ±Þ¿©°¡ 
---250¸¸¿øÀÌ ¾È µÇ´Â ±³¼öµéÀÇ ±Þ¿©¸¦ 15% ÀÎ»óÇÏ½Ã¿À.
+--ì˜ˆ3) Professor í…Œì´ë¸”ì—ì„œ  ì°¨ë²”ì² êµìˆ˜ì˜ ì§ê¸‰ê³¼ ë™ì¼í•œ ì§ê¸‰ì„ ê°€ì§„ êµìˆ˜ë“¤ ì¤‘ í˜„ìž¬ ê¸‰ì—¬ê°€ 
+--250ë§Œì›ì´ ì•ˆ ë˜ëŠ” êµìˆ˜ë“¤ì˜ ê¸‰ì—¬ë¥¼ 15% ì¸ìƒí•˜ì‹œì˜¤.
 
 SELECT *
   FROM professor
  WHERE position = (SELECT position
                      FROM professor
-                    WHERE name = 'Â÷¹üÃ¶');
+                    WHERE name = 'ì°¨ë²”ì² ');
 
 UPDATE (SELECT *
           FROM professor
          WHERE position = (SELECT position
                              FROM professor
-                            WHERE name = 'Â÷¹üÃ¶'))
+                            WHERE name = 'ì°¨ë²”ì² '))
    SET pay = pay * (1.15)
  WHERE pay < 250;
 
@@ -233,20 +233,20 @@ UPDATE professor
  WHERE     pay < 250
        AND position = (SELECT position
                          FROM professor
-                        WHERE name = 'Â÷¹üÃ¶');
+                        WHERE name = 'ì°¨ë²”ì² ');
 
---´ÙÁß °ÇÀÇ update - ¼­ºêÄõ¸®¸¦ ÀÌ¿ëÇÑ update
+--ë‹¤ì¤‘ ê±´ì˜ update - ì„œë¸Œì¿¼ë¦¬ë¥¼ ì´ìš©í•œ update
 
 /*
-¼­ºêÄõ¸®¸¦ »ç¿ëÇÏ¸é ÇÑ ¹øÀÇ update ¸í·ÉÀ¸·Î ¿©·¯ °³ÀÇ ÄÃ·³À» ¼öÁ¤ÇÒ ¼ö ÀÖ´Ù.
-¿©·¯ ÄÃ·³À» ¼­ºêÄõ¸®ÀÇ °á°ú·Î updateÇÏ¸é µÈ´Ù.
+ì„œë¸Œì¿¼ë¦¬ë¥¼ ì‚¬ìš©í•˜ë©´ í•œ ë²ˆì˜ update ëª…ë ¹ìœ¼ë¡œ ì—¬ëŸ¬ ê°œì˜ ì»¬ëŸ¼ì„ ìˆ˜ì •í•  ìˆ˜ ìžˆë‹¤.
+ì—¬ëŸ¬ ì»¬ëŸ¼ì„ ì„œë¸Œì¿¼ë¦¬ì˜ ê²°ê³¼ë¡œ updateí•˜ë©´ ëœë‹¤.
 
-´ÙÁß°ÇÀÇ update¸¦ ÇÏ±â À§ÇØ¼­´Â ±âº»ÀûÀÎ update¹®ÀÇ ÆûÀ» »ç¿ëÇÏ°í
-subquery·Î ÃßÃâÇÑ µ¥ÀÌÅÍ¸¦ settingÇÏ·Á´Â ÄÃ·³ÀÇ µ¥ÀÌÅÍ°ªÀ¸·Î »ç¿ëÇÔ
+ë‹¤ì¤‘ê±´ì˜ updateë¥¼ í•˜ê¸° ìœ„í•´ì„œëŠ” ê¸°ë³¸ì ì¸ updateë¬¸ì˜ í¼ì„ ì‚¬ìš©í•˜ê³ 
+subqueryë¡œ ì¶”ì¶œí•œ ë°ì´í„°ë¥¼ settingí•˜ë ¤ëŠ” ì»¬ëŸ¼ì˜ ë°ì´í„°ê°’ìœ¼ë¡œ ì‚¬ìš©í•¨
 */
 
---1) EMP01 Å×ÀÌºíÀÇ »ç¿ø¹øÈ£°¡ 7844ÀÎ »ç¿øÀÇ ºÎ¼­¹øÈ£¿Í Á÷¹«(JOB)¸¦          
---»ç¿ø¹øÈ£°¡ 7782ÀÎ »ç¿ø°ú °°Àº Á÷¹«¿Í °°Àº ºÎ¼­·Î ¹èÁ¤ÇÏ¶ó  
+--1) EMP01 í…Œì´ë¸”ì˜ ì‚¬ì›ë²ˆí˜¸ê°€ 7844ì¸ ì‚¬ì›ì˜ ë¶€ì„œë²ˆí˜¸ì™€ ì§ë¬´(JOB)ë¥¼          
+--ì‚¬ì›ë²ˆí˜¸ê°€ 7782ì¸ ì‚¬ì›ê³¼ ê°™ì€ ì§ë¬´ì™€ ê°™ì€ ë¶€ì„œë¡œ ë°°ì •í•˜ë¼  
 
 SELECT job, deptno
   FROM emp
@@ -264,8 +264,8 @@ set job='MANAGER', deptno=10
 where empno=7844;
 */
 
---cf. ´ÙÁß ÄÃ·³ ¼­ºêÄõ¸®
---ÇÐ³âº° ÃÖ´ëÅ°¸¦ °®´Â ÇÐ»ýÀ¸ ¤ÓÁ¤º¸ Á¶È¸
+--cf. ë‹¤ì¤‘ ì»¬ëŸ¼ ì„œë¸Œì¿¼ë¦¬
+--í•™ë…„ë³„ ìµœëŒ€í‚¤ë¥¼ ê°–ëŠ” í•™ìƒìœ¼ ã…£ì •ë³´ ì¡°íšŒ
 
 SELECT *
   FROM student
@@ -282,15 +282,15 @@ UPDATE emp
              WHERE empno = 7782)
  WHERE empno = 7844;
 
---[3] exists¸¦ ÀÌ¿ëÇÑ ´ÙÁß°ÇÀÇ update
+--[3] existsë¥¼ ì´ìš©í•œ ë‹¤ì¤‘ê±´ì˜ update
 
 /*
-- ¼­ºêÄõ¸®ÀÇ ÄÃ·³°ªÀÌ Á¸ÀçÇÏ´Â ¿©ºÎ¸¦ Ã¼Å©
-- Á¸Àç¿©ºÎ¸¸ Ã¼Å©ÇÏ±â ¶§¹®¿¡ Á¸ÀçÇÏ¸é true, Á¸ÀçÇÏÁö ¾ÊÀ¸¸é false¸¦ ¸®ÅÏ
-- true¸é ¾÷µ¥ÀÌÆ®, false¸é ¾÷µ¥ÀÌÆ® ÁøÇàÇÏÁö ¾ÊÀ½
+- ì„œë¸Œì¿¼ë¦¬ì˜ ì»¬ëŸ¼ê°’ì´ ì¡´ìž¬í•˜ëŠ” ì—¬ë¶€ë¥¼ ì²´í¬
+- ì¡´ìž¬ì—¬ë¶€ë§Œ ì²´í¬í•˜ê¸° ë•Œë¬¸ì— ì¡´ìž¬í•˜ë©´ true, ì¡´ìž¬í•˜ì§€ ì•Šìœ¼ë©´ falseë¥¼ ë¦¬í„´
+- trueë©´ ì—…ë°ì´íŠ¸, falseë©´ ì—…ë°ì´íŠ¸ ì§„í–‰í•˜ì§€ ì•ŠìŒ
 */
 
---»èÁ¦µÈ ÄÚµå°¡ panmae Å×ÀÌºí¿¡ ÀÖ´Ù¸é »õ ÄÚµå·Î updateÇÏ±â
+--ì‚­ì œëœ ì½”ë“œê°€ panmae í…Œì´ë¸”ì— ìžˆë‹¤ë©´ ìƒˆ ì½”ë“œë¡œ updateí•˜ê¸°
 
 SELECT * FROM product;
 
@@ -315,8 +315,8 @@ UPDATE panmae a
               FROM product b
              WHERE a.P_CODE = b.P_CODE AND del_yn = 'Y');
 
---emp¿¡¼­ commÀº ±âÁ¸°ªº¸´Ù 100ÀÎ»óÇÏ°í,
---salÀº jobÀÌ CLERKÀÌ¸é 2¹è, MANAGERÀÌ¸é 3¹è, ³ª¸ÓÁö´Â 4¹è·Î ¼öÁ¤ÇÏ½Ã¿À
+--empì—ì„œ commì€ ê¸°ì¡´ê°’ë³´ë‹¤ 100ì¸ìƒí•˜ê³ ,
+--salì€ jobì´ CLERKì´ë©´ 2ë°°, MANAGERì´ë©´ 3ë°°, ë‚˜ë¨¸ì§€ëŠ” 4ë°°ë¡œ ìˆ˜ì •í•˜ì‹œì˜¤
 
 SELECT * FROM emp;
 
@@ -332,14 +332,14 @@ UPDATE emp
 */
 
 
---update Ãß°¡
---1) employees ¿¡¼­ »ç¿ø¹øÈ£°¡ 100ÀÎ Á÷¿øÀÇ job_id ¸¦ IT_PROG ·Î ¼öÁ¤
+--update ì¶”ê°€
+--1) employees ì—ì„œ ì‚¬ì›ë²ˆí˜¸ê°€ 100ì¸ ì§ì›ì˜ job_id ë¥¼ IT_PROG ë¡œ ìˆ˜ì •
 
 UPDATE employees
    SET job_id = 'IT_PROG'
  WHERE EMPLOYEE_ID = 100;
 
---2) employees ¿¡¼­ »ç¿ø¹øÈ£°¡ 100ÀÎ Á÷¿øÀÇ job_id ¸¦ »ç¿ø¹øÈ£°¡ 101ÀÎ job_id ·Î ¼öÁ¤
+--2) employees ì—ì„œ ì‚¬ì›ë²ˆí˜¸ê°€ 100ì¸ ì§ì›ì˜ job_id ë¥¼ ì‚¬ì›ë²ˆí˜¸ê°€ 101ì¸ job_id ë¡œ ìˆ˜ì •
 
 UPDATE employees
    SET job_id =
@@ -351,14 +351,14 @@ UPDATE employees
 SELECT * FROM employees;
 
 /*
-<[3] delete¹®>
-- µ¥ÀÌÅÍ¸¦ »èÁ¦ÇÏ´Â ±¸¹®
+<[3] deleteë¬¸>
+- ë°ì´í„°ë¥¼ ì‚­ì œí•˜ëŠ” êµ¬ë¬¸
 
-delete from Å×ÀÌºí
-where Á¶°Ç
+delete from í…Œì´ë¸”
+where ì¡°ê±´
 */
 
---¿¹1) dept2 Å×ÀÌºí¿¡¼­ ºÎ¼­¹øÈ£(dcode)°¡ 9000¹ø¿¡¼­ 9100¹ø »çÀÌÀÎ ¸ÅÀåµéÀ» »èÁ¦ÇÏ½Ã¿À 
+--ì˜ˆ1) dept2 í…Œì´ë¸”ì—ì„œ ë¶€ì„œë²ˆí˜¸(dcode)ê°€ 9000ë²ˆì—ì„œ 9100ë²ˆ ì‚¬ì´ì¸ ë§¤ìž¥ë“¤ì„ ì‚­ì œí•˜ì‹œì˜¤ 
 
 SELECT *
   FROM dept2
@@ -367,9 +367,9 @@ SELECT *
 DELETE FROM dept2
       WHERE dcode BETWEEN 9000 AND 9100;
 
---delete¹®¿¡¼­ ¼­ºêÄõ¸® ÀÌ¿ë
---´ÜÀÏÇà ¼­ºêÄõ¸®
---departments¿¡¼­ 10¹ø ºÎ¼­ÀÇ ºÎ¼­ÀåÀ» employees¿¡¼­ »èÁ¦
+--deleteë¬¸ì—ì„œ ì„œë¸Œì¿¼ë¦¬ ì´ìš©
+--ë‹¨ì¼í–‰ ì„œë¸Œì¿¼ë¦¬
+--departmentsì—ì„œ 10ë²ˆ ë¶€ì„œì˜ ë¶€ì„œìž¥ì„ employeesì—ì„œ ì‚­ì œ
 
 SELECT *
   FROM employees
@@ -390,8 +390,8 @@ DELETE FROM employees e
                                FROM departments d
                               WHERE d.DEPARTMENT_ID = 10);
 
--- ºÎ¸ðÀÚ½Ä°£ Á¦¾àÁ¶°ÇÀÌ °É·ÁÀÕ¾î¼­ »èÁ¦ ¿¡·¯
--- »õ·Î ¸¸µé¾î¼­ ¿¹Á¦ ½ÃÇà
+-- ë¶€ëª¨ìžì‹ê°„ ì œì•½ì¡°ê±´ì´ ê±¸ë ¤ìž‡ì–´ì„œ ì‚­ì œ ì—ëŸ¬
+-- ìƒˆë¡œ ë§Œë“¤ì–´ì„œ ì˜ˆì œ ì‹œí–‰
 
 CREATE TABLE new_employees
 AS
@@ -404,7 +404,7 @@ DELETE FROM new_employees e
                                FROM departments d
                               WHERE d.DEPARTMENT_ID = 10);
 
--- departments ¿¡¼­ location_id °¡ 1700 ÀÎ »ç¿øµéÀ» employees ¿¡¼­ »èÁ¦
+-- departments ì—ì„œ location_id ê°€ 1700 ì¸ ì‚¬ì›ë“¤ì„ employees ì—ì„œ ì‚­ì œ
 
 DELETE FROM new_employees
       WHERE DEPARTMENT_ID IN (SELECT DEPARTMENT_ID
@@ -421,16 +421,16 @@ DELETE FROM
 
 SELECT * FROM new_employees;
 
--- ´ÙÁßÄÃ·³ ¼­ºêÄõ¸®
---employees¿¡¼­ Á÷¾÷º° ÃÖ´ë ±Þ¿©¸¦ ¹Þ´Â »ç¿ø »èÁ¦
+-- ë‹¤ì¤‘ì»¬ëŸ¼ ì„œë¸Œì¿¼ë¦¬
+--employeesì—ì„œ ì§ì—…ë³„ ìµœëŒ€ ê¸‰ì—¬ë¥¼ ë°›ëŠ” ì‚¬ì› ì‚­ì œ
 
 DELETE new_employees
  WHERE (JOB_ID, SALARY) IN (  SELECT JOB_ID, MAX (SALARY)
                                 FROM new_employees
                             GROUP BY JOB_ID);
 
--- »ó°ü°ü°è ¼­ºêÄõ¸®
--- new_employees ¿¡¼­ ÀÚ½ÅÀÇ job_idÀÇ Æò±Õ ±Þ¿©º¸´Ù ¸¹ÀÌ ¹Þ´Â »ç¿ø »èÁ¦
+-- ìƒê´€ê´€ê³„ ì„œë¸Œì¿¼ë¦¬
+-- new_employees ì—ì„œ ìžì‹ ì˜ job_idì˜ í‰ê·  ê¸‰ì—¬ë³´ë‹¤ ë§Žì´ ë°›ëŠ” ì‚¬ì› ì‚­ì œ
 
 SELECT *
   FROM new_employees a
@@ -447,8 +447,8 @@ DELETE FROM new_employees a
 
 -- commit, rollback
 
---insert allÀ» ÀÌ¿ëÇÑ ¿©·¯ Å×ÀÌºí¿¡ ¿©·¯ Çà ÀÔ·ÂÇÏ±â
--- ¿¹1) ´Ù¸¥ Å×ÀÌºí¿¡ ÇÑ²¨¹ø¿¡ µ¥ÀÌÅÍ ÀÔ·ÂÇÏ±â 
+--insert allì„ ì´ìš©í•œ ì—¬ëŸ¬ í…Œì´ë¸”ì— ì—¬ëŸ¬ í–‰ ìž…ë ¥í•˜ê¸°
+-- ì˜ˆ1) ë‹¤ë¥¸ í…Œì´ë¸”ì— í•œêº¼ë²ˆì— ë°ì´í„° ìž…ë ¥í•˜ê¸° 
 
 INSERT ALL
   INTO p_01
@@ -461,9 +461,9 @@ SELECT * FROM p_01;
 
 SELECT * FROM p_02;
 
--- ¿¹2) ´Ù¸¥ Å×ÀÌºíÀÇ µ¥ÀÌÅÍ¸¦ °¡Á®¿Í¼­ ÀÔ·ÂÇÏ±â ? 
---Professor Å×ÀÌºí¿¡¼­ ±³¼ö¹øÈ£°¡ 1000¹ø¿¡¼­ 1999¹ø±îÁöÀÎ ±³¼öÀÇ ¹øÈ£¿Í ±³¼öÀÌ¸§Àº p_01 Å×ÀÌºí¿¡ ÀÔ·ÂÇÏ°í, 
---±³¼ö¹øÈ£°¡ 2000¹ø¿¡¼­ 2999¹ø±îÁöÀÎ ±³¼öÀÇ ¹øÈ£¿Í ±³¼öÀÌ¸§Àº p_02 Å×ÀÌºí¿¡ ÀÔ·ÂÇÏ½Ã¿À.
+-- ì˜ˆ2) ë‹¤ë¥¸ í…Œì´ë¸”ì˜ ë°ì´í„°ë¥¼ ê°€ì ¸ì™€ì„œ ìž…ë ¥í•˜ê¸° ? 
+--Professor í…Œì´ë¸”ì—ì„œ êµìˆ˜ë²ˆí˜¸ê°€ 1000ë²ˆì—ì„œ 1999ë²ˆê¹Œì§€ì¸ êµìˆ˜ì˜ ë²ˆí˜¸ì™€ êµìˆ˜ì´ë¦„ì€ p_01 í…Œì´ë¸”ì— ìž…ë ¥í•˜ê³ , 
+--êµìˆ˜ë²ˆí˜¸ê°€ 2000ë²ˆì—ì„œ 2999ë²ˆê¹Œì§€ì¸ êµìˆ˜ì˜ ë²ˆí˜¸ì™€ êµìˆ˜ì´ë¦„ì€ p_02 í…Œì´ë¸”ì— ìž…ë ¥í•˜ì‹œì˜¤.
 
   INSERT ALL
     WHEN profno BETWEEN 1000 AND 1999
@@ -480,9 +480,9 @@ SELECT * FROM p_01;
 
 SELECT * FROM p_02;
 
---¿¹3) ´Ù¸¥ Å×ÀÌºí¿¡ µ¿½Ã¿¡ °°Àº µ¥ÀÌÅÍ ÀÔ·ÂÇÏ±â ? 
---Professor Å×ÀÌºí¿¡¼­ ±³¼ö¹øÈ£°¡ 3000¹ø¿¡¼­ 3999¹ø±îÁöÀÎ ±³¼öµéÀÇ ¹øÈ£¿Í ±³¼öÀÌ¸§À» 
---p_01 Å×ÀÌºí°ú p_02 Å×ÀÌºí¿¡ µ¿½Ã¿¡ ÀÔ·ÂÇÏ½Ã¿À. 
+--ì˜ˆ3) ë‹¤ë¥¸ í…Œì´ë¸”ì— ë™ì‹œì— ê°™ì€ ë°ì´í„° ìž…ë ¥í•˜ê¸° ? 
+--Professor í…Œì´ë¸”ì—ì„œ êµìˆ˜ë²ˆí˜¸ê°€ 3000ë²ˆì—ì„œ 3999ë²ˆê¹Œì§€ì¸ êµìˆ˜ë“¤ì˜ ë²ˆí˜¸ì™€ êµìˆ˜ì´ë¦„ì„ 
+--p_01 í…Œì´ë¸”ê³¼ p_02 í…Œì´ë¸”ì— ë™ì‹œì— ìž…ë ¥í•˜ì‹œì˜¤. 
 
 INSERT ALL
   INTO p_01
@@ -497,12 +497,12 @@ SELECT * FROM p_01;
 
 SELECT * FROM p_02;
 
--- dept => dept01 Å×ÀÌºí ¸¸µé±â ?
--- emp => emp01 Å×ÀÌºí ¸¸µé±â ? 
+-- dept => dept01 í…Œì´ë¸” ë§Œë“¤ê¸° ?
+-- emp => emp01 í…Œì´ë¸” ë§Œë“¤ê¸° ? 
 
 --insert ? 
---1) dept01, emp01 Å×ÀÌºí¿¡ µ¥ÀÌÅÍ ÀÔ·ÂÇÏ±â ? 
---dept01 Å×ÀÌºí¿¡´Â ¸ðµç Ä®·³ ÀÔ·Â, emp01 Å×ÀÌºí¿¡´Â ÀÏºÎ Ä®·³¸¸ ÀÔ·Â 
+--1) dept01, emp01 í…Œì´ë¸”ì— ë°ì´í„° ìž…ë ¥í•˜ê¸° ? 
+--dept01 í…Œì´ë¸”ì—ëŠ” ëª¨ë“  ì¹¼ëŸ¼ ìž…ë ¥, emp01 í…Œì´ë¸”ì—ëŠ” ì¼ë¶€ ì¹¼ëŸ¼ë§Œ ìž…ë ¥ 
 
 CREATE TABLE dept01
 AS
@@ -525,26 +525,26 @@ AS
 DESC emp01;
 
 --update ? 
---1) DEPT01 Å×ÀÌºíÀÇ ºÎ¼­¹øÈ£°¡ 30ÀÎ ºÎ¼­ÀÇ À§Ä¡(LOC)¸¦ 'ºÎ»ê'À¸·Î ¼öÁ¤ ? 
+--1) DEPT01 í…Œì´ë¸”ì˜ ë¶€ì„œë²ˆí˜¸ê°€ 30ì¸ ë¶€ì„œì˜ ìœ„ì¹˜(LOC)ë¥¼ 'ë¶€ì‚°'ìœ¼ë¡œ ìˆ˜ì • ? 
 
 UPDATE dept01
-   SET loc = 'ºÎ»ê'
+   SET loc = 'ë¶€ì‚°'
  WHERE DEPTNO = 30;
 
---2) DEPT01 Å×ÀÌºíÀÇ Áö¿ªÀ» ¸ðµÎ '¼­¿ï'·Î ¼öÁ¤ ? 
+--2) DEPT01 í…Œì´ë¸”ì˜ ì§€ì—­ì„ ëª¨ë‘ 'ì„œìš¸'ë¡œ ìˆ˜ì • ? 
 
 UPDATE dept01
-   SET LOC = '¼­¿ï';
+   SET LOC = 'ì„œìš¸';
 
---3) emp01 Å×ÀÌºí¿¡¼­ jobÀÌ 'MANAGER' ÀÎ »ç¿øÀÇ ±Þ¿©(sal)¸¦ 10% ÀÎ»ó 
+--3) emp01 í…Œì´ë¸”ì—ì„œ jobì´ 'MANAGER' ì¸ ì‚¬ì›ì˜ ê¸‰ì—¬(sal)ë¥¼ 10% ì¸ìƒ 
 
 UPDATE emp01
    SET sal = sal * (1.1)
  WHERE job = 'MANAGER';
 
 
---¼­ºêÄõ¸®¸¦ ÀÌ¿ëÇÑ update ? 
---1) »ç¿ø¹øÈ£°¡ 7934ÀÎ »ç¿øÀÇ ±Þ¿©¿Í, Á÷¹«¸¦ »ç¿ø¹øÈ£°¡ 7654ÀÎ »ç¿øÀÇ Á÷¹«¿Í ±Þ¿© ·Î ¼öÁ¤(emp01 Å×ÀÌºí ÀÌ¿ë) 
+--ì„œë¸Œì¿¼ë¦¬ë¥¼ ì´ìš©í•œ update ? 
+--1) ì‚¬ì›ë²ˆí˜¸ê°€ 7934ì¸ ì‚¬ì›ì˜ ê¸‰ì—¬ì™€, ì§ë¬´ë¥¼ ì‚¬ì›ë²ˆí˜¸ê°€ 7654ì¸ ì‚¬ì›ì˜ ì§ë¬´ì™€ ê¸‰ì—¬ ë¡œ ìˆ˜ì •(emp01 í…Œì´ë¸” ì´ìš©) 
 
 UPDATE emp01
    SET (SAL, JOB) =
@@ -553,9 +553,9 @@ UPDATE emp01
              WHERE EMPNO = 7654)
  WHERE EMPNO = 7934;
 
---´Ù¸¥ Å×ÀÌºíÀ» ÂüÁ¶ÇÑ UPDATE ? 
---1) DEPT01 Å×ÀÌºí¿¡¼­ ºÎ¼­ÀÌ¸§ÀÌ SALESÀÎ µ¥ÀÌÅÍ¸¦ Ã£¾Æ ±× ºÎ¼­¿¡ ÇØ´çµÇ´Â 
---EMP01 Å×ÀÌºíÀÇ »ç¿ø¾÷¹«(JOB)¸¦ 'SALSEMAN'À¸·Î ¼öÁ¤ ? 
+--ë‹¤ë¥¸ í…Œì´ë¸”ì„ ì°¸ì¡°í•œ UPDATE ? 
+--1) DEPT01 í…Œì´ë¸”ì—ì„œ ë¶€ì„œì´ë¦„ì´ SALESì¸ ë°ì´í„°ë¥¼ ì°¾ì•„ ê·¸ ë¶€ì„œì— í•´ë‹¹ë˜ëŠ” 
+--EMP01 í…Œì´ë¸”ì˜ ì‚¬ì›ì—…ë¬´(JOB)ë¥¼ 'SALSEMAN'ìœ¼ë¡œ ìˆ˜ì • ? 
 
 UPDATE emp01
    SET job = 'SALSEMAN'
@@ -563,8 +563,8 @@ UPDATE emp01
                    FROM dept01
                   WHERE dname = 'SALES');
 
---2) DEPT01 Å×ÀÌºíÀÇ À§Ä¡(loc)°¡  'DALLAS'ÀÎ µ¥ÀÌÅÍ¸¦ Ã£¾Æ ±× ºÎ¼­¿¡ ÇØ´çÇÏ´Â 
---EMP01 Å×ÀÌºíÀÇ »ç¿øµéÀÇ Á÷¹«(JOB)À» 'ANALYST'·Î ¼öÁ¤
+--2) DEPT01 í…Œì´ë¸”ì˜ ìœ„ì¹˜(loc)ê°€  'DALLAS'ì¸ ë°ì´í„°ë¥¼ ì°¾ì•„ ê·¸ ë¶€ì„œì— í•´ë‹¹í•˜ëŠ” 
+--EMP01 í…Œì´ë¸”ì˜ ì‚¬ì›ë“¤ì˜ ì§ë¬´(JOB)ì„ 'ANALYST'ë¡œ ìˆ˜ì •
 
 UPDATE emp01
    SET job = 'ANALYST'
@@ -574,31 +574,31 @@ UPDATE emp01
 
 
 -- DELETE ? 
---1) EMP01Å×ÀÌºí¿¡¼­ 7782ÀÇ »ç¿ø¹øÈ£ÀÎ »ç¿øÁ¤º¸¸¦ ¸ðµÎ »èÁ¦ ? 
+--1) EMP01í…Œì´ë¸”ì—ì„œ 7782ì˜ ì‚¬ì›ë²ˆí˜¸ì¸ ì‚¬ì›ì •ë³´ë¥¼ ëª¨ë‘ ì‚­ì œ ? 
 
 DELETE FROM emp01
       WHERE EMPNO = 7782;
 
---2) EMP01Å×ÀÌºí¿¡¼­ Á÷¹«(JOB)ÀÌ 'CLERK'ÀÎ »ç¿øµéÀÇ Á¤º¸¸¦ »èÁ¦ ? 
+--2) EMP01í…Œì´ë¸”ì—ì„œ ì§ë¬´(JOB)ì´ 'CLERK'ì¸ ì‚¬ì›ë“¤ì˜ ì •ë³´ë¥¼ ì‚­ì œ ? 
 
 DELETE FROM emp01
       WHERE job = 'CLERK';
 
---3) EMP01Å×ÀÌºíÀÇ ¸ðµç Á¤º¸¸¦ »èÁ¦ ÈÄ rollback 
+--3) EMP01í…Œì´ë¸”ì˜ ëª¨ë“  ì •ë³´ë¥¼ ì‚­ì œ í›„ rollback 
 
 DELETE FROM emp01;
 
---¼­ºêÄõ¸®¸¦ ÀÌ¿ëÇÑ µ¥ÀÌÅÍÀÇ »èÁ¦ ? 
---1) 'ACCOUNTING'ºÎ¼­¸í¿¡ ´ëÇÑ ºÎ¼­ÄÚµå¸¦ DEPT01Å×ÀÌºí¿¡¼­ °Ë»öÇÑ ÈÄ   
---ÇØ´ç ºÎ¼­ÄÚµå¸¦ °¡Áø »ç¿øÀÇ Á¤º¸¸¦ EMP01Å×ÀÌºí¿¡¼­ »èÁ¦ ? 
+--ì„œë¸Œì¿¼ë¦¬ë¥¼ ì´ìš©í•œ ë°ì´í„°ì˜ ì‚­ì œ ? 
+--1) 'ACCOUNTING'ë¶€ì„œëª…ì— ëŒ€í•œ ë¶€ì„œì½”ë“œë¥¼ DEPT01í…Œì´ë¸”ì—ì„œ ê²€ìƒ‰í•œ í›„   
+--í•´ë‹¹ ë¶€ì„œì½”ë“œë¥¼ ê°€ì§„ ì‚¬ì›ì˜ ì •ë³´ë¥¼ EMP01í…Œì´ë¸”ì—ì„œ ì‚­ì œ ? 
 
 DELETE FROM emp01
       WHERE DEPTNO = (SELECT deptno
                         FROM dept01
                        WHERE dname = 'ACCOUNTING');
 
---2) DEPT01Å×ÀÌºí¿¡¼­ ºÎ¼­ÀÇ À§Ä¡°¡ 'NEW YORK'ÀÎ ºÎ¼­¸¦ Ã£¾Æ   
---EMP01Å×ÀÌºí¿¡¼­ ±× ºÎ¼­¿¡ ÇØ´çÇÏ´Â »ç¿øÀ» »èÁ¦ 
+--2) DEPT01í…Œì´ë¸”ì—ì„œ ë¶€ì„œì˜ ìœ„ì¹˜ê°€ 'NEW YORK'ì¸ ë¶€ì„œë¥¼ ì°¾ì•„   
+--EMP01í…Œì´ë¸”ì—ì„œ ê·¸ ë¶€ì„œì— í•´ë‹¹í•˜ëŠ” ì‚¬ì›ì„ ì‚­ì œ 
 
 DELETE FROM emp01
       WHERE DEPTNO = (SELECT deptno

@@ -1,5 +1,5 @@
-/* Formatted on 2020/04/28 ¿ÀÈÄ 7:31:30 (QP5 v5.360) */
--- 1) panmae, product ÀÌ¿ë,
+/* Formatted on 2020/04/28 ì˜¤í›„ 7:31:30 (QP5 v5.360) */
+-- 1) panmae, product ì´ìš©,
 
 SELECT p.P_DATE,
        p.P_CODE,
@@ -9,7 +9,7 @@ SELECT p.P_DATE,
        b.P_PRICE * p.p_qty     total
   FROM panmae p JOIN product b ON p.P_CODE = b.P_CODE;
 
--- 2) °Ô½ÃÆÇ(board), ÇÑÁÙ ´äº¯(comments) Å×ÀÌºí ¸¸µé±â
+-- 2) ê²Œì‹œíŒ(board), í•œì¤„ ë‹µë³€(comments) í…Œì´ë¸” ë§Œë“¤ê¸°
 
 DROP TABLE board CASCADE CONSTRAINT;
 
@@ -43,8 +43,8 @@ CREATE SEQUENCE seq_board INCREMENT BY 1 START WITH 1 NOCACHE;
 
 CREATE SEQUENCE seq_comments INCREMENT BY 1 START WITH 1 NOCACHE;
 
--- 3) °Ô½ÃÆÇ°ú ÇÑÁÙ ´äº¯ Å×ÀÌºíÀ» ÀÌ¿ëÇÏ¿© °Ô½ÃÆÇ¹øÈ£, ÀÛ¼ºÀÚ, Á¦¸ñ, ³»¿ë, ÇÑÁÙ´äº¯ ¹øÈ£, 
---    ÀÛ¼ºÀÚ, ³» ¿ë, ÀÛ¼ºÀÏÀ» Á¶È¸(Á¶ÀÎ) °¢°¢ ºä ¸¸µé±â
+-- 3) ê²Œì‹œíŒê³¼ í•œì¤„ ë‹µë³€ í…Œì´ë¸”ì„ ì´ìš©í•˜ì—¬ ê²Œì‹œíŒë²ˆí˜¸, ìž‘ì„±ìž, ì œëª©, ë‚´ìš©, í•œì¤„ë‹µë³€ ë²ˆí˜¸, 
+--    ìž‘ì„±ìž, ë‚´ ìš©, ìž‘ì„±ì¼ì„ ì¡°íšŒ(ì¡°ì¸) ê°ê° ë·° ë§Œë“¤ê¸°
 
 CREATE OR REPLACE VIEW v_board_comments
 AS
@@ -58,51 +58,51 @@ AS
            c.REGDATE
       FROM board b JOIN comments c ON b.NO = c.BOARD_NO;
 
--- 1. °Ô½ÃÆÇ¿¡ ±Û¾²±â - insert ? 
+-- 1. ê²Œì‹œíŒì— ê¸€ì“°ê¸° - insert ? 
 
 INSERT INTO board
      VALUES (seq_board.NEXTVAL,
-             'java¿¡ ´ëÇØ',
+             'javaì— ëŒ€í•´',
              'hong',
              'h123',
-             'java¶õ...',
+             'javaëž€...',
              SYSDATE,
              0);
 
 INSERT INTO board
      VALUES (seq_board.NEXTVAL,
-             'oracle¿¡ ´ëÇØ',
+             'oracleì— ëŒ€í•´',
              'kim',
              'k123',
-             'oracle¶õ...',
+             'oracleëž€...',
              SYSDATE,
              0);
 
 INSERT INTO board
      VALUES (3,
-             'html¿¡ ´ëÇØ',
+             'htmlì— ëŒ€í•´',
              'hong',
              'h123',
-             'htmlÀÌ¶õ...',
+             'htmlì´ëž€...',
              SYSDATE,
              0);
 
 INSERT INTO board
      VALUES (4,
-             'mysql¿¡ ´ëÇØ',
+             'mysqlì— ëŒ€í•´',
              'kim2',
              'k123',
-             'mysqlÀÌ¶õ...',
+             'mysqlì´ëž€...',
              SYSDATE,
              0);
 
---2. °Ô½ÃÆÇÀÇ 1¹ø ±Û¿¡ ´ëÇØ ÇÑÁÙ ´äº¯ 2°³ ¾²±â ?
+--2. ê²Œì‹œíŒì˜ 1ë²ˆ ê¸€ì— ëŒ€í•´ í•œì¤„ ë‹µë³€ 2ê°œ ì“°ê¸° ?
 
 INSERT INTO comments
      VALUES (seq_comments.NEXTVAL,
              'lee',
              'l123',
-             'ÁÁÀº Á¤º¸ °¨»ç',
+             'ì¢‹ì€ ì •ë³´ ê°ì‚¬',
              1,
              SYSDATE,
              0);
@@ -111,7 +111,7 @@ INSERT INTO comments
      VALUES (seq_comments.NEXTVAL,
              'park',
              'p123',
-             '¼öÁ¤ ºÎÅ¹µå·Á¿ä',
+             'ìˆ˜ì • ë¶€íƒë“œë ¤ìš”',
              2,
              SYSDATE,
              0);
@@ -120,7 +120,7 @@ INSERT INTO comments
      VALUES (seq_comments.NEXTVAL,
              'lee',
              'l123',
-             'ÁÁÀº Á¤º¸ °¨»ç',
+             'ì¢‹ì€ ì •ë³´ ê°ì‚¬',
              2,
              SYSDATE,
              0);
@@ -129,38 +129,38 @@ INSERT INTO comments
      VALUES (seq_comments.NEXTVAL,
              'park',
              'p123',
-             '¼öÁ¤ ºÎÅ¹µå·Á¿ä',
+             'ìˆ˜ì • ë¶€íƒë“œë ¤ìš”',
              1,
              SYSDATE,
              0);
 
 
--- 3. ÇÑÁÙ ´äº¯ 1°³ »èÁ¦ - delete ? 
+-- 3. í•œì¤„ ë‹µë³€ 1ê°œ ì‚­ì œ - delete ? 
 
 DELETE FROM comments
       WHERE no = 2;
 
---4. °Ô½ÃÆÇÀÇ ±Û ¼öÁ¤ - update ? 
+--4. ê²Œì‹œíŒì˜ ê¸€ ìˆ˜ì • - update ? 
 
 UPDATE board
-   SET main_text = 'java´Â ÇÁ·Î±×·¡¹Ö ¾ð¾î·Î½á...'
+   SET main_text = 'javaëŠ” í”„ë¡œê·¸ëž˜ë° ì–¸ì–´ë¡œì¨...'
  WHERE no = 1;
 
---5. °Ô½ÃÆÇÀÇ ±Û »èÁ¦ ? ÇÑÁÙ ´äº¯µµ °°ÀÌ »èÁ¦µÇµµ·Ï ? 
+--5. ê²Œì‹œíŒì˜ ê¸€ ì‚­ì œ ? í•œì¤„ ë‹µë³€ë„ ê°™ì´ ì‚­ì œë˜ë„ë¡ ? 
 
 DELETE FROM board
       WHERE no = 1;
 
---6. °Ô½ÃÆÇ ¸ñ·Ï - select ? ¹øÈ£ ³»¸²Â÷¼øÀ¸·Î ÀüÃ¼ Á¶È¸ ? 
+--6. ê²Œì‹œíŒ ëª©ë¡ - select ? ë²ˆí˜¸ ë‚´ë¦¼ì°¨ìˆœìœ¼ë¡œ ì „ì²´ ì¡°íšŒ ? 
 
   SELECT *
     FROM board
 ORDER BY no;
 
---7. °Ô½ÃÆÇ ¸ñ·Ï¿¡¼­ ¼±ÅÃÇÑ ±Û º¸±â ? 
---¼±ÅÃÇÑ ±Û¸¸ Á¶È¸ - select ? 
---¼±ÅÃÇÑ ±ÛÀÇ Á¶È¸¼ö Áõ°¡ - update ? 
---¼±ÅÃÇÑ ±ÛÀÇ ÇÑÁÙ ´äº¯ ¸ðµÎ Á¶È¸ - select ? 
+--7. ê²Œì‹œíŒ ëª©ë¡ì—ì„œ ì„ íƒí•œ ê¸€ ë³´ê¸° ? 
+--ì„ íƒí•œ ê¸€ë§Œ ì¡°íšŒ - select ? 
+--ì„ íƒí•œ ê¸€ì˜ ì¡°íšŒìˆ˜ ì¦ê°€ - update ? 
+--ì„ íƒí•œ ê¸€ì˜ í•œì¤„ ë‹µë³€ ëª¨ë‘ ì¡°íšŒ - select ? 
 
 SELECT main_text
   FROM board
@@ -173,6 +173,6 @@ UPDATE board
 select * from v_board_comments
 where BOARD_NO=2;
 
---8. Á¦¸ñ, ³»¿ë, ÀÛ¼ºÀÚ·Î °Ë»ö - select
+--8. ì œëª©, ë‚´ìš©, ìž‘ì„±ìžë¡œ ê²€ìƒ‰ - select
 select * from board
 where title like '%%' and main_text like '%%' and user_id like '%%';

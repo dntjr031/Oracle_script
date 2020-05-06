@@ -1,28 +1,28 @@
-/* Formatted on 2020/05/06 ¿ÀÀü 10:44:36 (QP5 v5.360) */
---8°­_seq_index_view.sql
---[2020-04-28 È­¿äÀÏ]
+/* Formatted on 2020/05/06 ì˜¤ì „ 10:44:36 (QP5 v5.360) */
+--8ê°•_seq_index_view.sql
+--[2020-04-28 í™”ìš”ì¼]
 
 /*
     <sequence>
-    - ¿¬¼ÓÀûÀÎ ¼ýÀÚ¸¦ »ý¼ºÇØ³»´Â µ¥ÀÌÅÍ º£ÀÌ½º °´Ã¼
-    - ±âº»Å°°¡ °¢°¢ÀÇ ÀÔ·ÂµÇ´Â row¸¦ ½Äº°ÇÒ ¼ö ÀÖ±â¸¸ ÇÏ¸é µÈ´Ù°í ÇÒ¶§,
-      ½ÃÄö½º¿¡ ÀÇÇØ »ý¼ºµÈ °ªÀ» »ç¿ëÇÔ
-    - Å×ÀÌºí¿¡ ÀÖ´Â ±âº»Å° °ªÀ» »ý¼ºÇÏ±â À§ÇØ »ç¿ëµÇ´Â µ¶¸³ÀûÀÎ °´Ã¼
-    - Å×ÀÌºí¿¡ Á¾¼ÓµÇÁö ¾ÊÀ½ => ÇÏ³ªÀÇ ½ÃÄö½º¸¦ ¿©·¯ °³ÀÇ Å×ÀÌºí¿¡ µ¿½Ã¿¡ »ç¿ëÇÒ ¼ö ÀÖ´Ù.
+    - ì—°ì†ì ì¸ ìˆ«ìžë¥¼ ìƒì„±í•´ë‚´ëŠ” ë°ì´í„° ë² ì´ìŠ¤ ê°ì²´
+    - ê¸°ë³¸í‚¤ê°€ ê°ê°ì˜ ìž…ë ¥ë˜ëŠ” rowë¥¼ ì‹ë³„í•  ìˆ˜ ìžˆê¸°ë§Œ í•˜ë©´ ëœë‹¤ê³  í• ë•Œ,
+      ì‹œí€€ìŠ¤ì— ì˜í•´ ìƒì„±ëœ ê°’ì„ ì‚¬ìš©í•¨
+    - í…Œì´ë¸”ì— ìžˆëŠ” ê¸°ë³¸í‚¤ ê°’ì„ ìƒì„±í•˜ê¸° ìœ„í•´ ì‚¬ìš©ë˜ëŠ” ë…ë¦½ì ì¸ ê°ì²´
+    - í…Œì´ë¸”ì— ì¢…ì†ë˜ì§€ ì•ŠìŒ => í•˜ë‚˜ì˜ ì‹œí€€ìŠ¤ë¥¼ ì—¬ëŸ¬ ê°œì˜ í…Œì´ë¸”ì— ë™ì‹œì— ì‚¬ìš©í•  ìˆ˜ ìžˆë‹¤.
     
-    create sequence ½ÃÄö½º¸í
-        minvalue    --½ÃÄö½ºÀÇ ÃÖ¼Ò°ª
-        maxvalue    --½ÃÄö½ºÀÇ ÃÖ´ë°ª
-        start with ½ÃÀÛ°ª
-        increment by Áõ°¡Ä¡
-        nocache     --cache¸¦ »ç¿ëÇÏÁö ¾Ê°Ú´Ù
-        nocycle     --»ý¼ºµÈ ½ÃÄö½º°ªÀÌ ÃÖ´ëÄ¡ È¤Àº ÃÖ¼ÒÄ¡¿¡ ´Ù´Ù¶úÀ» ¶§ ÃÊ±â°ªºÎÅÍ ´Ù½Ã ½ÃÀÛÇÒ Áö ¿©ºÎ
-        order       --¿äÃ»µÇ´Â ¼ø¼­´ë·Î °ªÀ» »ý¼º
+    create sequence ì‹œí€€ìŠ¤ëª…
+        minvalue    --ì‹œí€€ìŠ¤ì˜ ìµœì†Œê°’
+        maxvalue    --ì‹œí€€ìŠ¤ì˜ ìµœëŒ€ê°’
+        start with ì‹œìž‘ê°’
+        increment by ì¦ê°€ì¹˜
+        nocache     --cacheë¥¼ ì‚¬ìš©í•˜ì§€ ì•Šê² ë‹¤
+        nocycle     --ìƒì„±ëœ ì‹œí€€ìŠ¤ê°’ì´ ìµœëŒ€ì¹˜ í˜¹ì€ ìµœì†Œì¹˜ì— ë‹¤ë‹¤ëžì„ ë•Œ ì´ˆê¸°ê°’ë¶€í„° ë‹¤ì‹œ ì‹œìž‘í•  ì§€ ì—¬ë¶€
+        order       --ìš”ì²­ë˜ëŠ” ìˆœì„œëŒ€ë¡œ ê°’ì„ ìƒì„±
         
-    ¡Ø ½ÃÄö½º »ç¿ë
-    nextval, currval ÀÇ»çÄÃ·³
-    1) nextval - ¹Ù·Î ´ÙÀ½¿¡ »ý¼ºµÉ ½ÃÄö½º¸¦ °¡Áö°í ÀÖ´Ù.
-    2) currval - ÇöÀç ½ÃÄö½º °ªÀ» °¡Áö°í ÀÖ´Ù
+    â€» ì‹œí€€ìŠ¤ ì‚¬ìš©
+    nextval, currval ì˜ì‚¬ì»¬ëŸ¼
+    1) nextval - ë°”ë¡œ ë‹¤ìŒì— ìƒì„±ë  ì‹œí€€ìŠ¤ë¥¼ ê°€ì§€ê³  ìžˆë‹¤.
+    2) currval - í˜„ìž¬ ì‹œí€€ìŠ¤ ê°’ì„ ê°€ì§€ê³  ìžˆë‹¤
 */
 
 SELECT * FROM pd;
@@ -42,12 +42,12 @@ SELECT *
   FROM user_constraints
  WHERE table_name = 'PD_TEMP1';
 
---½ÃÄö½º »ý¼º
+--ì‹œí€€ìŠ¤ ìƒì„±
 
-CREATE SEQUENCE pd_temp1_seq START WITH 50 INCREMENT BY 1   -- 50ºÎÅÍ ½ÃÀÛÇØ¼­ 1¾¿ Áõ°¡
+CREATE SEQUENCE pd_temp1_seq START WITH 50 INCREMENT BY 1   -- 50ë¶€í„° ì‹œìž‘í•´ì„œ 1ì”© ì¦ê°€
                                                          NOCACHE;
 
---»ç¿ëÀÚ°¡ »ý¼ºÇÑ sequence Á¶È¸
+--ì‚¬ìš©ìžê°€ ìƒì„±í•œ sequence ì¡°íšŒ
 
 SELECT * FROM user_sequences;
 
@@ -55,12 +55,12 @@ ALTER TABLE pd_temp1
     MODIFY regdate DEFAULT SYSDATE;
 
 INSERT INTO pd_temp1 (no, pdname, price)
-     VALUES (pd_temp1_seq.NEXTVAL, 'ÄÄÇ»ÅÍ', 2000000);
+     VALUES (pd_temp1_seq.NEXTVAL, 'ì»´í“¨í„°', 2000000);
 
 -- seq = 50
 
 INSERT INTO pd_temp1 (no, pdname, price)
-     VALUES (pd_temp1_seq.NEXTVAL, '¸ð´ÏÅÍ', 350000);
+     VALUES (pd_temp1_seq.NEXTVAL, 'ëª¨ë‹ˆí„°', 350000);
 
 -- seq=51
 
@@ -68,14 +68,14 @@ SELECT * FROM pd_temp1;
 
 SELECT pd_temp1_seq.CURRVAL FROM DUAL;
 
--- ÇöÀç seq = 51
+-- í˜„ìž¬ seq = 51
 
 SELECT pd_temp1_seq.NEXTVAL FROM DUAL;
 
--- ´ÙÀ½ seq = 52, °ªÀÌ Áõ°¡µÇ¾î ¹ö·Á¼­ ÀÌÈÄ »ç¿ë½Ã ±× ´ÙÀ½°ª(53)ºÎÅÍ Ã³¸®µÊ
+-- ë‹¤ìŒ seq = 52, ê°’ì´ ì¦ê°€ë˜ì–´ ë²„ë ¤ì„œ ì´í›„ ì‚¬ìš©ì‹œ ê·¸ ë‹¤ìŒê°’(53)ë¶€í„° ì²˜ë¦¬ë¨
 
 INSERT INTO pd_temp1 (no, pdname, price)
-     VALUES (pd_temp1_seq.NEXTVAL, 'Å°º¸µå', 27000);
+     VALUES (pd_temp1_seq.NEXTVAL, 'í‚¤ë³´ë“œ', 27000);
 
 -- seq = 53
 
@@ -91,11 +91,11 @@ CREATE TABLE pd2
     regdate    DATE DEFAULT SYSDATE
 );
 
--- 1ºÎÅÍ ½ÃÀÛÇØ¼­ 1¾¿ Áõ°¡ÇÏ´Â ½ÃÄö½º °´Ã¼ »ý¼º
+-- 1ë¶€í„° ì‹œìž‘í•´ì„œ 1ì”© ì¦ê°€í•˜ëŠ” ì‹œí€€ìŠ¤ ê°ì²´ ìƒì„±
 
 CREATE SEQUENCE pd2_seq INCREMENT BY 1 START WITH 1 NOCACHE;
 
---µ¥ÀÌÅÍ ÀÔ·Â
+--ë°ì´í„° ìž…ë ¥
 
 INSERT INTO pd2 (no,
                  pdcode,
@@ -104,9 +104,9 @@ INSERT INTO pd2 (no,
                  company)
      VALUES (pd2_seq.NEXTVAL,
              'A01',
-             '³ëÆ®ºÏ',
+             'ë…¸íŠ¸ë¶',
              3500000,
-             '»ï¼º');
+             'ì‚¼ì„±');
 
 INSERT INTO pd2 (no,
                  pdcode,
@@ -114,52 +114,52 @@ INSERT INTO pd2 (no,
                  price)
      VALUES (pd2_seq.NEXTVAL,
              'B01',
-             'Å°º¸µå',
+             'í‚¤ë³´ë“œ',
              38000);
 
 SELECT * FROM pd2;
 
 SELECT * FROM user_sequences;
 
---½ÃÄö½º »èÁ¦
---drop sequence ½ÃÄö½º¸í;
+--ì‹œí€€ìŠ¤ ì‚­ì œ
+--drop sequence ì‹œí€€ìŠ¤ëª…;
 
 DROP SEQUENCE pd_temp1_seq;
 
 /*
     <index>
-    - Å×ÀÌºíÀÇ µ¥ÀÌÅÍ¸¦ »¡¸® Ã£±â À§ÇÑ ²¿¸®Ç¥
-    - ÀÎµ¦½º°¡ ¾ø´Ù¸é Æ¯Á¤ÇÑ °ªÀ» Ã£±â À§ÇØ ¸ðµç µ¥ÀÌÅÍ ÆäÀÌÁö¸¦ ´Ù µÚÁ®¾ß ÇÔ
+    - í…Œì´ë¸”ì˜ ë°ì´í„°ë¥¼ ë¹¨ë¦¬ ì°¾ê¸° ìœ„í•œ ê¼¬ë¦¬í‘œ
+    - ì¸ë±ìŠ¤ê°€ ì—†ë‹¤ë©´ íŠ¹ì •í•œ ê°’ì„ ì°¾ê¸° ìœ„í•´ ëª¨ë“  ë°ì´í„° íŽ˜ì´ì§€ë¥¼ ë‹¤ ë’¤ì ¸ì•¼ í•¨
       (table full scan)
     - index seek
-      ÀÎµ¦½º¸¦ »ç¿ëÇÏ´Â °ÍÀÌ ´õ È¿°úÀûÀÌ¶ó¸é, ¿À¶óÅ¬Àº ¸ðµç ÆäÀÌÁö¸¦ µÚÁöÁö ¾Ê°í
-      ÀÎµ¦½º ÆäÀÌÁö¸¦ Ã£¾Æ¼­ ½±°Ô µ¥ÀÌÅÍ¸¦ °¡Á®¿È
-    - ÇÑ Å×ÀÌºí¿¡ ¿©·¯ °³ÀÇ ÀÎµ¦½º¸¦ »ý¼ºÇÒ ¼ö ÀÖÀ½
+      ì¸ë±ìŠ¤ë¥¼ ì‚¬ìš©í•˜ëŠ” ê²ƒì´ ë” íš¨ê³¼ì ì´ë¼ë©´, ì˜¤ë¼í´ì€ ëª¨ë“  íŽ˜ì´ì§€ë¥¼ ë’¤ì§€ì§€ ì•Šê³ 
+      ì¸ë±ìŠ¤ íŽ˜ì´ì§€ë¥¼ ì°¾ì•„ì„œ ì‰½ê²Œ ë°ì´í„°ë¥¼ ê°€ì ¸ì˜´
+    - í•œ í…Œì´ë¸”ì— ì—¬ëŸ¬ ê°œì˜ ì¸ë±ìŠ¤ë¥¼ ìƒì„±í•  ìˆ˜ ìžˆìŒ
     
-    create [unique] index ÀÎµ¦½º¸í
-    on Å×ÀÌºí¸í(ÄÃ·³¸í1, ÄÃ·³¸í2, ...)
+    create [unique] index ì¸ë±ìŠ¤ëª…
+    on í…Œì´ë¸”ëª…(ì»¬ëŸ¼ëª…1, ì»¬ëŸ¼ëª…2, ...)
 */
 
---primary key³ª unique Á¦¾àÁ¶°ÇÀ» ÁÖ¸é ÀÚµ¿À¸·Î unique index°¡ »ý¼ºµÊ
+--primary keyë‚˜ unique ì œì•½ì¡°ê±´ì„ ì£¼ë©´ ìžë™ìœ¼ë¡œ unique indexê°€ ìƒì„±ë¨
 
 SELECT * FROM pd2;
 
---»óÇ° ÄÚµå ÀÎµ¦½º
+--ìƒí’ˆ ì½”ë“œ ì¸ë±ìŠ¤
 
 CREATE UNIQUE INDEX idx_pd2_pdcode
     ON pd2 (pdcode);
 
---»óÇ°¸í ÀÎµ¦½º
+--ìƒí’ˆëª… ì¸ë±ìŠ¤
 
 CREATE INDEX idx_pd2_pdname
     ON pd2 (pdname);
 
---»óÇ° µî·ÏÀÏ, È¸»ç¸í º¹ÇÕÅ° ÀÎµ¦½º
+--ìƒí’ˆ ë“±ë¡ì¼, íšŒì‚¬ëª… ë³µí•©í‚¤ ì¸ë±ìŠ¤
 
 CREATE INDEX idx_pd2_regdate_company
     ON pd2 (regdate, company);
 
---ÀÎµ¦½º Á¶È¸
+--ì¸ë±ìŠ¤ ì¡°íšŒ
 
 SELECT *
   FROM user_indexes
@@ -173,7 +173,7 @@ SELECT *
   FROM user_constraints
  WHERE table_name = 'PD2';
 
---ÀÎµ¦½º¸¦ ÀÌ¿ëÇÑ Á¶È¸
+--ì¸ë±ìŠ¤ë¥¼ ì´ìš©í•œ ì¡°íšŒ
 
 SELECT *
   FROM pd2
@@ -181,45 +181,45 @@ SELECT *
 
 SELECT *
   FROM pd2
- WHERE pdname = 'Å°º¸µå';
+ WHERE pdname = 'í‚¤ë³´ë“œ';
 
 SELECT *
   FROM pd2
- WHERE regdate >= '2020-04-28' AND company = '»ï¼º';
+ WHERE regdate >= '2020-04-28' AND company = 'ì‚¼ì„±';
 
---index »èÁ¦
---drop index ÀÎµ¦½º¸í
+--index ì‚­ì œ
+--drop index ì¸ë±ìŠ¤ëª…
 DROP INDEX idx_pd2_pdcode;
 
 /*
-    <ºä-view>
-    - view´Â Å×ÀÌºí¿¡ ÀÖ´Â µ¥ÀÌÅÍ¸¦ º¸¿©ÁÖ´Â Çü½ÄÀ» Á¤ÀÇÇÏ´Â select¹®ÀåÀÇ µ¢¾î¸®
-    - view´Â ½ÇÁ¦·Î µ¥ÀÌÅÍ¸¦ °¡Áö°í ÀÖÁö´Â ¾ÊÁö¸¸ ºä¸¦ ÅëÇØ µ¥ÀÌÅÍ¸¦ Á¶È¸ÇÒ ¼ö ÀÖ°í,
-      µ¥ÀÌÅÍ¸¦ ÀÔ·Â, ¼öÁ¤, »èÁ¦ÇÒ ¼ö ÀÖÀ¸¸ç ´Ù¸¥ Å×ÀÌºí°ú Á¶ÀÎµµ ÇÒ ¼ö ÀÖ±â ¶§¹®¿¡ °¡»óÀÇ ³í¸®Àû Å×ÀÌºíÀÌ¶ó°í ÇÔ
+    <ë·°-view>
+    - viewëŠ” í…Œì´ë¸”ì— ìžˆëŠ” ë°ì´í„°ë¥¼ ë³´ì—¬ì£¼ëŠ” í˜•ì‹ì„ ì •ì˜í•˜ëŠ” selectë¬¸ìž¥ì˜ ë©ì–´ë¦¬
+    - viewëŠ” ì‹¤ì œë¡œ ë°ì´í„°ë¥¼ ê°€ì§€ê³  ìžˆì§€ëŠ” ì•Šì§€ë§Œ ë·°ë¥¼ í†µí•´ ë°ì´í„°ë¥¼ ì¡°íšŒí•  ìˆ˜ ìžˆê³ ,
+      ë°ì´í„°ë¥¼ ìž…ë ¥, ìˆ˜ì •, ì‚­ì œí•  ìˆ˜ ìžˆìœ¼ë©° ë‹¤ë¥¸ í…Œì´ë¸”ê³¼ ì¡°ì¸ë„ í•  ìˆ˜ ìžˆê¸° ë•Œë¬¸ì— ê°€ìƒì˜ ë…¼ë¦¬ì  í…Œì´ë¸”ì´ë¼ê³  í•¨
       
-    create [or replace] view ºäÀÌ¸§
+    create [or replace] view ë·°ì´ë¦„
     as
-    select¹®Àå;
+    selectë¬¸ìž¥;
     
-    ¡Ø ºä¸¦ »ç¿ëÇÏ´Â ¸ñÀû
-    1) º¸¾È¼º - ¼û±â°í ½ÍÀº ÄÃ·³µéÀ» ¼û±æ ¼ö ÀÖ´Ù.
-    2) ÆíÀÇ¼º - Á¶ÀÎ°ú °°Àº º¹ÀâÇÑ Äõ¸®¹®ÀåÀ» ºä·Î ¸¸µé¾î ¼ö¿ùÇÏ°Ô ÁúÀÇ ÇÒ ¼ö ÀÖ´Ù.
+    â€» ë·°ë¥¼ ì‚¬ìš©í•˜ëŠ” ëª©ì 
+    1) ë³´ì•ˆì„± - ìˆ¨ê¸°ê³  ì‹¶ì€ ì»¬ëŸ¼ë“¤ì„ ìˆ¨ê¸¸ ìˆ˜ ìžˆë‹¤.
+    2) íŽ¸ì˜ì„± - ì¡°ì¸ê³¼ ê°™ì€ ë³µìž¡í•œ ì¿¼ë¦¬ë¬¸ìž¥ì„ ë·°ë¡œ ë§Œë“¤ì–´ ìˆ˜ì›”í•˜ê²Œ ì§ˆì˜ í•  ìˆ˜ ìžˆë‹¤.
 */
 
---testuser »ç¿ëÀÚ´Â empÀÇ ¿µ¾÷ºÎ(deptno=30) »ç¿øµéÀÇ ±âº»Á¤º¸
---(ÀÌ¸§, job, ÀÔ»çÀÏ)¸¦ °Ë»öÇÒ ¼ö ÀÖ¾î¾ß ÇÑ´Ù¸é..
+--testuser ì‚¬ìš©ìžëŠ” empì˜ ì˜ì—…ë¶€(deptno=30) ì‚¬ì›ë“¤ì˜ ê¸°ë³¸ì •ë³´
+--(ì´ë¦„, job, ìž…ì‚¬ì¼)ë¥¼ ê²€ìƒ‰í•  ìˆ˜ ìžˆì–´ì•¼ í•œë‹¤ë©´..
 
---hr»ç¿ëÀÚ°¡ emp Å×ÀÌºíÀÇ ÀÏºÎ ÄÃ·³¸¸ º¼ ¼ö ÀÖ´Â ºä¸¦ ¸¸µé¾î¼­
---testuser°¡ ÇØ´ç ºä¸¦ º¼ ¼ö ÀÖ°Ô ÇÑ´Ù
+--hrì‚¬ìš©ìžê°€ emp í…Œì´ë¸”ì˜ ì¼ë¶€ ì»¬ëŸ¼ë§Œ ë³¼ ìˆ˜ ìžˆëŠ” ë·°ë¥¼ ë§Œë“¤ì–´ì„œ
+--testuserê°€ í•´ë‹¹ ë·°ë¥¼ ë³¼ ìˆ˜ ìžˆê²Œ í•œë‹¤
 
---1) hr°èÁ¤¿¡°Ô ºä »ý¼º ±ÇÇÑÀ» ºÎ¿©ÇØ¾ß ÇÔ
---sys°ü¸®ÀÚ °èÁ¤¿¡¼­ ±ÇÇÑ ºÎ¿©¸¦ ÇØ¾ß ÇÔ
+--1) hrê³„ì •ì—ê²Œ ë·° ìƒì„± ê¶Œí•œì„ ë¶€ì—¬í•´ì•¼ í•¨
+--sysê´€ë¦¬ìž ê³„ì •ì—ì„œ ê¶Œí•œ ë¶€ì—¬ë¥¼ í•´ì•¼ í•¨
 --grant create view to hr;
 
---view »ý¼º ±ÇÇÑ Á¦°ÅÇÏ±â
+--view ìƒì„± ê¶Œí•œ ì œê±°í•˜ê¸°
 --revoke create view from hr;
 
---2) hr »ç¿ëÀÚ°¡ ºä¸¦ ¸¸µç´Ù
+--2) hr ì‚¬ìš©ìžê°€ ë·°ë¥¼ ë§Œë“ ë‹¤
 
 CREATE OR REPLACE VIEW v_emp
 AS
@@ -227,44 +227,44 @@ AS
       FROM emp
      WHERE deptno = 30;
 
---select * from Å×ÀÌºí ¶Ç´Â ºä
+--select * from í…Œì´ë¸” ë˜ëŠ” ë·°
 
 SELECT * FROM v_emp;
 
---»ý¼ºÇÑ ºä Á¶È¸ÇÏ±â
+--ìƒì„±í•œ ë·° ì¡°íšŒí•˜ê¸°
 
 SELECT * FROM emp;
 
---3) testuser¿¡°Ô ÇØ´ç ºä¸¦ selectÇÒ ¼ö ÀÖ´Â ±ÇÇÑÀ» ºÎ¿©ÇÑ´Ù
+--3) testuserì—ê²Œ í•´ë‹¹ ë·°ë¥¼ selectí•  ìˆ˜ ìžˆëŠ” ê¶Œí•œì„ ë¶€ì—¬í•œë‹¤
 
 /*
-    sys°èÁ¤¿¡¼­ testuser »ç¿ëÀÚ °èÁ¤À» ¸¸µé±â
+    sysê³„ì •ì—ì„œ testuser ì‚¬ìš©ìž ê³„ì •ì„ ë§Œë“¤ê¸°
     
     create user testuser
     identified by testuser123
     default tablespace users;
     
-    ±ÇÇÑ ºÎ¿©ÇÏ±â(Á¢¼ÓÀ» À§ÇÑ ±âº»ÀûÀÎ ±ÇÇÑ)
+    ê¶Œí•œ ë¶€ì—¬í•˜ê¸°(ì ‘ì†ì„ ìœ„í•œ ê¸°ë³¸ì ì¸ ê¶Œí•œ)
     grant resource, connect to testuser;
     
-    Á¢¼ÓÇÏ±â
+    ì ‘ì†í•˜ê¸°
     conn testuser/testuser123
 */
 
 GRANT SELECT ON v_emp TO testuser;
--- hr°èÁ¤ÀÇ ºäÀÌ¹Ç·Î select±ÇÇÑ ºÎ¿©°¡ °¡´É
+-- hrê³„ì •ì˜ ë·°ì´ë¯€ë¡œ selectê¶Œí•œ ë¶€ì—¬ê°€ ê°€ëŠ¥
 
---±ÇÇÑ Á¦°Å
+--ê¶Œí•œ ì œê±°
 --recoke select on v_emp from testuser;
 
 /*
-    4) testuser°èÁ¤¿¡¼­ ºä selectÇÏ±â
+    4) testuserê³„ì •ì—ì„œ ë·° selectí•˜ê¸°
     select * from hr.v_emp;
-              ½ºÅ°¸¶ÀÌ¸§.µ¥ÀÌÅÍº£ÀÌ½º ¿ÀºêÁ§Æ®¸í
+              ìŠ¤í‚¤ë§ˆì´ë¦„.ë°ì´í„°ë² ì´ìŠ¤ ì˜¤ë¸Œì íŠ¸ëª…
 */
 
---ºä º¯°æÇÏ±â
---research ºÎ¼­ÀÇ »ç¿øÁ¤º¸µµ Á¶È¸ÇØ¾ß ÇÑ´Ù¸é
+--ë·° ë³€ê²½í•˜ê¸°
+--research ë¶€ì„œì˜ ì‚¬ì›ì •ë³´ë„ ì¡°íšŒí•´ì•¼ í•œë‹¤ë©´
 
 CREATE OR REPLACE VIEW v_emp
 AS
@@ -276,8 +276,8 @@ SELECT * FROM emp;
 
 SELECT * FROM v_emp;
 
---¿µ¾÷ºÎ, researchºÎ¿¡ ¼ÓÇÏ´Â »ç¿øµé Áß¿¡
---1982³â ÀÌÀü¿¡ ÀÔ»çÇÑ »ç¶÷ÀÇ Á¤º¸(ÀÌ¸§, Á÷¹«, ÀÔ»çÀÏ)À» Á¶È¸ ÇÏ·Á¸é?
+--ì˜ì—…ë¶€, researchë¶€ì— ì†í•˜ëŠ” ì‚¬ì›ë“¤ ì¤‘ì—
+--1982ë…„ ì´ì „ì— ìž…ì‚¬í•œ ì‚¬ëžŒì˜ ì •ë³´(ì´ë¦„, ì§ë¬´, ìž…ì‚¬ì¼)ì„ ì¡°íšŒ í•˜ë ¤ë©´?
 --1) view
 
 SELECT *
@@ -290,8 +290,8 @@ SELECT ename, job, hiredate
   FROM emp
  WHERE deptno IN (20, 30) AND hiredate < '1982-01-01';
 
---joinÀ» ÀÌ¿ëÇÏ´Â °æ¿ì³ª º¹ÀâÇÑ Äõ¸®¹®ÀÇ °æ¿ì ºä¸¦ ¸¸µé¾î¼­ »ç¿ë
---employees, departments Å×ÀÌºí Á¶ÀÎ
+--joinì„ ì´ìš©í•˜ëŠ” ê²½ìš°ë‚˜ ë³µìž¡í•œ ì¿¼ë¦¬ë¬¸ì˜ ê²½ìš° ë·°ë¥¼ ë§Œë“¤ì–´ì„œ ì‚¬ìš©
+--employees, departments í…Œì´ë¸” ì¡°ì¸
 
 CREATE OR REPLACE VIEW v_employees
 AS
@@ -312,13 +312,13 @@ SELECT * FROM employees;
 
 SELECT * FROM departments;
 
---ÇØ´ç ºä¿¡¼­ ±Þ¿©°¡ 10000 ÀÌ»óÀÎ »ç¿ø Á¶È¸
+--í•´ë‹¹ ë·°ì—ì„œ ê¸‰ì—¬ê°€ 10000 ì´ìƒì¸ ì‚¬ì› ì¡°íšŒ
 
 SELECT *
   FROM v_employees
  WHERE pay > 10000;
 
---gogak¿¡¼­ °í°´ Á¤º¸¿Í °í°´ÀÇ ¼ºº°, ³ªÀÌ¸¦ view·Î ¸¸µé±â
+--gogakì—ì„œ ê³ ê° ì •ë³´ì™€ ê³ ê°ì˜ ì„±ë³„, ë‚˜ì´ë¥¼ viewë¡œ ë§Œë“¤ê¸°
 --v_gogak_info
 
 CREATE OR REPLACE VIEW v_gogak_info
@@ -328,8 +328,8 @@ AS
            JUMIN,
            POINT,
            CASE
-               WHEN SUBSTR (jumin, 7, 1) IN (1, 3) THEN '³²ÀÚ'
-               ELSE '¿©ÀÚ'
+               WHEN SUBSTR (jumin, 7, 1) IN (1, 3) THEN 'ë‚¨ìž'
+               ELSE 'ì—¬ìž'
            END    gender,
              EXTRACT (YEAR FROM SYSDATE)
            - (  SUBSTR (jumin, 1, 2)
@@ -340,13 +340,13 @@ AS
            + 1    age
       FROM gogak;
 
---ÇØ´ç ºä¸¦ ÀÌ¿ëÇÏ¿© 20´ë, 30´ë ¿©ÀÚ¸¸ Á¶È¸
+--í•´ë‹¹ ë·°ë¥¼ ì´ìš©í•˜ì—¬ 20ëŒ€, 30ëŒ€ ì—¬ìžë§Œ ì¡°íšŒ
 
 SELECT *
   FROM v_gogak_info
- WHERE TRUNC (age, -1) IN (20, 30) AND gender = '¿©ÀÚ';
+ WHERE TRUNC (age, -1) IN (20, 30) AND gender = 'ì—¬ìž';
 
---inline view ÀÌ¿ë
+--inline view ì´ìš©
 
 SELECT *
   FROM (SELECT GNO,
@@ -354,8 +354,8 @@ SELECT *
                JUMIN,
                POINT,
                CASE
-                   WHEN SUBSTR (jumin, 7, 1) IN (1, 3) THEN '³²ÀÚ'
-                   ELSE '¿©ÀÚ'
+                   WHEN SUBSTR (jumin, 7, 1) IN (1, 3) THEN 'ë‚¨ìž'
+                   ELSE 'ì—¬ìž'
                END    gender,
                  EXTRACT (YEAR FROM SYSDATE)
                - (  SUBSTR (jumin, 1, 2)
@@ -365,30 +365,30 @@ SELECT *
                      END))
                + 1    age
           FROM gogak)
- WHERE TRUNC (age, -1) IN (20, 30) AND gender = '¿©ÀÚ';
+ WHERE TRUNC (age, -1) IN (20, 30) AND gender = 'ì—¬ìž';
 
 
 
 /*
-    <ºä¸¦ ÅëÇÑ µ¥ÀÌÅÍ ¼öÁ¤>
-    1. ºä¸¦ ÅëÇÑ Á¶È¸µµ °¡´ÉÇÏ°í, ÀÔ·Â, ¼öÁ¤, »èÁ¦µµ °¡´ÉÇÔ => updatable view
-    2. Á¶È¸¸¸ °¡´ÉÇÑ ºäµµ ÀÖÀ½ => read only view
+    <ë·°ë¥¼ í†µí•œ ë°ì´í„° ìˆ˜ì •>
+    1. ë·°ë¥¼ í†µí•œ ì¡°íšŒë„ ê°€ëŠ¥í•˜ê³ , ìž…ë ¥, ìˆ˜ì •, ì‚­ì œë„ ê°€ëŠ¥í•¨ => updatable view
+    2. ì¡°íšŒë§Œ ê°€ëŠ¥í•œ ë·°ë„ ìžˆìŒ => read only view
 */
 
---updatable view ¸¸µé±â
+--updatable view ë§Œë“¤ê¸°
 
 /*
-    create or replace view ºäÀÌ¸§
+    create or replace view ë·°ì´ë¦„
     as
-        select¹®;
+        selectë¬¸;
 */
 
---rede only view ¸¸µé±â
+--rede only view ë§Œë“¤ê¸°
 
 /*
-    create or replace view ºäÀÌ¸§
+    create or replace view ë·°ì´ë¦„
     as
-        select¹®
+        selectë¬¸
     with read only;
 */
 
@@ -415,14 +415,14 @@ UPDATE v_emp
    SET ename = 'SMITH2'
  WHERE ename = 'SMITH';
 
--- updatable view´Â ÀÔ·Â, ¼öÁ¤, »èÁ¦ °¡´É
+-- updatable viewëŠ” ìž…ë ¥, ìˆ˜ì •, ì‚­ì œ ê°€ëŠ¥
 
 INSERT INTO v_emp (ename, job, hiredate)
-     VALUES ('È«±æµ¿', 'CLERK', SYSDATE);
+     VALUES ('í™ê¸¸ë™', 'CLERK', SYSDATE);
 
 --error, cannot insert NULL into ("HR"."EMP"."EMPNO")
---=> ºä¸¦ ÅëÇÑ ÀÔ·ÂÀ» ÇÏ´Â °æ¿ì, ºä¿¡ ¾ø´Â ÄÃ·³Àº nullÀ» Çã¿ëÇÏ°Å³ª default°ªÀÌ ÀÖ¾î¾ß ÇÔ
---   ±×·¸Áö ¾ÊÀ¸¸é ¿¡·¯ ¹ß»ý
+--=> ë·°ë¥¼ í†µí•œ ìž…ë ¥ì„ í•˜ëŠ” ê²½ìš°, ë·°ì— ì—†ëŠ” ì»¬ëŸ¼ì€ nullì„ í—ˆìš©í•˜ê±°ë‚˜ defaultê°’ì´ ìžˆì–´ì•¼ í•¨
+--   ê·¸ë ‡ì§€ ì•Šìœ¼ë©´ ì—ëŸ¬ ë°œìƒ
 
 CREATE OR REPLACE VIEW v_emp_2
 AS
@@ -438,26 +438,26 @@ INSERT INTO v_emp_2 (empno,
                      job,
                      hiredate)
      VALUES (9999,
-             'È«±æµ¿',
+             'í™ê¸¸ë™',
              'CLERK',
              SYSDATE);
 
--- ºäÀÇ Á¶°ÇÀ» ¹þ¾î³ª´Â ¹üÀ§ÀÌÁö¸¸ ÀÔ·Â °¡´ÉÇÔ
+-- ë·°ì˜ ì¡°ê±´ì„ ë²—ì–´ë‚˜ëŠ” ë²”ìœ„ì´ì§€ë§Œ ìž…ë ¥ ê°€ëŠ¥í•¨
 
 SELECT *
   FROM v_emp_2
  WHERE empno = 9999;
 
--- ÀÔ·ÂÀº °¡´ÉÇÏÁö¸¸ ¹üÀ§ ¹ÛÀÌ¹Ç·Î Á¶È¸ ºÒ°¡´É
+-- ìž…ë ¥ì€ ê°€ëŠ¥í•˜ì§€ë§Œ ë²”ìœ„ ë°–ì´ë¯€ë¡œ ì¡°íšŒ ë¶ˆê°€ëŠ¥
 
 DELETE FROM v_emp_2
       WHERE empno = 9999;
 
--- ÀÔ·ÂÀº °¡´ÉÇÏÁö¸¸ ¹üÀ§ ¹ÛÀÌ¹Ç·Î »èÁ¦µµ ºÒ°¡´É
+-- ìž…ë ¥ì€ ê°€ëŠ¥í•˜ì§€ë§Œ ë²”ìœ„ ë°–ì´ë¯€ë¡œ ì‚­ì œë„ ë¶ˆê°€ëŠ¥
 
 /*
-    ±âº»ÀûÀ¸·Î ºä¸¦ ¸¸µé¶§ ºäÀÇ Á¶°ÇÀ» ¹þ¾î³ª´Â ¹üÀ§·Î µ¥ÀÌÅÍ¸¦ ¼öÁ¤ÇÒ ¼ö ÀÖÀ¸¸ç
-    ÀÌ¸¦ Çã¿ëÇÏÁö ¾Ê°íÀÚ ÇÒ¶§´Â with check optionÀ» »ç¿ë
+    ê¸°ë³¸ì ìœ¼ë¡œ ë·°ë¥¼ ë§Œë“¤ë•Œ ë·°ì˜ ì¡°ê±´ì„ ë²—ì–´ë‚˜ëŠ” ë²”ìœ„ë¡œ ë°ì´í„°ë¥¼ ìˆ˜ì •í•  ìˆ˜ ìžˆìœ¼ë©°
+    ì´ë¥¼ í—ˆìš©í•˜ì§€ ì•Šê³ ìž í• ë•ŒëŠ” with check optionì„ ì‚¬ìš©
 */
 
 CREATE OR REPLACE VIEW v_emp_3
@@ -470,18 +470,18 @@ AS
      WHERE deptno IN (20, 30)
 WITH CHECK OPTION;
 
---ºäÀÇ Á¶°ÇÀ» ¹þ¾î³ª´Â ¹üÀ§·Î´Â µ¥ÀÌÅÍ º¯°æ ºÒ°¡
+--ë·°ì˜ ì¡°ê±´ì„ ë²—ì–´ë‚˜ëŠ” ë²”ìœ„ë¡œëŠ” ë°ì´í„° ë³€ê²½ ë¶ˆê°€
 
 INSERT INTO v_emp_3 (empno,
                      ename,
                      job,
                      hiredate)
      VALUES (9998,
-             'È«±æµ¿',
+             'í™ê¸¸ë™',
              'CLERK',
              SYSDATE);
 
--- error, with check option À§¹è, view WITH CHECK OPTION where-clause violation
+-- error, with check option ìœ„ë°°, view WITH CHECK OPTION where-clause violation
 
 SELECT * FROM v_emp_3;
 

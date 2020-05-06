@@ -1,23 +1,23 @@
-/* Formatted on 2020/05/06 ¿ÀÀü 10:44:18 (QP5 v5.360) */
---3°­_sql±×·ìÇÔ¼ö.sql
---20-04-20 ¿ù
+/* Formatted on 2020/05/06 ì˜¤ì „ 10:44:18 (QP5 v5.360) */
+--3ê°•_sqlê·¸ë£¹í•¨ìˆ˜.sql
+--20-04-20 ì›”
 
---º¹¼öÇàÇÔ¼ö(±×·ìÇÔ¼ö)
+--ë³µìˆ˜í–‰í•¨ìˆ˜(ê·¸ë£¹í•¨ìˆ˜)
 
 SELECT SUM (pay) FROM professor;
 
 SELECT * FROM professor;
 
---count() : ÀÔ·ÂµÇ´Â µ¥ÀÌÅÍÀÇ °Ç¼ö¸¦ ¸®ÅÏ
---±×·ìÇÔ¼ö´Â nullÀ» Á¦¿ÜÇÏ°í °è»êÇÔ
+--count() : ìž…ë ¥ë˜ëŠ” ë°ì´í„°ì˜ ê±´ìˆ˜ë¥¼ ë¦¬í„´
+--ê·¸ë£¹í•¨ìˆ˜ëŠ” nullì„ ì œì™¸í•˜ê³  ê³„ì‚°í•¨
 
-SELECT COUNT (*), COUNT (bonus), COUNT (hpage), COUNT (name) FROM professor;                                                                                                                                                                        --=> bonus, hpageÀÇ °Ç¼ö´Â nullÀÌ Á¦¿ÜµÈ °Ç¼ö
+SELECT COUNT (*), COUNT (bonus), COUNT (hpage), COUNT (name) FROM professor;                                                                                                                                                                        --=> bonus, hpageì˜ ê±´ìˆ˜ëŠ” nullì´ ì œì™¸ëœ ê±´ìˆ˜
 
---sum() : ÇÕ°è¸¦ ±¸ÇÏ´Â ÇÔ¼ö
+--sum() : í•©ê³„ë¥¼ êµ¬í•˜ëŠ” í•¨ìˆ˜
 
 /*
-¹®ÀÚ, ³¯Â¥´Â sum, avg() ÇÔ¼ö¸¦ »ç¿ëÇÒ ¼ö ¾ø´Ù(¿¬»êºÒ°¡)
-countÇÔ¼ö´Â ¸ðµÎ »ç¿ë °¡´É
+ë¬¸ìž, ë‚ ì§œëŠ” sum, avg() í•¨ìˆ˜ë¥¼ ì‚¬ìš©í•  ìˆ˜ ì—†ë‹¤(ì—°ì‚°ë¶ˆê°€)
+countí•¨ìˆ˜ëŠ” ëª¨ë‘ ì‚¬ìš© ê°€ëŠ¥
 */
 
 SELECT SUM (pay),
@@ -29,7 +29,7 @@ SELECT SUM (pay),
 
 --select sum(name) from professor; => error
 
---avg() : Æò±ÕÀ» ±¸ÇÏ´Â ÇÔ¼ö
+--avg() : í‰ê· ì„ êµ¬í•˜ëŠ” í•¨ìˆ˜
 
 SELECT AVG (pay),
        SUM (pay),
@@ -45,39 +45,39 @@ SELECT AVG (pay),
   FROM professor;
 
 /*
-±×·ìÇÔ¼ö´Â nullÀ» Á¦¿ÜÇÏ°í ¿¬»êÇÏ¹Ç·Î, avg()´Â Á¤»óÀûÀÎ °á°ú°ªÀÌ ³ª¿ÀÁö ¾ÊÀ½
-=> nvl() ÇÔ¼ö¸¦ ÀÌ¿ëÇÏ¿© Ã³¸®
-=> avg(nvl(ÄÃ·³,0))
+ê·¸ë£¹í•¨ìˆ˜ëŠ” nullì„ ì œì™¸í•˜ê³  ì—°ì‚°í•˜ë¯€ë¡œ, avg()ëŠ” ì •ìƒì ì¸ ê²°ê³¼ê°’ì´ ë‚˜ì˜¤ì§€ ì•ŠìŒ
+=> nvl() í•¨ìˆ˜ë¥¼ ì´ìš©í•˜ì—¬ ì²˜ë¦¬
+=> avg(nvl(ì»¬ëŸ¼,0))
 */
 
---max() : ÃÖ´ë°ª
---min() : ÃÖ¼Ò°ª
+--max() : ìµœëŒ€ê°’
+--min() : ìµœì†Œê°’
 
 SELECT MAX (pay), MIN (pay), MAX (bonus), MIN (bonus) FROM professor;
 
---¹®ÀÚ, ³¯Â¥µµ ÃÖ´ë°ª, ÃÖ¼Ò°ªÀ» ±¸ÇÒ ¼ö ÀÖ´Ù.(´ë¼Ò ºñ±³°¡ °¡´ÉÇÏ¹Ç·Î)
+--ë¬¸ìž, ë‚ ì§œë„ ìµœëŒ€ê°’, ìµœì†Œê°’ì„ êµ¬í•  ìˆ˜ ìžˆë‹¤.(ëŒ€ì†Œ ë¹„êµê°€ ê°€ëŠ¥í•˜ë¯€ë¡œ)
 
 SELECT MAX (name), MIN (name), MAX (hiredate), MIN (hiredate) FROM professor;
 
---Áßº¹°ªÀ» Á¦¿ÜÇÑ °Ç¼ö : count(distinct ÄÃ·³¸í)
+--ì¤‘ë³µê°’ì„ ì œì™¸í•œ ê±´ìˆ˜ : count(distinct ì»¬ëŸ¼ëª…)
 
 SELECT COUNT (grade), COUNT (*), COUNT (DISTINCT grade) FROM student;
 
 /*
-sum(distinct ÄÃ·³¸í) - Áßº¹°ªÀ» Á¦¿ÜÇÑ ÇÕ°è
-avg(distinct ÄÃ·³¸í) - Áßº¹°ªÀ» Á¦¿ÜÇÑ Æò±Õ
-max(distinct ÄÃ·³¸í) - Áßº¹°ªÀ» Á¦¿ÜÇÑ ÃÖ´ë°ª
-min(distinct ÄÃ·³¸í) - Áßº¹°ªÀ» Á¦¿ÜÇÑ ÃÖ¼Ò°ª
+sum(distinct ì»¬ëŸ¼ëª…) - ì¤‘ë³µê°’ì„ ì œì™¸í•œ í•©ê³„
+avg(distinct ì»¬ëŸ¼ëª…) - ì¤‘ë³µê°’ì„ ì œì™¸í•œ í‰ê· 
+max(distinct ì»¬ëŸ¼ëª…) - ì¤‘ë³µê°’ì„ ì œì™¸í•œ ìµœëŒ€ê°’
+min(distinct ì»¬ëŸ¼ëª…) - ì¤‘ë³µê°’ì„ ì œì™¸í•œ ìµœì†Œê°’
 */
 
---±×·ìº° Áý°è
---ÇÐ°úº°·Î ±³¼öµéÀÇ Æò±Õ±Þ¿©¸¦ ±¸ÇÏ±â
+--ê·¸ë£¹ë³„ ì§‘ê³„
+--í•™ê³¼ë³„ë¡œ êµìˆ˜ë“¤ì˜ í‰ê· ê¸‰ì—¬ë¥¼ êµ¬í•˜ê¸°
 
-SELECT AVG (pay) FROM professor;                                                                                                --ÀüÃ¼ ±³¼öµéÀÇ Æò±Õ±Þ¿©
+SELECT AVG (pay) FROM professor;                                                                                                --ì „ì²´ êµìˆ˜ë“¤ì˜ í‰ê· ê¸‰ì—¬
 
   SELECT deptno, pay
     FROM professor
-ORDER BY deptno;                                                                                   -- ÇÐ°úº°·Î Á¤·Ä
+ORDER BY deptno;                                                                                   -- í•™ê³¼ë³„ë¡œ ì •ë ¬
 
   SELECT deptno, AVG (pay)
     FROM professor
@@ -86,25 +86,25 @@ ORDER BY deptno;
 
 /*
 group by
-- Å×ÀÌºí ÀüÃ¼¿¡ ´ëÇÑ Áý°è¸¦ ±¸ÇÏ´Â °ÍÀÌ ¾Æ´Ñ, Æ¯Á¤ ¹üÀ§¿¡¼­ÀÇ Áý°è µ¥ÀÌÅÍ¸¦ ±¸ÇÔ
+- í…Œì´ë¸” ì „ì²´ì— ëŒ€í•œ ì§‘ê³„ë¥¼ êµ¬í•˜ëŠ” ê²ƒì´ ì•„ë‹Œ, íŠ¹ì • ë²”ìœ„ì—ì„œì˜ ì§‘ê³„ ë°ì´í„°ë¥¼ êµ¬í•¨
 */
--- ÇÐ°úº°, Á÷±Þº° ±Þ¿©ÀÇ Æò±Õ ±¸ÇÏ±â
+-- í•™ê³¼ë³„, ì§ê¸‰ë³„ ê¸‰ì—¬ì˜ í‰ê·  êµ¬í•˜ê¸°
 
   SELECT deptno, position, AVG (NVL (pay, 0))
     FROM professor
 GROUP BY deptno, position
 ORDER BY deptno, position;
 
---=> group by Àý¿¡ ÀÖ´Â ÄÃ·³°ú ±×·ìÇÔ¼ö¸¸ selectÀý¿¡ ¿Ã ¼ö ÀÖ´Ù.
+--=> group by ì ˆì— ìžˆëŠ” ì»¬ëŸ¼ê³¼ ê·¸ë£¹í•¨ìˆ˜ë§Œ selectì ˆì— ì˜¬ ìˆ˜ ìžˆë‹¤.
 
---group byÀý¿¡¼­´Â º°Äª »ç¿ë ºÒ°¡
+--group byì ˆì—ì„œëŠ” ë³„ì¹­ ì‚¬ìš© ë¶ˆê°€
 
-  SELECT deptno dno, position Á÷±Þ, AVG (NVL (pay, 0)) "Æò±Õ±Þ¿©"
+  SELECT deptno dno, position ì§ê¸‰, AVG (NVL (pay, 0)) "í‰ê· ê¸‰ì—¬"
     FROM professor
 GROUP BY dno, position                                                -- error
 ORDER BY deptno, position;
 
---ÇÐ°úº° Æò±Õ ±Þ¿©¸¦ ±¸ÇÑ ÈÄ, Æò±Õ ±Þ¿©°¡ 450ÃÊ°úÀÎ ºÎ¼­ÀÇ ºÎ¼­¹øÈ£¿Í Æò±Õ±Þ¿©±¸ÇÏ±â
+--í•™ê³¼ë³„ í‰ê·  ê¸‰ì—¬ë¥¼ êµ¬í•œ í›„, í‰ê·  ê¸‰ì—¬ê°€ 450ì´ˆê³¼ì¸ ë¶€ì„œì˜ ë¶€ì„œë²ˆí˜¸ì™€ í‰ê· ê¸‰ì—¬êµ¬í•˜ê¸°
 
   SELECT deptno, AVG (NVL (pay, 0))
     FROM professor
@@ -114,114 +114,114 @@ GROUP BY deptno
 
 /*
 having
-- group byÀÇ °á°ú ³»¿¡¼­ Æ¯Á¤ Á¶°ÇÀ» ¸¸Á·ÇÏ´Â °ÍÀ» ±¸ÇÏ·Á¸é havingÀ» ÀÌ¿ë
-- group byÀý¿¡ ÀÇÇØ Ãâ·ÂµÈ °á°ú¿¡ ´ëÇÑ Á¶°ÇÀ» Á¤ÀÇ
-- group byµÈ °á°ú¸¦ Á¦ÇÑÇÏ°íÀÚ ÇÒ ¶§ »ç¿ë
+- group byì˜ ê²°ê³¼ ë‚´ì—ì„œ íŠ¹ì • ì¡°ê±´ì„ ë§Œì¡±í•˜ëŠ” ê²ƒì„ êµ¬í•˜ë ¤ë©´ havingì„ ì´ìš©
+- group byì ˆì— ì˜í•´ ì¶œë ¥ëœ ê²°ê³¼ì— ëŒ€í•œ ì¡°ê±´ì„ ì •ì˜
+- group byëœ ê²°ê³¼ë¥¼ ì œí•œí•˜ê³ ìž í•  ë•Œ ì‚¬ìš©
 
-group by Ä®·³
-having Á¶°Ç
+group by ì¹¼ëŸ¼
+having ì¡°ê±´
 */
 
---Student Å×ÀÌºí¿¡¼­ gradeº°·Î weight, heightÀÇ Æò±Õ, ÃÖ´ë°ª ±¸ÇÏ±â 
+--Student í…Œì´ë¸”ì—ì„œ gradeë³„ë¡œ weight, heightì˜ í‰ê· , ìµœëŒ€ê°’ êµ¬í•˜ê¸° 
 
   SELECT grade,
-         AVG (NVL (weight, 0))     "¹«°Ô Æò±Õ",
-         AVG (NVL (height, 0))     "Å° Æò±Õ",
-         MAX (weight)              "¹«°Ô ÃÖ´ë°ª",
-         MAX (height)              "Å° ÃÖ´ë°ª"
+         AVG (NVL (weight, 0))     "ë¬´ê²Œ í‰ê· ",
+         AVG (NVL (height, 0))     "í‚¤ í‰ê· ",
+         MAX (weight)              "ë¬´ê²Œ ìµœëŒ€ê°’",
+         MAX (height)              "í‚¤ ìµœëŒ€ê°’"
     FROM student
 GROUP BY grade;
 
---2¹øÀÇ °á°ú¿¡¼­ Å°ÀÇ Æò±ÕÀÌ 170 ÀÌÇÏÀÎ °æ¿ì ±¸ÇÏ±â
+--2ë²ˆì˜ ê²°ê³¼ì—ì„œ í‚¤ì˜ í‰ê· ì´ 170 ì´í•˜ì¸ ê²½ìš° êµ¬í•˜ê¸°
 
   SELECT grade,
-         AVG (NVL (weight, 0))     "¹«°Ô Æò±Õ",
-         AVG (NVL (height, 0))     "Å° Æò±Õ",
-         MAX (weight)              "¹«°Ô ÃÖ´ë°ª",
-         MAX (height)              "Å° ÃÖ´ë°ª"
+         AVG (NVL (weight, 0))     "ë¬´ê²Œ í‰ê· ",
+         AVG (NVL (height, 0))     "í‚¤ í‰ê· ",
+         MAX (weight)              "ë¬´ê²Œ ìµœëŒ€ê°’",
+         MAX (height)              "í‚¤ ìµœëŒ€ê°’"
     FROM student
 GROUP BY grade
   HAVING AVG (NVL (height, 0)) <= 170;
 
---emp2 ¿¡¼­ position º° payÀÇ ÇÕ°è, Æò±Õ ±¸ÇÏ±â
---±× °á°ú¿¡¼­ Æò±ÕÀÌ 5000¸¸¿ø ÀÌ»óÀÎ °æ¿ì ±¸ÇÏ±â
+--emp2 ì—ì„œ position ë³„ payì˜ í•©ê³„, í‰ê·  êµ¬í•˜ê¸°
+--ê·¸ ê²°ê³¼ì—ì„œ í‰ê· ì´ 5000ë§Œì› ì´ìƒì¸ ê²½ìš° êµ¬í•˜ê¸°
 
   SELECT position,
-         SUM (NVL (pay, 0))     "pay ÇÕ°è",
-         AVG (NVL (pay, 0))     "pay Æò±Õ"
+         SUM (NVL (pay, 0))     "pay í•©ê³„",
+         AVG (NVL (pay, 0))     "pay í‰ê· "
     FROM emp2
 GROUP BY position
   HAVING AVG (NVL (pay, 0)) >= 50000000;
 
 /*
-¡Ø select sql¹® ½ÇÇà ¼ø¼­
-5. select ÄÃ·³
-1. from Å×ÀÌºí 
-2. where Á¶°Ç
-3. group by ÄÃ·³
-4. having Á¶°Ç
-6. order by ÄÃ·³ (desc)
+â€» select sqlë¬¸ ì‹¤í–‰ ìˆœì„œ
+5. select ì»¬ëŸ¼
+1. from í…Œì´ë¸” 
+2. where ì¡°ê±´
+3. group by ì»¬ëŸ¼
+4. having ì¡°ê±´
+6. order by ì»¬ëŸ¼ (desc)
 */
 
---rollup, cube : group by¿Í ÇÔ°Ô »ç¿ë
---[1] rollup() : ÁÖ¾îÁø µ¥ÀÌÅÍµéÀÇ ¼Ò°è¸¦ ±¸ÇØÁÜ
---group byÀý¿¡ ÁÖ¾îÁø Á¶°ÇÀ¸·Î ¼Ò°è°ªÀ» ±¸ÇØÁÜ
+--rollup, cube : group byì™€ í•¨ê²Œ ì‚¬ìš©
+--[1] rollup() : ì£¼ì–´ì§„ ë°ì´í„°ë“¤ì˜ ì†Œê³„ë¥¼ êµ¬í•´ì¤Œ
+--group byì ˆì— ì£¼ì–´ì§„ ì¡°ê±´ìœ¼ë¡œ ì†Œê³„ê°’ì„ êµ¬í•´ì¤Œ
 
---ÇÐ°úº° Æò±Õ ±Þ¿©
+--í•™ê³¼ë³„ í‰ê·  ê¸‰ì—¬
 
-  SELECT deptno, ROUND (AVG (NVL (pay, 0)), 1) "Æò±Õ ±Þ¿©"
+  SELECT deptno, ROUND (AVG (NVL (pay, 0)), 1) "í‰ê·  ê¸‰ì—¬"
     FROM professor
 GROUP BY deptno
 ORDER BY deptno;
 
---rollup()ÀÌ¿ë
+--rollup()ì´ìš©
 
-  SELECT deptno, ROUND (AVG (NVL (pay, 0)), 1) "Æò±Õ ±Þ¿©"
+  SELECT deptno, ROUND (AVG (NVL (pay, 0)), 1) "í‰ê·  ê¸‰ì—¬"
     FROM professor
 GROUP BY ROLLUP (deptno)
 ORDER BY deptno;
 
---cube()ÀÌ¿ë
+--cube()ì´ìš©
 
-  SELECT deptno, ROUND (AVG (NVL (pay, 0)), 1) "Æò±Õ ±Þ¿©"
+  SELECT deptno, ROUND (AVG (NVL (pay, 0)), 1) "í‰ê·  ê¸‰ì—¬"
     FROM professor
 GROUP BY CUBE (deptno)
 ORDER BY deptno;
 
---group byÇÑ ÄÃ·³ÀÌ 2°³ÀÎ °æ¿ì
---ÇÐ°úº°, Á÷±Þº° Æò±Õ ±Þ¿©
+--group byí•œ ì»¬ëŸ¼ì´ 2ê°œì¸ ê²½ìš°
+--í•™ê³¼ë³„, ì§ê¸‰ë³„ í‰ê·  ê¸‰ì—¬
 
-  SELECT deptno, position, AVG (NVL (pay, 0)) "Æò±Õ ±Þ¿©"
+  SELECT deptno, position, AVG (NVL (pay, 0)) "í‰ê·  ê¸‰ì—¬"
     FROM professor
 GROUP BY deptno, position
 ORDER BY deptno, position;
 
 --rollup()
 
-  SELECT deptno, position, ROUND (AVG (NVL (pay, 0)), 1) "Æò±Õ ±Þ¿©"
+  SELECT deptno, position, ROUND (AVG (NVL (pay, 0)), 1) "í‰ê·  ê¸‰ì—¬"
     FROM professor
 GROUP BY ROLLUP (deptno, position)
 ORDER BY deptno, position;
 
---=> ÇÐ°úº°, ÀüÃ¼ ¼Ò°è°¡ Ãß°¡µÊ
+--=> í•™ê³¼ë³„, ì „ì²´ ì†Œê³„ê°€ ì¶”ê°€ë¨
 
 --cube()
 
-  SELECT deptno, position, ROUND (AVG (NVL (pay, 0)), 1) "Æò±Õ ±Þ¿©"
+  SELECT deptno, position, ROUND (AVG (NVL (pay, 0)), 1) "í‰ê·  ê¸‰ì—¬"
     FROM professor
 GROUP BY CUBE (deptno, position)
 ORDER BY deptno, position;
 
---=> ÇÐ°úº°, Á÷±Þº°, ÀüÃ¼ ¼Ò°è°¡ Ãß°¡µÊ
+--=> í•™ê³¼ë³„, ì§ê¸‰ë³„, ì „ì²´ ì†Œê³„ê°€ ì¶”ê°€ë¨
 
--- group byÇÑ ÄÃ·³ÀÌ 3°³ÀÎ °æ¿ì
---Áö¿ªº°, ºÎ¼­º°, Á÷±ºº° Æò±Õ ±Þ¿© ±¸ÇÏ±â
+-- group byí•œ ì»¬ëŸ¼ì´ 3ê°œì¸ ê²½ìš°
+--ì§€ì—­ë³„, ë¶€ì„œë³„, ì§êµ°ë³„ í‰ê·  ê¸‰ì—¬ êµ¬í•˜ê¸°
 
   SELECT CITY,
          DEPARTMENT_name,
          JOB_ID,
-         COUNT (NVL (salary, 0))     "ÀÎ¿ø¼ö",
-         AVG (NVL (SALARY, 0))       "Æò±Õ ±Þ¿©"
+         COUNT (NVL (salary, 0))     "ì¸ì›ìˆ˜",
+         AVG (NVL (SALARY, 0))       "í‰ê·  ê¸‰ì—¬"
     FROM emp_details_view
 GROUP BY CITY, DEPARTMENT_name, JOB_ID
 ORDER BY CITY, DEPARTMENT_name, JOB_ID;
@@ -231,44 +231,44 @@ ORDER BY CITY, DEPARTMENT_name, JOB_ID;
   SELECT CITY,
          DEPARTMENT_name,
          JOB_ID,
-         COUNT (NVL (salary, 0))     "ÀÎ¿ø¼ö",
-         AVG (NVL (SALARY, 0))       "Æò±Õ ±Þ¿©"
+         COUNT (NVL (salary, 0))     "ì¸ì›ìˆ˜",
+         AVG (NVL (SALARY, 0))       "í‰ê·  ê¸‰ì—¬"
     FROM emp_details_view
 GROUP BY ROLLUP (CITY, DEPARTMENT_name, JOB_ID)
 ORDER BY CITY, DEPARTMENT_name, JOB_ID;
 
---=> ÄÃ·³ÀÇ °³¼ö+1°³ÀÇ ¼Ò°è°¡ ¸¸µé¾îÁü
---¿¹) rollup(a,b,c) => (a),(a,b),(a,b,c),() => 3+1 => 4°³ÀÇ ¼Ò°è°¡ ¸¸µé¾îÁü
+--=> ì»¬ëŸ¼ì˜ ê°œìˆ˜+1ê°œì˜ ì†Œê³„ê°€ ë§Œë“¤ì–´ì§
+--ì˜ˆ) rollup(a,b,c) => (a),(a,b),(a,b,c),() => 3+1 => 4ê°œì˜ ì†Œê³„ê°€ ë§Œë“¤ì–´ì§
 
 --cube() 
 
   SELECT CITY,
          DEPARTMENT_name,
          JOB_ID,
-         COUNT (NVL (salary, 0))     "ÀÎ¿ø¼ö",
-         AVG (NVL (SALARY, 0))       "Æò±Õ ±Þ¿©"
+         COUNT (NVL (salary, 0))     "ì¸ì›ìˆ˜",
+         AVG (NVL (SALARY, 0))       "í‰ê·  ê¸‰ì—¬"
     FROM emp_details_view
 GROUP BY CUBE (CITY, DEPARTMENT_name, JOB_ID)
 ORDER BY CITY, DEPARTMENT_name, JOB_ID;
 
---=> 2ÀÇ ÄÃ·³½Â °³ÀÇ ¼Ò°è°¡ ¸¸µé¾îÁü
---¿¹) rollup(a,b,c) => (a),(b),...,(a,b,c),() => 2ÀÇ 3½Â => 8°³ÀÇ ¼Ò°è°¡ ¸¸µé¾îÁü
+--=> 2ì˜ ì»¬ëŸ¼ìŠ¹ ê°œì˜ ì†Œê³„ê°€ ë§Œë“¤ì–´ì§
+--ì˜ˆ) rollup(a,b,c) => (a),(b),...,(a,b,c),() => 2ì˜ 3ìŠ¹ => 8ê°œì˜ ì†Œê³„ê°€ ë§Œë“¤ì–´ì§
 
---2020-04-21 È­¿äÀÏ
+--2020-04-21 í™”ìš”ì¼
 
 /*
-grouping ÇÔ¼ö
-- rollupÇÔ¼ö¿Í cube ÇÔ¼ö¿Í ÇÔ²² »ç¿ëµÇ´Â ÇÔ¼ö·Î ¾î¶² Ä®·³ÀÌ ÇØ´ç groupingÀÛ¾÷¿¡
-  »ç¿ë µÇ¾ú´ÂÁö ¾Æ´ÑÁö¸¦ ±¸º°ÇØÁÖ´Â ¿ªÇÒÀ» ÇÔ
-- ¾î¶² Ä®·³ÀÌ grouping ÀÛ¾÷¿¡ »ç¿ëµÇ¾úÀ¸¸é 0À» ¹ÝÈ¯ÇÏ°í, »ç¿ëµÇÁö ¾Ê¾ÒÀ¸¸é 1À» ¹ÝÈ¯
-- ¼Ò°è¿¡ ´ëÇÑ ¿ä¾à Á¤º¸¸¦ ÁÙ ¶§ »ç¿ë
+grouping í•¨ìˆ˜
+- rollupí•¨ìˆ˜ì™€ cube í•¨ìˆ˜ì™€ í•¨ê»˜ ì‚¬ìš©ë˜ëŠ” í•¨ìˆ˜ë¡œ ì–´ë–¤ ì¹¼ëŸ¼ì´ í•´ë‹¹ groupingìž‘ì—…ì—
+  ì‚¬ìš© ë˜ì—ˆëŠ”ì§€ ì•„ë‹Œì§€ë¥¼ êµ¬ë³„í•´ì£¼ëŠ” ì—­í• ì„ í•¨
+- ì–´ë–¤ ì¹¼ëŸ¼ì´ grouping ìž‘ì—…ì— ì‚¬ìš©ë˜ì—ˆìœ¼ë©´ 0ì„ ë°˜í™˜í•˜ê³ , ì‚¬ìš©ë˜ì§€ ì•Šì•˜ìœ¼ë©´ 1ì„ ë°˜í™˜
+- ì†Œê³„ì— ëŒ€í•œ ìš”ì•½ ì •ë³´ë¥¼ ì¤„ ë•Œ ì‚¬ìš©
 */
 
---group byÇÑ ÄÃ·³ÀÌ 1°³ÀÎ °æ¿ì
+--group byí•œ ì»¬ëŸ¼ì´ 1ê°œì¸ ê²½ìš°
 --rollup
 
-  SELECT deptno                            ÇÐ°ú,
-         ROUND (AVG (NVL (pay, 0)), 1)     "Æò±Õ±Þ¿©",
+  SELECT deptno                            í•™ê³¼,
+         ROUND (AVG (NVL (pay, 0)), 1)     "í‰ê· ê¸‰ì—¬",
          GROUPING (deptno)
     FROM professor
 GROUP BY ROLLUP (deptno)
@@ -276,19 +276,19 @@ ORDER BY deptno;
 
 -- cube
 
-  SELECT deptno                            ÇÐ°ú,
-         ROUND (AVG (NVL (pay, 0)), 1)     "Æò±Õ±Þ¿©",
+  SELECT deptno                            í•™ê³¼,
+         ROUND (AVG (NVL (pay, 0)), 1)     "í‰ê· ê¸‰ì—¬",
          GROUPING (deptno)
     FROM professor
 GROUP BY CUBE (deptno)
 ORDER BY deptno;
 
---group by ÇÑ ÄÃ·³ÀÌ 2°³ÀÎ °æ¿ì
+--group by í•œ ì»¬ëŸ¼ì´ 2ê°œì¸ ê²½ìš°
 --rollup
 
-  SELECT deptno                            ÇÐ°ú,
-         position                          Á÷±Þ,
-         ROUND (AVG (NVL (pay, 0)), 1)     "Æò±Õ±Þ¿©",
+  SELECT deptno                            í•™ê³¼,
+         position                          ì§ê¸‰,
+         ROUND (AVG (NVL (pay, 0)), 1)     "í‰ê· ê¸‰ì—¬",
          GROUPING (deptno),
          GROUPING (position)
     FROM professor
@@ -297,38 +297,38 @@ ORDER BY deptno, position;
 
 --cube
 
-  SELECT deptno                            ÇÐ°ú,
-         position                          Á÷±Þ,
-         ROUND (AVG (NVL (pay, 0)), 1)     "Æò±Õ±Þ¿©",
+  SELECT deptno                            í•™ê³¼,
+         position                          ì§ê¸‰,
+         ROUND (AVG (NVL (pay, 0)), 1)     "í‰ê· ê¸‰ì—¬",
          GROUPING (deptno),
          GROUPING (position)
     FROM professor
 GROUP BY CUBE (deptno, position)
 ORDER BY deptno, position;
 
--- decode ÀÌ¿ë
+-- decode ì´ìš©
 
   SELECT deptno
-             ÇÐ°ú,
-         DECODE (GROUPING (position), 0, position, 'ÇÐ°úº° ¼Ò°è')
-             Á÷±Þ,
+             í•™ê³¼,
+         DECODE (GROUPING (position), 0, position, 'í•™ê³¼ë³„ ì†Œê³„')
+             ì§ê¸‰,
          ROUND (AVG (NVL (pay, 0)), 1)
-             "Æò±Õ±Þ¿©",
+             "í‰ê· ê¸‰ì—¬",
          GROUPING (deptno),
          GROUPING (position)
     FROM professor
 GROUP BY ROLLUP (deptno, position)
 ORDER BY deptno, position;
 
-  SELECT DECODE (GROUPING (deptno), 1, '[ÀüÃ¼]', deptno)
-             ÇÐ°ú,
+  SELECT DECODE (GROUPING (deptno), 1, '[ì „ì²´]', deptno)
+             í•™ê³¼,
          DECODE (
              GROUPING (position),
              0, position,
-             DECODE (GROUPING (deptno), 0, 'ÇÐ°úº° ¼Ò°è', '[ÃÑ ÇÕ°è]'))
-             Á÷±Þ,
+             DECODE (GROUPING (deptno), 0, 'í•™ê³¼ë³„ ì†Œê³„', '[ì´ í•©ê³„]'))
+             ì§ê¸‰,
          ROUND (AVG (NVL (pay, 0)), 1)
-             "Æò±Õ±Þ¿©",
+             "í‰ê· ê¸‰ì—¬",
          GROUPING (deptno),
          GROUPING (position)
     FROM professor
@@ -340,16 +340,16 @@ ORDER BY deptno, position;
   SELECT DECODE (
              GROUPING (deptno),
              1, DECODE (GROUPING (position),
-                        0, '[Á÷±Þº° ¼Ò°è]',
-                        '[ÀüÃ¼]'),
-             deptno)                      ÇÐ°ú,
+                        0, '[ì§ê¸‰ë³„ ì†Œê³„]',
+                        '[ì „ì²´]'),
+             deptno)                      í•™ê³¼,
          DECODE (
              GROUPING (position),
              1, DECODE (GROUPING (deptno),
-                        0, '[ÇÐ°úº° ¼Ò°è]',
-                        '[ÃÑ ÇÕ°è]'),
-             position)                    Á÷±Þ,
-         ROUND (AVG (NVL (pay, 0)), 1)    "Æò±Õ±Þ¿©",
+                        0, '[í•™ê³¼ë³„ ì†Œê³„]',
+                        '[ì´ í•©ê³„]'),
+             position)                    ì§ê¸‰,
+         ROUND (AVG (NVL (pay, 0)), 1)    "í‰ê· ê¸‰ì—¬",
          GROUPING (deptno),
          GROUPING (position)
     FROM professor
@@ -357,11 +357,11 @@ GROUP BY CUBE (deptno, position)
 ORDER BY deptno, position;
 
 --grouping sets
---¿øÇÏ´Â Áý°è¸¸ ¼öÇàÇÒ ¼ö ÀÖ´Ù.
---±×·ìÇÎ Á¶°ÇÀÌ ¿©·¯ °³ÀÏ °æ¿ì À¯¿ëÇÏ°Ô »ç¿ë
+--ì›í•˜ëŠ” ì§‘ê³„ë§Œ ìˆ˜í–‰í•  ìˆ˜ ìžˆë‹¤.
+--ê·¸ë£¹í•‘ ì¡°ê±´ì´ ì—¬ëŸ¬ ê°œì¼ ê²½ìš° ìœ ìš©í•˜ê²Œ ì‚¬ìš©
 
---¿¹) STUDENT Å×ÀÌºí¿¡¼­ ÇÐ³âº°·Î ÇÐ»ýµéÀÇ ÀÎ¿ø¼ö ÇÕ°è¿Í ÇÐ°úº°·Î ÀÎ ¿ø¼öÀÇ ÇÕ°è¸¦ ±¸ÇØ¾ß ÇÏ´Â °æ¿ì¿¡ 
---±âÁ¸¿¡´Â ÇÐ³âº°·Î ÀÎ¿ø¼ö ÇÕ°è¸¦ ±¸ÇÏ °í º°µµ·Î ÇÐ°úº°·Î ÀÎ¿ø¼ö ÇÕ°è¸¦ ±¸ÇÑ ÈÄ UNION ¿¬»êÀ» ÇßÀ½ 
+--ì˜ˆ) STUDENT í…Œì´ë¸”ì—ì„œ í•™ë…„ë³„ë¡œ í•™ìƒë“¤ì˜ ì¸ì›ìˆ˜ í•©ê³„ì™€ í•™ê³¼ë³„ë¡œ ì¸ ì›ìˆ˜ì˜ í•©ê³„ë¥¼ êµ¬í•´ì•¼ í•˜ëŠ” ê²½ìš°ì— 
+--ê¸°ì¡´ì—ëŠ” í•™ë…„ë³„ë¡œ ì¸ì›ìˆ˜ í•©ê³„ë¥¼ êµ¬í•˜ ê³  ë³„ë„ë¡œ í•™ê³¼ë³„ë¡œ ì¸ì›ìˆ˜ í•©ê³„ë¥¼ êµ¬í•œ í›„ UNION ì—°ì‚°ì„ í–ˆìŒ 
 
   SELECT grade, COUNT (*)
     FROM student
@@ -371,8 +371,8 @@ UNION
     FROM student
 GROUP BY deptno1;
 
---grouping sets ÀÌ¿ë
---¿ø·¡ ±×·ì
+--grouping sets ì´ìš©
+--ì›ëž˜ ê·¸ë£¹
 
   SELECT grade, deptno1, COUNT (*)
     FROM student
@@ -388,28 +388,28 @@ ORDER BY grade, deptno1;
 
 --rollup
 
-  SELECT deptno, position, ROUND (AVG (NVL (pay, 0)), 2) ±Þ¿©
+  SELECT deptno, position, ROUND (AVG (NVL (pay, 0)), 2) ê¸‰ì—¬
     FROM professor
 GROUP BY ROLLUP (deptno, position)
 ORDER BY deptno, position;
 
---grouping setsÀ» ÀÌ¿ëÇÑ rollup°ú µ¿ÀÏÇÑ »óÈ²
+--grouping setsì„ ì´ìš©í•œ rollupê³¼ ë™ì¼í•œ ìƒí™©
 
-  SELECT deptno, position, ROUND (AVG (NVL (pay, 0)), 2) ±Þ¿©
+  SELECT deptno, position, ROUND (AVG (NVL (pay, 0)), 2) ê¸‰ì—¬
     FROM professor
 GROUP BY GROUPING SETS ((deptno, position), (deptno), (  ))
 ORDER BY deptno, position;
 
 --cube
 
-  SELECT deptno, position, ROUND (AVG (NVL (pay, 0)), 2) ±Þ¿©
+  SELECT deptno, position, ROUND (AVG (NVL (pay, 0)), 2) ê¸‰ì—¬
     FROM professor
 GROUP BY CUBE (deptno, position)
 ORDER BY deptno, position;
 
---grouping setsÀ» ÀÌ¿ëÇÑ cube¿Í µ¿ÀÏÇÑ »óÈ²
+--grouping setsì„ ì´ìš©í•œ cubeì™€ ë™ì¼í•œ ìƒí™©
 
-  SELECT deptno, position, ROUND (AVG (NVL (pay, 0)), 2) ±Þ¿©
+  SELECT deptno, position, ROUND (AVG (NVL (pay, 0)), 2) ê¸‰ì—¬
     FROM professor
 GROUP BY GROUPING SETS ((deptno, position),
                         (deptno),
@@ -417,72 +417,72 @@ GROUP BY GROUPING SETS ((deptno, position),
                         (  ))
 ORDER BY deptno, position;
 
---grouping setsÀ» ÀÌ¿ëÇØ ³»°¡ ¿øÇÏ´Âµ¥·Î Ãâ·Â
+--grouping setsì„ ì´ìš©í•´ ë‚´ê°€ ì›í•˜ëŠ”ë°ë¡œ ì¶œë ¥
 
-  SELECT deptno, position, ROUND (AVG (NVL (pay, 0)), 2) ±Þ¿©
+  SELECT deptno, position, ROUND (AVG (NVL (pay, 0)), 2) ê¸‰ì—¬
     FROM professor
 GROUP BY GROUPING SETS ((deptno, position), (position))
 ORDER BY deptno, position;
 
---panmae Å×ÀÌºí¿¡¼­ ¼ö·®(p_qty)ÀÌ 3°³ ÀÌ»óÀÎ µ¥ ÀÌÅÍ¿¡ ´ëÇØ ÆÇ¸ÅÀÏ(p_date)º°, ÆÇ¸ÅÁ¡(p_store) º°·Î 
---ÆÇ¸Å±Ý¾×(p_total)ÀÇ ÇÕ°è ±¸ÇÏ±â ? 
+--panmae í…Œì´ë¸”ì—ì„œ ìˆ˜ëŸ‰(p_qty)ì´ 3ê°œ ì´ìƒì¸ ë° ì´í„°ì— ëŒ€í•´ íŒë§¤ì¼(p_date)ë³„, íŒë§¤ì (p_store) ë³„ë¡œ 
+--íŒë§¤ê¸ˆì•¡(p_total)ì˜ í•©ê³„ êµ¬í•˜ê¸° ? 
 
-  SELECT p_qty                      ¼ö·®,
-         p_date                     ÆÇ¸ÅÀÏ,
-         p_store                    ÆÇ¸ÅÁ¡,
-         SUM (NVL (p_total, 0))     ÆÇ¸Å±Ý¾×
+  SELECT p_qty                      ìˆ˜ëŸ‰,
+         p_date                     íŒë§¤ì¼,
+         p_store                    íŒë§¤ì ,
+         SUM (NVL (p_total, 0))     íŒë§¤ê¸ˆì•¡
     FROM panmae
    WHERE p_qty >= 3
 GROUP BY p_qty, p_date, p_store
 ORDER BY p_qty, p_date, p_store;
 
---rollup, cubeÀÌ¿ëÇÏ¿© ¼Ò°è Ãâ·Â ? 
+--rollup, cubeì´ìš©í•˜ì—¬ ì†Œê³„ ì¶œë ¥ ? 
 
-  SELECT p_qty                      ¼ö·®,
-         p_date                     ÆÇ¸ÅÀÏ,
-         p_store                    ÆÇ¸ÅÁ¡,
-         SUM (NVL (p_total, 0))     ÆÇ¸Å±Ý¾×
+  SELECT p_qty                      ìˆ˜ëŸ‰,
+         p_date                     íŒë§¤ì¼,
+         p_store                    íŒë§¤ì ,
+         SUM (NVL (p_total, 0))     íŒë§¤ê¸ˆì•¡
     FROM panmae
    WHERE p_qty >= 3
 GROUP BY ROLLUP (p_qty, p_date, p_store)
 ORDER BY p_qty, p_date, p_store;
 
-  SELECT p_qty                      ¼ö·®,
-         p_date                     ÆÇ¸ÅÀÏ,
-         p_store                    ÆÇ¸ÅÁ¡,
-         SUM (NVL (p_total, 0))     ÆÇ¸Å±Ý¾×
+  SELECT p_qty                      ìˆ˜ëŸ‰,
+         p_date                     íŒë§¤ì¼,
+         p_store                    íŒë§¤ì ,
+         SUM (NVL (p_total, 0))     íŒë§¤ê¸ˆì•¡
     FROM panmae
    WHERE p_qty >= 3
 GROUP BY CUBE (p_qty, p_date, p_store)
 ORDER BY p_qty, p_date, p_store;
 
---°¢°¢ÀÇ °æ¿ì groupingÇÔ¼ö¸¦ ÀÌ¿ëÇØ¼­ ¿ä¾àÁ¤º¸ Ãâ·ÂÇÏ ±â(decode()µµ ÀÌ¿ë)
+--ê°ê°ì˜ ê²½ìš° groupingí•¨ìˆ˜ë¥¼ ì´ìš©í•´ì„œ ìš”ì•½ì •ë³´ ì¶œë ¥í•˜ ê¸°(decode()ë„ ì´ìš©)
 
   SELECT DECODE (
              GROUPING (p_qty),
              1, DECODE (
                     GROUPING (p_date),
                     1, DECODE (GROUPING (p_store),
-                               1, '[3°³ ÀÌ»ó]',
-                               '[ÆÇ¸ÅÁ¡º°]'),
-                    '[ÆÇ¸ÅÀÏº°]'),
-             p_qty)                ¼ö·®,
+                               1, '[3ê°œ ì´ìƒ]',
+                               '[íŒë§¤ì ë³„]'),
+                    '[íŒë§¤ì¼ë³„]'),
+             p_qty)                ìˆ˜ëŸ‰,
          DECODE (
              GROUPING (p_date),
              1, DECODE (
                     GROUPING (p_store),
                     1, DECODE (GROUPING (p_qty),
-                               1, '[ÆÇ¸Å±Ý¾×]',
-                               '[¼ö·®º°]'),
-                    '[ÆÇ¸ÅÀÏÀÇ ÃÑ ÇÕ]'),
-             p_date)               ÆÇ¸ÅÀÏ,
+                               1, '[íŒë§¤ê¸ˆì•¡]',
+                               '[ìˆ˜ëŸ‰ë³„]'),
+                    '[íŒë§¤ì¼ì˜ ì´ í•©]'),
+             p_date)               íŒë§¤ì¼,
          DECODE (
              GROUPING (p_store),
              1, DECODE (GROUPING (p_date),
-                        1, '[ÃÑ ÇÕ]',
-                        '[ÆÇ¸ÅÁ¡ÀÇ ÃÑ ÇÕ]'),
-             p_store)              ÆÇ¸ÅÁ¡,
-         SUM (NVL (p_total, 0))    ÆÇ¸Å±Ý¾×,
+                        1, '[ì´ í•©]',
+                        '[íŒë§¤ì ì˜ ì´ í•©]'),
+             p_store)              íŒë§¤ì ,
+         SUM (NVL (p_total, 0))    íŒë§¤ê¸ˆì•¡,
          GROUPING (p_qty),
          GROUPING (p_date),
          GROUPING (p_store)
@@ -498,34 +498,34 @@ GROUP BY GROUPING SETS ((p_qty, p_date, p_store),
                         (  ))
 ORDER BY p_qty, p_date, p_store;
 
---emp Å×ÀÌºí¿¡¼­ ºÎ¼­º°·Î °¢ Á÷±Þº° salÀÇ ÇÕ°è°¡ ¸îÀÎ Áö °è»êÇØ¼­ Ãâ·ÂÇÏ±â
---[1] group by ÀÌ¿ë, ¼¼·Î Ãâ·Â(±âÁ¸ ¹æ½Ä)
+--emp í…Œì´ë¸”ì—ì„œ ë¶€ì„œë³„ë¡œ ê° ì§ê¸‰ë³„ salì˜ í•©ê³„ê°€ ëª‡ì¸ ì§€ ê³„ì‚°í•´ì„œ ì¶œë ¥í•˜ê¸°
+--[1] group by ì´ìš©, ì„¸ë¡œ ì¶œë ¥(ê¸°ì¡´ ë°©ì‹)
 
   SELECT DEPTNO, JOB, SUM (NVL (sal, 0))
     FROM emp
 GROUP BY DEPTNO, JOB
 ORDER BY DEPTNO, JOB;
 
---[2] jobÀ» °¡·Î·Î Ãâ·ÂÇÏ±â
---jobº° salÀÇ ÇÕ°è
+--[2] jobì„ ê°€ë¡œë¡œ ì¶œë ¥í•˜ê¸°
+--jobë³„ salì˜ í•©ê³„
 
   SELECT job, SUM (sal), COUNT (*)
     FROM emp
 GROUP BY job
 ORDER BY job;
 
---jobÀ» °¡·Î·Î ³ª¿­
+--jobì„ ê°€ë¡œë¡œ ë‚˜ì—´
 
   SELECT SUM (DECODE (job, 'ANALYST', sal))       ANALYST,
          SUM (DECODE (job, 'CLERK', sal))         CLERK,
          SUM (DECODE (job, 'MANAGER', sal))       MANAGER,
          SUM (DECODE (job, 'PRESIDENT', sal))     PRESIDENT,
          SUM (DECODE (job, 'SALESMAN', sal))      SALESMAN,
-         SUM (sal)                                "ÃÑ ÇÕ°è"
+         SUM (sal)                                "ì´ í•©ê³„"
     FROM emp
 ORDER BY deptno;
 
---deptnoº°·Î group byÇÏ°í, jobÀ» °¡·Î·Î Ãâ·Â
+--deptnoë³„ë¡œ group byí•˜ê³ , jobì„ ê°€ë¡œë¡œ ì¶œë ¥
 
   SELECT deptno,
          SUM (DECODE (job, 'ANALYST', sal))       ANALYST,
@@ -533,59 +533,59 @@ ORDER BY deptno;
          SUM (DECODE (job, 'MANAGER', sal))       MANAGER,
          SUM (DECODE (job, 'PRESIDENT', sal))     PRESIDENT,
          SUM (DECODE (job, 'SALESMAN', sal))      SALESMAN,
-         SUM (sal)                                "ºÎ¼­º° ÇÕ°è"
+         SUM (sal)                                "ë¶€ì„œë³„ í•©ê³„"
     FROM emp
 GROUP BY deptno
 ORDER BY deptno;
 
---¿ùº° ¸ÅÃâ(¿ùº°·Î priceÀÇ ÇÕ°è ±¸ÇÏ±â)
+--ì›”ë³„ ë§¤ì¶œ(ì›”ë³„ë¡œ priceì˜ í•©ê³„ êµ¬í•˜ê¸°)
 --[1] group by
 
-  SELECT EXTRACT (MONTH FROM REGDATE) ¿ù, SUM (price)
+  SELECT EXTRACT (MONTH FROM REGDATE) ì›”, SUM (price)
     FROM pd
 GROUP BY EXTRACT (MONTH FROM REGDATE)
 ORDER BY EXTRACT (MONTH FROM REGDATE);
 
-  SELECT TO_CHAR (REGDATE, 'mm') ¿ù, SUM (price)
+  SELECT TO_CHAR (REGDATE, 'mm') ì›”, SUM (price)
     FROM pd
 GROUP BY TO_CHAR (REGDATE, 'mm')
 ORDER BY TO_CHAR (REGDATE, 'mm');
 
---[2] ¿ùÀÌ °¡·Î·Î Ãâ·Â
+--[2] ì›”ì´ ê°€ë¡œë¡œ ì¶œë ¥
 
-SELECT SUM (DECODE (EXTRACT (MONTH FROM REGDATE), 3, price))     "3¿ù",
-       SUM (DECODE (EXTRACT (MONTH FROM REGDATE), 4, price))     "4¿ù"
+SELECT SUM (DECODE (EXTRACT (MONTH FROM REGDATE), 3, price))     "3ì›”",
+       SUM (DECODE (EXTRACT (MONTH FROM REGDATE), 4, price))     "4ì›”"
   FROM pd;
 
-SELECT SUM (DECODE (TO_CHAR (REGDATE, 'mm'), '01', price))     "1¿ù",
-       SUM (DECODE (TO_CHAR (REGDATE, 'mm'), '02', price))     "2¿ù",
-       SUM (DECODE (TO_CHAR (REGDATE, 'mm'), '03', price))     "3¿ù",
-       SUM (DECODE (TO_CHAR (REGDATE, 'mm'), '04', price))     "4¿ù",
-       SUM (DECODE (TO_CHAR (REGDATE, 'mm'), '05', price))     "5¿ù",
-       SUM (DECODE (TO_CHAR (REGDATE, 'mm'), '06', price))     "6¿ù",
-       SUM (DECODE (TO_CHAR (REGDATE, 'mm'), '07', price))     "7¿ù",
-       SUM (DECODE (TO_CHAR (REGDATE, 'mm'), '08', price))     "8¿ù",
-       SUM (DECODE (TO_CHAR (REGDATE, 'mm'), '09', price))     "9¿ù",
-       SUM (DECODE (TO_CHAR (REGDATE, 'mm'), '10', price))     "10¿ù",
-       SUM (DECODE (TO_CHAR (REGDATE, 'mm'), '11', price))     "11¿ù",
-       SUM (DECODE (TO_CHAR (REGDATE, 'mm'), '12', price))     "12¿ù"
+SELECT SUM (DECODE (TO_CHAR (REGDATE, 'mm'), '01', price))     "1ì›”",
+       SUM (DECODE (TO_CHAR (REGDATE, 'mm'), '02', price))     "2ì›”",
+       SUM (DECODE (TO_CHAR (REGDATE, 'mm'), '03', price))     "3ì›”",
+       SUM (DECODE (TO_CHAR (REGDATE, 'mm'), '04', price))     "4ì›”",
+       SUM (DECODE (TO_CHAR (REGDATE, 'mm'), '05', price))     "5ì›”",
+       SUM (DECODE (TO_CHAR (REGDATE, 'mm'), '06', price))     "6ì›”",
+       SUM (DECODE (TO_CHAR (REGDATE, 'mm'), '07', price))     "7ì›”",
+       SUM (DECODE (TO_CHAR (REGDATE, 'mm'), '08', price))     "8ì›”",
+       SUM (DECODE (TO_CHAR (REGDATE, 'mm'), '09', price))     "9ì›”",
+       SUM (DECODE (TO_CHAR (REGDATE, 'mm'), '10', price))     "10ì›”",
+       SUM (DECODE (TO_CHAR (REGDATE, 'mm'), '11', price))     "11ì›”",
+       SUM (DECODE (TO_CHAR (REGDATE, 'mm'), '12', price))     "12ì›”"
   FROM pd;
 
--- student Å×ÀÌºí¿¡¼­ deptno1(ÇÐ°ú)º°, grade(ÇÐ³â)º° Å° (height)ÀÇ Æò±Õ±¸ÇÏ±â ? 
---[1] group by ÀÌ¿ë ? 
+-- student í…Œì´ë¸”ì—ì„œ deptno1(í•™ê³¼)ë³„, grade(í•™ë…„)ë³„ í‚¤ (height)ì˜ í‰ê· êµ¬í•˜ê¸° ? 
+--[1] group by ì´ìš© ? 
 
-  SELECT deptno1, grade, AVG (NVL (height, 0)) Æò±ÕÅ°
+  SELECT deptno1, grade, AVG (NVL (height, 0)) í‰ê· í‚¤
     FROM student
 GROUP BY deptno1, grade
 ORDER BY deptno1, grade;
 
---[2] group by, decode ÀÌ¿ë-°¡·Î, ¼¼·Î ¹Ù²ã¼­
+--[2] group by, decode ì´ìš©-ê°€ë¡œ, ì„¸ë¡œ ë°”ê¿”ì„œ
 
   SELECT deptno1,
-         AVG (DECODE (grade, 1, NVL (height, 0)))     "1ÇÐ³â",
-         AVG (DECODE (grade, 2, NVL (height, 0)))     "2ÇÐ³â",
-         AVG (DECODE (grade, 3, NVL (height, 0)))     "3ÇÐ³â",
-         AVG (DECODE (grade, 4, NVL (height, 0)))     "4ÇÐ³â"
+         AVG (DECODE (grade, 1, NVL (height, 0)))     "1í•™ë…„",
+         AVG (DECODE (grade, 2, NVL (height, 0)))     "2í•™ë…„",
+         AVG (DECODE (grade, 3, NVL (height, 0)))     "3í•™ë…„",
+         AVG (DECODE (grade, 4, NVL (height, 0)))     "4í•™ë…„"
     FROM student
 GROUP BY deptno1
 ORDER BY deptno1;

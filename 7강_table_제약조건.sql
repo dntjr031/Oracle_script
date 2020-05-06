@@ -1,58 +1,58 @@
-/* Formatted on 2020/05/06 ¿ÀÀü 10:44:34 (QP5 v5.360) */
---7°­_table_Á¦¾àÁ¶°Ç.sql
---[2020-04-27 ¿ù¿äÀÏ]
+/* Formatted on 2020/05/06 ì˜¤ì „ 10:44:34 (QP5 v5.360) */
+--7ê°•_table_ì œì•½ì¡°ê±´.sql
+--[2020-04-27 ì›”ìš”ì¼]
 
 /*
-    DDL - µ¥ÀÌÅÍº£ÀÌ½º ¿ÀºêÁ§Æ®µéÀ» »ý¼º, º¯°æ, »èÁ¦, °ü¸®ÇÏ´Â ¸í·É¾î
-    [1] create - ¿ÀºêÁ§Æ® »ý¼º ¸í·É¾î
-               - create ¿ÀºêÁ§Æ®Å¸ÀÔ ¿ÀºêÁ§Æ®¸í...
-                 ¿¹) create table Å×ÀÌºí¸í...
-    [2] drop - ¿ÀºêÁ§ÅÍ Á¦°Å(¿µ±¸ ¼Ò¸ê)
-             - drop ¿ÀºêÁ§Æ®Å¸ÀÔ ¿ÀºêÁ§Æ®¸í;
-               ¿¹) drop table Å×ÀÌºí¸í;
-    [3] alter - ¿ÀºêÁ§Æ® ±¸Á¶ º¯°æ  
-              - alter ¿ÀºêÁ§Æ®Å¸ÀÔ ¿ÀºêÁ§Æ®¸í..
-                ¿¹) alter table dept5
+    DDL - ë°ì´í„°ë² ì´ìŠ¤ ì˜¤ë¸Œì íŠ¸ë“¤ì„ ìƒì„±, ë³€ê²½, ì‚­ì œ, ê´€ë¦¬í•˜ëŠ” ëª…ë ¹ì–´
+    [1] create - ì˜¤ë¸Œì íŠ¸ ìƒì„± ëª…ë ¹ì–´
+               - create ì˜¤ë¸Œì íŠ¸íƒ€ìž… ì˜¤ë¸Œì íŠ¸ëª…...
+                 ì˜ˆ) create table í…Œì´ë¸”ëª…...
+    [2] drop - ì˜¤ë¸Œì í„° ì œê±°(ì˜êµ¬ ì†Œë©¸)
+             - drop ì˜¤ë¸Œì íŠ¸íƒ€ìž… ì˜¤ë¸Œì íŠ¸ëª…;
+               ì˜ˆ) drop table í…Œì´ë¸”ëª…;
+    [3] alter - ì˜¤ë¸Œì íŠ¸ êµ¬ì¡° ë³€ê²½  
+              - alter ì˜¤ë¸Œì íŠ¸íƒ€ìž… ì˜¤ë¸Œì íŠ¸ëª…..
+                ì˜ˆ) alter table dept5
                     add loc varchar2(20);
     [4] truncate
-        - truncate table - Å×ÀÌºíÀÇ µ¥ÀÌÅÍ »èÁ¦
-          ¿¹) truncate table Å×ÀÌºí¸í;
+        - truncate table - í…Œì´ë¸”ì˜ ë°ì´í„° ì‚­ì œ
+          ì˜ˆ) truncate table í…Œì´ë¸”ëª…;
           
-    ¡Ø drop, truncate, delete ºñ±³
-    1) delete - ¸Þ¸ð¸®»óÀÇ µ¥ÀÌÅÍ¸¦ »èÁ¦, rollbackÀ¸·Î µÇµ¹¸± ¼ö ÀÖ´Ù.
-    2) truncate - ¸Þ¸ð¸®»óÀÇ µ¥ÀÌÅÍ¿Í µ¥ÀÌÅÍÆÄÀÏ±îÁö »èÁ¦, ÀÚµ¿ Ä¿¹ÔµÊ
-                - deleteº¸´Ù ¼öÇà¼Óµµ°¡ ºü¸§
-        => delete, truncate´Â µ¥ÀÌÅÍ¸¸ »èÁ¦, Å×ÀÌºí ±¸Á¶´Â »ì¾ÆÀÖ´Ù.
-    3) drop - Å×ÀÌºíÀÇ ±¸Á¶±îÁö ¿µ±¸È÷ ¼Ò¸ê½ÃÅ´
+    â€» drop, truncate, delete ë¹„êµ
+    1) delete - ë©”ëª¨ë¦¬ìƒì˜ ë°ì´í„°ë¥¼ ì‚­ì œ, rollbackìœ¼ë¡œ ë˜ëŒë¦´ ìˆ˜ ìžˆë‹¤.
+    2) truncate - ë©”ëª¨ë¦¬ìƒì˜ ë°ì´í„°ì™€ ë°ì´í„°íŒŒì¼ê¹Œì§€ ì‚­ì œ, ìžë™ ì»¤ë°‹ë¨
+                - deleteë³´ë‹¤ ìˆ˜í–‰ì†ë„ê°€ ë¹ ë¦„
+        => delete, truncateëŠ” ë°ì´í„°ë§Œ ì‚­ì œ, í…Œì´ë¸” êµ¬ì¡°ëŠ” ì‚´ì•„ìžˆë‹¤.
+    3) drop - í…Œì´ë¸”ì˜ êµ¬ì¡°ê¹Œì§€ ì˜êµ¬ížˆ ì†Œë©¸ì‹œí‚´
 */
 
 /*
-    ¡Ø Å×ÀÌºí ¸¸µé±â
-    create table Å×ÀÌºí¸í
+    â€» í…Œì´ë¸” ë§Œë“¤ê¸°
+    create table í…Œì´ë¸”ëª…
     (
-        ÄÃ·³¸í1 µ¥ÀÌÅÍÅ¸ÀÔ,
-        ÄÃ·³¸í2 µ¥ÀÌÅÍÅ¸ÀÔ,
-        ÄÃ·³¸í3 µ¥ÀÌÅÍÅ¸ÀÔ,
+        ì»¬ëŸ¼ëª…1 ë°ì´í„°íƒ€ìž…,
+        ì»¬ëŸ¼ëª…2 ë°ì´í„°íƒ€ìž…,
+        ì»¬ëŸ¼ëª…3 ë°ì´í„°íƒ€ìž…,
         ...
     );
     
-    ¡Ø µ¥ÀÌÅÍ Å¸ÀÔ
-    ¹®ÀÚÇü, ¼ýÀÚÇü, ³¯Â¥Çü
-    [1] ¹®ÀÚÇü
-    char(Å©±â) - °íÁ¤±æÀÌ ¹®ÀÚÇü, ÃÖ´ë 2000byte±îÁö ÀúÀå
-    varchar2(Å©±â) - °¡º¯±æÀÌ ¹®ÀÚÇü, ÃÖ´ë 4000byte±îÁö ÀúÀå
-    clob Å¸ÀÔ(Character large Object)
-    - Å©±â°¡ Å« ¹®ÀÚ¿­ÀÌ³ª ¹®¼­ÀÇ ÀúÀåÀÌ °¡´É
-    - longÅ¸ÀÔÀÌ È®ÀåµÈ ÇüÅÂ, 4GB±îÁö ÀúÀå
+    â€» ë°ì´í„° íƒ€ìž…
+    ë¬¸ìží˜•, ìˆ«ìží˜•, ë‚ ì§œí˜•
+    [1] ë¬¸ìží˜•
+    char(í¬ê¸°) - ê³ ì •ê¸¸ì´ ë¬¸ìží˜•, ìµœëŒ€ 2000byteê¹Œì§€ ì €ìž¥
+    varchar2(í¬ê¸°) - ê°€ë³€ê¸¸ì´ ë¬¸ìží˜•, ìµœëŒ€ 4000byteê¹Œì§€ ì €ìž¥
+    clob íƒ€ìž…(Character large Object)
+    - í¬ê¸°ê°€ í° ë¬¸ìžì—´ì´ë‚˜ ë¬¸ì„œì˜ ì €ìž¥ì´ ê°€ëŠ¥
+    - longíƒ€ìž…ì´ í™•ìž¥ëœ í˜•íƒœ, 4GBê¹Œì§€ ì €ìž¥
 */
---char, varchar2 ºñ±³
+--char, varchar2 ë¹„êµ
 
 CREATE TABLE char_exam1
 (
     names1    CHAR (3),
-    -- °íÁ¤±æÀÌ 3¹ÙÀÌÆ®
+    -- ê³ ì •ê¸¸ì´ 3ë°”ì´íŠ¸
     names2    VARCHAR2 (3)
--- °¡º¯±æÀÌ 3¹ÙÀÌÆ®
+-- ê°€ë³€ê¸¸ì´ 3ë°”ì´íŠ¸
 );
 
 INSERT INTO char_exam1
@@ -71,84 +71,84 @@ DROP TABLE char_exam1;
 CREATE TABLE char_exam1
 (
     names1    CHAR (3),
-    --»ý·«ÇÏ¸é byte
+    --ìƒëžµí•˜ë©´ byte
     names2    VARCHAR2 (3),
     names3    CHAR (6 BYTE),
     names4    CHAR (6 CHAR),
     names5    CHAR (6),
     names6    CLOB
--- 4GB±îÁö ÀúÀå
+-- 4GBê¹Œì§€ ì €ìž¥
 );
 
 INSERT INTO char_exam1
      VALUES ('AAA',
-             '°¡',
+             'ê°€',
              'ABCDEF',
              'ABCDEFG',
              'AB',
              NULL);
 
--- error, names4´Â 6°³ ¹®ÀÚ¸¸ ÀÔ·Â °¡´ÉÇÏ¹Ç·Î ¿¡·¯
+-- error, names4ëŠ” 6ê°œ ë¬¸ìžë§Œ ìž…ë ¥ ê°€ëŠ¥í•˜ë¯€ë¡œ ì—ëŸ¬
 
 INSERT INTO char_exam1
      VALUES ('AAA',
-             '°¡',
+             'ê°€',
              'ABCDEF',
-             '°¡³ª´Ù¶ó¸¶¹Ù',
-             '°¡³ª',
+             'ê°€ë‚˜ë‹¤ë¼ë§ˆë°”',
+             'ê°€ë‚˜',
              NULL);
 
---ÀÎÄÚµù¿¡ µû¶ó ÇÑ±Û 1±ÛÀÚ´Â 2¹ÙÀÌÆ®³ª 3¹ÙÀÌÆ®
---UTF8 : ÇÑ±Û 1±ÛÀÚ°¡ 3¹ÙÀÌÆ®
+--ì¸ì½”ë”©ì— ë”°ë¼ í•œê¸€ 1ê¸€ìžëŠ” 2ë°”ì´íŠ¸ë‚˜ 3ë°”ì´íŠ¸
+--UTF8 : í•œê¸€ 1ê¸€ìžê°€ 3ë°”ì´íŠ¸
 
 INSERT INTO char_exam1
      VALUES ('AAA',
-             '°¡',
+             'ê°€',
              'ABCDEF',
-             '°¡³ª´Ù¶ó¸¶¹Ù',
-             '°¡³ª´Ù',
+             'ê°€ë‚˜ë‹¤ë¼ë§ˆë°”',
+             'ê°€ë‚˜ë‹¤',
              NULL);
 
---names5´Â 6¹ÙÀÌÆ®ÀÌ¹Ç·Î ÇÑ±Û 2±ÛÀÚ¸¸ ÀÔ·Â °¡´É
+--names5ëŠ” 6ë°”ì´íŠ¸ì´ë¯€ë¡œ í•œê¸€ 2ê¸€ìžë§Œ ìž…ë ¥ ê°€ëŠ¥
 
 SELECT *
   FROM nls_session_parameters
  WHERE parameter = 'NLS_LENGTH_SEMANTICS';
 
---=> char, varchar2¿¡¼­ »ý·«ÇÏ¸é byte
+--=> char, varchar2ì—ì„œ ìƒëžµí•˜ë©´ byte
 
 INSERT INTO char_exam1 (names1, names3, names6)
-     VALUES ('AAC', 'ABCDEF', 'abcdEFGH°¡³ª´Ù clob ¿¬½À');
+     VALUES ('AAC', 'ABCDEF', 'abcdEFGHê°€ë‚˜ë‹¤ clob ì—°ìŠµ');
 
 SELECT * FROM char_exam1;
 
 /*
-    [2] ¼ýÀÚÇü
+    [2] ìˆ«ìží˜•
     number
-    number(ÀüÃ¼ ÀÚ¸®¼ö)
-    number(ÀüÃ¼ ÀÚ¸®¼ö, ¼Ò¼öÀÌÇÏ ÀÚ¸®¼ö)
+    number(ì „ì²´ ìžë¦¬ìˆ˜)
+    number(ì „ì²´ ìžë¦¬ìˆ˜, ì†Œìˆ˜ì´í•˜ ìžë¦¬ìˆ˜)
 */
 
 CREATE TABLE num_exam1
 (
     n1    NUMBER,
     n2    NUMBER (9),
-    --ÀüÃ¼ 9ÀÚ¸®¼ö Ç¥Çö°¡´É
-    --¼Ò¼öÀÌÇÏ ÀÚ¸®¼ö´Â Ç¥ÇöÇÏÁö ¾ÊÀ½
+    --ì „ì²´ 9ìžë¦¬ìˆ˜ í‘œí˜„ê°€ëŠ¥
+    --ì†Œìˆ˜ì´í•˜ ìžë¦¬ìˆ˜ëŠ” í‘œí˜„í•˜ì§€ ì•ŠìŒ
     n3    NUMBER (9, 2),
-    --ÀüÃ¼ 9ÀÚ¸®ÀÇ ¼öÁß ¼Ò¼öÀÌÇÏ 2ÀÚ¸®±îÁö Ç¥Çö °¡´É
-    --¼Ò¼öÀÌÇÏ 3Â°ÀÚ¸®¿¡¼­ ¹Ý¿Ã¸²
+    --ì „ì²´ 9ìžë¦¬ì˜ ìˆ˜ì¤‘ ì†Œìˆ˜ì´í•˜ 2ìžë¦¬ê¹Œì§€ í‘œí˜„ ê°€ëŠ¥
+    --ì†Œìˆ˜ì´í•˜ 3ì§¸ìžë¦¬ì—ì„œ ë°˜ì˜¬ë¦¼
     n4    NUMBER (9, 1),
-    --ÀüÃ¼ 9ÀÚ¸®ÀÇ ¼öÁß ¼Ò¼öÀÌÇÏ 1ÀÚ¸®±îÁö Ç¥Çö °¡´É
-    --¼Ò¼öÀÌÇÏ 2Â°ÀÚ¸®¿¡¼­ ¹Ý¿Ã¸²
+    --ì „ì²´ 9ìžë¦¬ì˜ ìˆ˜ì¤‘ ì†Œìˆ˜ì´í•˜ 1ìžë¦¬ê¹Œì§€ í‘œí˜„ ê°€ëŠ¥
+    --ì†Œìˆ˜ì´í•˜ 2ì§¸ìžë¦¬ì—ì„œ ë°˜ì˜¬ë¦¼
     n5    NUMBER (7),
-    --ÀüÃ¼ 7ÀÚ¸®¼ö Ç¥Çö°¡´É
+    --ì „ì²´ 7ìžë¦¬ìˆ˜ í‘œí˜„ê°€ëŠ¥
     n6    NUMBER (7, -2),
-    --ÀüÃ¼ 7ÀÚ¸®ÀÇ ¼ö Ç¥Çö, ½ÊÀÇÀÚ¸®¿¡¼­ ¹Ý¿Ã¸²
+    --ì „ì²´ 7ìžë¦¬ì˜ ìˆ˜ í‘œí˜„, ì‹­ì˜ìžë¦¬ì—ì„œ ë°˜ì˜¬ë¦¼
     n7    NUMBER (6),
-    --ÀüÃ¼ 7ÀÚ¸®¼ö Ç¥Çö°¡´É
+    --ì „ì²´ 7ìžë¦¬ìˆ˜ í‘œí˜„ê°€ëŠ¥
     n8    NUMBER (3, 5)
---1º¸´Ù ÀÛÀº ½Ç¼ö Ç¥Çö, ¼Ò¼öÀÌÇÏ 5ÀÚ¸® Áß 0ÀÌ µÎ°³(5-3) ºÙ´Â´Ù
+--1ë³´ë‹¤ ìž‘ì€ ì‹¤ìˆ˜ í‘œí˜„, ì†Œìˆ˜ì´í•˜ 5ìžë¦¬ ì¤‘ 0ì´ ë‘ê°œ(5-3) ë¶™ëŠ”ë‹¤
 );
 
 INSERT INTO num_exam1 (n1,
@@ -179,16 +179,16 @@ INSERT INTO num_exam1 (n1,
              1234567.89,
              1234567.89);
 
-             -- error, n7Àº ÀüÃ¼ ÀÚ¸®¼ö 6°³¸¸ °¡´É, ÇöÀç 7°³ÀÌ¹Ç·Î ¿¡·¯
+             -- error, n7ì€ ì „ì²´ ìžë¦¬ìˆ˜ 6ê°œë§Œ ê°€ëŠ¥, í˜„ìž¬ 7ê°œì´ë¯€ë¡œ ì—ëŸ¬
 
 SELECT * FROM num_exam1;
 
 /*
     n8 number(3,5)
-    - ÀüÃ¼ ÀÚ¸®¼ö°¡ ¼Ò¼öÀÌÇÏ ÀÚ¸®¼öº¸´Ù ÀûÀº °æ¿ì
-    - 1º¸´Ù ÀÛÀº ½Ç¼ö Ç¥Çö
-    - ÀüÃ¼ ÀÚ¸®¼ö 3°³, ¼Ò¼öÀÌÇÏ ÀÚ¸®¼ö 5°³
-    => 5-3 => ¼Ò¼öÀÌÇÏ ÀÚ¸®¼ö¿¡ 2°³ÀÇ 0ÀÌ ºÙ°Ô µÊ
+    - ì „ì²´ ìžë¦¬ìˆ˜ê°€ ì†Œìˆ˜ì´í•˜ ìžë¦¬ìˆ˜ë³´ë‹¤ ì ì€ ê²½ìš°
+    - 1ë³´ë‹¤ ìž‘ì€ ì‹¤ìˆ˜ í‘œí˜„
+    - ì „ì²´ ìžë¦¬ìˆ˜ 3ê°œ, ì†Œìˆ˜ì´í•˜ ìžë¦¬ìˆ˜ 5ê°œ
+    => 5-3 => ì†Œìˆ˜ì´í•˜ ìžë¦¬ìˆ˜ì— 2ê°œì˜ 0ì´ ë¶™ê²Œ ë¨
 */
 
 INSERT INTO num_exam1 (n8)
@@ -205,9 +205,9 @@ INSERT INTO num_exam1 (n8)
 SELECT * FROM num_exam1;
 
 /*
-    [3] ³¯Â¥Çü
-    date - ³â¿ùÀÏ ½ÃºÐÃÊ±îÁö Ç¥Çö
-    timestamp - ¹Ð¸®ÃÊ±îÁöµµ Ç¥Çö
+    [3] ë‚ ì§œí˜•
+    date - ë…„ì›”ì¼ ì‹œë¶„ì´ˆê¹Œì§€ í‘œí˜„
+    timestamp - ë°€ë¦¬ì´ˆê¹Œì§€ë„ í‘œí˜„
 */
 
 SELECT SYSDATE, SYSTIMESTAMP FROM DUAL;
@@ -233,7 +233,7 @@ INSERT INTO date_exam1
 
 SELECT * FROM date_exam1;
 
---Å×ÀÌºí ¸¸µé±â ¿¬½À : tbl_test1
+--í…Œì´ë¸” ë§Œë“¤ê¸° ì—°ìŠµ : tbl_test1
 
 CREATE TABLE tbl_test1
 (
@@ -246,9 +246,9 @@ CREATE TABLE tbl_test1
 );
 
 INSERT INTO tbl_test1
-     VALUES ('È«±æµ¿',
+     VALUES ('í™ê¸¸ë™',
              '970930-2296312',
-             'È«±æµ¿ ¾Æ¹«°³ÀÔ´Ï´Ù.',
+             'í™ê¸¸ë™ ì•„ë¬´ê°œìž…ë‹ˆë‹¤.',
              'M',
              25,
              '2020-04-27');
@@ -256,15 +256,15 @@ INSERT INTO tbl_test1
 SELECT * FROM tbl_test1;
 
 /*
-    <¹«°áÁ¤ Á¦¾àÁ¶°Ç>
-    µ¥ÀÌÅÍ ¹«°á¼º
-    - ¿À¶óÅ¬ ¼­¹ö¿¡¼­ µ¥ÀÌÅÍ¸¦ Èì ¾øÀÌ ¾ÈÁ¤µÇ°Ô ÁöÄÑ ÁÖ´Â °Í
-    - Á¦´ë·Î µÈ µ¥ÀÌÅÍµéÀÌ ¿Ã¹Ù¸£°Ô ÀúÀåµÉ ¼ö ÀÖµµ·Ï ÇÏ±â À§ÇØ 
-      µ¥ÀÌÅÍº£ÀÌ½º Ãø¿¡¼­ Á¦°øÇÏ´Â ±â´Éµé => ¹«°á¼º Á¦¾àÁ¶°Ç
-    - ¹«°á¼ºÀ» ÁöÅ°±â À§ÇØ Á¦¾à Á¶°ÇµéÀ» Á¦°øÇÔ
-    - Á¦¾àÁ¶°ÇµéÀº Å×ÀÌºíÀÇ ÄÃ·³¿¡ Àû¿ëµÊ
+    <ë¬´ê²°ì • ì œì•½ì¡°ê±´>
+    ë°ì´í„° ë¬´ê²°ì„±
+    - ì˜¤ë¼í´ ì„œë²„ì—ì„œ ë°ì´í„°ë¥¼ í  ì—†ì´ ì•ˆì •ë˜ê²Œ ì§€ì¼œ ì£¼ëŠ” ê²ƒ
+    - ì œëŒ€ë¡œ ëœ ë°ì´í„°ë“¤ì´ ì˜¬ë°”ë¥´ê²Œ ì €ìž¥ë  ìˆ˜ ìžˆë„ë¡ í•˜ê¸° ìœ„í•´ 
+      ë°ì´í„°ë² ì´ìŠ¤ ì¸¡ì—ì„œ ì œê³µí•˜ëŠ” ê¸°ëŠ¥ë“¤ => ë¬´ê²°ì„± ì œì•½ì¡°ê±´
+    - ë¬´ê²°ì„±ì„ ì§€í‚¤ê¸° ìœ„í•´ ì œì•½ ì¡°ê±´ë“¤ì„ ì œê³µí•¨
+    - ì œì•½ì¡°ê±´ë“¤ì€ í…Œì´ë¸”ì˜ ì»¬ëŸ¼ì— ì ìš©ë¨
     
-    ¡Ø ¹«°áÁ¤ Á¦¾à Á¶°Ç(Integrity Constraints)
+    â€» ë¬´ê²°ì • ì œì•½ ì¡°ê±´(Integrity Constraints)
     [1] null / not null
     [2] unique
     [3] primary key
@@ -275,11 +275,11 @@ SELECT * FROM tbl_test1;
 
 /*
     [1] null(not null => C)
-    - µ¥ÀÌÅÍ°¡ ¾øÀ½À» ÀÇ¹Ì
-    - ÄÃ·³ÀÇ ¼Ó¼ºÁß ÇÏ³ª·Î ÇØ´ç ÄÃ·³ÀÌ null°ªÀ» Çã¿ëÇÏ´ÂÁö Çã¿ëÇÏÁö ¾Ê´ÂÁö ÁöÁ¤
-    - µ¥ÀÌÅÍ Å¸ÀÔ ´ÙÀ½¿¡ ¸í½ÃÇØ¾ß ÇÔ
-    - nullÀ» Çã¿ëÇÏ¸é null, Çã¿ëÇÏÁö ¾ÊÀ¸¸é not nullÀ» ¸í½Ã
-    - ¸í½ÃÇÏÁö ¾ÊÀ¸¸é default°ªÀÎ null·Î ÁöÁ¤
+    - ë°ì´í„°ê°€ ì—†ìŒì„ ì˜ë¯¸
+    - ì»¬ëŸ¼ì˜ ì†ì„±ì¤‘ í•˜ë‚˜ë¡œ í•´ë‹¹ ì»¬ëŸ¼ì´ nullê°’ì„ í—ˆìš©í•˜ëŠ”ì§€ í—ˆìš©í•˜ì§€ ì•ŠëŠ”ì§€ ì§€ì •
+    - ë°ì´í„° íƒ€ìž… ë‹¤ìŒì— ëª…ì‹œí•´ì•¼ í•¨
+    - nullì„ í—ˆìš©í•˜ë©´ null, í—ˆìš©í•˜ì§€ ì•Šìœ¼ë©´ not nullì„ ëª…ì‹œ
+    - ëª…ì‹œí•˜ì§€ ì•Šìœ¼ë©´ defaultê°’ì¸ nullë¡œ ì§€ì •
 */
 
 CREATE TABLE null_exam1
@@ -295,17 +295,17 @@ INSERT INTO null_exam1 (col1, col2)
 INSERT INTO null_exam1 (col2, col3)
      VALUES ('CC', 'DD');
 
---¿¡·¯ : col1Àº not nullÀÌ¹Ç·Î °ªÀ» ÀÔ·ÂÇØ¾ß ÇÔ 
+--ì—ëŸ¬ : col1ì€ not nullì´ë¯€ë¡œ ê°’ì„ ìž…ë ¥í•´ì•¼ í•¨ 
 
 INSERT INTO null_exam1 (col1, col2, col3)
      VALUES ('TT1', '', NULL);
 
--- nullÀ» Á÷Á¢ ÀÔ·ÂÇÏ´Â °æ¿ì : null, '' ÀÔ·Â
+-- nullì„ ì§ì ‘ ìž…ë ¥í•˜ëŠ” ê²½ìš° : null, '' ìž…ë ¥
 
 INSERT INTO null_exam1 (col1, col3)
      VALUES ('TT2', ' ');
 
--- ' ' Àº null¾Æ´Ô
+-- ' ' ì€ nullì•„ë‹˜
 
 SELECT *
   FROM null_exam1
@@ -315,14 +315,14 @@ SELECT *
   FROM null_exam1
  WHERE col3 IS NOT NULL;
 
---=> ÇÊ¼ö ÀÔ·ÂÇ×¸ñ¿¡´Â not null Á¦¾àÁ¶°ÇÀ» ÁöÁ¤ÇØ¾ß ÇÔ
+--=> í•„ìˆ˜ ìž…ë ¥í•­ëª©ì—ëŠ” not null ì œì•½ì¡°ê±´ì„ ì§€ì •í•´ì•¼ í•¨
 
 /*
     [2] unique (U)
-    - °¢ ·¹ÄÚµå¸¦ À¯ÀÏÇÏ°Ô ½Çº°ÇÒ ¼ö ÀÖ´Â ¼Ó¼º
-    - º¹ÇÕÅ°¸¦ unique Á¦¾àÁ¶°ÇÀ¸·Î »ç¿ëÇÒ ¼ö ÀÖ´Ù
-    - ÇÑ Å×ÀÌºí¿¡ ¿©·¯ °³ÀÇ unique Á¦¾àÁ¶°ÇÀÌ ¿Ã ¼ö ÀÖ´Ù
-    - nullÀ» Çã¿ëÇÔ
+    - ê° ë ˆì½”ë“œë¥¼ ìœ ì¼í•˜ê²Œ ì‹¤ë³„í•  ìˆ˜ ìžˆëŠ” ì†ì„±
+    - ë³µí•©í‚¤ë¥¼ unique ì œì•½ì¡°ê±´ìœ¼ë¡œ ì‚¬ìš©í•  ìˆ˜ ìžˆë‹¤
+    - í•œ í…Œì´ë¸”ì— ì—¬ëŸ¬ ê°œì˜ unique ì œì•½ì¡°ê±´ì´ ì˜¬ ìˆ˜ ìžˆë‹¤
+    - nullì„ í—ˆìš©í•¨
 */
 
 CREATE TABLE unique_exam1
@@ -332,7 +332,7 @@ CREATE TABLE unique_exam1
     col3    VARCHAR2 (10) NOT NULL,
     col4    VARCHAR2 (10) NOT NULL,
     CONSTRAINTS uni_tmp_uk UNIQUE (col3, col4)
---º¹ÇÕ unique Å°(outline Á¦¾à Á¶°Ç)
+--ë³µí•© unique í‚¤(outline ì œì•½ ì¡°ê±´)
 
 );
 
@@ -348,17 +348,17 @@ INSERT INTO unique_exam1 (col1,
 INSERT INTO unique_exam1 (col1, col3, col4)
      VALUES ('A1', 'CC', 'DD');
 
-             --error : col1ÀÌ Áßº¹
+             --error : col1ì´ ì¤‘ë³µ
 
 INSERT INTO unique_exam1 (col1, col3, col4)
      VALUES ('A4', 'C1', 'D1');
 
-             --error : col3, col4 ´Â º¹ÇÕÅ°·Î uniqueÇØ¾ß ÇÏ¹Ç·Î
+             --error : col3, col4 ëŠ” ë³µí•©í‚¤ë¡œ uniqueí•´ì•¼ í•˜ë¯€ë¡œ
 
 INSERT INTO unique_exam1 (col1, col3, col4)
      VALUES ('A5', 'C5', 'D5');
 
-             -- col2´Â uniqueÀÌÁö¸¸, nullÇã¿ëÇÏ¹Ç·Î ÀÔ·Â°¡´É 
+             -- col2ëŠ” uniqueì´ì§€ë§Œ, nullí—ˆìš©í•˜ë¯€ë¡œ ìž…ë ¥ê°€ëŠ¥ 
 
 INSERT INTO unique_exam1
      VALUES ('A6',
@@ -386,18 +386,18 @@ UPDATE unique_exam1
    SET col1 = 'A1'
  WHERE col2 = 'B2';
 
---¿¡·¯(unique Å°°¡ °É¸° Ä®·³¿¡ µ¿ÀÏÇÑ °ª 'A1'À» ´Ù½Ã ÀÔ·ÂÇÏ¿© Á¦¾àÁ¶°Ç¿¡ À§¹è)
+--ì—ëŸ¬(unique í‚¤ê°€ ê±¸ë¦° ì¹¼ëŸ¼ì— ë™ì¼í•œ ê°’ 'A1'ì„ ë‹¤ì‹œ ìž…ë ¥í•˜ì—¬ ì œì•½ì¡°ê±´ì— ìœ„ë°°)
 
 SELECT * FROM unique_exam1;
 
 /*
-    nullÀ» Çã¿ëÇÑ unique¿¡´Â °ªÀ» ÀÔ·ÂÇÏÁö ¾ÊÀ» ¼ö ÀÖµû.
-    col2ÀÇ °ªÀÌ nullÀÎ ·¹ÄÚµå°¡ ¿©·¯ °³ 
-    => unique´ë»ó¿¡¼­ Á¦¿ÜµÊ
+    nullì„ í—ˆìš©í•œ uniqueì—ëŠ” ê°’ì„ ìž…ë ¥í•˜ì§€ ì•Šì„ ìˆ˜ ìžˆë”°.
+    col2ì˜ ê°’ì´ nullì¸ ë ˆì½”ë“œê°€ ì—¬ëŸ¬ ê°œ 
+    => uniqueëŒ€ìƒì—ì„œ ì œì™¸ë¨
     
-    unique Á¦¾àÁ¶°Ç¿¡´Â not nullÀ» ÁöÁ¤ÇÏ´Â °ÍÀÌ ÀÏ¹ÝÀûÀÓ
+    unique ì œì•½ì¡°ê±´ì—ëŠ” not nullì„ ì§€ì •í•˜ëŠ” ê²ƒì´ ì¼ë°˜ì ìž„
 */
---Á¦¾àÁ¶°Ç Á¶È¸
+--ì œì•½ì¡°ê±´ ì¡°íšŒ
 --user_constraints, user_cons_columns;
 
 SELECT *
@@ -422,18 +422,18 @@ ORDER BY CONSTRAINT_NAME;
 
 /*
     [3] primary key (P)
-    - °¢ ·¹ÄÚµå¸¦ À¯ÀÏÇÏ°Ô ½Äº°ÇÒ ¼ö ÀÖ´Â ¼Ó¼º
-    - Å×ÀÌºí´ç ÇÏ³ª¸¸ ¿Ã ¼ö ÀÖ´Ù.
+    - ê° ë ˆì½”ë“œë¥¼ ìœ ì¼í•˜ê²Œ ì‹ë³„í•  ìˆ˜ ìžˆëŠ” ì†ì„±
+    - í…Œì´ë¸”ë‹¹ í•˜ë‚˜ë§Œ ì˜¬ ìˆ˜ ìžˆë‹¤.
     - not null + unique index
-    - º¹ÇÕÅ°µµ °¡´É
+    - ë³µí•©í‚¤ë„ ê°€ëŠ¥
 */
 
 CREATE TABLE pk_exam1
 (
     col1    CHAR (3) PRIMARY KEY,
-    -- inline Á¦¾àÁ¶°Ç
+    -- inline ì œì•½ì¡°ê±´
     --col2    char(3) primary key,
-    -- error, primart key´Â ÇÏ³ª¸¸ »ý¼º °¡´É
+    -- error, primart keyëŠ” í•˜ë‚˜ë§Œ ìƒì„± ê°€ëŠ¥
     col2    VARCHAR (4),
     col3    NUMBER
 );
@@ -449,7 +449,7 @@ INSERT INTO pk_exam1 (col1, col2, col3)
 INSERT INTO pk_exam1 (col1, col2, col3)
      VALUES (NULL, 'CC', e);
 
---error, primary key´Â not nullÀÌ¹Ç·Î nullÀ» Çã¿ëÇÏÁö ¾ÊÀ½
+--error, primary keyëŠ” not nullì´ë¯€ë¡œ nullì„ í—ˆìš©í•˜ì§€ ì•ŠìŒ
 
 
 INSERT INTO pk_exam1 (col1)
@@ -463,7 +463,7 @@ CREATE TABLE pk_exam2
     col2    VARCHAR (4),
     col3    NUMBER,
     CONSTRAINT pk_col1_col2 PRIMARY KEY (col1, col2)
--- outline Á¦¾àÁ¶°Ç, º¹ÇÕÅ°
+-- outline ì œì•½ì¡°ê±´, ë³µí•©í‚¤
 );
 
 INSERT INTO pk_exam2
@@ -486,32 +486,32 @@ UPDATE pk_exam2
 -- error
 
 /*
-    [4] foreign key (R) ¿Ü·¡Å° Á¦¾àÁ¶°Ç
-    - ´Ù¸¥ Å×ÀÌºíÀ» ÂüÁ¶ÇÏ±â À§ÇÏ¿© »ç¿ëµÇ´Â ¼Ó¼ºµé
-    - Å×ÀÌºí °£¿¡ °ü°è¸¦ ¼³Á¤ÇÒ ¶§ »ç¿ëµÇ´Â Å°
-    - ºÎ¸ð Å×ÀÌºíÀÇ primary key ³ª unique´Â ÀÚ½Ä Å×ÀÌºíÀÇ foreign key·Î ÀüÀÌµÈ´Ù
+    [4] foreign key (R) ì™¸ëž˜í‚¤ ì œì•½ì¡°ê±´
+    - ë‹¤ë¥¸ í…Œì´ë¸”ì„ ì°¸ì¡°í•˜ê¸° ìœ„í•˜ì—¬ ì‚¬ìš©ë˜ëŠ” ì†ì„±ë“¤
+    - í…Œì´ë¸” ê°„ì— ê´€ê³„ë¥¼ ì„¤ì •í•  ë•Œ ì‚¬ìš©ë˜ëŠ” í‚¤
+    - ë¶€ëª¨ í…Œì´ë¸”ì˜ primary key ë‚˜ uniqueëŠ” ìžì‹ í…Œì´ë¸”ì˜ foreign keyë¡œ ì „ì´ëœë‹¤
     
-    - ÀÔ·Â½Ã ºÎ¸ð Å×ÀÌºíÀ» ¸ÕÀú insertÇÏ°í, ±× ÈÄ¿¡ ÀÚ½Ä Å×ÀÌºíÀ» insertÇØ¾ß ÇÔ
-    - ºÎ¸ð Å×ÀÌºí¿¡ ÀÖ´Â ÂüÁ¶ ÄÃ·³ÀÇ °ª¸¸ ÀÚ½Ä Å×ÀÌºí¿¡¼­ »ç¿ëÇÒ ¼ö ÀÖ´Ù
-     (ºÎ¸ð Å×ÀÌºí¿¡ ¾ø´Â °ªÀ» ÀÚ½Ä Å×ÀÌºí¿¡¼­ »ç¿ëÇÏ´Â °ÍÀº ºÒ°¡´É)
+    - ìž…ë ¥ì‹œ ë¶€ëª¨ í…Œì´ë¸”ì„ ë¨¼ì € insertí•˜ê³ , ê·¸ í›„ì— ìžì‹ í…Œì´ë¸”ì„ insertí•´ì•¼ í•¨
+    - ë¶€ëª¨ í…Œì´ë¸”ì— ìžˆëŠ” ì°¸ì¡° ì»¬ëŸ¼ì˜ ê°’ë§Œ ìžì‹ í…Œì´ë¸”ì—ì„œ ì‚¬ìš©í•  ìˆ˜ ìžˆë‹¤
+     (ë¶€ëª¨ í…Œì´ë¸”ì— ì—†ëŠ” ê°’ì„ ìžì‹ í…Œì´ë¸”ì—ì„œ ì‚¬ìš©í•˜ëŠ” ê²ƒì€ ë¶ˆê°€ëŠ¥)
     
-    - »èÁ¦½Ã ÀÚ½Ä Å×ÀÌºíÀ» ¸ÕÀú »èÁ¦ÇÏ°í, ±× ÈÄ¿¡ ºÎ¸ð Å×ÀÌºíÀ» »èÁ¦ÇØ¾ß ÇÔ
-    - foreign keyÁöÁ¤½Ã on delete cascade ¿É¼ÇÀ» ÁÖ¸é
-     ºÎ¸ð Å×ÀÌºíÀÇ ·¹ÄÚµå¸¦ »èÁ¦ÇÏ¸é ÀÚ½Ä Å×ÀÌºíÀÇ ÇØ´ç ·¹ÄÚÅ©µµ ÇÔ²² »èÁ¦µÊ
+    - ì‚­ì œì‹œ ìžì‹ í…Œì´ë¸”ì„ ë¨¼ì € ì‚­ì œí•˜ê³ , ê·¸ í›„ì— ë¶€ëª¨ í…Œì´ë¸”ì„ ì‚­ì œí•´ì•¼ í•¨
+    - foreign keyì§€ì •ì‹œ on delete cascade ì˜µì…˜ì„ ì£¼ë©´
+     ë¶€ëª¨ í…Œì´ë¸”ì˜ ë ˆì½”ë“œë¥¼ ì‚­ì œí•˜ë©´ ìžì‹ í…Œì´ë¸”ì˜ í•´ë‹¹ ë ˆì½”í¬ë„ í•¨ê»˜ ì‚­ì œë¨
 */
 
 /*
-    [5] check Á¦¾à Á¶°Ç(C)
-    - ÀÔ·ÂµÇ´Â °ªÀ» Ã¼Å©ÇÏ¿© ÀÏÁ¤ÇÑ Á¶°Ç¿¡ ÇØ´çµÇ´Â °ª¸¸ ÀÔ·ÂµÉ ¼ö ÀÖ°Ô ÇÏ´Â Á¦¾à Á¶°Ç
-     ¿¹) ¼ºº°(gender) ÄÃ·³ => ³²ÀÚ, ¿©ÀÚ¸¸ ÀÔ·ÂµÇ°í ´Ù¸¥ °ªÀº ÀÔ·ÂµÉ ¼ö ¾øµµ·Ï
+    [5] check ì œì•½ ì¡°ê±´(C)
+    - ìž…ë ¥ë˜ëŠ” ê°’ì„ ì²´í¬í•˜ì—¬ ì¼ì •í•œ ì¡°ê±´ì— í•´ë‹¹ë˜ëŠ” ê°’ë§Œ ìž…ë ¥ë  ìˆ˜ ìžˆê²Œ í•˜ëŠ” ì œì•½ ì¡°ê±´
+     ì˜ˆ) ì„±ë³„(gender) ì»¬ëŸ¼ => ë‚¨ìž, ì—¬ìžë§Œ ìž…ë ¥ë˜ê³  ë‹¤ë¥¸ ê°’ì€ ìž…ë ¥ë  ìˆ˜ ì—†ë„ë¡
 */
 
 CREATE TABLE check_exam1
 (
     no        NUMBER PRIMARY KEY,
     name      VARCHAR2 (30) NOT NULL,
-    gender    CHAR (6) CHECK (gender IN ('³²ÀÚ', '¿©ÀÚ')),
-    -- inline Á¦¾à Á¶°Ç
+    gender    CHAR (6) CHECK (gender IN ('ë‚¨ìž', 'ì—¬ìž')),
+    -- inline ì œì•½ ì¡°ê±´
     pay       NUMBER (10),
     age       NUMBER (3),
     CONSTRAINT ck_check_exam1_pay CHECK (pay >= 0),
@@ -519,7 +519,7 @@ CREATE TABLE check_exam1
 );
 
 INSERT INTO check_exam1 (no, name)
-     VALUES (1, 'È«±æµ¿');
+     VALUES (1, 'í™ê¸¸ë™');
 
 INSERT INTO check_exam1 (no,
                          name,
@@ -527,8 +527,8 @@ INSERT INTO check_exam1 (no,
                          pay,
                          age)
      VALUES (2,
-             '±è±æµ¿',
-             '³²ÀÚ',
+             'ê¹€ê¸¸ë™',
+             'ë‚¨ìž',
              5000000,
              35);
 
@@ -538,12 +538,12 @@ INSERT INTO check_exam1 (no,
                          pay,
                          age)
      VALUES (3,
-             'ÀÌ±æ¼ø',
-             '¿©',
+             'ì´ê¸¸ìˆœ',
+             'ì—¬',
              5000000,
              36);
 
---error, gender check Á¦¾àÁ¶°Ç À§¹è
+--error, gender check ì œì•½ì¡°ê±´ ìœ„ë°°
 
 INSERT INTO check_exam1 (no,
                          name,
@@ -551,12 +551,12 @@ INSERT INTO check_exam1 (no,
                          pay,
                          age)
      VALUES (4,
-             '±è±æÀÚ',
-             '¿©ÀÚ',
+             'ê¹€ê¸¸ìž',
+             'ì—¬ìž',
              -5000000,
              37);
 
---error, pay check Á¦¾àÁ¶°Ç À§¹è
+--error, pay check ì œì•½ì¡°ê±´ ìœ„ë°°
 
 INSERT INTO check_exam1 (no,
                          name,
@@ -564,12 +564,12 @@ INSERT INTO check_exam1 (no,
                          pay,
                          age)
      VALUES (5,
-             '±è±æµ¿',
-             '³²ÀÚ',
+             'ê¹€ê¸¸ë™',
+             'ë‚¨ìž',
              5000000,
              135);
 
---error, age check Á¦¾àÁ¶°Ç À§¹è
+--error, age check ì œì•½ì¡°ê±´ ìœ„ë°°
 
 SELECT * FROM check_exam1;
 
@@ -587,18 +587,18 @@ ORDER BY TABLE_NAME;
 
 /*
     [6] default
-    - ±âº»°ª
-    - ÄÃ·³¿¡ Æ¯Á¤°ªÀ» default°ªÀ¸·Î ¼³Á¤ÇÏ¸é Å×ÀÌºí¿¡ µ¥ÀÌÅÍ¸¦ ÀÔ·ÂÇÒ ¶§
-     ÇØ´ç ÄÃ·³¿¡ °ªÀ» ÀÔ·ÂÇÏÁö ¾ÊÀ» °æ¿ì, default·Î ¼³Á¤ÇÑ °ªÀÌ ÀÚµ¿À¸·Î ÀÔ·ÂµÊ
-    - ÄÃ·³ Å¸ÀÔ ´ÙÀ½¿¡ 'default µðÆúÆ®°ª' À» ¸í½Ã
-    - ¹Ýµå½Ã µ¥ÀÌÅÍ Å¸ÀÔ ´ÙÀ½¿¡, nullÀÌ³ª not null ¾Õ¿¡ À§Ä¡½ÃÄÑ¾ß ÇÔ  
+    - ê¸°ë³¸ê°’
+    - ì»¬ëŸ¼ì— íŠ¹ì •ê°’ì„ defaultê°’ìœ¼ë¡œ ì„¤ì •í•˜ë©´ í…Œì´ë¸”ì— ë°ì´í„°ë¥¼ ìž…ë ¥í•  ë•Œ
+     í•´ë‹¹ ì»¬ëŸ¼ì— ê°’ì„ ìž…ë ¥í•˜ì§€ ì•Šì„ ê²½ìš°, defaultë¡œ ì„¤ì •í•œ ê°’ì´ ìžë™ìœ¼ë¡œ ìž…ë ¥ë¨
+    - ì»¬ëŸ¼ íƒ€ìž… ë‹¤ìŒì— 'default ë””í´íŠ¸ê°’' ì„ ëª…ì‹œ
+    - ë°˜ë“œì‹œ ë°ì´í„° íƒ€ìž… ë‹¤ìŒì—, nullì´ë‚˜ not null ì•žì— ìœ„ì¹˜ì‹œì¼œì•¼ í•¨  
 */
 
 CREATE TABLE default_exam1
 (
     no          NUMBER PRIMARY KEY,
     name        VARCHAR2 (30),
-    gender      CHAR (3) DEFAULT '³²' CHECK (gender IN ('³²', '¿©')),
+    gender      CHAR (3) DEFAULT 'ë‚¨' CHECK (gender IN ('ë‚¨', 'ì—¬')),
     hiredate    DATE DEFAULT SYSDATE NOT NULL,
     scor        NUMBER (3) DEFAULT 0 NULL
 );
@@ -615,28 +615,28 @@ INSERT INTO default_exam1 (no,
                            hiredate,
                            scor)
      VALUES (3,
-             'È«±æ¼±',
-             '¿©',
+             'í™ê¸¸ì„ ',
+             'ì—¬',
              DEFAULT,
              90);
 
 INSERT INTO default_exam1
      VALUES (4,
-             '±è±æµ¿',
+             'ê¹€ê¸¸ë™',
              DEFAULT,
              DEFAULT,
              DEFAULT);
 
 SELECT * FROM default_exam1;
 
---Á¦¾àÁ¶°ÇÀ» ÀÌ¿ëÇÏ¿© Å×ÀÌºí ¸¸µé±â
---1) ºÎ¼­ Å×ÀÌºí ¸¸µé±â
---ºÎ¼­(ºÎ¸ð) <=> »ç¿ø(ÀÚ½Ä)
+--ì œì•½ì¡°ê±´ì„ ì´ìš©í•˜ì—¬ í…Œì´ë¸” ë§Œë“¤ê¸°
+--1) ë¶€ì„œ í…Œì´ë¸” ë§Œë“¤ê¸°
+--ë¶€ì„œ(ë¶€ëª¨) <=> ì‚¬ì›(ìžì‹)
 DROP TABLE depart CASCADE CONSTRAINT;
 
 /*
-    => ÀÚ½Ä Å×ÀÌºíÀÌ ÂüÁ¶ÇÏ°í ÀÖ´Â ºÎ¸ð Å×ÀÌºíÀº dropÇÒ ¼ö ¾øÀ¸³ª
-      ÂüÁ¶ Á¦¾à Á¶°Ç±îÁö »èÁ¦ÇÏ°í ½ÍÀ¸¸é drop½Ã cascade constraint¿É¼ÇÀ» ÁØ´Ù
+    => ìžì‹ í…Œì´ë¸”ì´ ì°¸ì¡°í•˜ê³  ìžˆëŠ” ë¶€ëª¨ í…Œì´ë¸”ì€ dropí•  ìˆ˜ ì—†ìœ¼ë‚˜
+      ì°¸ì¡° ì œì•½ ì¡°ê±´ê¹Œì§€ ì‚­ì œí•˜ê³  ì‹¶ìœ¼ë©´ dropì‹œ cascade constraintì˜µì…˜ì„ ì¤€ë‹¤
 */
 
 CREATE TABLE depart
@@ -646,8 +646,8 @@ CREATE TABLE depart
     loc          VARCHAR2 (100)
 );
 
---2) »ç¿ø Å×ÀÌºí ¸¸µé±â
---»ç¿ø(ºÎ¸ð) <=> »ç¿ø°¡Á·(ÀÚ½Ä)
+--2) ì‚¬ì› í…Œì´ë¸” ë§Œë“¤ê¸°
+--ì‚¬ì›(ë¶€ëª¨) <=> ì‚¬ì›ê°€ì¡±(ìžì‹)
 
 CREATE TABLE employee
 (
@@ -669,14 +669,14 @@ SELECT *
   FROM user_constraints
  WHERE table_name = 'EMPLOYEE';
 
---drop½Ã cascade constraint¿É¼ÇÀ» ÀÌ¿ëÇÏ¿© EMPLOYEEÀÇ ¿Ü·¡Å°µµ Á¦°ÅÇßÀ¸¹Ç·Î
---´Ù½Ã depart Å×ÀÌºíµµ createÇÏ°í, ¿Ü·¡Å°µµ Ãß°¡ÇØ ÁØ´Ù.
+--dropì‹œ cascade constraintì˜µì…˜ì„ ì´ìš©í•˜ì—¬ EMPLOYEEì˜ ì™¸ëž˜í‚¤ë„ ì œê±°í–ˆìœ¼ë¯€ë¡œ
+--ë‹¤ì‹œ depart í…Œì´ë¸”ë„ createí•˜ê³ , ì™¸ëž˜í‚¤ë„ ì¶”ê°€í•´ ì¤€ë‹¤.
 
 ALTER TABLE employee
     ADD CONSTRAINT fk_employee_dcode FOREIGN KEY (dcode)
             REFERENCES depart (dept_cd);
 
---3) »ç¿ø°¡Á· Å×ÀÌºí ¸¸µé±â
+--3) ì‚¬ì›ê°€ì¡± í…Œì´ë¸” ë§Œë“¤ê¸°
 
 CREATE TABLE family
 (
@@ -692,26 +692,26 @@ CREATE TABLE family
 SELECT * FROM family;
 
 --insert
---ºÎ¸ð Å×ÀÌºí¿¡ ¸ÕÀú µ¥ÀÌÅÍ¸¦ ÀÔ·Â
---1) ºÎ¼­ Å×ÀÌºí insert
+--ë¶€ëª¨ í…Œì´ë¸”ì— ë¨¼ì € ë°ì´í„°ë¥¼ ìž…ë ¥
+--1) ë¶€ì„œ í…Œì´ë¸” insert
 
 INSERT INTO depart (dept_cd, dept_name, loc)
-     VALUES ('A01', 'ÀÎ»çºÎ', '¼­¿ï');
+     VALUES ('A01', 'ì¸ì‚¬ë¶€', 'ì„œìš¸');
 
 INSERT INTO depart (dept_cd, dept_name, loc)
-     VALUES ('B01', '¿µ¾÷ºÎ', 'ºÎ»ê');
+     VALUES ('B01', 'ì˜ì—…ë¶€', 'ë¶€ì‚°');
 
 INSERT INTO depart (dept_cd, dept_name, loc)
-     VALUES ('C01', 'ÃÑ¹«ºÎ', '±¤ÁÖ');
+     VALUES ('C01', 'ì´ë¬´ë¶€', 'ê´‘ì£¼');
 
 SELECT * FROM depart;
 
---2) »ç¿øÅ×ÀÌºí insert
---ºÎ¸ðÀÎ ºÎ¼­ Å×ÀÌºíÀÇ ·¹ÄÚµå°¡ ¾øÀ¸¸é ÀÚ½Ä »ç¿ø Å×ÀÌºíÀ» insertÇÒ ¼ö ¾ø´Ù
+--2) ì‚¬ì›í…Œì´ë¸” insert
+--ë¶€ëª¨ì¸ ë¶€ì„œ í…Œì´ë¸”ì˜ ë ˆì½”ë“œê°€ ì—†ìœ¼ë©´ ìžì‹ ì‚¬ì› í…Œì´ë¸”ì„ insertí•  ìˆ˜ ì—†ë‹¤
 
 INSERT INTO employee
      VALUES (1001,
-             'È«±æµ¿',
+             'í™ê¸¸ë™',
              'A01',
              5000000,
              'h@nate.com',
@@ -719,7 +719,7 @@ INSERT INTO employee
 
 INSERT INTO employee
      VALUES (1002,
-             'È«±æµ¿2',
+             'í™ê¸¸ë™2',
              'F01',
              5000000,
              'h2@nate.com',
@@ -729,27 +729,27 @@ INSERT INTO employee
 
 INSERT INTO employee
      VALUES (1003,
-             'È«±æµ¿3',
+             'í™ê¸¸ë™3',
              'A01',
              -5000000,
              'h3@nate.com',
              DEFAULT);
 
---error, sal checkÁ¦¾à Á¶°Ç À§¹è
+--error, sal checkì œì•½ ì¡°ê±´ ìœ„ë°°
 
 INSERT INTO employee
      VALUES (1004,
-             'È«±æµ¿4',
+             'í™ê¸¸ë™4',
              'A01',
              5000000,
              'h@nate.com',
              DEFAULT);
 
---error, email unique Á¦¾àÁ¶°Ç À§¹è
+--error, email unique ì œì•½ì¡°ê±´ ìœ„ë°°
 
 INSERT INTO employee
      VALUES (1002,
-             '±è±æµ¿',
+             'ê¹€ê¸¸ë™',
              'B01',
              2000000,
              'k@nate.com',
@@ -757,7 +757,7 @@ INSERT INTO employee
 
 INSERT INTO employee
      VALUES (1003,
-             'ÀÌ±æµ¿',
+             'ì´ê¸¸ë™',
              'C01',
              3000000,
              'l@nate.com',
@@ -765,32 +765,32 @@ INSERT INTO employee
 
 SELECT * FROM employee;
 
---3) »ç¿ø°¡Á· Å×ÀÌºí insert
+--3) ì‚¬ì›ê°€ì¡± í…Œì´ë¸” insert
 
 INSERT INTO family (empno, name, relation)
-     VALUES (1005, '¹Ú±æ¼ö', 'ºÎ');
+     VALUES (1005, 'ë°•ê¸¸ìˆ˜', 'ë¶€');
 
 --error, parent key not found
 
 INSERT INTO family (empno, name, relation)
-     VALUES (1001, 'È«¾Æºü', 'ºÎ');
+     VALUES (1001, 'í™ì•„ë¹ ', 'ë¶€');
 
 INSERT INTO family (empno, name, relation)
-     VALUES (1001, '±è¾ö¸¶', '¸ð');
+     VALUES (1001, 'ê¹€ì—„ë§ˆ', 'ëª¨');
 
 INSERT INTO family (empno, name, relation)
-     VALUES (1001, 'È«¾Æºü', 'Çü');
+     VALUES (1001, 'í™ì•„ë¹ ', 'í˜•');
 
---error, uniqueÁ¦¾àÁ¶ÄÁ À§¹è
-
-INSERT INTO family (empno, name, relation)
-     VALUES (1002, '±è¾Æ¹öÁö', 'ºÎ');
+--error, uniqueì œì•½ì¡°ì»¨ ìœ„ë°°
 
 INSERT INTO family (empno, name, relation)
-     VALUES (1002, '¹Ú¾î¸Ó´Ï', '¸ð');
+     VALUES (1002, 'ê¹€ì•„ë²„ì§€', 'ë¶€');
 
 INSERT INTO family (empno, name, relation)
-     VALUES (1002, '±èÇü', 'Çü');
+     VALUES (1002, 'ë°•ì–´ë¨¸ë‹ˆ', 'ëª¨');
+
+INSERT INTO family (empno, name, relation)
+     VALUES (1002, 'ê¹€í˜•', 'í˜•');
 
 SELECT * FROM family;
 
@@ -798,34 +798,34 @@ SELECT f.*, e.*
   FROM family f JOIN employee e ON f.EMPNO = e.EMPNO;
 
 --delete
---ÀÚ½ÄÀÌ Âü°íÇÏ°í ÀÖ´Â ºÎ¸ð Å×ÀÌºíÀÇ ·¹ÄÚµå¸¦ »èÁ¦ÇÏ´Â °æ¿ì
---1) on delete cascade ¿É¼ÇÀ» ÁÖÁö ¾ÊÀº °æ¿ì
---=> ºÎ¸ð Å×ÀÌºíÀÇ ·¹ÄÚµå¸¦ »èÁ¦ÇÏ¸é ¿¡·¯ ¹ß»ý
+--ìžì‹ì´ ì°¸ê³ í•˜ê³  ìžˆëŠ” ë¶€ëª¨ í…Œì´ë¸”ì˜ ë ˆì½”ë“œë¥¼ ì‚­ì œí•˜ëŠ” ê²½ìš°
+--1) on delete cascade ì˜µì…˜ì„ ì£¼ì§€ ì•Šì€ ê²½ìš°
+--=> ë¶€ëª¨ í…Œì´ë¸”ì˜ ë ˆì½”ë“œë¥¼ ì‚­ì œí•˜ë©´ ì—ëŸ¬ ë°œìƒ
 
 DELETE FROM depart
       WHERE dept_cd = 'A01';
 
---error, foreign key Á¦¾àÁ¶°Ç À§¹Ý
---=> »èÁ¦¸¦ ¹Ýµå½Ã ÇØ¾ß µÈ´Ù¸é, ÀÚ½Ä ·¹ÄÚµå¸¦ ¸ÕÀú »èÁ¦ÇÑ ÈÄ ºÎ¸ð ·¹ÄÚµå¸¦ »èÁ¦ÇÑ´Ù
+--error, foreign key ì œì•½ì¡°ê±´ ìœ„ë°˜
+--=> ì‚­ì œë¥¼ ë°˜ë“œì‹œ í•´ì•¼ ëœë‹¤ë©´, ìžì‹ ë ˆì½”ë“œë¥¼ ë¨¼ì € ì‚­ì œí•œ í›„ ë¶€ëª¨ ë ˆì½”ë“œë¥¼ ì‚­ì œí•œë‹¤
 
---2) on delete cascade ¿É¼ÇÀ» ÁØ °æ¿ì
---=> ºÎ¸ð Å×ÀÌºíÀÇ ·¹ÄÚµå¸¦ »èÁ¦ÇÏ¸é ÇØ´ç ·¹ÄÚµå¸¦ ÂüÁ¶ÇÏ´Â ÀÚ½Ä Å×ÀÌºíµµ °°ÀÌ »èÁ¦µÊ
+--2) on delete cascade ì˜µì…˜ì„ ì¤€ ê²½ìš°
+--=> ë¶€ëª¨ í…Œì´ë¸”ì˜ ë ˆì½”ë“œë¥¼ ì‚­ì œí•˜ë©´ í•´ë‹¹ ë ˆì½”ë“œë¥¼ ì°¸ì¡°í•˜ëŠ” ìžì‹ í…Œì´ë¸”ë„ ê°™ì´ ì‚­ì œë¨
 
 DELETE FROM employee
       WHERE empno = 1001;
 
---family¿¡¼­ ÂüÁ¶ÇÏ°í ÀÖ´Â ·¹ÄÚµå »èÁ¦
---=> ºÎ¸ðÀÎ employeeÀÇ 1001¹ø ·¹ÄÚµå°¡ »èÁ¦µÇ¸é¼­ ÀÚ½ÄÀÎ familyÀÇ 101¹ø ·¹ÄÚµåµµ °°ÀÌ »èÁ¦µÊ
+--familyì—ì„œ ì°¸ì¡°í•˜ê³  ìžˆëŠ” ë ˆì½”ë“œ ì‚­ì œ
+--=> ë¶€ëª¨ì¸ employeeì˜ 1001ë²ˆ ë ˆì½”ë“œê°€ ì‚­ì œë˜ë©´ì„œ ìžì‹ì¸ familyì˜ 101ë²ˆ ë ˆì½”ë“œë„ ê°™ì´ ì‚­ì œë¨
 
---È¸¿ø Å×ÀÌºí ¸¸µé±â-member2 
---no - ¹øÈ£, ±âº»Å° 
---userid ¾ÆÀÌµð, unique, ¹Ýµå½Ã °ª ÀÔ·ÂµÇµµ·Ï 
---name ÀÌ¸§, ¹Ýµå½Ã °ª ÀÔ·ÂµÇµµ·Ï 
---pwd ºñ¹Ð¹øÈ£ , ¹Ýµå½Ã °ª ÀÔ·ÂµÇµµ·Ï 
---email ÀÌ¸ÞÀÏ, hp ÈÞ´ëÆù¹øÈ£, zipcode ¿ìÆí¹øÈ£, address  ÁÖ¼Ò(½Ãµµ, ±¸±º, µ¿),
--- addressDetail »ó¼¼ÁÖ¼Ò, 
---regdate °¡ÀÔÀÏ, ±âº»°ª:ÇöÀçÀÏÀÚ 
---mileage  ¸¶ÀÏ¸®Áö, ±âº»°ª :0, 0~1000000 »çÀÌÀÇ °ª¸¸ µé¾î°¡µµ·Ï
+--íšŒì› í…Œì´ë¸” ë§Œë“¤ê¸°-member2 
+--no - ë²ˆí˜¸, ê¸°ë³¸í‚¤ 
+--userid ì•„ì´ë””, unique, ë°˜ë“œì‹œ ê°’ ìž…ë ¥ë˜ë„ë¡ 
+--name ì´ë¦„, ë°˜ë“œì‹œ ê°’ ìž…ë ¥ë˜ë„ë¡ 
+--pwd ë¹„ë°€ë²ˆí˜¸ , ë°˜ë“œì‹œ ê°’ ìž…ë ¥ë˜ë„ë¡ 
+--email ì´ë©”ì¼, hp íœ´ëŒ€í°ë²ˆí˜¸, zipcode ìš°íŽ¸ë²ˆí˜¸, address  ì£¼ì†Œ(ì‹œë„, êµ¬êµ°, ë™),
+-- addressDetail ìƒì„¸ì£¼ì†Œ, 
+--regdate ê°€ìž…ì¼, ê¸°ë³¸ê°’:í˜„ìž¬ì¼ìž 
+--mileage  ë§ˆì¼ë¦¬ì§€, ê¸°ë³¸ê°’ :0, 0~1000000 ì‚¬ì´ì˜ ê°’ë§Œ ë“¤ì–´ê°€ë„ë¡
 
 CREATE TABLE member2
 (
@@ -867,25 +867,25 @@ CREATE TABLE member1
     mileage          NUMBER DEFAULT 0 CHECK (mileage BETWEEN 0 AND 1000000)
 );
 
---[2020-04-28 È­¿äÀÏ]
+--[2020-04-28 í™”ìš”ì¼]
 
 /*
-1) Å×ÀÌºí »ý¼º ÈÄ Á¦¾àÁ¶°Ç Ãß°¡
- alter table Å×ÀÌºí¸í
- add constraint Á¦¾àÁ¶°ÇÀÌ¸§ Á¦¾àÁ¶°ÇÁ¾·ù(ÄÃ·³);
+1) í…Œì´ë¸” ìƒì„± í›„ ì œì•½ì¡°ê±´ ì¶”ê°€
+ alter table í…Œì´ë¸”ëª…
+ add constraint ì œì•½ì¡°ê±´ì´ë¦„ ì œì•½ì¡°ê±´ì¢…ë¥˜(ì»¬ëŸ¼);
  ex) alter table emp
      add constraint pk_empno primary key(empno);
      
-2) Å×ÀÌºíÀ» ¸¸µé¸é¼­ ¾Æ¿ô¶óÀÎ Á¦¾àÁ¶°Ç ÁöÁ¤
- - ÄÃ·³¸íÀ» ¸ðµÎ ³ª¿­ÇÑ ÀÌÈÄ¿¡
- , constraint Á¦¾àÁ¶°ÇÀÌ¸§ Á¦¾àÁ¶°Ç Á¾·ù(ÄÃ·³)
+2) í…Œì´ë¸”ì„ ë§Œë“¤ë©´ì„œ ì•„ì›ƒë¼ì¸ ì œì•½ì¡°ê±´ ì§€ì •
+ - ì»¬ëŸ¼ëª…ì„ ëª¨ë‘ ë‚˜ì—´í•œ ì´í›„ì—
+ , constraint ì œì•½ì¡°ê±´ì´ë¦„ ì œì•½ì¡°ê±´ ì¢…ë¥˜(ì»¬ëŸ¼)
  ex) , constraint pk_empno primary key(empno);
  
-3) ÀÎ¶óÀÎ Á¦¾àÁ¶°Ç ÁöÁ¤
- - ÄÃ·³ÀÇ µ¥ÀÌÅÍÅ¸ÀÔ µÚ¿¡ Á¦¾àÁ¶°Ç Á¾·ù
+3) ì¸ë¼ì¸ ì œì•½ì¡°ê±´ ì§€ì •
+ - ì»¬ëŸ¼ì˜ ë°ì´í„°íƒ€ìž… ë’¤ì— ì œì•½ì¡°ê±´ ì¢…ë¥˜
  ex) empno number primary key
 */
---Å×ÀÌºí »ý¼º ÈÄ Á¦¾àÁ¶°Ç Ãß°¡ÇÏ±â
+--í…Œì´ë¸” ìƒì„± í›„ ì œì•½ì¡°ê±´ ì¶”ê°€í•˜ê¸°
 
 CREATE TABLE employee2
 (
@@ -897,8 +897,8 @@ CREATE TABLE employee2
     hiredate    DATE DEFAULT SYSDATE
 );
 
---Á¦¾àÁ¶°Ç Ãß°¡ÇÏ±â
---primary key Á¦¾àÁ¶°Ç Ãß°¡
+--ì œì•½ì¡°ê±´ ì¶”ê°€í•˜ê¸°
+--primary key ì œì•½ì¡°ê±´ ì¶”ê°€
 
 ALTER TABLE employee2
     ADD CONSTRAINT pk_employee2_empno PRIMARY KEY (empno);
@@ -907,51 +907,51 @@ SELECT *
   FROM user_constraints
  WHERE table_name = 'EMPLOYEE2';
 
---default°ª Á¶È¸
+--defaultê°’ ì¡°íšŒ
 
 SELECT column_name, data_default
   FROM user_tab_columns
  WHERE table_name = 'EMPLOYEE2';
 
---foreign key Á¦¾àÁ¶°Ç Ãß°¡
+--foreign key ì œì•½ì¡°ê±´ ì¶”ê°€
 
 ALTER TABLE employee2
     ADD CONSTRAINT fk_employee2_empno FOREIGN KEY (dcode)
             REFERENCES depart (dept_cd);
 
---check Á¦¾àÁ¶°Ç Ãß°¡
+--check ì œì•½ì¡°ê±´ ì¶”ê°€
 
 ALTER TABLE employee2
     ADD CONSTRAINT check_employee2_sal CHECK (sal >= 0);
 
---unique Á¦¾àÁ¶°Ç Ãß°¡
+--unique ì œì•½ì¡°ê±´ ì¶”ê°€
 
 ALTER TABLE employee2
     ADD CONSTRAINT check_employee2_email UNIQUE (email);
 
---not null, default Á¦¾àÁ¶°Ç º¯°æÇÏ±â
+--not null, default ì œì•½ì¡°ê±´ ë³€ê²½í•˜ê¸°
 
 ALTER TABLE employee2
     MODIFY name NULL;
 
---name ÄÃ·³ÀÌ not null ÀÌ¾ú´Âµ¥ null·Î º¯°æ
+--name ì»¬ëŸ¼ì´ not null ì´ì—ˆëŠ”ë° nullë¡œ ë³€ê²½
 
 ALTER TABLE employee2
     MODIFY name NOT NULL;
 
---name ÄÃ·³ÀÌ null ÀÌ¾ú´Âµ¥ not null·Î º¯°æ
+--name ì»¬ëŸ¼ì´ null ì´ì—ˆëŠ”ë° not nullë¡œ ë³€ê²½
 
 ALTER TABLE employee2
     MODIFY sal DEFAULT 1000;
 
--- sal ÄÃ·³ÀÇ default°ªÀÌ 0ÀÌ¾ú´Âµ¥ 1000À¸·Î º¯°æ
+-- sal ì»¬ëŸ¼ì˜ defaultê°’ì´ 0ì´ì—ˆëŠ”ë° 1000ìœ¼ë¡œ ë³€ê²½
 
---Á¦¾àÁ¶°Ç ÀÌ¸§ º¯°æÇÏ±â
+--ì œì•½ì¡°ê±´ ì´ë¦„ ë³€ê²½í•˜ê¸°
 
 ALTER TABLE employee2
     RENAME CONSTRAINT fk_employee2_empno TO fk_employee2_dcode;
 
---Á¦¾àÁ¶°Ç Á¦°ÅÇÏ±â
+--ì œì•½ì¡°ê±´ ì œê±°í•˜ê¸°
 
 ALTER TABLE employee2
     DROP CONSTRAINT pk_employee2_empno;
@@ -992,9 +992,9 @@ SELECT * FROM user_objects;
 /*
     create table depart_temp1
     as
-    select ¹®
+    select ë¬¸
     
-    À» ÀÌ¿ëÇØ¼­ Å×ÀÌºíÀ» ¸¸µé¸é, null, not nullÀ» Á¦¿ÜÇÑ Á¦¾àÁ¶°ÇÀº º¹»çµÇÁö ¾ÊÀ½
+    ì„ ì´ìš©í•´ì„œ í…Œì´ë¸”ì„ ë§Œë“¤ë©´, null, not nullì„ ì œì™¸í•œ ì œì•½ì¡°ê±´ì€ ë³µì‚¬ë˜ì§€ ì•ŠìŒ
 */
 
 CREATE TABLE depart_temp1
@@ -1009,12 +1009,12 @@ SELECT *
   FROM user_constraints
  WHERE table_name = 'DEPART_TEMP1';
 
---º¹»çÇÑ Å×ÀÌºí¿¡ primary key Ãß°¡
+--ë³µì‚¬í•œ í…Œì´ë¸”ì— primary key ì¶”ê°€
 
 ALTER TABLE depart_temp1
     ADD CONSTRAINT pk_depart_temp1_dept_cd PRIMARY KEY (dept_cd);
 
--- not null¿¡µµ Á¦¾àÁ¶°ÇÀÌ¸§ ³Ö±â
+-- not nullì—ë„ ì œì•½ì¡°ê±´ì´ë¦„ ë„£ê¸°
 
 CREATE TABLE employee4
 (
@@ -1035,39 +1035,39 @@ SELECT *
 
 
 
---Å×ÀÌºí º¯°æÇÏ±â(alter table ÀÌ¿ë)
+--í…Œì´ë¸” ë³€ê²½í•˜ê¸°(alter table ì´ìš©)
 
---1) »õ·Î¿î ÄÃ·³ Ãß°¡
+--1) ìƒˆë¡œìš´ ì»¬ëŸ¼ ì¶”ê°€
 
 SELECT * FROM depart;
 
 ALTER TABLE depart
     ADD pdept CHAR (3);
 
---Ãß°¡µÉ ¶§ °ªÀº nullÀÌ µé¾î°¨
+--ì¶”ê°€ë  ë•Œ ê°’ì€ nullì´ ë“¤ì–´ê°
 
 ALTER TABLE depart
-    ADD country VARCHAR2 (50) DEFAULT 'ÇÑ±¹';
+    ADD country VARCHAR2 (50) DEFAULT 'í•œêµ­';
 
---Ãß°¡µÉ ¶§ °ªÀº default°ªÀÌ µé¾î°¨
+--ì¶”ê°€ë  ë•Œ ê°’ì€ defaultê°’ì´ ë“¤ì–´ê°
 
---2) ÄÃ·³ÀÇ µ¥ÀÌÅÍ Å©±â º¯°æÇÏ±â
---country ÄÃ·³ÀÇ µ¥ÀÌÅÍ Å¸ÀÔ º¯°æ, varchar2(50) => varchar2(100)
+--2) ì»¬ëŸ¼ì˜ ë°ì´í„° í¬ê¸° ë³€ê²½í•˜ê¸°
+--country ì»¬ëŸ¼ì˜ ë°ì´í„° íƒ€ìž… ë³€ê²½, varchar2(50) => varchar2(100)
 
 ALTER TABLE depart
     MODIFY country VARCHAR2 (100);
 
 DESC depart;
 
---3) ÄÃ·³ ÀÌ¸§ º¯°æ
---loc => area ·Î º¯°æ
+--3) ì»¬ëŸ¼ ì´ë¦„ ë³€ê²½
+--loc => area ë¡œ ë³€ê²½
 
 ALTER TABLE depart
     RENAME COLUMN loc TO area;
 
 SELECT * FROM depart;
 
---cf. Å×ÀÌºí ÀÌ¸§ º¯°æÇÏ±â
+--cf. í…Œì´ë¸” ì´ë¦„ ë³€ê²½í•˜ê¸°
 
 SELECT * FROM depart_temp1;
 
@@ -1075,7 +1075,7 @@ RENAME depart_temp1 TO depart_temp10;
 
 SELECT * FROM depart_temp10;
 
---ÄÃ·³ »èÁ¦ÇÏ±â
+--ì»¬ëŸ¼ ì‚­ì œí•˜ê¸°
 
 ALTER TABLE depart_temp10
     DROP COLUMN loc;
